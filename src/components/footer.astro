@@ -1,0 +1,296 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+<footer id="main-footer" class="bg-gradient-to-br from-[#0a0a0c] via-[#0f1419] to-[#1a1f2e] pt-20 pb-12 overflow-hidden is-visible relative">
+  <div class="container mx-auto px-6 relative z-10">
+    {/* Main Footer Content */}
+    <div
+      id="footer-content"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16"
+    >
+      {/* Logo & Contact */}
+      <div class="animate-item group">
+        <div class="mb-8 transform transition-all duration-500 group-hover:scale-105">
+          <img
+            src="https://ext.same-assets.com/1537041832/310886023.png"
+            alt="MBC Logo"
+            width="180"
+            height="50"
+            class="mb-6 filter drop-shadow-lg"
+          />
+          <p class="text-gray-300 text-sm leading-relaxed">
+            Innovando en soluciones tecnológicas para transformar el futuro de tu empresa.
+          </p>
+        </div>
+        <div class="space-y-4">
+          <div class="flex items-center space-x-3 group/item">
+            <div class="w-10 h-10 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-lg flex items-center justify-center group-hover/item:from-blue-500/30 group-hover/item:to-cyan-500/30 transition-all duration-300">
+              <Icon name="lucide:phone" class="w-5 h-5 text-cyan-400" />
+            </div>
+            <div>
+              <p class="text-gray-400 text-xs">Teléfono</p>
+              <a href="tel:+5184255555" class="text-gray-200 hover:text-cyan-400 transition-colors duration-300 font-medium">(084) 255-555</a>
+            </div>
+          </div>
+          <div class="flex items-center space-x-3 group/item">
+            <div class="w-10 h-10 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-lg flex items-center justify-center group-hover/item:from-blue-500/30 group-hover/item:to-cyan-500/30 transition-all duration-300">
+              <Icon name="lucide:mail" class="w-5 h-5 text-cyan-400" />
+            </div>
+            <div>
+              <p class="text-gray-400 text-xs">Email</p>
+              <a href="mailto:contact@sensoteq.com" class="text-gray-200 hover:text-cyan-400 transition-colors duration-300 font-medium">contact@mbc.com</a>
+            </div>
+          </div>
+          <div class="flex items-center space-x-3 group/item">
+            <div class="w-10 h-10 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-lg flex items-center justify-center group-hover/item:from-blue-500/30 group-hover/item:to-cyan-500/30 transition-all duration-300">
+              <Icon name="lucide:map-pin" class="w-5 h-5 text-cyan-400" />
+            </div>
+            <div>
+              <p class="text-gray-400 text-xs">Dirección</p>
+              <a href="https://www.google.com/maps/search/?api=1&query=Calle+Plateros+330,+Cusco,+Perú" target="_blank" rel="noopener noreferrer" class="text-gray-200 hover:text-cyan-400 transition-colors duration-300 font-medium">Calle Plateros 330, Cusco</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Company Links */}
+      <div class="animate-item">
+        <h3 class="text-white font-semibold text-lg mb-6 relative inline-flex items-center">
+          <span class="relative z-10">Empresa</span>
+          <div class="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+        </h3>
+        <div class="space-y-4">
+          <a href="#" class="group block text-gray-400 hover:text-cyan-400 transition-all duration-300 flex items-center">
+            <Icon name="lucide:chevron-right" class="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300" />
+            <span class="transform translate-x-0 group-hover:translate-x-1 transition-transform duration-300">Sobre Nosotros</span>
+          </a>
+          <a href="#" class="group block text-gray-400 hover:text-cyan-400 transition-all duration-300 flex items-center">
+            <Icon name="lucide:chevron-right" class="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300" />
+            <span class="transform translate-x-0 group-hover:translate-x-1 transition-transform duration-300">Únete a MBC</span>
+          </a>
+          <a href="#" class="group block text-gray-400 hover:text-cyan-400 transition-all duration-300 flex items-center">
+            <Icon name="lucide:chevron-right" class="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300" />
+            <span class="transform translate-x-0 group-hover:translate-x-1 transition-transform duration-300">Contáctanos</span>
+          </a>
+          <a href="#" class="group block text-gray-400 hover:text-cyan-400 transition-all duration-300 flex items-center">
+            <Icon name="lucide:chevron-right" class="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300" />
+            <span class="transform translate-x-0 group-hover:translate-x-1 transition-transform duration-300">Blog</span>
+          </a>
+        </div>
+      </div>
+
+      {/* Services Links */}
+      <div class="animate-item">
+        <h3 class="text-white font-semibold text-lg mb-6 relative inline-flex items-center group">
+          <span class="relative z-10">Servicios</span>
+          <div class="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+        </h3>
+        <div class="space-y-4">
+          <a href="#" class="group block text-gray-400 hover:text-cyan-400 transition-all duration-300 flex items-center">
+            <Icon name="lucide:chevron-right" class="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300" />
+            <span class="transform translate-x-0 group-hover:translate-x-1 transition-transform duration-300">Consultoría IT</span>
+          </a>
+          <a href="#" class="group block text-gray-400 hover:text-cyan-400 transition-all duration-300 flex items-center">
+            <Icon name="lucide:chevron-right" class="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300" />
+            <span class="transform translate-x-0 group-hover:translate-x-1 transition-transform duration-300">Desarrollo Web</span>
+          </a>
+          <a href="#" class="group block text-gray-400 hover:text-cyan-400 transition-all duration-300 flex items-center">
+            <Icon name="lucide:chevron-right" class="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300" />
+            <span class="transform translate-x-0 group-hover:translate-x-1 transition-transform duration-300">Soluciones Cloud</span>
+          </a>
+          <a href="#" class="group block text-gray-400 hover:text-cyan-400 transition-all duration-300 flex items-center">
+            <Icon name="lucide:chevron-right" class="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300" />
+            <span class="transform translate-x-0 group-hover:translate-x-1 transition-transform duration-300">Soporte Técnico</span>
+          </a>
+        </div>
+      </div>
+
+      {/* Legal & Social */}
+      <div class="animate-item">
+        <h3 class="text-white font-semibold text-lg mb-6 relative inline-flex items-center group">
+          <span class="relative z-10">Legal</span>
+          <div class="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+        </h3>
+
+        <div class="space-y-4 mb-8">
+          <a href="#" class="group block text-gray-400 hover:text-cyan-400 transition-all duration-300 flex items-center">
+            <Icon name="lucide:chevron-right" class="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300" />
+            <span class="transform translate-x-0 group-hover:translate-x-1 transition-transform duration-300">Términos y condiciones</span>
+          </a>
+          <a href="#" class="group block text-gray-400 hover:text-cyan-400 transition-all duration-300 flex items-center">
+            <Icon name="lucide:chevron-right" class="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300" />
+            <span class="transform translate-x-0 group-hover:translate-x-1 transition-transform duration-300">Política de privacidad</span>
+          </a>
+          <a href="#" class="group block text-gray-400 hover:text-cyan-400 transition-all duration-300 flex items-center">
+            <Icon name="lucide:chevron-right" class="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300" />
+            <span class="transform translate-x-0 group-hover:translate-x-1 transition-transform duration-300">Cumplimiento normativo</span>
+          </a>
+        </div>
+
+        <div class="space-y-4">
+          <p class="text-gray-300 font-medium mb-4">Síguenos en redes:</p>
+          <div class="flex gap-3">
+            <a href="#" class="group relative">
+              <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur"></div>
+              <div class="relative w-12 h-12 bg-gray-800/50 backdrop-blur-sm rounded-lg flex items-center justify-center border border-gray-700 hover:border-cyan-500/50 transition-all duration-300 group-hover:scale-110">
+                <Icon name="lucide:linkedin" class="w-6 h-6 text-gray-400 group-hover:text-cyan-400 transition-colors duration-300" />
+              </div>
+            </a>
+            <a href="#" class="group relative">
+              <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur"></div>
+              <div class="relative w-12 h-12 bg-gray-800/50 backdrop-blur-sm rounded-lg flex items-center justify-center border border-gray-700 hover:border-cyan-500/50 transition-all duration-300 group-hover:scale-110">
+                <Icon name="lucide:youtube" class="w-6 h-6 text-gray-400 group-hover:text-cyan-400 transition-colors duration-300" />
+              </div>
+            </a>
+            <a href="#" class="group relative">
+              <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur"></div>
+              <div class="relative w-12 h-12 bg-gray-800/50 backdrop-blur-sm rounded-lg flex items-center justify-center border border-gray-700 hover:border-cyan-500/50 transition-all duration-300 group-hover:scale-110">
+                <Icon name="lucide:twitter" class="w-6 h-6 text-gray-400 group-hover:text-cyan-400 transition-colors duration-300" />
+              </div>
+            </a>
+            <a href="#" class="group relative">
+              <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur"></div>
+              <div class="relative w-12 h-12 bg-gray-800/50 backdrop-blur-sm rounded-lg flex items-center justify-center border border-gray-700 hover:border-cyan-500/50 transition-all duration-300 group-hover:scale-110">
+                <Icon name="lucide:facebook" class="w-6 h-6 text-gray-400 group-hover:text-cyan-400 transition-colors duration-300" />
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Bottom Bar */}
+    <div class="border-t border-gray-800/50 pt-8 animate-item">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-gray-500 text-sm flex items-center">
+          <Icon name="lucide:copyright" class="w-4 h-4 mr-2" />
+          2026 MBC. Todos los derechos reservados.
+        </p>
+        <button class="group relative px-8 py-3 bg-gradient-to-r from-[#00d4ff] to-[#0099cc] hover:from-[#00b8e6] hover:to-[#0080aa] text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_20px_rgba(0,212,255,0.3)] overflow-hidden">
+          <span class="relative z-10 flex items-center">
+            <Icon name="lucide:log-in" class="w-5 h-5 mr-2" />
+            Iniciar Sesión
+          </span>
+          <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 group-hover:translate-x-full transition-transform duration-700"></div>
+        </button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  /* Initial state for animation */
+  .animate-item {
+    opacity: 0;
+    transform: translateY(2rem);
+    transition-property: opacity, transform;
+    transition-duration: 0.8s;
+    transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  /* Final state when 'is-visible' class is applied */
+  #main-footer.is-visible .animate-item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Staggered delay for child elements */
+  #main-footer.is-visible #footer-content > .animate-item:nth-child(1) { transition-delay: 0.1s; }
+  #main-footer.is-visible #footer-content > .animate-item:nth-child(2) { transition-delay: 0.2s; }
+  #main-footer.is-visible #footer-content > .animate-item:nth-child(3) { transition-delay: 0.3s; }
+  #main-footer.is-visible #footer-content > .animate-item:nth-child(4) { transition-delay: 0.4s; }
+  /* Bottom bar animation */
+  #main-footer.is-visible .border-t.animate-item { transition-delay: 0.6s; }
+
+  /* Glow effect for electric blue theme */
+  @keyframes glow {
+    0% { box-shadow: 0 0 5px rgba(0, 212, 255, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.8), 0 0 30px rgba(0, 212, 255, 0.4); }
+    100% { box-shadow: 0 0 5px rgba(0, 212, 255, 0.5); }
+  }
+
+  /* Pulse animation for icons */
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.05); opacity: 1; }
+  }
+
+  /* Subtle floating animation */
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+  }
+
+  /* Enhanced social media icons */
+  .social-icon {
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  .social-icon:hover {
+    transform: scale(1.2) rotate(5deg);
+    filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5));
+  }
+
+  /* Enhanced button interactions */
+  .button-interactive {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+  }
+  .button-interactive::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+  .button-interactive:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+  .button-interactive:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+  }
+  .button-interactive:active {
+    transform: scale(0.98) translateY(0);
+  }
+
+  /* Link hover effects */
+  a.group:hover span {
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+  }
+
+  /* Gradient text effect for headings on hover */
+  h3.group:hover span {
+    background: linear-gradient(135deg, #00d4ff, #0099cc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Scroll reveal enhancement */
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Add subtle parallax effect to background pattern */
+  @keyframes parallax {
+    from { transform: translateY(0); }
+    to { transform: translateY(-20px); }
+  }
+
+  #main-footer:hover .absolute.inset-0 {
+    animation: parallax 10s ease-in-out infinite alternate;
+  }
+</style>
