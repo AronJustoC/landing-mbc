@@ -53,13 +53,13 @@ landing-mbc/
 
 ## 📦 Scripts Disponibles
 
-| Comando | Acción |
-| :--- | :--- |
-| `npm install` | Instala todas las dependencias |
-| `npm run dev` | Inicia servidor de desarrollo en `localhost:4321` |
-| `npm run build` | Construye el sitio para producción en `./dist/` |
-| `npm run preview` | Previsualiza la build localmente |
-| `npm run astro ...` | Ejecuta comandos CLI de Astro |
+| Comando             | Acción                                            |
+| :------------------ | :------------------------------------------------ |
+| `npm install`       | Instala todas las dependencias                    |
+| `npm run dev`       | Inicia servidor de desarrollo en `localhost:4321` |
+| `npm run build`     | Construye el sitio para producción en `./dist/`   |
+| `npm run preview`   | Previsualiza la build localmente                  |
+| `npm run astro ...` | Ejecuta comandos CLI de Astro                     |
 
 ## 🚀 Comenzando
 
@@ -71,17 +71,20 @@ landing-mbc/
 ### Instalación
 
 1. Clona el repositorio:
+
 ```bash
 git clone https://github.com/AronJustoC/landing-mbc.git
 cd landing-mbc
 ```
 
 2. Instala las dependencias:
+
 ```bash
 npm install
 ```
 
 3. Inicia el servidor de desarrollo:
+
 ```bash
 npm run dev
 ```
@@ -91,11 +94,13 @@ npm run dev
 ### Construcción para Producción
 
 1. Construye el sitio:
+
 ```bash
 npm run build
 ```
 
 2. Previsualiza localmente:
+
 ```bash
 npm run preview
 ```
@@ -172,7 +177,7 @@ Este proyecto está bajo la Licencia MIT - mira el archivo [LICENSE](LICENSE) pa
 
 ## 👨‍💻 Autor
 
-- **Aron Justo** - *Trabajo inicial* - [AronJustoC](https://github.com/AronJustoC)
+- **Aron Justo** - _Trabajo inicial_ - [AronJustoC](https://github.com/AronJustoC)
 
 ## 🙏 Agradecimientos
 
@@ -183,3 +188,4 @@ Este proyecto está bajo la Licencia MIT - mira el archivo [LICENSE](LICENSE) pa
 ---
 
 ⭐ Si este proyecto te ayudó, por favor dale una estrella en GitHub!
+
