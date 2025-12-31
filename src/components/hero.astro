@@ -1,0 +1,439 @@
+---
+// Hero.astro
+import { Icon } from "astro-icon/components";
+import logo from "../assets/logo-1.png"
+import heroimg1 from "../assets/image-7.png";
+import heroimg2 from "../assets/image-1.jpeg";
+import heroimg3 from "../assets/image-2.jpeg";
+import heroimg4 from "../assets/image-3.jpeg";
+import heroimg5 from "../assets/image-4.jpeg";
+import antaminaLogo from "../assets/logo-antamina.jpg";
+import cerroVerdeLogo from "../assets/logo-cerro-verde.jpg";
+import antapacayLogo from "../assets/logo-antapacay.png";
+import southerLogo from "../assets/logo-souther.png";
+// import quellavecoLogo from "../assets/logo-quellaveco.png";
+
+const slides = [
+  { src: heroimg1.src, alt: "MBC - Slide 1" },
+  { src: heroimg2.src, alt: "MBC - Slide 2" },
+  { src: heroimg3.src, alt: "MBC - Slide 3" },
+  { src: heroimg4.src, alt: "MBC - Slide 4" },
+  { src: heroimg5.src, alt: "MBC - Slide 5" },
+];
+---
+
+<section
+  id="main-hero"
+  class="relative min-h-[92vh] overflow-hidden bg-gradient-to-br from-[#0a0a0c] via-[#0f1419] to-[#1a1f2e] pt-24"
+>
+  {/* Background slider */}
+  <div class="absolute inset-0 z-0 overflow-hidden">
+    <div class="hero-slider absolute inset-0" data-interval="2500">
+    {slides.map((slide, i) => (
+      <img
+        src={slide.src}
+        alt={slide.alt}
+        class={`hero-slide absolute inset-0 h-full w-full object-cover object-center
+        transition-all duration-[1200ms] ease-in-out
+        ${i === 0 ? "opacity-80 scale-100" : "opacity-0 scale-105"}`}
+        loading={i === 0 ? "eager" : "lazy"}
+        decoding="async"
+      />
+    ))}
+  </div>
+    {/* Dark overlay + left focus */}
+    <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/25"></div>
+    {/* Subtle tech haze */}
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_25%_35%,rgba(0,212,255,0.14),transparent_45%)]"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_80%_40%,rgba(0,153,204,0.10),transparent_40%)]"></div>
+  </div>
+
+  {/* Decorative blobs */}
+  <div class="pointer-events-none absolute -top-24 -left-24 h-80 w-80 rounded-full blur-3xl opacity-30 bg-cyan-500/30"></div>
+  <div class="pointer-events-none absolute -bottom-24 right-0 h-96 w-96 rounded-full blur-3xl opacity-25 bg-blue-500/25"></div>
+
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      {/* Copy */}
+      <div class="lg:col-span-7">
+        <div class="animate-item inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-500/25 bg-gray-900/40 backdrop-blur-sm">
+          <span class="relative flex h-2 w-2">
+            <span class="absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75 animate-ping"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
+          </span>
+          <span class="text-sm text-gray-200/90">Monitoreo • Vibraciones • Ingeniería de datos</span>
+        </div>
+
+        <h1 class="animate-item mt-6 text-white font-extrabold tracking-tight text-4xl md:text-5xl lg:text-6xl leading-tight">
+          LÍDERES EN MANTENIMIENTO<br />
+          PREDICTIVO E INGENIERÍA DE<br />
+          DATOS EN PERÚ
+        </h1>
+
+        <p class="animate-item mt-5 max-w-xl text-gray-200/85 leading-relaxed">
+          Evite fallas catastróficas en activos críticos. Monitoreo avanzado y software personalizado
+          para entornos industriales exigentes (minería, energía e infraestructura).
+        </p>
+
+        <div class="animate-item mt-8 flex flex-col sm:flex-row gap-4">
+          <a
+            href="contact"
+            class="group relative px-8 py-3 bg-gradient-to-r from-[#00d4ff] to-[#0099cc] hover:from-[#00b8e6] hover:to-[#0080aa] text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_24px_rgba(0,212,255,0.30)] overflow-hidden inline-flex items-center justify-center"
+          >
+            <span class="relative z-10 flex items-center">
+              <Icon name="lucide:clipboard-check" class="w-5 h-5 mr-2" />
+              Solicita consultoría técnica
+            </span>
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 group-hover:translate-x-full transition-transform duration-700"></div>
+          </a>
+
+          <a
+            href="#servicios"
+            class="group px-8 py-3 rounded-lg border border-cyan-500/25 bg-gray-900/35 backdrop-blur-sm text-gray-100 font-medium transition-all duration-300 hover:border-cyan-500/50 hover:bg-gray-900/50 hover:shadow-[0_0_18px_rgba(0,212,255,0.18)] inline-flex items-center justify-center"
+          >
+            <Icon name="lucide:layers" class="w-5 h-5 mr-2 text-cyan-400" />
+            Ver servicios
+          </a>
+        </div>
+
+        {/* Highlights */}
+        <div class="animate-item mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl">
+          <div class="glass-card">
+            <Icon name="lucide:activity" class="w-5 h-5 text-cyan-400" />
+            <p class="text-gray-200 font-semibold mt-2">Vibraciones</p>
+            <p class="text-gray-400 text-sm">Diagnóstico y condición.</p>
+          </div>
+          <div class="glass-card">
+            <Icon name="lucide:cpu" class="w-5 h-5 text-cyan-400" />
+            <p class="text-gray-200 font-semibold mt-2">Sensores & IIoT</p>
+            <p class="text-gray-400 text-sm">Integración y monitoreo.</p>
+          </div>
+          <div class="glass-card">
+            <Icon name="lucide:database" class="w-5 h-5 text-cyan-400" />
+            <p class="text-gray-200 font-semibold mt-2">Data Engineering</p>
+            <p class="text-gray-400 text-sm">Software a medida.</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Right-side “device” card (opcional) */}
+      <!-- <div class="lg:col-span-5 hidden lg:block">
+        <div class="animate-item relative rounded-2xl border border-cyan-500/20 bg-gray-900/30 backdrop-blur-sm p-6 shadow-[0_0_40px_rgba(0,212,255,0.10)]">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center">
+                <Icon name="lucide:activity" class="w-5 h-5 text-cyan-400" />
+              </div>
+              <div>
+                <p class="text-gray-200 font-semibold">MBC Monitoring</p>
+                <p class="text-gray-400 text-xs">Estado en tiempo real</p>
+              </div>
+            </div>
+            <span class="text-xs text-cyan-300/90 px-3 py-1 rounded-full border border-cyan-500/25 bg-black/20">
+              ONLINE
+            </span>
+          </div>
+
+          <div class="mt-6 space-y-4">
+            <div class="mini-row">
+              <span class="text-gray-400 text-sm">Activos críticos</span>
+              <span class="text-gray-200 font-semibold">24</span>
+            </div>
+            <div class="mini-row">
+              <span class="text-gray-400 text-sm">Alertas</span>
+              <span class="text-gray-200 font-semibold">3</span>
+            </div>
+            <div class="mini-row">
+              <span class="text-gray-400 text-sm">Disponibilidad</span>
+              <span class="text-gray-200 font-semibold">99.2%</span>
+            </div>
+          </div>
+
+          <div class="mt-6 h-24 rounded-xl border border-cyan-500/15 bg-gradient-to-r from-black/30 to-black/10 overflow-hidden relative">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(0,212,255,0.22),transparent_40%)]"></div>
+            <div class="absolute bottom-3 left-4 text-gray-300 text-xs">Tendencia de vibración (demo)</div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</section>
+
+<!-- body content -->
+<section
+  id="ingenieria-confiabilidad"
+  class="relative py-20 bg-gradient-to-br from-[#071420] via-[#0b2233] to-[#0e2a3d]"
+>
+  <div class="container mx-auto px-6 text-center max-w-5xl">
+
+    <!-- Logo -->
+    <div class="flex justify-center mb-6">
+      <img
+        src={logo.src}
+        alt="MBC Ingeniería y Confiabilidad"
+        class="h-25 opacity-90"
+      />
+    </div>
+
+    <!-- Título -->
+    <h2 class="text-white text-3xl md:text-4xl font-bold tracking-tight">
+      INGENIERÍA Y CONFIABILIDAD EN EL<br class="hidden md:block" />
+      CORAZÓN DE LA INDUSTRIA
+    </h2>
+
+    <!-- Descripción -->
+    <p class="mt-6 text-gray-300 text-base md:text-lg leading-relaxed">
+      En MBC, nos especializamos en llevar soluciones de mantenimiento predictivo a donde otros no llegan.
+      Mediante monitoreo avanzado y software a medida, transformamos datos complejos de activos críticos
+      en información estratégica, optimizando el rendimiento y garantizando la continuidad operativa
+      en sectores como minería, energía e infraestructura.
+    </p>
+
+    <!-- Separador -->
+    <div class="mt-10 flex justify-center">
+      <span class="h-[2px] w-24 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"></span>
+    </div>
+
+    <!-- Pilares -->
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+
+      <div class="bg-[#0b1f2f]/60 border border-cyan-500/20 rounded-xl p-6 backdrop-blur-sm">
+        <h3 class="text-white font-semibold mb-3">
+          Monitoreo avanzado
+        </h3>
+        <p class="text-gray-300 text-sm leading-relaxed">
+          Medición de vibraciones, esfuerzos y respuesta estructural
+          para la detección temprana de fallas y condiciones anómalas.
+        </p>
+      </div>
+
+      <div class="bg-[#0b1f2f]/60 border border-cyan-500/20 rounded-xl p-6 backdrop-blur-sm">
+        <h3 class="text-white font-semibold mb-3">
+          Ingeniería aplicada
+        </h3>
+        <p class="text-gray-300 text-sm leading-relaxed">
+          Análisis dinámico, OMA, FEM y validación experimental
+          orientados a confiabilidad, fatiga y vida útil de activos.
+        </p>
+      </div>
+
+      <div class="bg-[#0b1f2f]/60 border border-cyan-500/20 rounded-xl p-6 backdrop-blur-sm">
+        <h3 class="text-white font-semibold mb-3">
+          Decisiones basadas en datos
+        </h3>
+        <p class="text-gray-300 text-sm leading-relaxed">
+          Desarrollo de software y modelos analíticos que convierten
+          señales complejas en indicadores claros para operación y mantenimiento.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="bg-gradient-to-br from-[#0a0a0c] via-[#0f1419] to-[#1a1f2e] py-20">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="text-white text-3xl font-semibold mb-6">
+      Experiencia en operaciones mineras del Perú
+    </h2>
+
+    <p class="text-white text-3xl font-semibold mb-12">
+      Nuestro equipo ha desarrollado trabajos de análisis dinámico,
+      monitoreo de condición y confiabilidad estructural en
+      operaciones mineras de gran escala en el país.
+    </p>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-10 items-center">
+      <img
+    src={antaminaLogo.src}
+    alt="Antamina"
+    class="mx-auto h-20 opacity-50 hover:opacity-100 transition"
+  />
+  <img
+    src={cerroVerdeLogo.src}
+    alt="Cerro Verde"
+    class="mx-auto h-20 opacity-70 hover:opacity-100 transition"
+  />
+  <img
+    src={antapacayLogo.src}
+    alt="Las Bambas"
+    class="mx-auto h-20 opacity-70 hover:opacity-100 transition"
+  />
+  <img
+    src={southerLogo.src}
+    alt="Toquepala"
+    class="mx-auto h-20 opacity-70 hover:opacity-100 transition"
+  />
+    </div>
+
+    <p class="mt-10 text-xs text-gray-500">
+      Los logotipos mostrados corresponden a operaciones mineras donde se ha desarrollado experiencia técnica.
+    </p>
+  </div>
+</section>
+
+<section class="bg-[#0a0a0c] py-20">
+  <div class="container mx-auto px-6">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+
+      {[
+        { n: "10+", l: "Años de experiencia" },
+        { n: "150+", l: "Activos analizados" },
+        { n: "30+", l: "Proyectos industriales" },
+        { n: "5", l: "Sectores productivos" },
+      ].map(item => (
+        <div class="animate-item bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg py-8">
+          <p class="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+            {item.n}
+          </p>
+          <p class="mt-2 text-gray-400 text-sm">
+            {item.l}
+          </p>
+        </div>
+      ))}
+
+    </div>
+  </div>
+</section>
+
+<section class="bg-gradient-to-br from-[#0a0a0c] via-[#0f1419] to-[#1a1f2e] py-20">
+  <div class="container mx-auto px-6">
+    <h2 class="animate-item text-white text-3xl font-semibold mb-10 text-center">
+      Opiniones de clientes
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {[
+        "Análisis riguroso y recomendaciones claras que mejoraron nuestra confiabilidad.",
+        "Excelente interpretación de vibraciones y comportamiento estructural.",
+        "Enfoque técnico sólido y acompañamiento continuo.",
+      ].map(text => (
+        <div class="animate-item group bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg p-6 hover:border-cyan-500/40 transition-all duration-300">
+          <p class="text-gray-300 text-sm leading-relaxed">
+            “{text}”
+          </p>
+          <p class="mt-4 text-cyan-400 text-xs font-medium">
+            Cliente industrial
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+  <style>
+    .metric-card {
+      border-radius: 16px;
+      border: 1px solid rgba(0,212,255,0.18);
+      background: rgba(10,10,12,0.35);
+      backdrop-filter: blur(10px);
+      padding: 32px 16px;
+      box-shadow: 0 0 26px rgba(0,212,255,0.08);
+    }
+    .metric-number {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #00d4ff, #0099cc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .metric-label {
+      margin-top: 8px;
+      color: #cbd5e1;
+      font-size: 0.95rem;
+    }
+  </style>
+</section>
+
+
+<style>
+
+  /* Igual lógica que tu footer: reveal por is-visible */
+  .animate-item {
+    opacity: 0;
+    transform: translateY(2rem);
+    transition-property: opacity, transform;
+    transition-duration: 0.8s;
+    transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  #main-hero.is-visible .animate-item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Stagger */
+  #main-hero.is-visible .animate-item:nth-child(1) { transition-delay: 0.10s; }
+  #main-hero.is-visible .animate-item:nth-child(2) { transition-delay: 0.18s; }
+  #main-hero.is-visible .animate-item:nth-child(3) { transition-delay: 0.26s; }
+  #main-hero.is-visible .animate-item:nth-child(4) { transition-delay: 0.34s; }
+  #main-hero.is-visible .animate-item:nth-child(5) { transition-delay: 0.42s; }
+
+  .glass-card{
+    border-radius: 14px;
+    padding: 14px 14px;
+    border: 1px solid rgba(0,212,255,0.18);
+    background: rgba(10,10,12,0.35);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 22px rgba(0,212,255,0.08);
+    transition: all .3s ease;
+  }
+  .glass-card:hover{
+    transform: translateY(-2px);
+    border-color: rgba(0,212,255,0.35);
+    box-shadow: 0 0 28px rgba(0,212,255,0.14);
+  }
+  .mini-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(148,163,184,0.15);
+    background: rgba(2,6,23,0.25);
+  }
+  
+</style>
+
+<script>
+  // Auto-reveal al entrar en viewport (igual idea del footer con is-visible)
+  const el = document.getElementById("main-hero");
+  if (el) {
+    const io = new IntersectionObserver(
+      ([entry]) => entry.isIntersecting && el.classList.add("is-visible"),
+      { threshold: 0.15 }
+    );
+    io.observe(el);
+  }
+</script>
+
+<script>
+  function initHeroSlider() {
+    const slider = document.querySelector(".hero-slider") as HTMLElement | null;
+    if (!slider) return;
+
+    if (slider.dataset.started === "1") return;
+    slider.dataset.started = "1";
+
+    const slides = Array.from(
+      slider.querySelectorAll(".hero-slide")
+    ) as HTMLElement[];
+
+    const interval = Number(slider.dataset.interval || 5000);
+    let current = 0;
+
+    if (slides.length > 1) {
+      setInterval(() => {
+        slides[current].classList.remove("opacity-80", "scale-100");
+        slides[current].classList.add("opacity-0", "scale-105");
+
+        current = (current + 1) % slides.length;
+
+        slides[current].classList.remove("opacity-0", "scale-105");
+        slides[current].classList.add("opacity-80", "scale-100");
+      }, interval);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", initHeroSlider);
+  document.addEventListener("astro:page-load", initHeroSlider);
+</script>
