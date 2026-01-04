@@ -1,5 +1,7 @@
 ---
 import "../styles/global.css";
+import WasapBall from "../components/shareComponents/wasapBall.astro";
+import TopBar from "../components/shareComponents/topBar.astro";
 ---
 
 <!doctype html>
@@ -12,7 +14,9 @@ import "../styles/global.css";
 		<title>Astro Basics</title>
 	</head>
 	<body>
+		<TopBar />
 		<slot />
+		<WasapBall />
 	</body>
 </html>
 

@@ -1,14 +1,14 @@
 ---
-import { Icon } from 'astro-icon/components';
-import LogoMBC from '../assets/logo-1.png'
+import { Icon } from "astro-icon/components";
+import LogoMBC from "../assets/logo-1.png";
 ---
+
 <header
   id="main-header"
-  class="fixed top-0 inset-x-0 z-50 bg-gradient-to-r from-[#0a0a0c]/80 via-[#0f1419]/80 to-[#1a1f2e]/80 backdrop-blur-xl border-b border-gray-800/40 is-visible"
+  class="fixed top-8 md:top-8 inset-x-0 z-50 bg-gradient-to-r from-[#0a0a0c]/90 via-[#0f1419]/90 to-[#1a1f2e]/90 backdrop-blur-xl border-b border-gray-800/40 is-visible transition-all duration-300"
 >
   <div class="container mx-auto px-6">
     <div class="flex items-center justify-between h-20">
-
       <!-- Logo -->
       <div class="animate-item flex items-center gap-3">
         <img
@@ -18,43 +18,70 @@ import LogoMBC from '../assets/logo-1.png'
           height="40"
           class="filter drop-shadow-lg hover:scale-105 transition-transform duration-300"
         />
-      </div>  
+      </div>
 
       <!-- Navigation -->
       <nav class="hidden md:flex items-center gap-10 animate-item">
-        <a href="/" class="group relative text-gray-300 hover:text-cyan-400 transition-colors duration-300">
+        <a
+          href="/"
+          class="group relative text-gray-300 hover:text-cyan-400 transition-colors duration-300"
+        >
           Inicio
-          <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+          <span
+            class="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
+          ></span>
         </a>
 
-        <a href="servicios" class="group relative text-gray-300 hover:text-cyan-400 transition-colors duration-300">
+        <a
+          href="servicios"
+          class="group relative text-gray-300 hover:text-cyan-400 transition-colors duration-300"
+        >
           Servicios
-          <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+          <span
+            class="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
+          ></span>
         </a>
 
-        <a href="about" class="group relative text-gray-300 hover:text-cyan-400 transition-colors duration-300">
+        <a
+          href="about"
+          class="group relative text-gray-300 hover:text-cyan-400 transition-colors duration-300"
+        >
           Proyectos
-          <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+          <span
+            class="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
+          ></span>
         </a>
 
-        <a href="contact" class="group relative text-gray-300 hover:text-cyan-400 transition-colors duration-300">
+        <a
+          href="contact"
+          class="group relative text-gray-300 hover:text-cyan-400 transition-colors duration-300"
+        >
           Contacto
-          <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+          <span
+            class="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
+          ></span>
         </a>
       </nav>
 
       <!-- Actions -->
       <div class="flex items-center gap-4 animate-item">
-        <button class="hidden md:flex group relative px-6 py-2.5 bg-gradient-to-r from-[#00d4ff] to-[#0099cc] hover:from-[#00b8e6] hover:to-[#0080aa] text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_20px_rgba(0,212,255,0.35)] overflow-hidden">
+        <button
+          class="hidden md:flex group relative px-6 py-2.5 bg-gradient-to-r from-[#00d4ff] to-[#0099cc] hover:from-[#00b8e6] hover:to-[#0080aa] text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_20px_rgba(0,212,255,0.35)] overflow-hidden"
+        >
           <span class="relative z-10 flex items-center gap-2">
             <Icon name="lucide:log-in" class="w-5 h-5" />
             Iniciar sesión
           </span>
-          <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 group-hover:translate-x-full transition-transform duration-700"></div>
+          <div
+            class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 group-hover:translate-x-full transition-transform duration-700"
+          >
+          </div>
         </button>
 
         <!-- Mobile menu button -->
-        <button class="md:hidden w-10 h-10 rounded-lg bg-gray-800/50 border border-gray-700 flex items-center justify-center hover:border-cyan-500/50 transition-all duration-300">
+        <button
+          class="md:hidden w-10 h-10 rounded-lg bg-gray-800/50 border border-gray-700 flex items-center justify-center hover:border-cyan-500/50 transition-all duration-300"
+        >
           <Icon name="lucide:menu" class="w-6 h-6 text-gray-300" />
         </button>
       </div>
@@ -77,7 +104,13 @@ import LogoMBC from '../assets/logo-1.png'
     transform: translateY(0);
   }
 
-  #main-header.is-visible .animate-item:nth-child(1) { transition-delay: 0.1s; }
-  #main-header.is-visible .animate-item:nth-child(2) { transition-delay: 0.2s; }
-  #main-header.is-visible .animate-item:nth-child(3) { transition-delay: 0.3s; }
+  #main-header.is-visible .animate-item:nth-child(1) {
+    transition-delay: 0.1s;
+  }
+  #main-header.is-visible .animate-item:nth-child(2) {
+    transition-delay: 0.2s;
+  }
+  #main-header.is-visible .animate-item:nth-child(3) {
+    transition-delay: 0.3s;
+  }
 </style>
