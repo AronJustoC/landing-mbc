@@ -1,416 +1,268 @@
 ---
 import { Icon } from "astro-icon/components";
-import contactBg from '../assets/imagen-10.png';
+import contactBg from "../assets/imagen-10.png";
 ---
 
-<html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Contacto | MBC</title>
-  </head>
-
-  <body class="bg-[#0a0a0c] text-white">
-    <!-- HERO CONTACTO -->
-    <section
-      id="contact-hero"
-      class="relative overflow-hidden bg-gradient-to-br from-[#0a0a0c] via-[#0f1419] to-[#1a1f2e] pt-24 pb-16"
-    >
-    <!-- Background con imagen -->
+<section
+  class="relative bg-gradient-to-br from-[#0a0a0c] via-[#0f1419] to-[#1a1f2e] py-24 lg:py-32 overflow-hidden"
+>
+  <!-- Background Image with Heavy Overlay -->
   <div class="absolute inset-0 z-0">
     <img
       src={contactBg.src}
-      alt="Contacto MBC Ingeniería y Confiabilidad"
-      class="h-full w-full object-cover object-center"
-      loading="eager"
-      decoding="async"
+      alt="Industrial Background"
+      class="h-full w-full object-cover object-center opacity-10 grayscale contrast-125"
     />
+    <div class="absolute inset-0 bg-[#0a0a0c]/95"></div>
+  </div>
 
-      <!-- Overlay base -->
-      <div class="absolute inset-0 bg-black/65"></div>
-
-      <!-- Gradiente lateral (el que ya usabas) -->
-      <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/25"></div>
-
-      <!-- Glow tech (los blobs originales) -->
-      <div class="pointer-events-none absolute -top-24 -left-24 h-80 w-80 rounded-full blur-3xl opacity-30 bg-cyan-500/30"></div>
-      <div class="pointer-events-none absolute -bottom-24 right-0 h-96 w-96 rounded-full blur-3xl opacity-25 bg-blue-500/25"></div>
-    </div>
-      <div class="pointer-events-none absolute -top-24 -left-24 h-80 w-80 rounded-full blur-3xl opacity-30 bg-cyan-500/30"></div>
-      <div class="pointer-events-none absolute -bottom-24 right-0 h-96 w-96 rounded-full blur-3xl opacity-25 bg-blue-500/25"></div>
-
-      <div class="container mx-auto px-6 relative z-10">
-        <div class="max-w-3xl">
-          <div
-            class="animate-item inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-500/25 bg-gray-900/40 backdrop-blur-sm"
-          >
-            <span class="relative flex h-2 w-2">
-              <span class="absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75 animate-ping"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
-            </span>
-            <span class="text-sm text-gray-200/90">Contacto comercial y técnico</span>
-          </div>
-
-          <h1 class="animate-item mt-6 text-4xl md:text-5xl font-extrabold tracking-tight">
-            Conversemos sobre confiabilidad<br class="hidden md:block" />
-            y mantenimiento predictivo
-          </h1>
-
-          <p class="animate-item mt-5 text-gray-200/85 leading-relaxed">
-            Cuéntanos tu industria, el activo y el problema. Te respondemos con un enfoque técnico:
-            diagnóstico, medición, análisis y plan de acción.
-          </p>
-
-          <div class="animate-item mt-8 flex flex-col sm:flex-row gap-4">
-            <a
-              href="#formulario"
-              class="group relative px-8 py-3 bg-gradient-to-r from-[#00d4ff] to-[#0099cc] hover:from-[#00b8e6] hover:to-[#0080aa]
-              text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105
-              hover:shadow-[0_0_24px_rgba(0,212,255,0.30)] overflow-hidden inline-flex items-center justify-center"
-            >
-              <span class="relative z-10 flex items-center">
-                <Icon name="lucide:send" class="w-5 h-5 mr-2" />
-                Solicitar contacto
-              </span>
-              <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 group-hover:translate-x-full transition-transform duration-700"></div>
-            </a>
-
-            <a
-              href="https://wa.me/51921005260"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="group px-8 py-3 rounded-lg border border-cyan-500/25 bg-gray-900/35 backdrop-blur-sm text-gray-100 font-medium
-              transition-all duration-300 hover:border-cyan-500/50 hover:bg-gray-900/50 hover:shadow-[0_0_18px_rgba(0,212,255,0.18)]
-              inline-flex items-center justify-center gap-3"
-            >
-              <Icon name="simple-icons:whatsapp" class="w-5 h-5 text-white" />
-              WhatsApp
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- MERCADOS ACTUALES -->
-    <section class="relative py-16 bg-gradient-to-br from-[#071420] via-[#0b2233] to-[#0e2a3d] overflow-hidden">
-      <div class="container mx-auto px-6">
-        <div class="max-w-3xl">
-          <h2 class="animate-item text-2xl md:text-3xl font-bold tracking-tight">
-            Mercados donde generamos mayor impacto
+  <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+      <!-- Left Column: Corporate Info -->
+      <div class="lg:col-span-5 flex flex-col justify-between h-full">
+        <div>
+          <h2 class="text-2xl font-semibold text-cyan-400 tracking-widest mb-4">
+            Contactanos
           </h2>
-          <p class="animate-item mt-3 text-gray-300 leading-relaxed">
-            Priorizamos entornos de alta criticidad, donde la disponibilidad, la seguridad y el costo de parada
-            exigen decisiones basadas en datos.
+          <h1
+            class="text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-8"
+          >
+            Ingeniería de <br />
+            <span class="text-gray-400">Precisión</span>
+          </h1>
+          <p
+            class="text-lg text-gray-400 leading-relaxed mb-12 border-l-2 border-cyan-500 pl-6"
+          >
+            Soluciones avanzadas en mantenimiento predictivo y monitoreo de
+            condición para la industria crítica. Contáctanos ahora mismo y
+            estaremos encantados de atenderte
           </p>
-        </div>
 
-        <div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <!-- Minería -->
-          <div class="animate-item market-card">
-            <div class="icon-box">
-              <Icon name="lucide:mountain" class="w-5 h-5 text-cyan-400" />
-            </div>
-            <h3 class="title">Minería</h3>
-            <p class="desc">Molinos, fajas, bombas, zarandas, ventilación, activos críticos y estructuras.</p>
-          </div>
-
-          <!-- Energía -->
-          <div class="animate-item market-card">
-            <div class="icon-box">
-              <Icon name="lucide:zap" class="w-5 h-5 text-cyan-400" />
-            </div>
-            <h3 class="title">Energía</h3>
-            <p class="desc">Generación, subestaciones, equipos rotativos y confiabilidad operacional.</p>
-          </div>
-
-          <!-- Infraestructura -->
-          <div class="animate-item market-card">
-            <div class="icon-box">
-              <Icon name="lucide:building-2" class="w-5 h-5 text-cyan-400" />
-            </div>
-            <h3 class="title">Infraestructura</h3>
-            <p class="desc">Estructuras, vibración ambiental, integridad y evaluación dinámica.</p>
-          </div>
-
-          <!-- Puertos / Marítimo -->
-          <div class="animate-item market-card">
-            <div class="icon-box">
-              <Icon name="lucide:anchor" class="w-5 h-5 text-cyan-400" />
-            </div>
-            <h3 class="title">Puertos y marítimo</h3>
-            <p class="desc">Shiploaders, grúas, poleas, estructuras y monitoreo de fatiga.</p>
-          </div>
-
-          <!-- Manufactura -->
-          <div class="animate-item market-card">
-            <div class="icon-box">
-              <Icon name="lucide:factory" class="w-5 h-5 text-cyan-400" />
-            </div>
-            <h3 class="title">Manufactura</h3>
-            <p class="desc">Líneas críticas, mantenimiento predictivo y analítica para OEE.</p>
-          </div>
-
-          <!-- Servicios a medida -->
-          <div class="animate-item market-card">
-            <div class="icon-box">
-              <Icon name="lucide:code" class="w-5 h-5 text-cyan-400" />
-            </div>
-            <h3 class="title">Software a medida</h3>
-            <p class="desc">Dashboards, integración IIoT, pipelines y modelos de diagnóstico.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACTO: FORM + INFO -->
-    <section id="formulario" class="relative py-18 bg-gradient-to-br from-[#0a0a0c] via-[#0f1419] to-[#1a1f2e]">
-      <div class="container mx-auto px-6 py-16">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
-          <!-- Formulario -->
-          <div class="lg:col-span-7">
-            <div class="animate-item panel">
-              <h2 class="text-2xl font-bold">Formulario de contacto</h2>
-              <p class="mt-2 text-gray-300">
-                Respuesta rápida en horario laboral. Para cotización, indica activo, ubicación y urgencia.
-              </p>
-
-              <!-- Acción: reemplaza por tu endpoint / Formspree / backend -->
-              <form class="mt-8 space-y-5" method="post" action="#">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label class="label">Nombre</label>
-                    <input class="input" name="nombre" placeholder="Tu nombre" required />
-                  </div>
-                  <div>
-                    <label class="label">Empresa</label>
-                    <input class="input" name="empresa" placeholder="Empresa / Proyecto" />
-                  </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label class="label">Email</label>
-                    <input class="input" type="email" name="email" placeholder="correo@empresa.com" required />
-                  </div>
-                  <div>
-                    <label class="label">Teléfono</label>
-                    <input class="input" name="telefono" placeholder="+51 ..." />
-                  </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label class="label">Mercado</label>
-                    <select class="input" name="mercado">
-                      <option>Minería</option>
-                      <option>Energía</option>
-                      <option>Infraestructura</option>
-                      <option>Puertos y marítimo</option>
-                      <option>Manufactura</option>
-                      <option>Software a medida</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label class="label">Tipo de servicio</label>
-                    <select class="input" name="servicio">
-                      <option>Monitoreo / Predictivo</option>
-                      <option>Análisis de vibraciones</option>
-                      <option>OMA / EMA / Dinámica estructural</option>
-                      <option>FEM / Validación / Ingeniería</option>
-                      <option>Integración IIoT / Software</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label class="label">Mensaje</label>
-                  <textarea
-                    class="input min-h-[140px]"
-                    name="mensaje"
-                    placeholder="Describe el activo, el síntoma (frecuencias, amplitudes, condición) y el objetivo."
-                    required
-                  ></textarea>
-                </div>
-
-                <button class="btn-primary" type="submit">
-                  <span class="flex items-center justify-center">
-                    <Icon name="lucide:send" class="w-5 h-5 mr-2" />
-                    Enviar
-                  </span>
-                </button>
-
-                <p class="text-xs text-gray-400">
-                  Al enviar, aceptas el uso de tus datos solo para fines de contacto comercial/técnico.
+          <div class="space-y-8">
+            <!-- Contact Item -->
+            <div class="flex items-start gap-5 group">
+              <div
+                class="w-12 h-12 rounded-lg bg-gray-900/50 flex items-center justify-center text-cyan-400 group-hover:border-cyan-500/50 group-hover:shadow-[0_0_15px_rgba(0,212,255,0.15)] transition-all"
+              >
+                <Icon name="lucide:mail" class="w-5 h-5" />
+              </div>
+              <div>
+                <p
+                  class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1"
+                >
+                  Consultas Generales
                 </p>
-              </form>
-            </div>
-          </div>
-
-          <!-- Info -->
-          <div class="lg:col-span-5">
-            <div class="animate-item panel">
-              <h2 class="text-2xl font-bold">Canales directos</h2>
-              <p class="mt-2 text-gray-300">Elige el canal según urgencia o coordinación de visita.</p>
-
-              <div class="mt-8 space-y-4">
-                <div class="info-row">
-                  <div class="icon-box">
-                    <Icon name="lucide:phone" class="w-5 h-5 text-cyan-400" />
-                  </div>
-                  <div>
-                    <p class="text-gray-400 text-xs">Teléfono</p>
-                    <a class="text-gray-200 hover:text-cyan-400 transition" href="tel:+51921005260">(+51) 921 005 260</a>
-                  </div>
-                </div>
-
-                <div class="info-row">
-                  <div class="icon-box">
-                    <Icon name="lucide:mail" class="w-5 h-5 text-cyan-400" />
-                  </div>
-                  <div>
-                    <p class="text-gray-400 text-xs">Email</p>
-                    <a class="text-gray-200 hover:text-cyan-400 transition" href="mailto:contact@mbc.com">contact@mbc.com</a>
-                  </div>
-                </div>
-
-                <div class="info-row">
-                  <div class="icon-box">
-                    <Icon name="lucide:map-pin" class="w-5 h-5 text-cyan-400" />
-                  </div>
-                  <div>
-                    <p class="text-gray-400 text-xs">Dirección</p>
-                    <a
-                      class="text-gray-200 hover:text-cyan-400 transition"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href="https://www.google.com/maps/search/?api=1&query=Calle+Plateros+330,+Cusco,+Perú"
-                    >
-                      Calle Plateros 330, Cusco
-                    </a>
-                  </div>
-                </div>
-
-                <div class="mt-8 rounded-xl border border-cyan-500/15 bg-black/20 p-4">
-                  <p class="text-gray-300 text-sm">
-                    <span class="text-cyan-300 font-semibold">Tip:</span> Si ya tienes espectros/mediciones (vibración,
-                    OMA, FRF, strain), adjunta en un link (Drive) y lo revisamos más rápido.
-                  </p>
-                </div>
+                <a
+                  href="mailto:contact@mbc.com"
+                  class="text-white text-lg font-medium hover:text-cyan-400 transition-colors"
+                  >contact@mbc.com</a
+                >
               </div>
+            </div>
 
-              <!-- “Mapa” placeholder -->
-              <div class="mt-8 h-48 rounded-xl border border-cyan-500/15 bg-gradient-to-r from-black/30 to-black/10 relative overflow-hidden">
-                <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(0,212,255,0.20),transparent_45%)]"></div>
-                <div class="absolute inset-0 flex items-center justify-center text-gray-300/80 text-sm">
-                  Mapa / cobertura nacional (placeholder)
+            <!-- Contact Item -->
+            <div class="flex items-start gap-5 group">
+              <div
+                class="w-12 h-12 rounded-lg bg-gray-900/50 flex items-center justify-center text-cyan-400 group-hover:border-cyan-500/50 group-hover:shadow-[0_0_15px_rgba(0,212,255,0.15)] transition-all"
+              >
+                <Icon name="lucide:phone" class="w-5 h-5" />
+              </div>
+              <div>
+                <p
+                  class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1"
+                >
+                  Soporte Técnico
+                </p>
+                <a
+                  href="tel:+51921005260"
+                  class="text-white text-lg font-medium hover:text-cyan-400 transition-colors"
+                  >(+51) 921 005 260</a
+                >
+              </div>
+            </div>
+
+            <!-- Contact Item -->
+            <div class="flex items-start gap-5 group">
+              <div
+                class="w-12 h-12 rounded-lg bg-gray-900/50 flex items-center justify-center text-cyan-400 group-hover:border-cyan-500/50 group-hover:shadow-[0_0_15px_rgba(0,212,255,0.15)] transition-all"
+              >
+                <Icon name="lucide:map-pin" class="w-5 h-5" />
+              </div>
+              <div>
+                <p
+                  class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1"
+                >
+                  Oficina Central
+                </p>
+                <p class="text-white text-lg font-medium">
+                  Calle Plateros 330, Cusco
+                </p>
+              </div>
+            </div>
+            <!-- Contact Item -->
+            <!-- Social Media Item -->
+            <div class="flex items-start gap-5 group">
+              <div
+                class="w-12 h-12 rounded-lg bg-gray-900/50 flex items-center justify-center text-cyan-400 group-hover:border-cyan-500/50 group-hover:shadow-[0_0_15px_rgba(0,212,255,0.15)] transition-all"
+              >
+                <Icon name="lucide:share-2" class="w-5 h-5" />
+              </div>
+              <div>
+                <p
+                  class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-2"
+                >
+                  Síguenos
+                </p>
+                <div class="flex gap-4">
+                  <a
+                    href="#"
+                    class="text-gray-400 hover:text-cyan-400 transition-colors transform hover:scale-110"
+                    aria-label="Instagram"
+                  >
+                    <Icon name="lucide:instagram" class="w-6 h-6" />
+                  </a>
+                  <a
+                    href="#"
+                    class="text-gray-400 hover:text-cyan-400 transition-colors transform hover:scale-110"
+                    aria-label="LinkedIn"
+                  >
+                    <Icon name="lucide:linkedin" class="w-6 h-6" />
+                  </a>
+                  <a
+                    href="#"
+                    class="text-gray-400 hover:text-cyan-400 transition-colors transform hover:scale-110"
+                    aria-label="YouTube"
+                  >
+                    <Icon name="lucide:youtube" class="w-6 h-6" />
+                  </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- Animación reveal -->
-    <script is:inline>
-      const root = document.body;
-      const items = Array.from(document.querySelectorAll(".animate-item"));
+      <!-- Right Column: Clean Form -->
+      <div class="lg:col-span-7">
+        <div
+          class="rounded-2xl border border-cyan-500/20 bg-gray-900/40 backdrop-blur-md shadow-[0_0_30px_rgba(0,212,255,0.05)] p-8 lg:p-12"
+        >
+          <h3 class="text-2xl font-bold text-white mb-8">
+            Formulario de Proyecto
+          </h3>
 
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting) e.target.classList.add("is-visible");
-          });
-        },
-        { threshold: 0.15 }
-      );
+          <form class="space-y-8" method="post" action="#">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div class="group">
+                <label
+                  class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 group-focus-within:text-cyan-400 transition-colors"
+                  >Nombre</label
+                >
+                <input
+                  type="text"
+                  name="nombre"
+                  class="w-full bg-transparent border-b border-gray-700 py-3 text-white focus:outline-none focus:border-cyan-400 transition-colors placeholder:text-gray-700/50"
+                  placeholder="Ingrese su nombre"
+                  required
+                />
+              </div>
+              <div class="group">
+                <label
+                  class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 group-focus-within:text-cyan-400 transition-colors"
+                  >Empresa</label
+                >
+                <input
+                  type="text"
+                  name="empresa"
+                  class="w-full bg-transparent border-b border-gray-700 py-3 text-white focus:outline-none focus:border-cyan-400 transition-colors placeholder:text-gray-700/50"
+                  placeholder="Nombre de la empresa"
+                />
+              </div>
+            </div>
 
-      items.forEach((el) => io.observe(el));
-    </script>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div class="group">
+                <label
+                  class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 group-focus-within:text-cyan-400 transition-colors"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  name="email"
+                  class="w-full bg-transparent border-b border-gray-700 py-3 text-white focus:outline-none focus:border-cyan-400 transition-colors placeholder:text-gray-700/50"
+                  placeholder="correo@empresa.com"
+                  required
+                />
+              </div>
+              <div class="group">
+                <label
+                  class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 group-focus-within:text-cyan-400 transition-colors"
+                  >Teléfono</label
+                >
+                <input
+                  type="tel"
+                  name="telefono"
+                  class="w-full bg-transparent border-b border-gray-700 py-3 text-white focus:outline-none focus:border-cyan-400 transition-colors placeholder:text-gray-700/50"
+                  placeholder="+51 ..."
+                />
+              </div>
+            </div>
 
-    <style>
-      .animate-item {
-        opacity: 0;
-        transform: translateY(2rem);
-        transition-property: opacity, transform;
-        transition-duration: 0.8s;
-        transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      }
-      .animate-item.is-visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      .panel {
-        border-radius: 16px;
-        border: 1px solid rgba(0, 212, 255, 0.18);
-        background: rgba(10, 10, 12, 0.35);
-        backdrop-filter: blur(10px);
-        padding: 24px;
-        box-shadow: 0 0 26px rgba(0, 212, 255, 0.08);
-      }
-      .icon-box {
-        width: 42px;
-        height: 42px;
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(135deg, rgba(59,130,246,0.18), rgba(34,211,238,0.18));
-        border: 1px solid rgba(0, 212, 255, 0.15);
-      }
-      .market-card {
-        border-radius: 16px;
-        border: 1px solid rgba(0, 212, 255, 0.18);
-        background: rgba(10, 10, 12, 0.30);
-        backdrop-filter: blur(10px);
-        padding: 18px;
-        transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-        box-shadow: 0 0 20px rgba(0, 212, 255, 0.06);
-      }
-      .market-card:hover {
-        transform: translateY(-2px);
-        border-color: rgba(0, 212, 255, 0.35);
-        box-shadow: 0 0 28px rgba(0, 212, 255, 0.12);
-      }
-      .market-card .title { margin-top: 10px; font-weight: 700; }
-      .market-card .desc { margin-top: 6px; color: rgba(226,232,240,0.78); font-size: 0.9rem; line-height: 1.35; }
-      .info-row {
-        display: flex;
-        gap: 12px;
-        align-items: center;
-        padding: 12px;
-        border-radius: 14px;
-        border: 1px solid rgba(148,163,184,0.12);
-        background: rgba(2,6,23,0.22);
-      }
-      .label { display:block; font-size: 0.85rem; color: rgba(226,232,240,0.78); margin-bottom: 6px; }
-      .input {
-        width: 100%;
-        border-radius: 12px;
-        border: 1px solid rgba(148,163,184,0.18);
-        background: rgba(2,6,23,0.35);
-        padding: 12px 12px;
-        color: white;
-        outline: none;
-        transition: border-color .2s ease, box-shadow .2s ease;
-      }
-      .input:focus {
-        border-color: rgba(0,212,255,0.45);
-        box-shadow: 0 0 0 3px rgba(0,212,255,0.12);
-      }
-      .btn-primary {
-        width: 100%;
-        border-radius: 12px;
-        padding: 12px 16px;
-        font-weight: 700;
-        background: linear-gradient(90deg, #00d4ff, #0099cc);
-        transition: transform .25s ease, box-shadow .25s ease;
-        box-shadow: 0 0 18px rgba(0, 212, 255, 0.18);
-      }
-      .btn-primary:hover {
-        transform: translateY(-1px) scale(1.01);
-        box-shadow: 0 0 26px rgba(0, 212, 255, 0.28);
-      }
-    </style>
-  </body>
-</html>
+            <div class="group">
+              <label
+                class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 group-focus-within:text-cyan-400 transition-colors"
+                >Servicio Requerido</label
+              >
+              <select
+                name="servicio"
+                class="w-full bg-transparent border-b border-gray-700 py-3 text-white focus:outline-none focus:border-cyan-400 transition-colors cursor-pointer"
+              >
+                <option value="" class="bg-gray-900 text-gray-400"
+                  >Seleccione una opción...</option
+                >
+                <option value="monitoreo" class="bg-gray-900"
+                  >Monitoreo Predictivo</option
+                >
+                <option value="vibraciones" class="bg-gray-900"
+                  >Análisis de Vibraciones</option
+                >
+                <option value="oma" class="bg-gray-900"
+                  >Ingeniería Estructural</option
+                >
+                <option value="software" class="bg-gray-900"
+                  >Software & IIoT</option
+                >
+              </select>
+            </div>
+
+            <div class="group">
+              <label
+                class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 group-focus-within:text-cyan-400 transition-colors"
+                >Mensaje</label
+              >
+              <textarea
+                name="mensaje"
+                rows="3"
+                class="w-full bg-transparent border-b border-gray-700 py-3 text-white focus:outline-none focus:border-cyan-400 transition-colors placeholder:text-gray-700/50 resize-none"
+                placeholder="Describa su requerimiento..."
+                required></textarea>
+            </div>
+
+            <div class="pt-4">
+              <button
+                type="submit"
+                class="px-8 py-4 bg-gradient-to-r from-[#00d4ff] to-[#0099cc] hover:from-[#00b8e6] hover:to-[#0080aa] text-white font-bold rounded shadow-[0_0_20px_rgba(0,212,255,0.3)] hover:shadow-[0_0_30px_rgba(0,212,255,0.5)] transition-all duration-300 transform hover:scale-105 flex items-center gap-3 group"
+              >
+                <span>Enviar Mensaje</span>
+                <Icon
+                  name="lucide:arrow-right"
+                  class="w-5 h-5 group-hover:translate-x-1 transition-transform"
+                />
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
