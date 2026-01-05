@@ -1,0 +1,39 @@
+---
+import TopBar from './shareComponents/topBar.astro';
+import Header from './header.astro';
+---
+
+<div id="header-container" class="fixed top-0 left-0 right-0 z-50 transition-transform duration-300">
+    <TopBar />
+    <Header />
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const headerContainer = document.getElementById('header-container');
+        const topBar = document.getElementById('top-bar');
+        if (headerContainer && topBar) {
+            const topBarHeight = topBar.offsetHeight;
+            let isScrolled = window.scrollY > 50;
+
+            const setTransform = () => {
+                if (window.scrollY > 50) {
+                    if (!isScrolled) {
+                        headerContainer.style.transform = `translateY(-${topBarHeight}px)`;
+                        isScrolled = true;
+                    }
+                } else {
+                    if (isScrolled) {
+                        headerContainer.style.transform = 'translateY(0)';
+                        isScrolled = false;
+                    }
+                }
+            }
+
+            if (isScrolled) {
+                headerContainer.style.transform = `translateY(-${topBarHeight}px)`;
+            }
+            
+            window.addEventListener('scroll', setTransform);
+        }
+    });
+</script>
