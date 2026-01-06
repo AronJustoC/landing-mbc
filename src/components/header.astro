@@ -120,34 +120,12 @@ const aboutUs = [
           </div>
         </div>
 
-        <!-- Nosotros Dropdown -->
-        <div class="relative" data-dropdown>
-          <button
-            class="px-4 py-2 text-gray-300 hover:text-cyan-400 flex items-center gap-2 transition-colors duration-300"
-            data-dropdown-button
-          >
-            Nosotros
-            <Icon name="lucide:chevron-down" class="w-4 h-4" />
-          </button>
-          <div
-            class="absolute top-full mt-3 p-4 bg-[#10151c]/90 backdrop-blur-xl border border-gray-800 rounded-2xl shadow-2xl w-72 opacity-0 invisible transition-all duration-300"
-            data-dropdown-menu
-          >
-            <div class="space-y-2">
-              {
-                aboutUs.map((item) => (
-                  <a
-                    href={item.href}
-                    class="group block p-3 rounded-lg hover:bg-white/5"
-                  >
-                    <p class="text-white font-semibold text-sm">{item.name}</p>
-                    <p class="text-gray-400 text-xs">{item.description}</p>
-                  </a>
-                ))
-              }
-            </div>
-          </div>
-        </div>
+        <a
+          href="/about"
+          class="px-4 py-2 text-gray-300 hover:text-cyan-400 transition-colors duration-300"
+        >
+          Nosotros</a
+        >
 
         <a
           href="/proyectos"
