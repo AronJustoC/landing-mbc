@@ -2,7 +2,7 @@
 import { defineConfig } from 'astro/config';
 import icon from "astro-icon";
 import tailwindcss from '@tailwindcss/vite';
-import image from "@astrojs/image";
+// import image from "@astrojs/image";
 
 // https://astro.build/config
 export default defineConfig({
@@ -10,7 +10,7 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
   integrations: [
-    image(),
+    // image(),
     icon({
       include: {
         lucide: ['*'], // This tells astro-icon to include all icons from the 'lucide' set
