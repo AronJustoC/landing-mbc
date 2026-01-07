@@ -56,10 +56,11 @@ const aboutUs = [
 
 <header
   id="main-header"
-  class="relative z-50 transition-all duration-300 group"
+  class="sticky top-0 w-full z-50 transition-all duration-300 group -mb-20"
 >
   <div
-    class="absolute inset-0 bg-gradient-to-r from-[#0a0a0c]/90 via-[#0f1419]/90 to-[#1a1f2e]/90 backdrop-blur-xl border-b border-gray-800/40"
+    id="header-bg"
+    class="absolute inset-0 bg-gradient-to-r from-[#0a0a0c]/90 via-[#0f1419]/90 to-[#1a1f2e]/90 backdrop-blur-xl border-b border-gray-800/40 transition-opacity duration-300 opacity-0"
   >
   </div>
   <div class="relative container mx-auto px-6">
@@ -264,9 +265,35 @@ const aboutUs = [
     max-height: 100vh;
   }
 </style>
+
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const header = document.getElementById("main-header");
+    const headerBg = document.getElementById("header-bg");
+    let lastScrollY = window.scrollY;
+
+    const updateHeader = () => {
+      const currentScrollY = window.scrollY;
+
+      // 1. Lógica del fondo (transparente arriba, sólido al bajar)
+      if (currentScrollY > 50) {
+        headerBg?.classList.remove("opacity-0");
+      } else {
+        headerBg?.classList.add("opacity-0");
+      }
+
+      // 2. Lógica de ocultar/mostrar (Scroll Down -> Ocultar, Scroll Up -> Mostrar)
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        header?.classList.add("-translate-y-full");
+      } else if (currentScrollY < lastScrollY) {
+        header?.classList.remove("-translate-y-full");
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener("scroll", updateHeader);
+    updateHeader();
 
     // Mobile menu toggle
     const mobileMenuButton = document.getElementById("mobile-menu-button");
