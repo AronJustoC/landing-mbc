@@ -1,6 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
-import LogoMBC from "../assets/logo-1.png";
+import LogoMBC from "../assets/logo-mbc.svg";
 
 const services = [
   {
@@ -70,10 +70,11 @@ const aboutUs = [
         <img
           src={LogoMBC.src}
           alt="MBC Logo"
-          width="160"
-          height="40"
+          width="50"
+          height="50"
           class="filter drop-shadow-lg hover:scale-105 transition-transform duration-300"
         />
+        <p class="text-white/80 font-semibold text-[45px] text-shadow-xl text-shadow-black"> MBC</p>
       </a>
 
       <!-- Navigation -->
@@ -95,7 +96,7 @@ const aboutUs = [
             <Icon name="lucide:chevron-down" class="w-4 h-4" />
           </button>
           <div
-            class="absolute top-full mt-3 p-4 bg-[#10151c]/90 backdrop-blur-xl border border-gray-800 rounded-2xl shadow-2xl w-80 opacity-0 invisible transition-all duration-300"
+            class="absolute top-full mt-3 p-4 bg-[#0a0a0c]/90 backdrop-blur-xl border border-cyan-500/20 rounded-2xl shadow-[0_0_22px_rgba(0,212,255,0.15)] w-80 opacity-0 invisible transition-all duration-300"
             data-dropdown-menu
           >
             <div class="space-y-2">
@@ -103,9 +104,9 @@ const aboutUs = [
                 services.map((service) => (
                   <a
                     href={service.href}
-                    class="group flex items-start gap-4 p-3 rounded-lg hover:bg-white/5"
+                    class="group flex items-start gap-4 p-3 rounded-lg hover:bg-cyan-500/10 transition-colors"
                   >
-                    <div class="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-700/50 text-cyan-400 shrink-0">
+                    <div class="w-10 h-10 flex items-center justify-center rounded-lg bg-cyan-500/10 text-cyan-400 shrink-0 group-hover:bg-cyan-500/20 transition-colors">
                       <Icon name={service.icon} class="w-5 h-5" />
                     </div>
                     <div>
@@ -277,9 +278,9 @@ const aboutUs = [
 
       // 1. Lógica del fondo (transparente arriba, sólido al bajar)
       if (currentScrollY > 50) {
-        headerBg?.classList.remove("opacity-0");
+        headerBg?.classList.remove("opacity-1");
       } else {
-        headerBg?.classList.add("opacity-0");
+        headerBg?.classList.add("opacity-1");
       }
 
       // 2. Lógica de ocultar/mostrar (Scroll Down -> Ocultar, Scroll Up -> Mostrar)
