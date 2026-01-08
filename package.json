@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.78",
+    "@iconify-json/simple-icons": "^1.2.64",
     "@tailwindcss/vite": "^4.1.17",
     "astro": "^5.16.4",
     "astro-icon": "^1.1.5",
+    "daisyui": "^5.5.14",
     "tailwindcss": "^4.1.17"
   }
 }

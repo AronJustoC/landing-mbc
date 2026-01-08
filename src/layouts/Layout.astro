@@ -1,5 +1,8 @@
 ---
 import "../styles/global.css";
+import WasapBall from "../components/shareComponents/wasapBall.astro";
+import HeaderContainer from "../components/HeaderContainer.astro";
+import Footer from "../components/footer.astro";
 ---
 
 <!doctype html>
@@ -12,7 +15,10 @@ import "../styles/global.css";
 		<title>Astro Basics</title>
 	</head>
 	<body>
+		<HeaderContainer />
 		<slot />
+		<Footer />
+		<WasapBall />
 	</body>
 </html>
 

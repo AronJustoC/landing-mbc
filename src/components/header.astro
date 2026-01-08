@@ -1,0 +1,334 @@
+---
+import { Icon } from "astro-icon/components";
+import LogoMBC from "../assets/logo-1.png";
+
+const services = [
+  {
+    name: "Análisis de Vibraciones",
+    description: "Diagnóstico preciso de maquinaria rotativa.",
+    href: "/servicios/analisis-vibraciones",
+    icon: "lucide:bar-chart-3",
+  },
+  {
+    name: "Mantenimiento Predictivo",
+    description: "Anticipa fallos y optimiza la vida útil de tus activos.",
+    href: "/servicios/mantenimiento-predictivo",
+    icon: "lucide:cpu",
+  },
+  {
+    name: "Integración de Equipos",
+    description: "Soluciones a medida para la monitorización de condición.",
+    href: "/servicios/integracion-equipos",
+    icon: "lucide:settings-2",
+  },
+  {
+    name: "Cursos y Asesorías",
+    description: "Capacitación especializada para tu equipo técnico.",
+    href: "/servicios/cursos-asesorias",
+    icon: "lucide:graduation-cap",
+  },
+  {
+    name: "Vibration Cloud Service",
+    description: "Análisis experto de datos en la nube.",
+    href: "/servicios/vibration-cloud",
+    icon: "lucide:cloud-cog",
+  },
+];
+
+const aboutUs = [
+  {
+    name: "Nuestra Historia",
+    description: "Conoce nuestra trayectoria y valores.",
+    href: "/nosotros/historia",
+  },
+  {
+    name: "Misión y Visión",
+    description: "Los pilares que guían nuestro trabajo.",
+    href: "/nosotros/mision-vision",
+  },
+  {
+    name: "Nuestro Equipo",
+    description: "El talento detrás de nuestro éxito.",
+    href: "/nosotros/equipo",
+  },
+];
+---
+
+<header
+  id="main-header"
+  class="sticky top-0 w-full z-50 transition-all duration-300 group -mb-20"
+>
+  <div
+    id="header-bg"
+    class="absolute inset-0 bg-gradient-to-r from-[#0a0a0c]/90 via-[#0f1419]/90 to-[#1a1f2e]/90 backdrop-blur-xl border-b border-gray-800/40 transition-opacity duration-300 opacity-0"
+  >
+  </div>
+  <div class="relative container mx-auto px-6">
+    <div class="flex items-center justify-between h-20">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-3">
+        <img
+          src={LogoMBC.src}
+          alt="MBC Logo"
+          width="160"
+          height="40"
+          class="filter drop-shadow-lg hover:scale-105 transition-transform duration-300"
+        />
+      </a>
+
+      <!-- Navigation -->
+      <nav class="hidden md:flex items-center gap-2">
+        <a
+          href="/"
+          class="px-4 py-2 text-gray-300 hover:text-cyan-400 transition-colors duration-300"
+        >
+          Inicio
+        </a>
+
+        <!-- Servicios Dropdown -->
+        <div class="relative" data-dropdown>
+          <button
+            class="px-4 py-2 text-gray-300 hover:text-cyan-400 flex items-center gap-2 transition-colors duration-300"
+            data-dropdown-button
+          >
+            Servicios
+            <Icon name="lucide:chevron-down" class="w-4 h-4" />
+          </button>
+          <div
+            class="absolute top-full mt-3 p-4 bg-[#10151c]/90 backdrop-blur-xl border border-gray-800 rounded-2xl shadow-2xl w-80 opacity-0 invisible transition-all duration-300"
+            data-dropdown-menu
+          >
+            <div class="space-y-2">
+              {
+                services.map((service) => (
+                  <a
+                    href={service.href}
+                    class="group flex items-start gap-4 p-3 rounded-lg hover:bg-white/5"
+                  >
+                    <div class="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-700/50 text-cyan-400 shrink-0">
+                      <Icon name={service.icon} class="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p class="text-white font-semibold text-sm">
+                        {service.name}
+                      </p>
+                      <p class="text-gray-400 text-xs">{service.description}</p>
+                    </div>
+                  </a>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+
+        <a
+          href="/about"
+          class="px-4 py-2 text-gray-300 hover:text-cyan-400 transition-colors duration-300"
+        >
+          Nosotros</a
+        >
+
+        <a
+          href="/proyectos"
+          class="px-4 py-2 text-gray-300 hover:text-cyan-400 transition-colors duration-300"
+        >
+          Proyectos
+        </a>
+        <a
+          href="/contact"
+          class="px-4 py-2 text-gray-300 hover:text-cyan-400 transition-colors duration-300"
+        >
+          Contacto
+        </a>
+      </nav>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-4">
+        <a
+          href="/login"
+          class="hidden md:flex group relative px-6 py-2.5 bg-gradient-to-r from-[#00d4ff] to-[#0099cc] hover:from-[#00b8e6] hover:to-[#0080aa] text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_20px_rgba(0,212,255,0.35)] overflow-hidden"
+        >
+          <span class="relative z-10 flex items-center gap-2">
+            <Icon name="lucide:log-in" class="w-5 h-5" />
+            Iniciar sesión
+          </span>
+          <div
+            class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 group-hover:translate-x-full transition-transform duration-700"
+          >
+          </div>
+        </a>
+
+        <!-- Mobile menu button -->
+        <button
+          id="mobile-menu-button"
+          class="md:hidden w-10 h-10 rounded-lg bg-gray-800/50 border border-gray-700 flex items-center justify-center hover:border-cyan-500/50 transition-all duration-300"
+        >
+          <Icon name="lucide:menu" class="w-6 h-6 text-gray-300" />
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="md:hidden absolute top-full left-0 right-0 w-full bg-[#0a0a0c] border-t border-gray-800/40"
+  >
+    <div class="container mx-auto px-6 py-4">
+      <nav class="flex flex-col gap-4">
+        <a href="/" class="text-gray-300 hover:text-cyan-400">Inicio</a>
+
+        <!-- Mobile Servicios -->
+        <div>
+          <button
+            class="w-full flex justify-between items-center text-gray-300 hover:text-cyan-400"
+          >
+            <span>Servicios</span>
+            <Icon name="lucide:chevron-down" class="w-4 h-4" />
+          </button>
+          <div class="pl-4 pt-2 space-y-2">
+            {
+              services.map((s) => (
+                <a href={s.href} class="block text-gray-400 hover:text-white">
+                  {s.name}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Mobile Nosotros -->
+        <div>
+          <button
+            class="w-full flex justify-between items-center text-gray-300 hover:text-cyan-400"
+          >
+            <span>Nosotros</span>
+            <Icon name="lucide:chevron-down" class="w-4 h-4" />
+          </button>
+          <div class="pl-4 pt-2 space-y-2">
+            {
+              aboutUs.map((item) => (
+                <a
+                  href={item.href}
+                  class="block text-gray-400 hover:text-white"
+                >
+                  {item.name}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+
+        <a href="/proyectos" class="text-gray-300 hover:text-cyan-400"
+          >Proyectos</a
+        >
+        <a href="/contacto" class="text-gray-300 hover:text-cyan-400"
+          >Contacto</a
+        >
+
+        <a
+          href="/login"
+          class="mt-4 flex items-center justify-center gap-2 px-6 py-2.5 bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-medium rounded-lg"
+        >
+          <Icon name="lucide:log-in" class="w-5 h-5" />
+          Iniciar sesión
+        </a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<style>
+  [data-dropdown-menu] {
+    transform: translateY(10px);
+  }
+  [data-dropdown]:hover [data-dropdown-menu] {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  [data-dropdown-button] .lucide-chevron-down {
+    transition: transform 0.3s;
+  }
+  [data-dropdown]:hover [data-dropdown-button] .lucide-chevron-down {
+    transform: rotate(180deg);
+  }
+
+  #mobile-menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  #main-header.is-mobile-menu-open #mobile-menu {
+    max-height: 100vh;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const header = document.getElementById("main-header");
+    const headerBg = document.getElementById("header-bg");
+    let lastScrollY = window.scrollY;
+
+    const updateHeader = () => {
+      const currentScrollY = window.scrollY;
+
+      // 1. Lógica del fondo (transparente arriba, sólido al bajar)
+      if (currentScrollY > 50) {
+        headerBg?.classList.remove("opacity-0");
+      } else {
+        headerBg?.classList.add("opacity-0");
+      }
+
+      // 2. Lógica de ocultar/mostrar (Scroll Down -> Ocultar, Scroll Up -> Mostrar)
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        header?.classList.add("-translate-y-full");
+      } else if (currentScrollY < lastScrollY) {
+        header?.classList.remove("-translate-y-full");
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener("scroll", updateHeader);
+    updateHeader();
+
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById("mobile-menu-button");
+    if (mobileMenuButton && header) {
+      mobileMenuButton.addEventListener("click", () => {
+        header.classList.toggle("is-mobile-menu-open");
+      });
+    }
+
+    // Mobile submenu toggle
+    const mobileMenu = document.getElementById("mobile-menu");
+    if (mobileMenu) {
+      const subMenuButtons = mobileMenu.querySelectorAll("button");
+      subMenuButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const subMenu = button.nextElementSibling as HTMLElement;
+          if (subMenu) {
+            // Toggle icon
+            const icon = button.querySelector("svg");
+            icon?.classList.toggle("rotate-180");
+
+            // Toggle visibility
+            if (subMenu.style.maxHeight) {
+              subMenu.style.maxHeight = "";
+            } else {
+              subMenu.style.maxHeight = subMenu.scrollHeight + "px";
+            }
+          }
+        });
+        // Initially hide submenus
+        const subMenu = button.nextElementSibling as HTMLElement;
+        if (subMenu) {
+          subMenu.style.maxHeight = "";
+        }
+      });
+    }
+  });
+</script>
