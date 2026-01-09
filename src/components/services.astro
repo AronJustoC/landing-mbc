@@ -1,0 +1,161 @@
+---
+import { Image } from "astro:assets";
+
+import predictiveImg from "../assets/services/predictive.png";
+import reliabilityImg from "../assets/services/reliability.png";
+import dynamicImg from "../assets/services/dynamic.png";
+import structuralImg from "../assets/services/structural.png";
+import monitoringImg from "../assets/services/monitoring.png";
+import supportImg from "../assets/services/support.png";
+
+const services = [
+    {
+        title: "Mantenimiento Predictivo",
+        description:
+            "Monitoreo de condición especializado para predecir fallas antes de que ocurran.",
+        image: predictiveImg,
+    },
+    {
+        title: "Ingeniería de Confiabilidad",
+        description:
+            "Optimización de estrategias de mantenimiento basadas en datos precisos y análisis de riesgo.",
+        image: reliabilityImg,
+    },
+    {
+        title: "Análisis Dinámico",
+        description:
+            "Diagnóstico Vibracional, Análisis Modal, Estudio de elementos finitos y Monitoreo de esfuerzos.",
+        image: dynamicImg,
+    },
+    {
+        title: "Evaluación Estructural",
+        description:
+            "Análisis dinámico y estructural profundo de equipos e infraestructuras industriales.",
+        image: structuralImg,
+    },
+    {
+        title: "Monitoreo de Activos",
+        description:
+            "Seguimiento continuo del desempeño y condición de sus activos críticos en tiempo real.",
+        image: monitoringImg,
+    },
+    {
+        title: "Soporte Técnico Especializado",
+        description:
+            "Asistencia técnica experta, informes detallados y recomendaciones de ingeniería de alto nivel.",
+        image: supportImg,
+    },
+];
+---
+
+<section id="servicios" class="py-20 bg-[#08080A] relative overflow-hidden">
+    <!-- Background Elements -->
+    <div
+        class="absolute top-0 left-0 w-full h-full pointer-events-none opacity-20"
+    >
+        <div
+            class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#31B0FF]/10 blur-[120px] rounded-full"
+        >
+        </div>
+        <div
+            class="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-[#31B0FF]/5 blur-[100px] rounded-full"
+        >
+        </div>
+    </div>
+
+    <div class="container mx-auto px-6 relative z-10 mt-10">
+        <div
+            class="flex flex-col items-center mb-16 animate-item bg-white/1 py-6 backdrop-blur-sm mx-auto"
+        >
+            <h2
+                class="text-xl lg:text-2xl font-semibold text-white tracking-tight leading-tight mb-3"
+            >
+                Nuestros Servicios
+            </h2>
+            <div
+                class="h-1 w-20 bg-gradient-to-r from-[#31B0FF] to-[#0099cc] rounded-full"
+            >
+            </div>
+        </div>
+        <p
+            class="text-gray-400 max-w-3xl mx-auto text-center text-base md:text-lg leading-relaxed mb-20 -mt-10"
+        >
+            Soluciones integrales de ingeniería diseñadas para maximizar la
+            disponibilidad, seguridad y vida útil de sus activos industriales.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {
+                services.map((service, index) => (
+                    <div
+                        class="animate-item group"
+                        style={`transition-delay: ${index * 100}ms`}
+                    >
+                        <div class="h-full flex flex-col rounded-2xl bg-[#0d1216]/80 backdrop-blur-xl border border-white/10 shadow-lg hover:border-[#31B0FF]/40 transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(49,176,255,0.1)] overflow-hidden">
+                            <div class="w-full h-48 relative overflow-hidden">
+                                <div class="absolute inset-0 bg-gradient-to-t from-[#0d1216] via-transparent to-transparent z-10" />
+                                <Image
+                                    src={service.image}
+                                    alt={service.title}
+                                    class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                                    width={600}
+                                    height={400}
+                                />
+                            </div>
+
+                            <div class="p-8 pt-6 flex-grow flex flex-col relative">
+                                <span class="z-10 absolute top-[-20px] right-8 text-5xl font-bold text-white/[0.07] pointer-events-none select-none">
+                                    {String(index + 1).padStart(2, "0")}
+                                </span>
+                                <h3 class="z-10 text-xl font-semibold text-white tracking-tight mb-2">
+                                    {service.title}
+                                </h3>
+                                <div class="h-[1px] w-12 bg-gradient-to-r from-[#31B0FF] to-[#0099cc] rounded-full mb-6" />
+                                <p class="text-gray-400 text-sm leading-relaxed mb-6 group-hover:text-gray-300 transition-colors duration-300 flex-grow">
+                                    {service.description}
+                                </p>
+
+                                <a
+                                    href="#contacto"
+                                    class="text-sm font-semibold text-[#31B0FF] hover:text-[#31B0FF]/80 transition-colors mt-auto self-start"
+                                >
+                                    Solicitar Información &rarr;
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+
+    <style>
+        .animate-item {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .animate-item.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</section>
+
+<script>
+    const observerOptions = {
+        threshold: 0.1,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll(".animate-item").forEach((item) => {
+        observer.observe(item);
+    });
+</script>
