@@ -2,44 +2,41 @@
 import { Icon } from "astro-icon/components";
 import LogoMBC from "../assets/logo-mbc.svg";
 
-const services = [
-  {
-    name: "Mantenimiento Predictivo",
-    description: "Monitoreo de condición para predecir fallas.",
-    href: "/services#predictive",
-    icon: "lucide:activity",
-  },
-  {
-    name: "Ingeniería de Confiabilidad",
-    description: "Optimización basada en datos y riesgo.",
-    href: "/services#reliability",
-    icon: "lucide:shield-check",
-  },
-  {
-    name: "Análisis Dinámico",
-    description: "Diagnóstico Vibracional y Modal.",
-    href: "/services#dynamic",
-    icon: "lucide:waves",
-  },
-  {
-    name: "Evaluación Estructural",
-    description: "Análisis de esfuerzo y deformación.",
-    href: "/services#structural",
-    icon: "lucide:construction",
-  },
-  {
-    name: "Monitoreo de Activos",
-    description: "Seguimiento continuo en tiempo real.",
-    href: "/services#monitoring",
-    icon: "lucide:monitor-check",
-  },
-  {
-    name: "Soporte Técnico",
-    description: "Asistencia experta e informes.",
-    href: "/services#support",
-    icon: "lucide:headset",
-  },
-];
+import { services as servicesData } from "../consts/services";
+
+// Map services data to header format if needed, or just use it directly
+// We'll augment the consts data with icons here for display purposes if not present in the consts file yet,
+// but for now let's assume we mapped them or added them to consts.
+// To keep it clean, let's just stick to the consts file source of truth strategy.
+// Wait, the consts file doesn't have icons defined yet. I should double check services.ts content via memory.
+// I see I defined icons in header.astro but not in services.ts.
+// I will merge them here for the view.
+
+const services = servicesData.map((s) => ({
+  name: s.title,
+  description: s.shortDescription,
+  href: `/servicios/${s.id}`,
+  icon: getIconForService(s.id),
+}));
+
+function getIconForService(id: string) {
+  switch (id) {
+    case "mantenimiento-predictivo":
+      return "lucide:activity";
+    case "ingenieria-confiabilidad":
+      return "lucide:shield-check";
+    case "analisis-dinamico":
+      return "lucide:waves";
+    case "evaluacion-estructural":
+      return "lucide:construction";
+    case "monitoreo-activos":
+      return "lucide:monitor-check";
+    case "soporte-tecnico":
+      return "lucide:headset";
+    default:
+      return "lucide:circle";
+  }
+}
 
 const aboutUs = [
   {
@@ -66,7 +63,7 @@ const aboutUs = [
 >
   <div
     id="header-bg"
-    class="absolute inset-0 bg-[#0a0a0c]/80 backdrop-blur-md border-b border-white/5 transition-opacity duration-300 opacity-0"
+    class="absolute inset-0 bg-[#08080A]/95 border-b border-white/5 transition-opacity duration-300 opacity-0"
   >
   </div>
   <div class="relative container mx-auto px-6">
@@ -76,60 +73,81 @@ const aboutUs = [
         <img
           src={LogoMBC.src}
           alt="MBC Logo"
-          width="50"
-          height="50"
-          class="filter drop-shadow-lg group-hover/logo:scale-110 transition-transform duration-300"
+          width="45"
+          height="45"
+          class="filter drop-shadow-lg opacity-90 group-hover/logo:opacity-100 transition-opacity duration-300"
         />
-        <p
-          class="text-white/90 font-bold text-[38px] tracking-tight drop-shadow-md"
-        >
-          MBC
-        </p>
+        <div class="flex flex-col">
+          <span
+            class="text-white font-bold text-2xl tracking-tight leading-none"
+            >MBC</span
+          >
+          <span
+            class="text-[#31B0FF] text-[10px] font-medium tracking-widest uppercase leading-none"
+            >Predictive</span
+          >
+        </div>
       </a>
 
       <!-- Navigation -->
-      <nav class="hidden md:flex items-center gap-6">
+      <nav class="hidden md:flex items-center gap-8">
         <a
           href="/"
-          class="text-sm font-medium text-gray-300 hover:text-[#31B0FF] transition-colors duration-300"
+          class="text-sm font-medium text-gray-400 hover:text-white transition-colors duration-300"
         >
           Inicio
         </a>
 
         <!-- Servicios Dropdown -->
-        <div class="relative group/dropdown">
-          <a
-            href="/services"
-            class="flex items-center gap-1.5 text-sm font-medium text-gray-300 hover:text-[#31B0FF] transition-colors duration-300 py-4"
-          >
-            Servicios
-            <Icon
-              name="lucide:chevron-down"
-              class="w-4 h-4 transition-transform duration-300 group-hover/dropdown:rotate-180"
-            />
-          </a>
+        <div class="relative" id="desktop-services-container">
+          <div class="flex items-center gap-1 py-6">
+            <a
+              href="/services"
+              class="text-sm font-medium text-gray-400 hover:text-white transition-colors duration-300"
+            >
+              Servicios
+            </a>
+            <button
+              id="desktop-services-trigger"
+              class="p-1 text-gray-400 hover:text-white transition-colors duration-300 focus:outline-none"
+              aria-label="Toggle Services Menu"
+              aria-expanded="false"
+            >
+              <Icon
+                name="lucide:chevron-down"
+                class="w-3.5 h-3.5 transition-transform duration-300"
+              />
+            </button>
+          </div>
 
           <!-- Dropdown Menu -->
           <div
-            class="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover/dropdown:opacity-100 group-hover/dropdown:visible transition-all duration-300 transform translate-y-2 group-hover/dropdown:translate-y-0 w-[600px]"
+            id="desktop-services-menu"
+            class="absolute top-full left-1/2 -translate-x-1/2 pt-0 opacity-0 invisible transition-all duration-200 transform translate-y-2 w-[600px]"
           >
             <div
-              class="bg-[#0a0a0c]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_0_40px_rgba(0,0,0,0.5)] p-4 grid grid-cols-2 gap-2"
+              class="bg-[#0d1216] border border-white/10 rounded-xl shadow-[0_10px_40px_-5px_rgba(0,0,0,0.5)] p-2 grid grid-cols-2 gap-1"
             >
+              <div class="col-span-2 px-3 py-2 border-b border-white/5 mb-1">
+                <span
+                  class="text-xs font-semibold text-gray-500 uppercase tracking-wider"
+                  >Nuestras Soluciones</span
+                >
+              </div>
               {
                 services.map((service) => (
                   <a
                     href={service.href}
-                    class="flex items-start gap-3 p-3 rounded-xl hover:bg-white/5 transition-all duration-300 group/item"
+                    class="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-all duration-200 group/item"
                   >
-                    <div class="w-10 h-10 flex items-center justify-center rounded-lg bg-[#31B0FF]/10 text-[#31B0FF] shrink-0 group-hover/item:bg-[#31B0FF] group-hover/item:text-white transition-all duration-300">
-                      <Icon name={service.icon} class="w-5 h-5" />
+                    <div class="w-9 h-9 flex items-center justify-center rounded bg-[#31B0FF]/10 text-[#31B0FF] shrink-0 group-hover/item:bg-[#31B0FF] group-hover/item:text-white transition-all duration-300">
+                      <Icon name={service.icon} class="w-4.5 h-4.5" />
                     </div>
                     <div>
-                      <p class="text-white font-medium text-sm mb-0.5">
+                      <p class="text-white font-medium text-sm mb-0.5 group-hover/item:text-[#31B0FF] transition-colors">
                         {service.name}
                       </p>
-                      <p class="text-gray-400 text-xs leading-relaxed line-clamp-2">
+                      <p class="text-gray-500 text-xs leading-relaxed line-clamp-1 group-hover/item:text-gray-400">
                         {service.description}
                       </p>
                     </div>
@@ -142,14 +160,14 @@ const aboutUs = [
 
         <a
           href="/about"
-          class="text-sm font-medium text-gray-300 hover:text-[#31B0FF] transition-colors duration-300"
+          class="text-sm font-medium text-gray-400 hover:text-white transition-colors duration-300"
         >
           Nosotros</a
         >
 
         <a
           href="/contact"
-          class="text-sm font-medium text-gray-300 hover:text-[#31B0FF] transition-colors duration-300"
+          class="text-sm font-medium text-gray-400 hover:text-white transition-colors duration-300"
         >
           Contacto
         </a>
@@ -159,7 +177,7 @@ const aboutUs = [
       <div class="flex items-center gap-4">
         <a
           href="/login"
-          class="hidden md:flex items-center gap-2 px-5 py-2 bg-[#31B0FF] hover:bg-[#2196F3] text-white text-sm font-semibold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(49,176,255,0.3)] hover:shadow-[0_0_30px_rgba(49,176,255,0.5)] transform hover:-translate-y-0.5"
+          class="hidden md:flex items-center gap-2 px-5 py-2 bg-[#31B0FF]/10 text-[#31B0FF] hover:bg-[#31B0FF] hover:text-white border border-[#31B0FF]/20 hover:border-[#31B0FF] text-xs font-bold uppercase tracking-wider rounded transition-all duration-300"
         >
           <Icon name="lucide:user" class="w-4 h-4" />
           <span>Acceso Clientes</span>
@@ -168,7 +186,7 @@ const aboutUs = [
         <!-- Mobile menu button -->
         <button
           id="mobile-menu-button"
-          class="md:hidden w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 transition-all duration-300"
+          class="md:hidden w-10 h-10 rounded bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 transition-all duration-300"
           aria-label="Menu"
         >
           <Icon name="lucide:menu" class="w-5 h-5" />
@@ -180,93 +198,109 @@ const aboutUs = [
   <!-- Mobile Menu -->
   <div
     id="mobile-menu"
-    class="md:hidden fixed inset-0 bg-[#0a0a0c] z-[9999] transform translate-x-full transition-transform duration-500 ease-in-out"
+    class="md:hidden fixed inset-0 bg-[#08080A] z-[9999] transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col"
   >
-    <div class="flex flex-col h-full overflow-y-auto">
-      <div
-        class="flex items-center justify-between p-6 border-b border-white/10"
+    <div
+      class="flex items-center justify-between p-6 border-b border-white/5 bg-[#08080A]"
+    >
+      <a href="/" class="flex items-center gap-3">
+        <img src={LogoMBC.src} alt="MBC Logo" width="40" height="40" />
+        <div class="flex flex-col">
+          <span class="text-white font-bold text-xl tracking-tight leading-none"
+            >MBC</span
+          >
+          <span
+            class="text-[#31B0FF] text-[9px] font-medium tracking-widest uppercase leading-none"
+            >Predictive</span
+          >
+        </div>
+      </a>
+      <button
+        id="close-mobile-menu"
+        class="w-10 h-10 rounded bg-white/5 border border-white/5 flex items-center justify-center text-white hover:bg-white/10 transition-colors"
       >
-        <a href="/" class="flex items-center gap-3">
-          <img src={LogoMBC.src} alt="MBC Logo" width="40" height="40" />
-          <span class="text-white font-bold text-2xl">MBC</span>
-        </a>
-        <button
-          id="close-mobile-menu"
-          class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-white/10"
-        >
-          <Icon name="lucide:x" class="w-5 h-5" />
-        </button>
-      </div>
+        <Icon name="lucide:x" class="w-5 h-5" />
+      </button>
+    </div>
 
-      <nav class="flex-1 p-6 space-y-2">
+    <div class="flex-1 overflow-y-auto">
+      <nav class="p-4 space-y-2">
         <a
           href="/"
-          class="block p-4 text-lg font-medium text-gray-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors"
+          class="flex items-center gap-3 p-4 text-base font-medium text-white bg-white/5 rounded-lg border border-white/5"
         >
+          <Icon name="lucide:home" class="w-5 h-5 text-[#31B0FF]" />
           Inicio
         </a>
 
         <!-- Mobile Servicios -->
-        <div class="space-y-2">
+        <div
+          class="rounded-lg border border-white/5 bg-[#0d1216] overflow-hidden"
+        >
           <div
-            class="flex items-center justify-between p-4 rounded-xl hover:bg-white/5 group relative z-50"
+            class="flex items-center justify-between p-4 cursor-pointer hover:bg-white/5 transition-colors"
+            data-submenu-trigger
           >
-            <a
-              href="/services"
-              class="text-lg font-medium text-gray-300 hover:text-white flex-1"
-            >
-              Servicios
-            </a>
-            <button
-              class="p-2 text-gray-400 hover:text-white"
-              data-submenu-trigger
-            >
-              <Icon
-                name="lucide:chevron-down"
-                class="w-5 h-5 transition-transform duration-300"
-              />
-            </button>
+            <div class="flex items-center gap-3">
+              <Icon name="lucide:layers" class="w-5 h-5 text-[#31B0FF]" />
+              <span class="text-base font-medium text-white">Servicios</span>
+            </div>
+            <Icon
+              name="lucide:chevron-down"
+              class="w-5 h-5 text-gray-500 transition-transform duration-300"
+            />
           </div>
 
-          <div class="pl-4 space-y-1 hidden" id="services-submenu">
+          <div
+            class="hidden bg-[#08080A]/50 border-t border-white/5"
+            id="services-submenu"
+          >
             {
               services.map((s) => (
                 <a
                   href={s.href}
-                  class="flex items-center gap-3 p-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                  class="flex items-center gap-3 p-4 pl-12 text-gray-400 hover:text-white hover:bg-white/5 transition-colors border-b border-white/5 last:border-0"
                 >
-                  <Icon name={s.icon} class="w-4 h-4 text-[#31B0FF]" />
                   <span class="text-sm">{s.name}</span>
                 </a>
               ))
             }
+            <a
+              href="/services"
+              class="flex items-center gap-2 p-4 pl-12 text-[#31B0FF] text-xs font-bold uppercase tracking-wider hover:bg-white/5 transition-colors"
+            >
+              Ver todos los servicios
+              <Icon name="lucide:arrow-right" class="w-3.5 h-3.5" />
+            </a>
           </div>
         </div>
 
         <a
           href="/about"
-          class="block p-4 text-lg font-medium text-gray-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors"
+          class="flex items-center gap-3 p-4 text-base font-medium text-gray-400 hover:text-white hover:bg-white/5 rounded-lg border border-transparent hover:border-white/5 transition-colors"
         >
+          <Icon name="lucide:users" class="w-5 h-5 text-[#31B0FF]/70" />
           Nosotros
         </a>
 
         <a
           href="/contact"
-          class="block p-4 text-lg font-medium text-gray-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors"
+          class="flex items-center gap-3 p-4 text-base font-medium text-gray-400 hover:text-white hover:bg-white/5 rounded-lg border border-transparent hover:border-white/5 transition-colors"
         >
+          <Icon name="lucide:mail" class="w-5 h-5 text-[#31B0FF]/70" />
           Contacto
         </a>
       </nav>
+    </div>
 
-      <div class="p-6 border-t border-white/10">
-        <a
-          href="/login"
-          class="flex items-center justify-center gap-2 w-full p-4 bg-[#31B0FF] text-white font-semibold rounded-xl hover:bg-[#2196F3] transition-colors"
-        >
-          <Icon name="lucide:user" class="w-5 h-5" />
-          Acceso Clientes
-        </a>
-      </div>
+    <div class="p-6 border-t border-white/5">
+      <a
+        href="/login"
+        class="flex items-center justify-center gap-2 w-full p-3.5 bg-[#31B0FF]/10 text-[#31B0FF] border border-[#31B0FF]/20 font-semibold rounded hover:bg-[#31B0FF] hover:text-white transition-all text-sm uppercase tracking-wider"
+      >
+        <Icon name="lucide:user" class="w-4 h-4" />
+        Acceso Clientes
+      </a>
     </div>
   </div>
 </header>
@@ -306,7 +340,7 @@ const aboutUs = [
       closeMobileMenuBtn.onclick = () => toggleMenu(false);
     }
 
-    // Submenu Toggle
+    // Mobile Submenu Toggle
     if (submenuTrigger && servicesSubmenu) {
       submenuTrigger.onclick = (e) => {
         e.stopPropagation();
@@ -315,6 +349,57 @@ const aboutUs = [
         const isExpanded = !servicesSubmenu.classList.contains("hidden");
         submenuTrigger.setAttribute("aria-expanded", String(isExpanded));
       };
+    }
+
+    // Desktop Dropdown Toggle
+    const desktopTrigger = document.getElementById("desktop-services-trigger");
+    const desktopMenu = document.getElementById("desktop-services-menu");
+    const desktopContainer = document.getElementById(
+      "desktop-services-container",
+    );
+
+    if (desktopTrigger && desktopMenu && desktopContainer) {
+      const toggleDesktopMenu = (show: boolean) => {
+        if (show) {
+          desktopMenu.classList.remove(
+            "opacity-0",
+            "invisible",
+            "translate-y-2",
+          );
+          desktopMenu.classList.add("opacity-100", "visible", "translate-y-0");
+          desktopTrigger.querySelector("svg")?.classList.add("rotate-180");
+          desktopTrigger.setAttribute("aria-expanded", "true");
+        } else {
+          desktopMenu.classList.add("opacity-0", "invisible", "translate-y-2");
+          desktopMenu.classList.remove(
+            "opacity-100",
+            "visible",
+            "translate-y-0",
+          );
+          desktopTrigger.querySelector("svg")?.classList.remove("rotate-180");
+          desktopTrigger.setAttribute("aria-expanded", "false");
+        }
+      };
+
+      desktopTrigger.onclick = (e) => {
+        e.stopPropagation();
+        const isOpen = desktopMenu.classList.contains("visible");
+        toggleDesktopMenu(!isOpen);
+      };
+
+      // Close on click outside
+      document.addEventListener("click", (e) => {
+        if (!desktopContainer.contains(e.target as Node)) {
+          toggleDesktopMenu(false);
+        }
+      });
+
+      // Close on escape key
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          toggleDesktopMenu(false);
+        }
+      });
     }
 
     // Header Scroll Logic
