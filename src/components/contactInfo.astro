@@ -282,14 +282,15 @@ import MapLocation from "./shareComponents/mapLocation.astro";
             >
           </div>
 
-          <!-- Google reCAPTCHA -->
+          <!-- Google reCAPTCHA (Oculto inicialmente) -->
           <div
-            class="flex justify-start transform origin-left scale-[0.85] md:scale-90"
+            class="flex justify-start transform origin-left scale-[0.85] md:scale-90 g-recaptcha-container hidden transition-all duration-300"
           >
             <div
               class="g-recaptcha"
-              data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+              data-sitekey={import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY}
               data-theme="dark"
+              data-callback="onRecaptchaSuccess"
             >
             </div>
           </div>
@@ -355,6 +356,14 @@ import MapLocation from "./shareComponents/mapLocation.astro";
         }, 5000); // 5 segundos
       };
 
+      // Recaptcha Callback (Global)
+      window.onRecaptchaSuccess = () => {
+        const customEvent = new Event("recaptcha-verified");
+        // Asegurarse de que el formulario exista en el scope si es inline
+        const form = document.getElementById("contact-form");
+        if (form) form.dispatchEvent(customEvent);
+      };
+
       // Validación de campos simple
       const validateField = (input) => {
         const group = input.closest(".group");
@@ -365,7 +374,8 @@ import MapLocation from "./shareComponents/mapLocation.astro";
           isValid = false;
         }
         if (input.type === "email" && input.value) {
-          const emailPattern = /^[^\s @]+ @[^\s @]+\.[^\s @]+$/;
+          // Regex corregido
+          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
           if (!emailPattern.test(input.value)) isValid = false;
         }
 
@@ -422,7 +432,12 @@ import MapLocation from "./shareComponents/mapLocation.astro";
       });
 
       if (form) {
-        form.addEventListener("submit", (e) => {
+        const recaptchaContainer = form.querySelector(".g-recaptcha-container");
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const captchaError = document.getElementById("captcha-error");
+
+        // Manejar el submit inicial (clic en Enviar)
+        form.addEventListener("submit", async (e) => {
           e.preventDefault();
           let isFormValid = true;
 
@@ -431,25 +446,94 @@ import MapLocation from "./shareComponents/mapLocation.astro";
             if (!validateField(input)) isFormValid = false;
           });
 
-          // Validar Captcha
+          if (!isFormValid) return;
+
+          // Verificar si ya tenemos token
           // @ts-ignore
-          const response = grecaptcha.getResponse();
-          if (response.length === 0) {
-            isFormValid = false;
-            if (errorMsg) errorMsg.classList.remove("hidden");
-          } else {
-            if (errorMsg) errorMsg.classList.add("hidden");
+          const recaptchaToken = grecaptcha.getResponse();
+
+          if (!recaptchaToken) {
+            // Si es válido pero no hay token, mostrar el captcha
+            if (recaptchaContainer) {
+              recaptchaContainer.classList.remove("hidden");
+              recaptchaContainer.classList.add("animate-fade-in");
+            }
+            if (submitBtn) submitBtn.classList.add("hidden");
+            if (captchaError) captchaError.classList.remove("hidden");
+            captchaError.innerText =
+              "Por favor, completa la verificación abajo 👇";
+            return;
           }
 
-          if (isFormValid) {
-            // Simulación de envío
-            console.log("Formulario válido, enviando...");
-            showToast(); // Mostrar notificación en lugar de alert
-            form.reset();
-            // @ts-ignore
-            grecaptcha.reset();
+          // Si llegamos aquí, tenemos token y formulario válido -> ENVIAR
+          await submitForm(recaptchaToken);
+        });
+
+        // Evento personalizado disparado por el callback de recaptcha
+        form.addEventListener("recaptcha-verified", async () => {
+          // @ts-ignore
+          const token = grecaptcha.getResponse();
+          if (token) {
+            await submitForm(token);
           }
         });
+
+        async function submitForm(token) {
+          const originalBtnText = submitBtn ? submitBtn.innerHTML : "";
+          if (submitBtn) {
+            submitBtn.classList.remove("hidden");
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<span class="animate-spin mr-2">⟳</span> Enviando...`;
+          }
+          if (recaptchaContainer) recaptchaContainer.classList.add("hidden");
+          if (captchaError) captchaError.classList.add("hidden");
+
+          // Preparar datos
+          const formData = new FormData(form);
+          const data = Object.fromEntries(formData.entries());
+          data.recaptcha = token;
+
+          try {
+            const response = await fetch("/api/contact", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+              showToast();
+              form.reset();
+              // @ts-ignore
+              grecaptcha.reset();
+              if (recaptchaContainer)
+                recaptchaContainer.classList.add("hidden");
+            } else {
+              // @ts-ignore
+              grecaptcha.reset();
+              if (recaptchaContainer)
+                recaptchaContainer.classList.remove("hidden");
+              const result = await response.json();
+              alert(
+                "Error: " + (result.message || "No se pudo enviar el mensaje"),
+              );
+            }
+          } catch (error) {
+            console.error(error);
+            alert("Error de conexión");
+            // @ts-ignore
+            grecaptcha.reset();
+            if (recaptchaContainer)
+              recaptchaContainer.classList.remove("hidden");
+          } finally {
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              // Restaurar SVG y texto (Simplificado)
+              submitBtn.innerHTML = `<span>ENVIAR MENSAJE</span> <svg data-icon="lucide:send" class="w-4 h-4" viewBox="0 0 24 24" fill="none" class="w-4 h-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>`;
+            }
+          }
+        }
       }
 
       // Animation Observer
@@ -479,6 +563,31 @@ import MapLocation from "./shareComponents/mapLocation.astro";
     .animate-item.is-visible {
       opacity: 1;
       transform: translateY(0);
+    }
+    .animate-spin {
+      display: inline-block;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.5s ease-out;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </section>
