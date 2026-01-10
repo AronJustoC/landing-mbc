@@ -4,34 +4,40 @@ import LogoMBC from "../assets/logo-mbc.svg";
 
 const services = [
   {
-    name: "Análisis de Vibraciones",
-    description: "Diagnóstico preciso de maquinaria rotativa.",
-    href: "/servicios/analisis-vibraciones",
-    icon: "lucide:bar-chart-3",
-  },
-  {
     name: "Mantenimiento Predictivo",
-    description: "Anticipa fallos y optimiza la vida útil de tus activos.",
-    href: "/servicios/mantenimiento-predictivo",
-    icon: "lucide:cpu",
+    description: "Monitoreo de condición para predecir fallas.",
+    href: "/services#predictive",
+    icon: "lucide:activity",
   },
   {
-    name: "Integración de Equipos",
-    description: "Soluciones a medida para la monitorización de condición.",
-    href: "/servicios/integracion-equipos",
-    icon: "lucide:settings-2",
+    name: "Ingeniería de Confiabilidad",
+    description: "Optimización basada en datos y riesgo.",
+    href: "/services#reliability",
+    icon: "lucide:shield-check",
   },
   {
-    name: "Cursos y Asesorías",
-    description: "Capacitación especializada para tu equipo técnico.",
-    href: "/servicios/cursos-asesorias",
-    icon: "lucide:graduation-cap",
+    name: "Análisis Dinámico",
+    description: "Diagnóstico Vibracional y Modal.",
+    href: "/services#dynamic",
+    icon: "lucide:waves",
   },
   {
-    name: "Vibration Cloud Service",
-    description: "Análisis experto de datos en la nube.",
-    href: "/servicios/vibration-cloud",
-    icon: "lucide:cloud-cog",
+    name: "Evaluación Estructural",
+    description: "Análisis de esfuerzo y deformación.",
+    href: "/services#structural",
+    icon: "lucide:construction",
+  },
+  {
+    name: "Monitoreo de Activos",
+    description: "Seguimiento continuo en tiempo real.",
+    href: "/services#monitoring",
+    icon: "lucide:monitor-check",
+  },
+  {
+    name: "Soporte Técnico",
+    description: "Asistencia experta e informes.",
+    href: "/services#support",
+    icon: "lucide:headset",
   },
 ];
 
@@ -56,64 +62,76 @@ const aboutUs = [
 
 <header
   id="main-header"
-  class="sticky top-0 w-full z-50 transition-all duration-300 group -mb-20"
+  class="sticky top-0 w-full z-[1000] transition-all duration-300 group -mb-20"
 >
   <div
     id="header-bg"
-    class="absolute inset-0 bg-gradient-to-r from-[#0a0a0c]/90 via-[#0f1419]/90 to-[#1a1f2e]/90 backdrop-blur-xl border-b border-gray-800/40 transition-opacity duration-300 opacity-0"
+    class="absolute inset-0 bg-[#0a0a0c]/80 backdrop-blur-md border-b border-white/5 transition-opacity duration-300 opacity-0"
   >
   </div>
   <div class="relative container mx-auto px-6">
     <div class="flex items-center justify-between h-20">
       <!-- Logo -->
-      <a href="/" class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3 group/logo">
         <img
           src={LogoMBC.src}
           alt="MBC Logo"
           width="50"
           height="50"
-          class="filter drop-shadow-lg hover:scale-105 transition-transform duration-300"
+          class="filter drop-shadow-lg group-hover/logo:scale-110 transition-transform duration-300"
         />
-        <p class="text-white/80 font-semibold text-[45px] text-shadow-xl text-shadow-black"> MBC</p>
+        <p
+          class="text-white/90 font-bold text-[38px] tracking-tight drop-shadow-md"
+        >
+          MBC
+        </p>
       </a>
 
       <!-- Navigation -->
-      <nav class="hidden md:flex items-center gap-2">
+      <nav class="hidden md:flex items-center gap-6">
         <a
           href="/"
-          class="px-4 py-2 text-gray-300 hover:text-cyan-400 transition-colors duration-300"
+          class="text-sm font-medium text-gray-300 hover:text-[#31B0FF] transition-colors duration-300"
         >
           Inicio
         </a>
 
         <!-- Servicios Dropdown -->
-        <div class="relative" data-dropdown>
-          <button
-            class="px-4 py-2 text-gray-300 hover:text-cyan-400 flex items-center gap-2 transition-colors duration-300"
-            data-dropdown-button
+        <div class="relative group/dropdown">
+          <a
+            href="/services"
+            class="flex items-center gap-1.5 text-sm font-medium text-gray-300 hover:text-[#31B0FF] transition-colors duration-300 py-4"
           >
             Servicios
-            <Icon name="lucide:chevron-down" class="w-4 h-4" />
-          </button>
+            <Icon
+              name="lucide:chevron-down"
+              class="w-4 h-4 transition-transform duration-300 group-hover/dropdown:rotate-180"
+            />
+          </a>
+
+          <!-- Dropdown Menu -->
           <div
-            class="absolute top-full mt-3 p-4 bg-[#0a0a0c]/90 backdrop-blur-xl border border-cyan-500/20 rounded-2xl shadow-[0_0_22px_rgba(0,212,255,0.15)] w-80 opacity-0 invisible transition-all duration-300"
-            data-dropdown-menu
+            class="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover/dropdown:opacity-100 group-hover/dropdown:visible transition-all duration-300 transform translate-y-2 group-hover/dropdown:translate-y-0 w-[600px]"
           >
-            <div class="space-y-2">
+            <div
+              class="bg-[#0a0a0c]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_0_40px_rgba(0,0,0,0.5)] p-4 grid grid-cols-2 gap-2"
+            >
               {
                 services.map((service) => (
                   <a
                     href={service.href}
-                    class="group flex items-start gap-4 p-3 rounded-lg hover:bg-cyan-500/10 transition-colors"
+                    class="flex items-start gap-3 p-3 rounded-xl hover:bg-white/5 transition-all duration-300 group/item"
                   >
-                    <div class="w-10 h-10 flex items-center justify-center rounded-lg bg-cyan-500/10 text-cyan-400 shrink-0 group-hover:bg-cyan-500/20 transition-colors">
+                    <div class="w-10 h-10 flex items-center justify-center rounded-lg bg-[#31B0FF]/10 text-[#31B0FF] shrink-0 group-hover/item:bg-[#31B0FF] group-hover/item:text-white transition-all duration-300">
                       <Icon name={service.icon} class="w-5 h-5" />
                     </div>
                     <div>
-                      <p class="text-white font-semibold text-sm">
+                      <p class="text-white font-medium text-sm mb-0.5">
                         {service.name}
                       </p>
-                      <p class="text-gray-400 text-xs">{service.description}</p>
+                      <p class="text-gray-400 text-xs leading-relaxed line-clamp-2">
+                        {service.description}
+                      </p>
                     </div>
                   </a>
                 ))
@@ -124,20 +142,14 @@ const aboutUs = [
 
         <a
           href="/about"
-          class="px-4 py-2 text-gray-300 hover:text-cyan-400 transition-colors duration-300"
+          class="text-sm font-medium text-gray-300 hover:text-[#31B0FF] transition-colors duration-300"
         >
           Nosotros</a
         >
 
         <a
-          href="/proyectos"
-          class="px-4 py-2 text-gray-300 hover:text-cyan-400 transition-colors duration-300"
-        >
-          Proyectos
-        </a>
-        <a
           href="/contact"
-          class="px-4 py-2 text-gray-300 hover:text-cyan-400 transition-colors duration-300"
+          class="text-sm font-medium text-gray-300 hover:text-[#31B0FF] transition-colors duration-300"
         >
           Contacto
         </a>
@@ -147,24 +159,19 @@ const aboutUs = [
       <div class="flex items-center gap-4">
         <a
           href="/login"
-          class="hidden md:flex group relative px-6 py-2.5 bg-gradient-to-r from-[#00d4ff] to-[#0099cc] hover:from-[#00b8e6] hover:to-[#0080aa] text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_20px_rgba(0,212,255,0.35)] overflow-hidden"
+          class="hidden md:flex items-center gap-2 px-5 py-2 bg-[#31B0FF] hover:bg-[#2196F3] text-white text-sm font-semibold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(49,176,255,0.3)] hover:shadow-[0_0_30px_rgba(49,176,255,0.5)] transform hover:-translate-y-0.5"
         >
-          <span class="relative z-10 flex items-center gap-2">
-            <Icon name="lucide:log-in" class="w-5 h-5" />
-            Iniciar sesión
-          </span>
-          <div
-            class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 group-hover:translate-x-full transition-transform duration-700"
-          >
-          </div>
+          <Icon name="lucide:user" class="w-4 h-4" />
+          <span>Acceso Clientes</span>
         </a>
 
         <!-- Mobile menu button -->
         <button
           id="mobile-menu-button"
-          class="md:hidden w-10 h-10 rounded-lg bg-gray-800/50 border border-gray-700 flex items-center justify-center hover:border-cyan-500/50 transition-all duration-300"
+          class="md:hidden w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 transition-all duration-300"
+          aria-label="Menu"
         >
-          <Icon name="lucide:menu" class="w-6 h-6 text-gray-300" />
+          <Icon name="lucide:menu" class="w-5 h-5" />
         </button>
       </div>
     </div>
@@ -173,163 +180,186 @@ const aboutUs = [
   <!-- Mobile Menu -->
   <div
     id="mobile-menu"
-    class="md:hidden absolute top-full left-0 right-0 w-full bg-[#0a0a0c] border-t border-gray-800/40"
+    class="md:hidden fixed inset-0 bg-[#0a0a0c] z-[9999] transform translate-x-full transition-transform duration-500 ease-in-out"
   >
-    <div class="container mx-auto px-6 py-4">
-      <nav class="flex flex-col gap-4">
-        <a href="/" class="text-gray-300 hover:text-cyan-400">Inicio</a>
+    <div class="flex flex-col h-full overflow-y-auto">
+      <div
+        class="flex items-center justify-between p-6 border-b border-white/10"
+      >
+        <a href="/" class="flex items-center gap-3">
+          <img src={LogoMBC.src} alt="MBC Logo" width="40" height="40" />
+          <span class="text-white font-bold text-2xl">MBC</span>
+        </a>
+        <button
+          id="close-mobile-menu"
+          class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-white/10"
+        >
+          <Icon name="lucide:x" class="w-5 h-5" />
+        </button>
+      </div>
+
+      <nav class="flex-1 p-6 space-y-2">
+        <a
+          href="/"
+          class="block p-4 text-lg font-medium text-gray-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors"
+        >
+          Inicio
+        </a>
 
         <!-- Mobile Servicios -->
-        <div>
-          <button
-            class="w-full flex justify-between items-center text-gray-300 hover:text-cyan-400"
+        <div class="space-y-2">
+          <div
+            class="flex items-center justify-between p-4 rounded-xl hover:bg-white/5 group relative z-50"
           >
-            <span>Servicios</span>
-            <Icon name="lucide:chevron-down" class="w-4 h-4" />
-          </button>
-          <div class="pl-4 pt-2 space-y-2">
+            <a
+              href="/services"
+              class="text-lg font-medium text-gray-300 hover:text-white flex-1"
+            >
+              Servicios
+            </a>
+            <button
+              class="p-2 text-gray-400 hover:text-white"
+              data-submenu-trigger
+            >
+              <Icon
+                name="lucide:chevron-down"
+                class="w-5 h-5 transition-transform duration-300"
+              />
+            </button>
+          </div>
+
+          <div class="pl-4 space-y-1 hidden" id="services-submenu">
             {
               services.map((s) => (
-                <a href={s.href} class="block text-gray-400 hover:text-white">
-                  {s.name}
-                </a>
-              ))
-            }
-          </div>
-        </div>
-
-        <!-- Mobile Nosotros -->
-        <div>
-          <button
-            class="w-full flex justify-between items-center text-gray-300 hover:text-cyan-400"
-          >
-            <span>Nosotros</span>
-            <Icon name="lucide:chevron-down" class="w-4 h-4" />
-          </button>
-          <div class="pl-4 pt-2 space-y-2">
-            {
-              aboutUs.map((item) => (
                 <a
-                  href={item.href}
-                  class="block text-gray-400 hover:text-white"
+                  href={s.href}
+                  class="flex items-center gap-3 p-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
                 >
-                  {item.name}
+                  <Icon name={s.icon} class="w-4 h-4 text-[#31B0FF]" />
+                  <span class="text-sm">{s.name}</span>
                 </a>
               ))
             }
           </div>
         </div>
-
-        <a href="/proyectos" class="text-gray-300 hover:text-cyan-400"
-          >Proyectos</a
-        >
-        <a href="/contacto" class="text-gray-300 hover:text-cyan-400"
-          >Contacto</a
-        >
 
         <a
-          href="/login"
-          class="mt-4 flex items-center justify-center gap-2 px-6 py-2.5 bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-medium rounded-lg"
+          href="/about"
+          class="block p-4 text-lg font-medium text-gray-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors"
         >
-          <Icon name="lucide:log-in" class="w-5 h-5" />
-          Iniciar sesión
+          Nosotros
+        </a>
+
+        <a
+          href="/contact"
+          class="block p-4 text-lg font-medium text-gray-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors"
+        >
+          Contacto
         </a>
       </nav>
+
+      <div class="p-6 border-t border-white/10">
+        <a
+          href="/login"
+          class="flex items-center justify-center gap-2 w-full p-4 bg-[#31B0FF] text-white font-semibold rounded-xl hover:bg-[#2196F3] transition-colors"
+        >
+          <Icon name="lucide:user" class="w-5 h-5" />
+          Acceso Clientes
+        </a>
+      </div>
     </div>
   </div>
 </header>
 
-<style>
-  [data-dropdown-menu] {
-    transform: translateY(10px);
-  }
-  [data-dropdown]:hover [data-dropdown-menu] {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-
-  [data-dropdown-button] .lucide-chevron-down {
-    transition: transform 0.3s;
-  }
-  [data-dropdown]:hover [data-dropdown-button] .lucide-chevron-down {
-    transform: rotate(180deg);
-  }
-
-  #mobile-menu {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  #main-header.is-mobile-menu-open #mobile-menu {
-    max-height: 100vh;
-  }
-</style>
-
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const header = document.getElementById("main-header");
-    const headerBg = document.getElementById("header-bg");
-    let lastScrollY = window.scrollY;
+  function initHeader() {
+    // Mobile Menu Logic
+    const mobileMenuBtn = document.getElementById("mobile-menu-button");
+    const closeMobileMenuBtn = document.getElementById("close-mobile-menu");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const submenuTrigger = document.querySelector<HTMLElement>(
+      "[data-submenu-trigger]",
+    );
+    const servicesSubmenu = document.getElementById("services-submenu");
 
-    const updateHeader = () => {
-      const currentScrollY = window.scrollY;
-
-      // 1. Lógica del fondo (transparente arriba, sólido al bajar)
-      if (currentScrollY > 50) {
-        headerBg?.classList.remove("opacity-1");
+    // Helper to secure toggle
+    const toggleMenu = (open: boolean) => {
+      if (!mobileMenu) return;
+      if (open) {
+        mobileMenu.classList.remove("translate-x-full");
+        // Lock body scroll
+        document.body.style.overflow = "hidden";
+        // Ensure header is visible when opening menu
+        const header = document.getElementById("main-header");
+        header?.classList.remove("-translate-y-full");
       } else {
-        headerBg?.classList.add("opacity-1");
+        mobileMenu.classList.add("translate-x-full");
+        document.body.style.overflow = "";
+      }
+      window.dispatchEvent(new Event("scroll"));
+    };
+
+    if (mobileMenuBtn) {
+      mobileMenuBtn.onclick = () => toggleMenu(true);
+    }
+    if (closeMobileMenuBtn) {
+      closeMobileMenuBtn.onclick = () => toggleMenu(false);
+    }
+
+    // Submenu Toggle
+    if (submenuTrigger && servicesSubmenu) {
+      submenuTrigger.onclick = (e) => {
+        e.stopPropagation();
+        servicesSubmenu.classList.toggle("hidden");
+        submenuTrigger.querySelector("svg")?.classList.toggle("rotate-180");
+        const isExpanded = !servicesSubmenu.classList.contains("hidden");
+        submenuTrigger.setAttribute("aria-expanded", String(isExpanded));
+      };
+    }
+
+    // Header Scroll Logic
+    const headerBg = document.getElementById("header-bg");
+    const header = document.getElementById("main-header");
+    let lastScroll = 0;
+
+    const handleScroll = () => {
+      const currentScroll = window.scrollY;
+      if (currentScroll < 0) return;
+
+      // Blur Effect
+      if (currentScroll > 20) {
+        headerBg?.classList.remove("opacity-0");
+        headerBg?.classList.add("opacity-100");
+      } else {
+        headerBg?.classList.add("opacity-0");
+        headerBg?.classList.remove("opacity-100");
       }
 
-      // 2. Lógica de ocultar/mostrar (Scroll Down -> Ocultar, Scroll Up -> Mostrar)
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        header?.classList.add("-translate-y-full");
-      } else if (currentScrollY < lastScrollY) {
+      // Hide/Show Logic
+      const isMobileMenuOpen = document.body.style.overflow === "hidden";
+      // Only consider hover on large screens to avoid sticky touch states on mobile
+      const isLargeScreen = window.matchMedia("(min-width: 768px)").matches;
+      const isHovering = isLargeScreen && header?.matches(":hover");
+
+      if (!isMobileMenuOpen && !isHovering) {
+        if (currentScroll > lastScroll && currentScroll > 100) {
+          header?.classList.add("-translate-y-full");
+        } else {
+          header?.classList.remove("-translate-y-full");
+        }
+      } else {
+        // Ensure header stays visible if interacting
         header?.classList.remove("-translate-y-full");
       }
 
-      lastScrollY = currentScrollY;
+      lastScroll = currentScroll;
     };
 
-    window.addEventListener("scroll", updateHeader);
-    updateHeader();
+    window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+  }
 
-    // Mobile menu toggle
-    const mobileMenuButton = document.getElementById("mobile-menu-button");
-    if (mobileMenuButton && header) {
-      mobileMenuButton.addEventListener("click", () => {
-        header.classList.toggle("is-mobile-menu-open");
-      });
-    }
-
-    // Mobile submenu toggle
-    const mobileMenu = document.getElementById("mobile-menu");
-    if (mobileMenu) {
-      const subMenuButtons = mobileMenu.querySelectorAll("button");
-      subMenuButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          const subMenu = button.nextElementSibling as HTMLElement;
-          if (subMenu) {
-            // Toggle icon
-            const icon = button.querySelector("svg");
-            icon?.classList.toggle("rotate-180");
-
-            // Toggle visibility
-            if (subMenu.style.maxHeight) {
-              subMenu.style.maxHeight = "";
-            } else {
-              subMenu.style.maxHeight = subMenu.scrollHeight + "px";
-            }
-          }
-        });
-        // Initially hide submenus
-        const subMenu = button.nextElementSibling as HTMLElement;
-        if (subMenu) {
-          subMenu.style.maxHeight = "";
-        }
-      });
-    }
-  });
+  // Initialize on load and after Astro swaps
+  document.addEventListener("astro:page-load", initHeader);
+  document.addEventListener("DOMContentLoaded", initHeader);
 </script>
