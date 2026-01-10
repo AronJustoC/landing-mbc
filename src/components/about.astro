@@ -5,317 +5,295 @@ import image1 from "../assets/about/about_4.png";
 import about1 from "../assets/about/about_1.png";
 import about2 from "../assets/about/about_2.png";
 import about3 from "../assets/about/about-3.png";
+import aboutHeaderBg from "../assets/headers/about_header_background.png";
+import SectionHero from "./SectionHero.astro";
+import BackgroundGrid from "./BackgroundGrid.astro";
 ---
 
-<section
-  id="nosotros"
-  class="relative overflow-hidden bg-gradient-to-br from-[#08080A] via-[#0d1216] to-[#151922] pt-30"
->
-  <!-- Background Solid Color -->
-  <div class="absolute inset-0 z-0 bg-[#08080A]"></div>
+<section id="nosotros" class="bg-[#08080A] relative overflow-hidden">
+  <SectionHero
+    title="Nosotros"
+    subtitle="Ingeniería especializada en confiabilidad y mantenimiento predictivo, comprometidos con la excelencia operativa."
+    image={aboutHeaderBg}
+    large={true}
+  />
+
+  <!-- Tech Grid Background Pattern -->
+  <div
+    class="absolute inset-0 z-0 pointer-events-none opacity-[0.15] mt-[60vh]"
+    style="background-image: radial-gradient(#31B0FF 1px, transparent 1px); background-size: 30px 30px; mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);"
+  >
+  </div>
 
   <!-- Dynamic Background Gradients -->
-  <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
+  <div
+    class="absolute inset-0 overflow-hidden pointer-events-none z-0 mt-[60vh]"
+  >
     <div
-      class="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-cyan-900/10 blur-[120px] rounded-full"
+      class="absolute top-[10%] -left-[10%] w-[60%] h-[60%] bg-[#31B0FF]/5 blur-[120px] rounded-full"
     >
     </div>
     <div
-      class="absolute top-[20%] right-[0%] w-[40%] h-[40%] bg-blue-900/10 blur-[100px] rounded-full"
-    >
-    </div>
-    <div
-      class="absolute -bottom-[10%] left-[20%] w-[60%] h-[40%] bg-[#08080A] blur-[80px]"
+      class="absolute bottom-[20%] right-[0%] w-[50%] h-[50%] bg-[#0099cc]/5 blur-[100px] rounded-full"
     >
     </div>
   </div>
 
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
-    <!-- 1. Section Title (Indicador de Página) -->
+  <div
+    class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10 pt-20 pb-24"
+  >
+    <!-- 2. Trayectoria Empresarial (History) - Estilo Sobrio y Elegante -->
     <div
-      class="flex flex-col items-center mb-10 animate-item bg-white/1 py-6 mx-auto backdrop-blur-sm"
+      class="bg-[#0d1216] border border-white/5 rounded-3xl p-8 lg:p-12 mb-20 relative overflow-hidden animate-item shadow-[0_4px_20px_rgba(0,0,0,0.2)] group"
     >
-      <h2
-        class="text-xl lg:text-2xl font-semibold text-white tracking-tight leading-tight mb-3"
-      >
-        Nosotros
-      </h2>
+      <!-- Decoración Sutil (Reducida) -->
       <div
-        class="h-1 w-20 bg-gradient-to-r from-[#31B0FF] to-[#0099cc] rounded-full"
+        class="absolute top-0 right-0 w-96 h-96 bg-[#31B0FF]/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none"
       >
       </div>
-    </div>
 
-    <!-- 2. Trayectoria Empresarial (History) -->
-    <div class="grid md:grid-cols-2 gap-16 items-center mb-25 animate-item">
-      <div>
-        <h2
-          class="text-xl lg:text-2xl font-semibold text-[#31B0FF] tracking-tight leading-tight mb-6 hover:text-[#31B0FF]/80 transition-colors"
-        >
-          Trayectoria Empresarial
-        </h2>
-
-        <div class="space-y-6 text-gray-400 leading-relaxed text-base">
-          <p>
-            <strong class="text-white font-semibold">MBC Predictive</strong> se ha
-            consolidado como un socio estratégico líder en ingeniería predictiva para
-            las industrias más exigentes. Nuestra evolución constante nos permite
-            ofrecer tecnologías de vanguardia y metodologías avanzadas.
-          </p>
-          <div
-            class="pl-6 border-l-4 border-[#31B0FF]/30 italic text-gray-300 py-2"
-          >
-            "Ingenieros especializados en mantenimiento, análisis vibracional y
-            confiabilidad, comprometidos con la excelencia y la mejora
-            continua."
-          </div>
-          <p>
-            Combinamos rigor académico con vasta experiencia de campo para
-            resolver desafíos complejos, asegurando la continuidad operativa de
-            nuestros clientes.
-          </p>
-        </div>
-      </div>
-      <div class="relative group">
-        <div
-          class="absolute -inset-4 bg-gradient-to-r from-[#31B0FF]/20 to-[#0099cc]/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition duration-700"
-        >
-        </div>
-        <Image
-          src={image1}
-          alt="Equipo MBC Predictive"
-          class="relative rounded-md shadow-sm w-full object-cover aspect-video border border-white/10 group-hover:border-[#31B0FF]/30 transition-colors"
-          width={600}
-          height={400}
-        />
-      </div>
-    </div>
-
-    <!-- 3. Misión y Visión ("Sobrio Profesional") -->
-    <div
-      class="animate-item mb-20 bg-[#0d1216] border border-white/5 rounded-2xl overflow-hidden shadow-2xl"
-    >
-      <div
-        class="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-white/5"
-      >
-        <!-- Misión -->
-        <div class="p-10 hover:bg-white/[0.01] transition-colors group">
-          <div class="flex items-center gap-4 mb-6">
-            <div
-              class="p-3 bg-[#31B0FF]/10 rounded-lg group-hover:scale-110 transition-transform duration-300"
+      <div class="grid lg:grid-cols-2 gap-12 items-center relative z-10">
+        <div class="order-2 lg:order-1">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="h-px w-8 bg-[#31B0FF]"></div>
+            <h2
+              class="text-[#31B0FF] font-bold text-sm uppercase tracking-widest"
             >
-              <Icon name="lucide:target" class="w-6 h-6 text-[#31B0FF]" />
-            </div>
-            <h2 class="text-xl lg:text-2xl font-semibold text-white">
-              Nuestra Misión
+              Nuestra Historia
             </h2>
           </div>
-          <p class="text-gray-400 leading-relaxed text-base">
+          <h3
+            class="text-3xl lg:text-4xl font-bold text-white mb-6 leading-tight"
+          >
+            Trayectoria <span class="text-gray-400 font-light">Empresarial</span
+            >
+          </h3>
+          <div
+            class="space-y-6 text-gray-400 leading-relaxed text-lg font-light"
+          >
+            <p>
+              <strong class="text-white font-medium">MBC Predictive</strong> se ha
+              consolidado como un socio estratégico líder en ingeniería predictiva
+              para las industrias más exigentes. Nuestra evolución constante nos permite
+              ofrecer tecnologías de vanguardia y metodologías avanzadas.
+            </p>
+            <div
+              class="pl-6 border-l w-full border-[#31B0FF]/40 italic text-gray-500 py-2"
+            >
+              "Ingenieros especializados en mantenimiento, análisis vibracional
+              y confiabilidad, comprometidos con la excelencia."
+            </div>
+            <p>
+              Combinamos rigor académico con vasta experiencia de campo para
+              resolver desafíos complejos, asegurando la continuidad operativa
+              de nuestros clientes.
+            </p>
+          </div>
+        </div>
+        <div class="order-1 lg:order-2 relative">
+          <Image
+            src={image1}
+            alt="Equipo MBC Predictive"
+            class="relative rounded-xl shadow-lg w-full object-cover aspect-[4/3] border border-white/5 grayscale-[20%] group-hover:grayscale-0 transition-all duration-700"
+            width={800}
+            height={600}
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Misión y Visión - Cards Minimalistas -->
+    <div class="grid md:grid-cols-2 gap-8 mb-24 animate-item">
+      <!-- Misión -->
+      <div
+        class="group relative overflow-hidden rounded-2xl bg-[#0d1216] border border-white/5 p-10 hover:border-[#31B0FF]/20 transition-all duration-500"
+      >
+        <div class="relative z-10">
+          <div
+            class="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center text-[#31B0FF] mb-8 group-hover:bg-[#31B0FF]/10 transition-colors duration-500"
+          >
+            <Icon name="lucide:target" class="w-6 h-6" />
+          </div>
+          <h2 class="text-2xl font-bold text-white mb-4">Nuestra Misión</h2>
+          <p class="text-gray-400 leading-relaxed text-lg font-light">
             Brindar soluciones integrales de ingeniería de mantenimiento que
             maximicen la disponibilidad y seguridad de los activos industriales,
-            fundamentadas en mediciones precisas, análisis de datos riguroso y
-            cumplimiento de normas técnicas.
+            fundamentadas en mediciones precisas y análisis riguroso.
           </p>
         </div>
+      </div>
 
-        <!-- Visión -->
-        <div class="p-10 hover:bg-white/[0.01] transition-colors group">
-          <div class="flex items-center gap-4 mb-6">
-            <div
-              class="p-3 bg-[#31B0FF]/10 rounded-lg group-hover:scale-110 transition-transform duration-300"
-            >
-              <Icon name="lucide:eye" class="w-6 h-6 text-[#31B0FF]" />
-            </div>
-            <h2 class="text-xl lg:text-2xl font-semibold text-white">
-              Nuestra Visión
-            </h2>
+      <!-- Visión -->
+      <div
+        class="group relative overflow-hidden rounded-2xl bg-[#0d1216] border border-white/5 p-10 hover:border-[#0099cc]/20 transition-all duration-500"
+      >
+        <div class="relative z-10">
+          <div
+            class="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center text-[#0099cc] mb-8 group-hover:bg-[#0099cc]/10 transition-colors duration-500"
+          >
+            <Icon name="lucide:eye" class="w-6 h-6" />
           </div>
-          <p class="text-gray-400 leading-relaxed text-base">
+          <h2 class="text-2xl font-bold text-white mb-4">Nuestra Visión</h2>
+          <p class="text-gray-400 leading-relaxed text-lg font-light">
             Posicionarnos como el referente indiscutible en ingeniería de
             confiabilidad y monitoreo de condición, reconocidos por nuestra
-            capacidad técnica, prevención proactiva de fallas y excelencia
-            operativa.
+            capacidad técnica y excelencia operativa.
           </p>
         </div>
       </div>
     </div>
 
-    <!-- 4. Dynamic Solutions Section (Cards) -->
+    <!-- 4. Nuestros Pilares (Cards Estáticas y Sobrias) -->
     <div class="mb-20">
-      <!-- Título de sección "sin fondo" -->
       <div class="text-center mb-16 animate-item">
-        <h2
-          class="text-xl lg:text-2xl font-semibold text-[#31B0FF] mb-4 hover:text-[#31B0FF]/80 transition-colors"
+        <span
+          class="text-[#31B0FF] font-bold text-sm uppercase tracking-widest mb-2 block"
+          >Excelencia Operativa</span
         >
+        <h2 class="text-3xl lg:text-5xl font-bold text-white">
           Nuestros Pilares
         </h2>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-8 relative z-10">
-        <!-- Card 1: Servicios -->
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Card 1 -->
         <div class="animate-item group">
           <div
-            class="h-full flex flex-col rounded-2xl bg-[#0d1216]/80 backdrop-blur-xl border border-white/10 shadow-lg hover:border-[#31B0FF]/40 transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(49,176,255,0.1)] overflow-hidden"
+            class="h-full rounded-2xl bg-[#0d1216] border border-white/5 overflow-hidden hover:border-white/10 transition-all duration-500"
           >
-            <div class="w-full h-48 relative overflow-hidden">
+            <div class="relative h-64 overflow-hidden">
               <div
-                class="absolute inset-0 bg-gradient-to-t from-[#0d1216] via-transparent to-transparent z-10"
+                class="absolute inset-0 bg-gradient-to-t from-[#0d1216] to-transparent z-10"
               >
               </div>
               <Image
                 src={about1}
-                alt="Sectores Industriales"
-                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                alt="Servicios"
+                class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
               />
-            </div>
-
-            <div class="p-8 pt-6 flex-grow flex flex-col relative">
-              <span
-                class="absolute top-4 right-8 text-5xl font-bold text-white/[0.03] pointer-events-none select-none"
-                >01</span
-              >
-              <h3 class="text-xl font-semibold text-white tracking-tight mb-2">
-                Nuestros Servicios
-              </h3>
-              <div
-                class="h-1 w-12 bg-gradient-to-r from-[#31B0FF] to-[#0099cc] rounded-full mb-6"
-              >
+              <div class="absolute bottom-4 left-6 z-20">
+                <span class="text-5xl font-bold text-white/5 select-none"
+                  >01</span
+                >
               </div>
-
-              <ul class="space-y-3 text-sm text-gray-300">
-                <li class="flex gap-3">
-                  <div
-                    class="w-1.5 h-1.5 rounded-full bg-[#31B0FF] mt-1.5 shrink-0"
-                  >
-                  </div>
-                  Mantenimiento Predictivo
+            </div>
+            <div class="p-8 pt-4">
+              <h3
+                class="text-xl font-bold text-white mb-4 group-hover:text-[#31B0FF] transition-colors"
+              >
+                Servicios Especializados
+              </h3>
+              <ul class="space-y-3 font-light">
+                <li class="flex items-center gap-3 text-gray-400">
+                  <div class="w-1 h-1 rounded-full bg-[#31B0FF]"></div>
+                  <span>Mantenimiento Predictivo</span>
                 </li>
-                <li class="flex gap-3">
-                  <div
-                    class="w-1.5 h-1.5 rounded-full bg-[#31B0FF] mt-1.5 shrink-0"
-                  >
-                  </div>
-                  Ingeniería de Confiabilidad
+                <li class="flex items-center gap-3 text-gray-400">
+                  <div class="w-1 h-1 rounded-full bg-[#31B0FF]"></div>
+                  <span>Ingeniería de Confiabilidad</span>
                 </li>
-                <li class="flex gap-3">
-                  <div
-                    class="w-1.5 h-1.5 rounded-full bg-[#31B0FF] mt-1.5 shrink-0"
-                  >
-                  </div>
-                  Análisis Dinámico
+                <li class="flex items-center gap-3 text-gray-400">
+                  <div class="w-1 h-1 rounded-full bg-[#31B0FF]"></div>
+                  <span>Análisis Dinámico</span>
                 </li>
               </ul>
             </div>
           </div>
         </div>
 
-        <!-- Card 2: Equipo (Destacada) -->
-        <div class="animate-item group md:-mt-6">
+        <!-- Card 2 -->
+        <div class="animate-item group md:-mt-8">
           <div
-            class="h-full flex flex-col rounded-2xl bg-[#0d1216] border border-[#31B0FF]/30 shadow-[0_0_30px_rgba(49,176,255,0.15)] relative overflow-hidden"
+            class="h-full rounded-2xl bg-[#0d1216] border border-[#31B0FF]/10 overflow-hidden hover:border-[#31B0FF]/30 transition-all duration-500 relative shadow-lg shadow-[#000000]/50"
           >
-            <div class="w-full h-48 relative overflow-hidden">
+            <div class="relative h-64 overflow-hidden">
               <div
-                class="absolute inset-0 bg-gradient-to-t from-[#0d1216] via-transparent to-transparent z-10"
+                class="absolute inset-0 bg-gradient-to-t from-[#0d1216] to-transparent z-10"
               >
               </div>
               <Image
                 src={about2}
-                alt="Capital Humano"
-                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                alt="Equipo"
+                class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
               />
+              <div class="absolute bottom-4 left-6 z-20">
+                <span class="text-5xl font-bold text-[#31B0FF]/10 select-none"
+                  >02</span
+                >
+              </div>
             </div>
-
-            <div
-              class="absolute top-48 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#31B0FF] to-transparent opacity-50"
-            >
-            </div>
-
-            <div class="p-8 pt-6 flex-grow flex flex-col relative">
-              <span
-                class="absolute top-4 right-8 text-5xl font-bold text-[#31B0FF]/[0.05] pointer-events-none select-none"
-                >02</span
+            <div class="p-8 pt-4 relative z-10">
+              <h3
+                class="text-xl font-bold text-white mb-4 group-hover:text-[#31B0FF] transition-colors"
               >
-              <h3 class="text-2xl font-bold text-center text-white mb-2">
-                Nuestro Equipo
+                Equipo Experto
               </h3>
-              <p
-                class="text-center text-[#31B0FF] font-bold text-xs uppercase tracking-widest mb-6"
-              >
-                Ingenieros Especializados
-              </p>
-
-              <ul
-                class="space-y-3 text-sm text-gray-300 border-t border-white/5 pt-6"
-              >
-                <li class="flex items-center gap-3">
-                  <Icon name="lucide:check" class="w-4 h-4 text-[#31B0FF]" />
-                  Análisis Vibracional
+              <ul class="space-y-3 font-light">
+                <li class="flex items-center gap-3 text-gray-400">
+                  <Icon
+                    name="lucide:check-circle-2"
+                    class="w-4 h-4 text-[#31B0FF]"
+                  />
+                  <span>Certificación ISO 18436</span>
                 </li>
-                <li class="flex items-center gap-3">
-                  <Icon name="lucide:check" class="w-4 h-4 text-[#31B0FF]" />
-                  Gestión de Confiabilidad
+                <li class="flex items-center gap-3 text-gray-400">
+                  <Icon
+                    name="lucide:check-circle-2"
+                    class="w-4 h-4 text-[#31B0FF]"
+                  />
+                  <span>Experiencia en Campo</span>
                 </li>
-                <li class="flex items-center gap-3">
-                  <Icon name="lucide:check" class="w-4 h-4 text-[#31B0FF]" />
-                  Mejora Continua
+                <li class="flex items-center gap-3 text-gray-400">
+                  <Icon
+                    name="lucide:check-circle-2"
+                    class="w-4 h-4 text-[#31B0FF]"
+                  />
+                  <span>Formación Continua</span>
                 </li>
               </ul>
             </div>
           </div>
         </div>
 
-        <!-- Card 3: Soluciones -->
+        <!-- Card 3 -->
         <div class="animate-item group">
           <div
-            class="h-full flex flex-col rounded-md bg-[#0d1216]/80 backdrop-blur-xl border border-white/10 shadow-lg hover:border-[#31B0FF]/40 transition-all duration-300 group-hover:shadow-[0_0_30px_rgba(49,176,255,0.1)] overflow-hidden"
+            class="h-full rounded-2xl bg-[#0d1216] border border-white/5 overflow-hidden hover:border-white/10 transition-all duration-500"
           >
-            <div class="w-full h-48 relative overflow-hidden">
+            <div class="relative h-64 overflow-hidden">
               <div
-                class="absolute inset-0 bg-gradient-to-t from-[#0d1216] via-transparent to-transparent z-10"
+                class="absolute inset-0 bg-gradient-to-t from-[#0d1216] to-transparent z-10"
               >
               </div>
               <Image
                 src={about3}
-                alt="Nuestras Soluciones"
-                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                alt="Soluciones"
+                class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
               />
-            </div>
-
-            <div class="p-8 pt-6 flex-grow flex flex-col relative">
-              <span
-                class="absolute top-4 right-8 text-5xl font-bold text-white/[0.03] pointer-events-none select-none"
-                >03</span
-              >
-              <h3 class="text-xl font-semibold text-white tracking-tight mb-2">
-                Soluciones Avanzadas
-              </h3>
-              <div
-                class="h-1 w-12 bg-gradient-to-r from-[#31B0FF] to-[#0099cc] rounded-full mb-6"
-              >
+              <div class="absolute bottom-4 left-6 z-20">
+                <span class="text-5xl font-bold text-white/5 select-none"
+                  >03</span
+                >
               </div>
-
-              <ul class="space-y-3 text-sm text-gray-300">
-                <li class="flex gap-3">
-                  <div
-                    class="w-1.5 h-1.5 rounded-full bg-[#31B0FF] mt-1.5 shrink-0"
-                  >
-                  </div>
-                  Evaluación Estructural
+            </div>
+            <div class="p-8 pt-4">
+              <h3
+                class="text-xl font-bold text-white mb-4 group-hover:text-[#31B0FF] transition-colors"
+              >
+                Tecnología Avanzada
+              </h3>
+              <ul class="space-y-3 font-light">
+                <li class="flex items-center gap-3 text-gray-400">
+                  <div class="w-1 h-1 rounded-full bg-[#31B0FF]"></div>
+                  <span>Software 4.0</span>
                 </li>
-                <li class="flex gap-3">
-                  <div
-                    class="w-1.5 h-1.5 rounded-full bg-[#31B0FF] mt-1.5 shrink-0"
-                  >
-                  </div>
-                  Monitoreo de Activos
+                <li class="flex items-center gap-3 text-gray-400">
+                  <div class="w-1 h-1 rounded-full bg-[#31B0FF]"></div>
+                  <span>Harding Calibrado</span>
                 </li>
-                <li class="flex gap-3">
-                  <div
-                    class="w-1.5 h-1.5 rounded-full bg-[#31B0FF] mt-1.5 shrink-0"
-                  >
-                  </div>
-                  Soporte Técnico
+                <li class="flex items-center gap-3 text-gray-400">
+                  <div class="w-1 h-1 rounded-full bg-[#31B0FF]"></div>
+                  <span>Integración IoT</span>
                 </li>
               </ul>
             </div>
