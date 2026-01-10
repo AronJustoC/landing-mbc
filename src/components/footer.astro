@@ -26,50 +26,54 @@ const legal = [
 ];
 ---
 
-<footer
-  class="bg-gradient-to-br from-[#0a0a0c] via-[#0f1419] to-[#1a1f2e] border-t border-cyan-500/10 pt-16 pb-10 text-sm"
->
+<footer class="bg-[#08080A] border-t border-white/5 pt-16 pb-10 text-sm">
   <div class="container mx-auto px-6">
     <div
       class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-x-8 gap-y-12"
     >
       <!-- Col 1: Identity & Contact -->
       <div class="space-y-6 lg:col-span-1">
-        <a href="/" class="block">
+        <a href="/" class="block group/logo">
           <img
             src={LogoMbc.src}
             alt="MBC Logo"
-            width="140"
-            class="opacity-90 grayscale hover:grayscale-0 transition-all duration-300"
+            width="120"
+            class="opacity-80 grayscale group-hover/logo:grayscale-0 group-hover/logo:opacity-100 transition-all duration-500"
           />
         </a>
 
-        <div class="space-y-3 text-gray-400 pt-2">
-          <div class="flex items-start gap-3">
+        <div class="space-y-4 text-gray-500 pt-2">
+          <div class="flex items-start gap-3 group/item">
             <Icon
               name="lucide:map-pin"
-              class="w-4 h-4 text-[#31B0FF] mt-0.5 shrink-0"
+              class="w-4 h-4 text-[#31B0FF]/70 mt-0.5 shrink-0 group-hover/item:text-[#31B0FF] transition-colors"
             />
-            <span class="text-gray-400 text-xs"
+            <span class="text-xs leading-relaxed"
               >Calle Plateros 330, Cusco - Perú</span
             >
           </div>
 
-          <div class="flex items-center gap-3">
-            <Icon name="lucide:mail" class="w-4 h-4 text-[#31B0FF] shrink-0" />
+          <div class="flex items-center gap-3 group/item">
+            <Icon
+              name="lucide:mail"
+              class="w-4 h-4 text-[#31B0FF]/70 shrink-0 group-hover/item:text-[#31B0FF] transition-colors"
+            />
             <a
               href="mailto:info@mbcpredictive.com"
-              class="hover:text-[#31B0FF] transition-colors text-xs"
+              class="hover:text-white transition-colors text-xs"
               >info@mbcpredictive.com</a
             >
           </div>
 
-          <div class="flex items-center gap-3">
-            <Icon name="lucide:globe" class="w-4 h-4 text-[#31B0FF] shrink-0" />
+          <div class="flex items-center gap-3 group/item">
+            <Icon
+              name="lucide:globe"
+              class="w-4 h-4 text-[#31B0FF]/70 shrink-0 group-hover/item:text-[#31B0FF] transition-colors"
+            />
             <a
               href="https://www.mbcpredictive.com"
               target="_blank"
-              class="hover:text-[#31B0FF] transition-colors text-xs"
+              class="hover:text-white transition-colors text-xs"
               >www.mbcpredictive.com</a
             >
           </div>
@@ -79,7 +83,7 @@ const legal = [
       <!-- Col 2: Servicios -->
       <div>
         <h3
-          class="text-white font-semibold mb-5 pl-2 border-l-2 border-[#31B0FF]"
+          class="text-white font-semibold mb-6 text-sm uppercase tracking-wider"
         >
           Servicios
         </h3>
@@ -89,7 +93,7 @@ const legal = [
               <li>
                 <a
                   href={item.href}
-                  class="text-gray-400 hover:text-[#31B0FF] transition-colors block text-xs"
+                  class="text-gray-500 hover:text-[#31B0FF] transition-colors block text-xs"
                 >
                   {item.name}
                 </a>
@@ -102,7 +106,7 @@ const legal = [
       <!-- Col 3: Empresa -->
       <div>
         <h3
-          class="text-white font-semibold mb-5 pl-2 border-l-2 border-[#31B0FF]"
+          class="text-white font-semibold mb-6 text-sm uppercase tracking-wider"
         >
           Empresa
         </h3>
@@ -112,7 +116,7 @@ const legal = [
               <li>
                 <a
                   href={item.href}
-                  class="text-gray-400 hover:text-[#31B0FF] transition-colors block text-xs"
+                  class="text-gray-500 hover:text-[#31B0FF] transition-colors block text-xs"
                 >
                   {item.name}
                 </a>
@@ -125,7 +129,7 @@ const legal = [
       <!-- Col 4: Legal -->
       <div>
         <h3
-          class="text-white font-semibold mb-5 pl-2 border-l-2 border-[#31B0FF]"
+          class="text-white font-semibold mb-6 text-sm uppercase tracking-wider"
         >
           Legal
         </h3>
@@ -135,7 +139,7 @@ const legal = [
               <li>
                 <a
                   href={item.href}
-                  class="text-gray-400 hover:text-[#31B0FF] transition-colors block text-xs"
+                  class="text-gray-500 hover:text-[#31B0FF] transition-colors block text-xs"
                 >
                   {item.name}
                 </a>
@@ -146,30 +150,30 @@ const legal = [
       </div>
 
       <!-- Col 5: Social & Actions -->
-      <div class="flex flex-col items-start lg:items-end space-y-6">
+      <div class="flex flex-col items-start lg:items-end space-y-8">
         <div class="space-y-4 w-full lg:text-right">
           <span
-            class="text-gray-500 text-xs uppercase tracking-wider font-semibold"
+            class="text-gray-600 text-[10px] uppercase tracking-widest font-bold"
             >Síguenos</span
           >
-          <div class="flex gap-3 lg:justify-end">
+          <div class="flex gap-2 lg:justify-end">
             <a
               href="#"
-              class="w-8 h-8 rounded bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-[#31B0FF] hover:border-[#31B0FF] hover:text-white transition-all duration-300"
+              class="w-8 h-8 rounded bg-white/5 border border-white/5 flex items-center justify-center text-gray-500 hover:border-[#31B0FF]/30 hover:text-[#31B0FF] hover:bg-[#31B0FF]/10 transition-all duration-300"
               aria-label="LinkedIn"
             >
               <Icon name="lucide:linkedin" class="w-4 h-4" />
             </a>
             <a
               href="#"
-              class="w-8 h-8 rounded bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-[#31B0FF] hover:border-[#31B0FF] hover:text-white transition-all duration-300"
+              class="w-8 h-8 rounded bg-white/5 border border-white/5 flex items-center justify-center text-gray-500 hover:border-[#31B0FF]/30 hover:text-[#31B0FF] hover:bg-[#31B0FF]/10 transition-all duration-300"
               aria-label="Facebook"
             >
               <Icon name="lucide:facebook" class="w-4 h-4" />
             </a>
             <a
               href="#"
-              class="w-8 h-8 rounded bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-[#31B0FF] hover:border-[#31B0FF] hover:text-white transition-all duration-300"
+              class="w-8 h-8 rounded bg-white/5 border border-white/5 flex items-center justify-center text-gray-500 hover:border-[#31B0FF]/30 hover:text-[#31B0FF] hover:bg-[#31B0FF]/10 transition-all duration-300"
               aria-label="Instagram"
             >
               <Icon name="lucide:instagram" class="w-4 h-4" />
@@ -179,13 +183,14 @@ const legal = [
 
         <a
           href="/login"
-          class="inline-flex items-center justify-center px-6 py-2.5 bg-[#31B0FF] hover:bg-[#2196F3] text-white font-medium rounded shadow-[0_0_15px_rgba(49,176,255,0.2)] hover:shadow-[0_0_20px_rgba(49,176,255,0.4)] transition-all transform hover:-translate-y-0.5 w-full lg:w-auto text-center"
+          class="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-[#31B0FF]/10 text-[#31B0FF] border border-[#31B0FF]/20 hover:border-[#31B0FF]/50 hover:bg-[#31B0FF]/20 text-xs font-bold uppercase tracking-wider rounded transition-all duration-300 w-full lg:w-auto text-center"
         >
-          Acceso Clientes
+          <Icon name="lucide:user" class="w-4 h-4" />
+          <span>Acceso Clientes</span>
         </a>
 
         <p
-          class="text-gray-600 text-xs lg:text-right pt-4 border-t border-white/5 w-full"
+          class="text-gray-600 text-[10px] lg:text-right pt-6 border-t border-white/5 w-full leading-relaxed"
         >
           © 2026 MBC Engineering.<br />Todos los derechos reservados.
         </p>
