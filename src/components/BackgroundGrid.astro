@@ -1,0 +1,40 @@
+---
+interface Props {
+    topColor?: string;
+    bottomColor?: string;
+    gridOpacity?: number;
+}
+
+const {
+    topColor = "#31B0FF",
+    bottomColor = "#0099cc",
+    gridOpacity = 0.15,
+} = Astro.props;
+---
+
+<div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+    <!-- Tech Grid Pattern -->
+    <div
+        class="absolute inset-0 w-full h-full"
+        style={`
+      background-image: radial-gradient(${topColor} 1px, transparent 1px); 
+      background-size: 30px 30px; 
+      opacity: ${gridOpacity};
+      mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+    `}
+    >
+    </div>
+
+    <!-- Ambient Light Blobs -->
+    <div
+        class="absolute top-[10%] -left-[10%] w-[50%] h-[50%] blur-[120px] rounded-full opacity-30"
+        style={`background-color: ${topColor};`}
+    >
+    </div>
+
+    <div
+        class="absolute bottom-[0%] -right-[5%] w-[40%] h-[40%] blur-[100px] rounded-full opacity-20"
+        style={`background-color: ${bottomColor};`}
+    >
+    </div>
+</div>

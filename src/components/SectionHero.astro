@@ -1,0 +1,61 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+    title: string;
+    subtitle?: string;
+    image: ImageMetadata;
+    id?: string;
+    large?: boolean; // Option to make it a full page hero vs section header
+}
+
+const { title, subtitle, image, id, large = true } = Astro.props;
+---
+
+<div
+    id={id}
+    class={`relative flex items-center justify-center overflow-hidden bg-[#08080A] ${large ? "min-h-[50vh] md:min-h-[60vh]" : "min-h-[40vh]"}`}
+>
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0 z-0">
+        <Image
+            src={image}
+            alt={`${title} background`}
+            class="w-full h-full object-cover opacity-30 mix-blend-screen"
+            width={1920}
+            height={1080}
+        />
+        <div
+            class="absolute inset-0 bg-gradient-to-b from-[#08080A] via-[#08080A]/80 to-[#08080A]"
+        >
+        </div>
+        <div
+            class="absolute inset-0 bg-gradient-to-r from-[#08080A] via-transparent to-[#08080A]"
+        >
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 z-10 relative text-center">
+        <h2
+            class="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight"
+        >
+            <span
+                class="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400"
+                >{title}</span
+            >
+        </h2>
+        {
+            subtitle && (
+                <p class="text-xl md:text-2xl text-[#31B0FF] font-light max-w-3xl mx-auto">
+                    {subtitle}
+                </p>
+            )
+        }
+
+        <!-- Decoration Line -->
+        <div
+            class="h-1 w-24 bg-gradient-to-r from-[#31B0FF] to-[#0099cc] rounded-full mx-auto mt-8 opacity-80"
+        >
+        </div>
+    </div>
+</div>

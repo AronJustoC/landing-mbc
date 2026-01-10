@@ -1,0 +1,197 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+    serviceName: string;
+}
+
+const { serviceName } = Astro.props;
+---
+
+<div
+    class="bg-[#11161d] p-8 rounded-2xl border border-white/10 relative overflow-hidden group"
+>
+    <!-- Glow effect -->
+    <div
+        class="absolute -top-20 -right-20 w-40 h-40 bg-[#31B0FF]/10 rounded-full blur-[50px] group-hover:bg-[#31B0FF]/20 transition-all duration-500"
+    >
+    </div>
+
+    <h3 class="text-xl font-bold text-white mb-2 relative z-10">
+        Solicitar Información
+    </h3>
+    <p class="text-gray-400 text-sm mb-6 relative z-10">
+        ¿Interesado en <span class="text-[#31B0FF] font-medium"
+            >{serviceName}</span
+        >? Déjanos tus datos.
+    </p>
+
+    <form
+        id="service-contact-form"
+        class="space-y-4 relative z-10"
+        method="post"
+        novalidate
+    >
+        <input type="hidden" name="service" value={serviceName} />
+
+        <!-- Nombre -->
+        <div class="group relative">
+            <input
+                type="text"
+                name="nombre"
+                id="service-nombre"
+                class="peer w-full bg-[#08080A] border border-gray-700/50 px-4 py-3 rounded-lg text-white text-sm focus:outline-none focus:border-[#31B0FF] focus:ring-1 focus:ring-[#31B0FF] placeholder:text-transparent transition-all"
+                placeholder=" "
+                required
+            />
+            <label
+                for="service-nombre"
+                class="absolute left-4 -top-2.5 text-[#31B0FF] text-xs bg-[#11161d] px-1 transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-3 peer-placeholder-shown:bg-transparent peer-focus:-top-2.5 peer-focus:text-[#31B0FF] peer-focus:text-xs peer-focus:bg-[#11161d] pointer-events-none"
+            >
+                Nombre Completo
+            </label>
+        </div>
+
+        <!-- Email -->
+        <div class="group relative">
+            <input
+                type="email"
+                name="email"
+                id="service-email"
+                class="peer w-full bg-[#08080A] border border-gray-700/50 px-4 py-3 rounded-lg text-white text-sm focus:outline-none focus:border-[#31B0FF] focus:ring-1 focus:ring-[#31B0FF] placeholder:text-transparent transition-all"
+                placeholder=" "
+                required
+            />
+            <label
+                for="service-email"
+                class="absolute left-4 -top-2.5 text-[#31B0FF] text-xs bg-[#11161d] px-1 transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-3 peer-placeholder-shown:bg-transparent peer-focus:-top-2.5 peer-focus:text-[#31B0FF] peer-focus:text-xs peer-focus:bg-[#11161d] pointer-events-none"
+            >
+                Correo Corporativo
+            </label>
+        </div>
+
+        <!-- Teléfono -->
+        <div class="group relative">
+            <input
+                type="tel"
+                name="telefono"
+                id="service-telefono"
+                class="peer w-full bg-[#08080A] border border-gray-700/50 px-4 py-3 rounded-lg text-white text-sm focus:outline-none focus:border-[#31B0FF] focus:ring-1 focus:ring-[#31B0FF] placeholder:text-transparent transition-all"
+                placeholder=" "
+                required
+            />
+            <label
+                for="service-telefono"
+                class="absolute left-4 -top-2.5 text-[#31B0FF] text-xs bg-[#11161d] px-1 transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-3 peer-placeholder-shown:bg-transparent peer-focus:-top-2.5 peer-focus:text-[#31B0FF] peer-focus:text-xs peer-focus:bg-[#11161d] pointer-events-none"
+            >
+                Teléfono
+            </label>
+        </div>
+
+        <!-- Mensaje (Pre-filled kinda) -->
+        <div class="group relative">
+            <textarea
+                name="mensaje"
+                id="service-mensaje"
+                rows="3"
+                class="peer w-full bg-[#08080A] border border-gray-700/50 px-4 py-3 rounded-lg text-white text-sm focus:outline-none focus:border-[#31B0FF] focus:ring-1 focus:ring-[#31B0FF] placeholder:text-transparent transition-all resize-none"
+                placeholder=" "
+                required
+                >Hola, me gustaría cotizar el servicio de {
+                    serviceName
+                }...</textarea
+            >
+            <label
+                for="service-mensaje"
+                class="absolute left-4 -top-2.5 text-[#31B0FF] text-xs bg-[#11161d] px-1 transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-3 peer-placeholder-shown:bg-transparent peer-focus:-top-2.5 peer-focus:text-[#31B0FF] peer-focus:text-xs peer-focus:bg-[#11161d] pointer-events-none"
+            >
+                Mensaje
+            </label>
+        </div>
+
+        <!-- Google reCAPTCHA -->
+        <div
+            class="g-recaptcha"
+            data-sitekey={import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY}
+            data-theme="dark"
+        >
+        </div>
+
+        <button
+            type="submit"
+            class="w-full bg-[#31B0FF] hover:bg-[#2094df] text-white font-bold py-3 px-4 rounded-lg shadow-lg shadow-[#31B0FF]/25 transition-all duration-300 transform hover:-translate-y-0.5 flex justify-center items-center gap-2"
+        >
+            <span>Solicitar Propuesta</span>
+            <Icon name="lucide:arrow-right" class="w-4 h-4" />
+        </button>
+
+        <p
+            id="service-feedback"
+            class="text-xs text-center min-h-[1.5em] font-medium"
+        >
+        </p>
+    </form>
+</div>
+
+<script is:inline>
+    // Logic similar to main contact form but simplified for this component
+    document.addEventListener("astro:page-load", () => {
+        // Support View Transitions if enabled later
+        initServiceForm();
+    });
+
+    // Also run on initial load just in case
+    document.addEventListener("DOMContentLoaded", initServiceForm);
+
+    function initServiceForm() {
+        const form = document.getElementById("service-contact-form");
+        if (!form) return;
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const btn = form.querySelector("button[type=submit]");
+            const feedback = document.getElementById("service-feedback");
+            // @ts-ignore
+            const token = grecaptcha.getResponse();
+
+            if (!token) {
+                feedback.innerHTML =
+                    "<span class='text-red-400'>Por favor verifica el captcha.</span>";
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = "<span class='animate-spin'>⟳</span> Enviando...";
+
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+            data.recaptcha = token;
+            data.mensaje = `[Interés en ${data.service}] ${data.mensaje}`; // Append service to message body
+
+            try {
+                const response = await fetch("/api/contact", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data),
+                });
+
+                if (response.ok) {
+                    feedback.innerHTML =
+                        "<span class='text-green-400'>¡Solicitud enviada! Te contactaremos pronto.</span>";
+                    form.reset();
+                    // @ts-ignore
+                    grecaptcha.reset();
+                } else {
+                    feedback.innerHTML =
+                        "<span class='text-red-400'>Error al enviar. Intenta de nuevo.</span>";
+                }
+            } catch (err) {
+                feedback.innerHTML =
+                    "<span class='text-red-400'>Error de conexión.</span>";
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = "<span>Solicitar Propuesta</span> <svg ...>"; // Simplified reset
+            }
+        });
+    }
+</script>
