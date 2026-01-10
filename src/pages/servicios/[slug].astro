@@ -1,0 +1,188 @@
+---
+export const prerender = true;
+
+import Layout from "../../layouts/Layout.astro";
+import HeaderContainer from "../../components/HeaderContainer.astro";
+import Footer from "../../components/footer.astro";
+import WasapBall from "../../components/shareComponents/wasapBall.astro";
+import ServiceContactForm from "../../components/ServiceContactForm.astro";
+import { services } from "../../consts/services";
+import { Icon } from "astro-icon/components";
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+// Generate Static Paths
+export async function getStaticPaths() {
+    return services.map((service) => ({
+        params: { slug: service.id },
+        props: { service },
+    }));
+}
+
+const { service } = Astro.props;
+
+// Map Service IDs to new English filenames
+const imageMap: Record<string, string> = {
+    "mantenimiento-predictivo": "predictive",
+    "ingenieria-confiabilidad": "reliability",
+    "analisis-dinamico": "dynamic",
+    "evaluacion-estructural": "structural",
+    "monitoreo-activos": "monitoring",
+    "soporte-tecnico": "support",
+};
+
+const imageName = imageMap[service.id] || service.id;
+
+// Dynamic Image Import
+const images = import.meta.glob<{ default: ImageMetadata }>(
+    "/src/assets/services/*.{jpeg,jpg,png,gif}",
+);
+const imagePath = `/src/assets/services/${imageName}.png`;
+if (!images[imagePath])
+    throw new Error(
+        `"${imagePath}" does not exist in glob: "src/assets/services/*.{jpeg,jpg,png,gif}"`,
+    );
+const imagePromise = images[imagePath]();
+---
+
+<Layout title={`${service.title} | MBC Predictive`}>
+    <!-- Hero Section with Background Image -->
+    <div
+        class="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-[#08080A]"
+    >
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <Image
+                src={imagePromise}
+                alt={service.imagePrompt}
+                class="w-full h-full object-cover opacity-50 mix-blend-screen"
+                width={1920}
+                height={1080}
+            />
+            <div
+                class="absolute inset-0 bg-gradient-to-b from-[#08080A] via-[#08080A]/70 to-[#08080A]"
+            >
+            </div>
+            <div
+                class="absolute inset-0 bg-gradient-to-r from-[#08080A] via-transparent to-[#08080A]"
+            >
+            </div>
+        </div>
+
+        <div class="container mx-auto px-4 z-10 relative text-center">
+            <h1
+                class="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight"
+            >
+                <span
+                    class="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400"
+                    >{service.title}</span
+                >
+            </h1>
+            <p
+                class="text-xl md:text-2xl text-[#31B0FF] font-light max-w-3xl mx-auto"
+            >
+                {service.shortDescription}
+            </p>
+        </div>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="relative bg-[#08080A] min-h-screen">
+        <!-- Background Pattern -->
+        <div
+            class="absolute inset-0 z-0 pointer-events-none opacity-20"
+            style="background-image: radial-gradient(#31B0FF 1px, transparent 1px); background-size: 40px 40px;"
+        >
+        </div>
+
+        <div class="container mx-auto px-4 py-16 max-w-7xl relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <!-- Left: Content & Benefits (2 Cols) -->
+                <div class="lg:col-span-2 space-y-12">
+                    <!-- Description -->
+                    <section>
+                        <h2
+                            class="text-2xl font-bold text-white mb-6 flex items-center gap-3"
+                        >
+                            <Icon
+                                name="lucide:info"
+                                class="w-6 h-6 text-[#31B0FF]"
+                            />
+                            Descripción del Servicio
+                        </h2>
+                        <p
+                            class="text-gray-300 text-lg leading-relaxed text-justify"
+                        >
+                            {service.fullDescription}
+                        </p>
+                    </section>
+
+                    <!-- Features/Capabilities -->
+                    <section>
+                        <h2
+                            class="text-2xl font-bold text-white mb-6 flex items-center gap-3"
+                        >
+                            <Icon
+                                name="lucide:layers"
+                                class="w-6 h-6 text-[#31B0FF]"
+                            />
+                            Capacidades Técnicas
+                        </h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {
+                                service.features.map((feature) => (
+                                    <div class="bg-[#11161d] p-4 rounded-lg border border-white/5 flex items-center gap-3 hover:border-[#31B0FF]/30 transition-colors">
+                                        <Icon
+                                            name="lucide:check-circle-2"
+                                            class="w-5 h-5 text-[#31B0FF]"
+                                        />
+                                        <span class="text-gray-200">
+                                            {feature}
+                                        </span>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </section>
+
+                    <!-- Benefits -->
+                    <section>
+                        <h2
+                            class="text-2xl font-bold text-white mb-6 flex items-center gap-3"
+                        >
+                            <Icon
+                                name="lucide:trending-up"
+                                class="w-6 h-6 text-[#31B0FF]"
+                            />
+                            Beneficios Clave
+                        </h2>
+                        <ul class="space-y-4">
+                            {
+                                service.benefits.map((benefit) => (
+                                    <li class="flex items-start gap-4">
+                                        <div class="w-8 h-8 rounded-full bg-[#31B0FF]/10 flex items-center justify-center shrink-0 mt-1">
+                                            <Icon
+                                                name="lucide:plus"
+                                                class="w-5 h-5 text-[#31B0FF]"
+                                            />
+                                        </div>
+                                        <p class="text-gray-300 text-lg">
+                                            {benefit}
+                                        </p>
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                    </section>
+                </div>
+
+                <!-- Right: Contact Form (1 Col) -->
+                <div class="lg:col-span-1">
+                    <div class="sticky top-24">
+                        <ServiceContactForm serviceName={service.title} />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</Layout>
