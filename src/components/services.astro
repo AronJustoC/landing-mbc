@@ -52,10 +52,13 @@ const services = servicesData.map((s) => ({
                         class="animate-item group"
                         style={`transition-delay: ${index * 100}ms`}
                     >
-                        <article class="h-full flex flex-col rounded-2xl bg-[#0d1216] border border-white/5 overflow-hidden hover:border-[#31B0FF]/40 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)] relative">
+                        <article class="h-full flex flex-col rounded-2xl bg-[#11161d] border border-white/10 overflow-hidden hover:border-[#31B0FF]/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg relative group">
+                            <!-- Glow effect -->
+                            <div class="absolute -top-20 -right-20 w-40 h-40 bg-[#31B0FF]/10 rounded-full blur-[50px] group-hover:bg-[#31B0FF]/20 transition-all duration-500 pointer-events-none z-0"></div>
+                            
                             <!-- Image Container -->
-                            <div class="w-full h-56 relative overflow-hidden">
-                                <div class="absolute inset-0 bg-gradient-to-t from-[#0d1216] via-[#0d1216]/20 to-transparent z-10" />
+                            <div class="w-full h-56 relative overflow-hidden z-10">
+                                <div class="absolute inset-0 bg-gradient-to-t from-[#11161d] via-[#11161d]/20 to-transparent z-10" />
                                 <Image
                                     src={service.image}
                                     alt={service.title}

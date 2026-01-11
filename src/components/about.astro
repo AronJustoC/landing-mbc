@@ -40,15 +40,15 @@ import BackgroundGrid from "./BackgroundGrid.astro";
   </div>
 
   <div
-    class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10 pt-20 pb-24"
+    class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10 pt-20 pb-10"
   >
     <!-- 2. Trayectoria Empresarial (History) - Estilo Sobrio y Elegante -->
     <div
-      class="bg-[#0d1216] border border-white/5 rounded-3xl p-8 lg:p-12 mb-20 relative overflow-hidden animate-item shadow-[0_4px_20px_rgba(0,0,0,0.2)] group"
+      class="bg-[#11161d] border border-white/10 rounded-2xl p-8 lg:p-12 mb-20 relative overflow-hidden animate-item shadow-lg group"
     >
-      <!-- Decoración Sutil (Reducida) -->
+      <!-- Glow effect -->
       <div
-        class="absolute top-0 right-0 w-96 h-96 bg-[#31B0FF]/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none"
+        class="absolute -top-20 -right-20 w-40 h-40 bg-[#31B0FF]/10 rounded-full blur-[50px] group-hover:bg-[#31B0FF]/20 transition-all duration-500"
       >
       </div>
 
@@ -106,8 +106,13 @@ import BackgroundGrid from "./BackgroundGrid.astro";
     <div class="grid md:grid-cols-2 gap-8 mb-24 animate-item">
       <!-- Misión -->
       <div
-        class="group relative overflow-hidden rounded-2xl bg-[#0d1216] border border-white/5 p-10 hover:border-[#31B0FF]/20 transition-all duration-500"
+        class="group relative overflow-hidden rounded-2xl bg-[#11161d] border border-white/10 p-10 hover:border-[#31B0FF]/30 transition-all duration-500 shadow-lg"
       >
+        <!-- Glow effect -->
+        <div
+          class="absolute -top-20 -right-20 w-40 h-40 bg-[#31B0FF]/10 rounded-full blur-[50px] group-hover:bg-[#31B0FF]/20 transition-all duration-500"
+        >
+        </div>
         <div class="relative z-10">
           <div
             class="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center text-[#31B0FF] mb-8 group-hover:bg-[#31B0FF]/10 transition-colors duration-500"
@@ -125,8 +130,13 @@ import BackgroundGrid from "./BackgroundGrid.astro";
 
       <!-- Visión -->
       <div
-        class="group relative overflow-hidden rounded-2xl bg-[#0d1216] border border-white/5 p-10 hover:border-[#0099cc]/20 transition-all duration-500"
+        class="group relative overflow-hidden rounded-2xl bg-[#11161d] border border-white/10 p-10 hover:border-[#0099cc]/30 transition-all duration-500 shadow-lg"
       >
+        <!-- Glow effect -->
+        <div
+          class="absolute -top-20 -right-20 w-40 h-40 bg-[#0099cc]/10 rounded-full blur-[50px] group-hover:bg-[#0099cc]/20 transition-all duration-500"
+        >
+        </div>
         <div class="relative z-10">
           <div
             class="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center text-[#0099cc] mb-8 group-hover:bg-[#0099cc]/10 transition-colors duration-500"
@@ -159,11 +169,17 @@ import BackgroundGrid from "./BackgroundGrid.astro";
         <!-- Card 1 -->
         <div class="animate-item group">
           <div
-            class="h-full rounded-2xl bg-[#0d1216] border border-white/5 overflow-hidden hover:border-white/10 transition-all duration-500"
+            class="h-full rounded-2xl bg-[#11161d] border border-white/10 overflow-hidden hover:border-[#31B0FF]/30 transition-all duration-500 relative shadow-lg"
           >
-            <div class="relative h-64 overflow-hidden">
+            <!-- Glow effect -->
+            <div
+              class="absolute -top-20 -right-20 w-40 h-40 bg-[#31B0FF]/10 rounded-full blur-[50px] group-hover:bg-[#31B0FF]/20 transition-all duration-500 z-0"
+            >
+            </div>
+
+            <div class="relative h-64 overflow-hidden z-10">
               <div
-                class="absolute inset-0 bg-gradient-to-t from-[#0d1216] to-transparent z-10"
+                class="absolute inset-0 bg-gradient-to-t from-[#11161d] to-transparent z-10"
               >
               </div>
               <Image
@@ -204,11 +220,17 @@ import BackgroundGrid from "./BackgroundGrid.astro";
         <!-- Card 2 -->
         <div class="animate-item group md:-mt-8">
           <div
-            class="h-full rounded-2xl bg-[#0d1216] border border-[#31B0FF]/10 overflow-hidden hover:border-[#31B0FF]/30 transition-all duration-500 relative shadow-lg shadow-[#000000]/50"
+            class="h-full rounded-2xl bg-[#11161d] border border-[#31B0FF]/30 overflow-hidden hover:border-[#31B0FF]/50 transition-all duration-500 relative shadow-lg shadow-[#31B0FF]/10"
           >
-            <div class="relative h-64 overflow-hidden">
+            <!-- Glow effect -->
+            <div
+              class="absolute -top-20 -right-20 w-40 h-40 bg-[#31B0FF]/10 rounded-full blur-[50px] group-hover:bg-[#31B0FF]/20 transition-all duration-500 z-0"
+            >
+            </div>
+
+            <div class="relative h-64 overflow-hidden z-10">
               <div
-                class="absolute inset-0 bg-gradient-to-t from-[#0d1216] to-transparent z-10"
+                class="absolute inset-0 bg-gradient-to-t from-[#11161d] to-transparent z-10"
               >
               </div>
               <Image
@@ -258,11 +280,17 @@ import BackgroundGrid from "./BackgroundGrid.astro";
         <!-- Card 3 -->
         <div class="animate-item group">
           <div
-            class="h-full rounded-2xl bg-[#0d1216] border border-white/5 overflow-hidden hover:border-white/10 transition-all duration-500"
+            class="h-full rounded-2xl bg-[#11161d] border border-white/10 overflow-hidden hover:border-[#31B0FF]/30 transition-all duration-500 relative shadow-lg"
           >
-            <div class="relative h-64 overflow-hidden">
+            <!-- Glow effect -->
+            <div
+              class="absolute -top-20 -right-20 w-40 h-40 bg-[#31B0FF]/10 rounded-full blur-[50px] group-hover:bg-[#31B0FF]/20 transition-all duration-500 z-0"
+            >
+            </div>
+
+            <div class="relative h-64 overflow-hidden z-10">
               <div
-                class="absolute inset-0 bg-gradient-to-t from-[#0d1216] to-transparent z-10"
+                class="absolute inset-0 bg-gradient-to-t from-[#11161d] to-transparent z-10"
               >
               </div>
               <Image
