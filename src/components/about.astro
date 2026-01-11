@@ -6,6 +6,7 @@ import about1 from "../assets/about/about_1.png";
 import about2 from "../assets/about/about_2.png";
 import about3 from "../assets/about/about-3.png";
 import aboutHeaderBg from "../assets/headers/about_header_background.png";
+import brochure from "../assets/about/MBC-Brochure.pdf";
 import SectionHero from "./SectionHero.astro";
 import BackgroundGrid from "./BackgroundGrid.astro";
 ---
@@ -88,6 +89,20 @@ import BackgroundGrid from "./BackgroundGrid.astro";
               resolver desafíos complejos, asegurando la continuidad operativa
               de nuestros clientes.
             </p>
+
+            <div class="pt-4">
+              <a
+                href={brochure}
+                download="MBC_Brochure.pdf"
+                class="inline-flex items-center gap-2 px-6 py-3 bg-[#31B0FF]/10 text-[#31B0FF] border border-[#31B0FF]/20 font-semibold rounded-lg hover:bg-[#31B0FF] hover:text-white transition-all duration-300 group/btn"
+              >
+                <Icon
+                  name="lucide:file-down"
+                  class="w-5 h-5 group-hover/btn:translate-y-1 transition-transform"
+                />
+                <span>Descargar Brochure</span>
+              </a>
+            </div>
           </div>
         </div>
         <div class="order-1 lg:order-2 relative">
