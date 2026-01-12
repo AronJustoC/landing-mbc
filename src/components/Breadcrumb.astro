@@ -1,0 +1,79 @@
+---
+/**
+ * Breadcrumb - Componente de navegación breadcrumbs para SEO
+ * Mejora la UX y ayuda a los motores de búsqueda a entender la estructura del sitio
+ */
+interface BreadcrumbItem {
+  name: string;
+  href: string;
+  current?: boolean;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+
+// Schema.org BreadcrumbList
+const breadcrumbList = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.name,
+    item: item.current ? undefined : new URL(item.href, Astro.site?.href || 'https://mbcpredictive.com').href,
+  })),
+};
+---
+
+<!-- Schema.org BreadcrumbList -->
+<script
+  set:html={JSON.stringify(breadcrumbList)}
+  type="application/ld+json"
+>
+</script>
+
+<!-- Visual Breadcrumb -->
+<nav aria-label="Breadcrumb" class="container mx-auto px-4 py-4">
+  <ol class="flex items-center gap-2 text-sm flex-wrap">
+    {
+      items.map((item, index) => (
+        <li class="flex items-center gap-2">
+          {
+            index > 0 && (
+              <span class="text-gray-600" aria-hidden="true">/</span>
+            )
+          }
+          {
+            item.current ? (
+              <span
+                class="text-[#31B0FF] font-medium"
+                aria-current="page"
+              >
+                {item.name}
+              </span>
+            ) : (
+              <a
+                href={item.href}
+                class="text-gray-400 hover:text-white transition-colors"
+              >
+                {item.name}
+              </a>
+            )
+          }
+        </li>
+      ))
+    }
+  </ol>
+</nav>
+
+<style>
+  /* Mobile optimization */
+  @media (max-width: 640px) {
+    ol {
+      font-size: 0.75rem;
+    }
+  }
+</style>

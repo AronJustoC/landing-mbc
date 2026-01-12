@@ -1,0 +1,164 @@
+---
+/**
+ * StructuredData - Schema.org JSON-LD para SEO
+ * Incluye Organization, LocalBusiness, y más
+ */
+interface Props {
+  type?: 'organization' | 'localbusiness' | 'website' | 'breadcrumb' | 'service';
+  data?: Record<string, any>;
+}
+
+const { type = 'organization', data } = Astro.props;
+
+// Organization Schema
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'MBC Predictive',
+  legalName: 'MBC Predictive S.A.C.',
+  url: 'https://mbcpredictive.com',
+  logo: 'https://mbcpredictive.com/logo.png',
+  description: 'Especialistas en Mantenimiento Predictivo e Ingeniería en Cusco, Perú. Servicios de análisis vibracional, termografía, ultrasonido y alineamiento láser.',
+  foundingDate: '2018',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Av. La Cultura 733',
+    addressLocality: 'Cusco',
+    addressRegion: 'Cusco',
+    postalCode: '08001',
+    addressCountry: 'PE',
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: '+51-984-123-456',
+    contactType: 'sales',
+    email: 'contacto@mbcpredictive.com',
+    areaServed: 'PE',
+    availableLanguage: ['Spanish', 'English'],
+  },
+  sameAs: [
+    'https://www.facebook.com/mbcpredictive',
+    'https://www.linkedin.com/company/mbcpredictive',
+    'https://www.instagram.com/mbcpredictive',
+  ],
+  areaServed: {
+    '@type': 'GeoCircle',
+    geoMidpoint: {
+      '@type': 'GeoCoordinates',
+      latitude: -13.53195,
+      longitude: -71.96746,
+    },
+    geoRadius: '500000',
+  },
+};
+
+// LocalBusiness Schema
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': 'https://mbcpredictive.com/#localbusiness',
+  name: 'MBC Predictive',
+  image: 'https://mbcpredictive.com/og-image.jpg',
+  url: 'https://mbcpredictive.com',
+  telephone: '+51-984-123-456',
+  email: 'contacto@mbcpredictive.com',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Av. La Cultura 733',
+    addressLocality: 'Cusco',
+    addressRegion: 'Cusco',
+    postalCode: '08001',
+    addressCountry: 'PE',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: -13.53195,
+    longitude: -71.96746,
+  },
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    opens: '08:00',
+    closes: '18:00',
+  },
+  priceRange: '$$',
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.8',
+    reviewCount: '45',
+  },
+};
+
+// WebSite Schema
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'MBC Predictive',
+  url: 'https://mbcpredictive.com/',
+  description: 'Especialistas en Mantenimiento Predictivo e Ingeniería en Cusco, Perú',
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: 'https://mbcpredictive.com/search?q={search_term_string}',
+    'query-input': 'required name=search_term_string',
+  },
+};
+
+// Service Schema (when data is provided)
+const serviceSchema = data ? {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: data.name || data.title,
+  description: data.description || data.fullDescription,
+  provider: {
+    '@type': 'Organization',
+    name: 'MBC Predictive',
+    url: 'https://mbcpredictive.com',
+  },
+  areaServed: {
+    '@type': 'GeoCircle',
+    geoMidpoint: {
+      '@type': 'GeoCoordinates',
+      latitude: -13.53195,
+      longitude: -71.96746,
+    },
+    geoRadius: '500000',
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Servicios de Mantenimiento Predictivo',
+    itemListElement: data.features?.map((feature: string, index: number) => ({
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: feature,
+      },
+      position: index + 1,
+    })),
+  },
+} : null;
+
+// Select the appropriate schema based on type
+let schema = organizationSchema;
+
+switch (type) {
+  case 'localbusiness':
+    schema = localBusinessSchema;
+    break;
+  case 'website':
+    schema = websiteSchema;
+    break;
+  case 'service':
+    schema = serviceSchema;
+    break;
+  case 'organization':
+  default:
+    schema = organizationSchema;
+    break;
+}
+---
+
+<script
+  set:html={JSON.stringify(schema)}
+  type="application/ld+json"
+>
+</script>

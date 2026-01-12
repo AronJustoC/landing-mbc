@@ -3,6 +3,43 @@ import "../styles/global.css";
 import WasapBall from "../components/shareComponents/wasapBall.astro";
 import HeaderContainer from "../components/HeaderContainer.astro";
 import Footer from "../components/footer.astro";
+import StructuredData from "../components/StructuredData.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+  type?: 'website' | 'article';
+  noindex?: boolean;
+}
+
+const {
+  title = 'MBC Predictive | Mantenimiento Predictivo & Ingeniería',
+  description = 'Especialistas en Mantenimiento Predictivo e Ingeniería en Cusco. Servicios de análisis vibracional, termografía, ultrasonido y alineamiento láser para optimizar la confiabilidad de su industria.',
+  image = '/og-image.jpg',
+  canonical,
+  type = 'website',
+  noindex = false,
+} = Astro.props;
+
+// Default canonical URL based on current pathname
+const getCanonicalUrl = () => {
+  if (canonical) return canonical;
+
+  const siteUrl = Astro.site?.href || 'https://mbcpredictive.com';
+  const pathname = Astro.url?.pathname || '/';
+  return siteUrl.replace(/\/$/, '') + pathname;
+};
+
+const finalCanonical = getCanonicalUrl();
+
+const fullTitle = title.includes('MBC Predictive')
+  ? title
+  : `${title} | MBC Predictive`;
+
+const siteUrl = Astro.site?.href || 'https://mbcpredictive.com';
+const fullImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
 ---
 
 <!doctype html>
@@ -13,50 +50,39 @@ import Footer from "../components/footer.astro";
 		<link rel="icon" type="image/png" href="/favicon.png" />
 		<meta name="generator" content={Astro.generator} />
 
+		<!-- Canonical URL -->
+		<link rel="canonical" href={finalCanonical} />
+
 		<!-- SEO Principal -->
-		<title>MBC Predictive | Mantenimiento Predictivo & Ingeniería</title>
-		<meta
-			name="description"
-			content="Especialistas en Mantenimiento Predictivo e Ingeniería en Cusco. Servicios de análisis vibracional, termografía, ultrasonido y alineamiento láser para optimizar la confiabilidad de su industria."
-		/>
+		<title>{fullTitle}</title>
+		<meta name="description" content={description} />
 		<meta
 			name="keywords"
 			content="mantenimiento predictivo, cusco, ingeniería, análisis vibracional, termografía, ultrasonido, alineamiento láser, balanceo dinámico, industria 4.0"
 		/>
 		<meta name="author" content="MBC Predictive" />
-		<meta name="robots" content="index, follow" />
+		<meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
 
 		<!-- Open Graph / Facebook -->
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content="https://mbcpredictive.com/" />
-		<meta
-			property="og:title"
-			content="MBC Predictive | Expertos en Confiabilidad Industrial"
-		/>
-		<meta
-			property="og:description"
-			content="Soluciones avanzadas de ingeniería y mantenimiento predictivo en Cusco. Maximizamos la vida útil de sus activos."
-		/>
-		<meta
-			property="og:image"
-			content="https://mbcpredictive.com/og-image.jpg"
-		/>
+		<meta property="og:type" content={type} />
+		<meta property="og:url" content={finalCanonical} />
+		<meta property="og:title" content={fullTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={fullImage} />
+		<meta property="og:site_name" content="MBC Predictive" />
+		<meta property="og:locale" content="es_PE" />
 
 		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image" />
-		<meta property="twitter:url" content="https://mbcpredictive.com/" />
-		<meta
-			property="twitter:title"
-			content="MBC Predictive | Mantenimiento Predictivo"
-		/>
-		<meta
-			property="twitter:description"
-			content="Especialistas en Mantenimiento Predictivo e Ingeniería. Análisis vibracional, termografía y más."
-		/>
-		<meta
-			property="twitter:image"
-			content="https://mbcpredictive.com/og-image.jpg"
-		/>
+		<meta property="twitter:url" content={finalCanonical} />
+		<meta property="twitter:title" content={fullTitle} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content={fullImage} />
+
+		<!-- Schema.org Structured Data -->
+		<StructuredData type="localbusiness" />
+		<StructuredData type="organization" />
+		<StructuredData type="website" />
 	</head>
 	<body>
 		<HeaderContainer />
