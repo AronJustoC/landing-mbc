@@ -1,0 +1,61 @@
+---
+import SectionHero from "./SectionHero.astro";
+import headerBg from "../assets/headers/about_header_background.png";
+import { Icon } from "astro-icon/components";
+---
+
+<section class="bg-[#08080A] relative overflow-hidden pb-20">
+  <SectionHero
+    title="Política de Privacidad"
+    subtitle="Compromiso con la protección de datos y la confidencialidad industrial."
+    image={headerBg}
+    large={false}
+  />
+
+  <div class="container mx-auto px-6 relative z-10 pt-16 max-w-4xl">
+    <div class="bg-[#11161d] border border-white/10 rounded-2xl p-8 md:p-12 shadow-lg relative overflow-hidden">
+      <!-- Decorative Glow -->
+      <div class="absolute top-0 right-0 w-64 h-64 bg-[#31B0FF]/5 blur-[80px] rounded-full pointer-events-none"></div>
+
+      <div class="space-y-8 relative z-10">
+        
+        <div>
+          <div class="flex items-center gap-3 mb-3">
+            <Icon name="lucide:shield-check" class="w-6 h-6 text-[#31B0FF]" />
+            <h3 class="text-white font-bold text-xl">Cumplimiento con la Ley N° 29733</h3>
+          </div>
+          <p class="text-gray-300 leading-relaxed">
+            De conformidad con la Ley de Protección de Datos Personales del Perú, MBC Predictive garantiza la seguridad y confidencialidad de los datos proporcionados. Sus datos serán incorporados a nuestro banco de datos "Clientes y Contactos" con la finalidad de gestionar la relación comercial y brindar soporte técnico.
+          </p>
+        </div>
+
+        <div>
+          <div class="flex items-center gap-3 mb-3">
+            <Icon name="lucide:database" class="w-6 h-6 text-[#31B0FF]" />
+            <h3 class="text-white font-bold text-xl">Confidencialidad de Datos Industriales</h3>
+          </div>
+          <p class="text-gray-300 leading-relaxed">
+            Entendemos la sensibilidad de la información operativa (planos, data vibracional, parámetros de proceso). MBC firma acuerdos de confidencialidad (NDA) estrictos, asegurando que la data técnica de sus activos no sea compartida con terceros ni utilizada para fines distintos al servicio contratado.
+          </p>
+        </div>
+
+        <div>
+          <div class="flex items-center gap-3 mb-3">
+            <Icon name="lucide:user-check" class="w-6 h-6 text-[#31B0FF]" />
+            <h3 class="text-white font-bold text-xl">Derechos ARCO</h3>
+          </div>
+          <p class="text-gray-300 leading-relaxed">
+            Como titular de sus datos personales, usted puede ejercer sus derechos de Acceso, Rectificación, Cancelación y Oposición (ARCO) enviando una solicitud a nuestro oficial de cumplimiento al correo <span class="text-[#31B0FF]">legal@mbc-predictive.com</span>.
+          </p>
+        </div>
+
+        <div class="bg-[#31B0FF]/5 border border-[#31B0FF]/20 rounded-lg p-4 mt-6">
+          <p class="text-sm text-gray-400">
+            <strong>Uso de Cookies:</strong> Nuestro sitio web utiliza cookies técnicas necesarias para el funcionamiento del sitio y cookies analíticas anónimas para mejorar la experiencia de usuario.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

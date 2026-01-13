@@ -9,7 +9,6 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/vercel": "^9.0.3",
     "@iconify-json/lucide": "^1.2.78",
     "@iconify-json/simple-icons": "^1.2.64",
     "@tailwindcss/vite": "^4.1.17",
@@ -19,5 +18,8 @@
     "daisyui": "^5.5.14",
     "nodemailer": "^7.0.12",
     "tailwindcss": "^4.1.17"
+  },
+  "devDependencies": {
+    "@astrojs/vercel": "^9.0.3"
   }
 }
