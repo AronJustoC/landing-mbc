@@ -3,9 +3,9 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout
-	title="Acceso Clientes | MBC Predictive"
-	description="Acceso exclusivo para clientes de MBC Predictive. Ingresa a tu panel de control para gestionar tus servicios de mantenimiento predictivo."
-	noindex={true}
+    title="Acceso Clientes | MBC Predictive"
+    description="Acceso exclusivo para clientes de MBC Predictive. Ingresa a tu panel de control para gestionar tus servicios de mantenimiento predictivo."
+    noindex={true}
 >
     <div
         class="min-h-screen flex items-center justify-center bg-[#08080A] relative overflow-hidden py-20"
@@ -23,83 +23,142 @@ import Layout from "../layouts/Layout.astro";
         </div>
 
         <div class="w-full max-w-md pt-20 relative z-10">
-            <!-- Card -->
+            <!-- Card con Efecto Holo -->
             <div
-                class="bg-[#11161d] border border-white/10 rounded-2xl p-8 shadow-2xl relative group overflow-hidden"
+                class="group holo-card relative bg-[#121214] rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 hover:shadow-[0_0_60px_rgba(49,176,255,0.15)]"
             >
-                <!-- Glow effect -->
                 <div
-                    class="absolute -top-20 -right-20 w-40 h-40 bg-[#31B0FF]/10 rounded-full blur-[50px] group-hover:bg-[#31B0FF]/20 transition-all duration-500 pointer-events-none"
+                    class="holo-border absolute inset-0 rounded-2xl z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                 >
                 </div>
-                <!-- Header -->
-                <div class="text-center mb-8">
-                    <h1 class="text-3xl font-bold text-white mb-2">
-                        Bienvenido
-                    </h1>
-                    <p class="text-gray-400 text-sm">
-                        Ingresa a tu panel de control MBC Predictive.
-                    </p>
-                </div>
-
-                <!-- Form -->
-                <form class="space-y-6">
-                    <div class="space-y-2">
-                        <label
-                            for="email"
-                            class="text-xs font-medium text-[#31B0FF] uppercase tracking-wider"
-                            >Correo Corporativo</label
+                <div
+                    class="relative z-10 bg-[#121214] p-10 h-full rounded-2xl border border-white/5 group-hover:border-transparent transition-colors"
+                >
+                    <!-- Header -->
+                    <div class="text-center mb-10">
+                        <div
+                            class="flex items-center justify-center gap-3 mb-6"
                         >
-                        <input
-                            type="email"
-                            id="email"
-                            class="w-full bg-[#08080A] border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#31B0FF] transition-colors"
-                            placeholder="usuario@empresa.com"
-                        />
-                    </div>
-
-                    <div class="space-y-2">
-                        <label
-                            for="password"
-                            class="text-xs font-medium text-[#31B0FF] uppercase tracking-wider"
-                            >Contraseña</label
-                        >
-                        <input
-                            type="password"
-                            id="password"
-                            class="w-full bg-[#08080A] border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#31B0FF] transition-colors"
-                            placeholder="••••••••"
-                        />
-                    </div>
-
-                    <button
-                        type="submit"
-                        class="w-full bg-[#31B0FF] hover:bg-[#2094df] text-white font-bold py-3.5 rounded-lg transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg shadow-[#31B0FF]/25"
-                    >
-                        Iniciar Sesión
-                    </button>
-                </form>
-
-                <!-- Registration Notice -->
-                <div class="mt-8 pt-6 border-t border-white/5 text-center">
-                    <p class="text-gray-500 text-sm mb-2">
-                        ¿No tienes una cuenta?
-                    </p>
-                    <div
-                        class="bg-[#31B0FF]/5 border border-[#31B0FF]/20 rounded-lg p-4"
-                    >
-                        <p class="text-xs text-gray-300 leading-relaxed">
-                            El acceso es exclusivo para clientes activos. Para
-                            solicitar credenciales, contacta a soporte:
-                            <a
-                                href="mailto:soporte@mbcpredictive.com"
-                                class="block mt-1 text-[#31B0FF] font-medium hover:underline"
-                                >soporte@mbc.com</a
+                            <div class="h-px w-8 bg-[#31B0FF]"></div>
+                            <span
+                                class="text-[10px] font-bold text-[#31B0FF] uppercase tracking-[0.4em]"
+                                >Panel Seguro</span
                             >
+                            <div class="h-px w-8 bg-[#31B0FF]"></div>
+                        </div>
+                        <h1
+                            class="text-3xl font-bold text-white mb-2 tracking-tight"
+                        >
+                            Acceso <span
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400"
+                                >Clientes</span
+                            >
+                        </h1>
+                        <p
+                            class="text-gray-400 text-sm font-light leading-relaxed"
+                        >
+                            Gestión técnica de mantenimiento predictivo.
                         </p>
+                    </div>
+
+                    <!-- Form -->
+                    <form class="space-y-6">
+                        <div class="space-y-2">
+                            <label
+                                for="email"
+                                class="text-[10px] font-bold text-[#31B0FF] uppercase tracking-[0.2em] ml-1"
+                                >Correo Corporativo</label
+                            >
+                            <input
+                                type="email"
+                                id="email"
+                                class="w-full bg-[#1a1f26]/50 border border-white/5 rounded-xl px-5 py-4 text-white text-sm focus:outline-none focus:border-[#31B0FF]/50 focus:bg-[#31B0FF]/5 transition-all"
+                                placeholder="usuario@empresa.com"
+                            />
+                        </div>
+
+                        <div class="space-y-2">
+                            <label
+                                for="password"
+                                class="text-[10px] font-bold text-[#31B0FF] uppercase tracking-[0.2em] ml-1"
+                                >Contraseña</label
+                            >
+                            <input
+                                type="password"
+                                id="password"
+                                class="w-full bg-[#1a1f26]/50 border border-white/5 rounded-xl px-5 py-4 text-white text-sm focus:outline-none focus:border-[#31B0FF]/50 focus:bg-[#31B0FF]/5 transition-all"
+                                placeholder="••••••••"
+                            />
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="w-full h-14 bg-[#31B0FF] hover:bg-[#2196F3] text-white font-bold rounded-xl shadow-lg hover:shadow-[#31B0FF]/30 transition-all duration-500 overflow-hidden relative group/btn"
+                        >
+                            <div
+                                class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-1000"
+                            >
+                            </div>
+                            <span
+                                class="tracking-[0.2em] text-xs uppercase relative z-10"
+                                >Iniciar Sesión</span
+                            >
+                        </button>
+                    </form>
+
+                    <!-- Registration Notice -->
+                    <div class="mt-8 pt-6 border-t border-white/5 text-center">
+                        <p class="text-gray-500 text-sm mb-2">
+                            ¿No tienes una cuenta?
+                        </p>
+                        <div
+                            class="bg-[#31B0FF]/5 border border-[#31B0FF]/20 rounded-lg p-4"
+                        >
+                            <p class="text-xs text-gray-300 leading-relaxed">
+                                El acceso es exclusivo para clientes activos.
+                                Para solicitar credenciales, contacta a soporte:
+                                <a
+                                    href="mailto:soporte@mbcpredictive.com"
+                                    class="block mt-1 text-[#31B0FF] font-medium hover:underline"
+                                    >soporte@mbc.com</a
+                                >
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <style>
+        /* Holographic Border Effect */
+        @keyframes border-rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .holo-border::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                transparent,
+                transparent,
+                transparent,
+                #31b0ff,
+                transparent,
+                transparent,
+                transparent,
+                #22d3ee
+            );
+            animation: border-rotate 4s linear infinite;
+        }
+    </style>
 </Layout>
