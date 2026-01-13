@@ -14,19 +14,55 @@ import brochurePdf from "../../assets/about/MBC-Brochure.pdf";
         class="absolute inset-0 z-0 select-none pointer-events-none overflow-hidden"
     >
         <!-- Video Layer -->
-        <div class="animate-hero-bg absolute inset-0 z-0">
+        <div class="animate-hero-bg absolute inset-0 z-0 bg-black">
             <video
-                class="absolute inset-0 w-full h-full object-cover opacity-70 contrast-110 grayscale-[30%]"
+                id="hero-video-1"
+                class="absolute inset-0 w-full h-full object-cover opacity-70 contrast-110 grayscale-[30%] transition-opacity duration-1000"
                 autoplay
-                loop
                 muted
                 playsinline
                 poster={heroimg1.src}
             >
                 <source src="/media/video-hero-1.mp4" type="video/mp4" />
             </video>
-            <div class="absolute inset-0 bg-black/40"></div>
+            <video
+                id="hero-video-2"
+                class="absolute inset-0 w-full h-full object-cover opacity-0 contrast-110 grayscale-[30%] transition-opacity duration-1000"
+                muted
+                playsinline
+                poster={heroimg1.src}
+            >
+                <source src="/media/video-hero-2.mp4" type="video/mp4" />
+            </video>
+            <div class="absolute inset-0 bg-black/40 z-10"></div>
         </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const video1 = document.getElementById(
+                    "hero-video-1",
+                ) as HTMLVideoElement;
+                const video2 = document.getElementById(
+                    "hero-video-2",
+                ) as HTMLVideoElement;
+
+                if (video1 && video2) {
+                    video1.addEventListener("ended", () => {
+                        video2.currentTime = 0;
+                        video2.play();
+                        video2.classList.replace("opacity-0", "opacity-70");
+                        video1.classList.replace("opacity-70", "opacity-0");
+                    });
+
+                    video2.addEventListener("ended", () => {
+                        video1.currentTime = 0;
+                        video1.play();
+                        video1.classList.replace("opacity-0", "opacity-70");
+                        video2.classList.replace("opacity-70", "opacity-0");
+                    });
+                }
+            });
+        </script>
 
         <!-- Mesh Gradient Overlay (Animated) -->
         <div
@@ -43,11 +79,11 @@ import brochurePdf from "../../assets/about/MBC-Brochure.pdf";
 
         <!-- Vignette & Depth Gradients -->
         <div
-            class="absolute inset-0 z-30 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent"
+            class="absolute inset-0 z-30 bg-gradient-to-t from-[#050505] via-[#050505]/10 to-transparent"
         >
         </div>
         <div
-            class="absolute inset-0 z-30 bg-gradient-to-r from-[#050505] via-transparent to-[#050505]"
+            class="absolute inset-0 z-30 bg-gradient-to-r from-[#050505]/10 via-[#050505]/10 to-[#050505]/10"
         >
         </div>
         <div
