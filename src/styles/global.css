@@ -1,2 +1,15 @@
 @import "tailwindcss";
 
+@theme {
+    --color-brand: #31B0FF;
+}
+
+@layer base {
+
+    html,
+    body {
+        @apply bg-[#08080A] text-white;
+        margin: 0;
+        padding: 0;
+    }
+}

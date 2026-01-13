@@ -7,7 +7,7 @@ import Footer from "../../components/footer.astro";
 import WasapBall from "../../components/shareComponents/wasapBall.astro";
 import ServiceContactForm from "../../components/ServiceContactForm.astro";
 import StructuredData from "../../components/StructuredData.astro";
-import Breadcrumb from "../../components/Breadcrumb.astro";
+import SectionHero from "../../components/SectionHero.astro";
 import { services } from "../../consts/services";
 import { Icon } from "astro-icon/components";
 import type { ImageMetadata } from "astro";
@@ -44,89 +44,45 @@ if (!images[imagePath])
     throw new Error(
         `"${imagePath}" does not exist in glob: "src/assets/services/*.{jpeg,jpg,png,gif}"`,
     );
-const imagePromise = images[imagePath]();
+const imagePromise = await images[imagePath]();
+const imageMetadata = imagePromise.default;
 
 // SEO Meta Tags
 const serviceDescription = `${service.shortDescription} ${service.fullDescription.substring(0, 150)}...`;
-const serviceKeywords = `${service.title}, ${service.features.join(', ')}, mantenimiento predictivo, cusco, peru`;
+const serviceKeywords = `${service.title}, ${service.features.join(", ")}, mantenimiento predictivo, cusco, peru`;
 
 // Schema.org Service Data
 const serviceSchemaData = {
-  name: service.title,
-  title: service.title,
-  description: serviceDescription,
-  fullDescription: service.fullDescription,
-  features: service.features,
+    name: service.title,
+    title: service.title,
+    description: serviceDescription,
+    fullDescription: service.fullDescription,
+    features: service.features,
 };
 ---
 
 <Layout
-	title={`${service.title} | MBC Predictive`}
-	description={serviceDescription}
-	image={`/services/${imageName}.png`}
+    title={`${service.title} | MBC Predictive`}
+    description={serviceDescription}
+    image={`/services/${imageName}.png`}
 >
-	<!-- Service Schema.org -->
-	<StructuredData type="service" data={serviceSchemaData} />
+    <!-- Service Schema.org -->
+    <StructuredData type="service" data={serviceSchemaData} />
 
-	<!-- Breadcrumb -->
-	<Breadcrumb
-		items={[
-			{ name: 'Inicio', href: '/' },
-			{ name: 'Servicios', href: '/services' },
-			{ name: service.title, href: `/servicios/${service.id}`, current: true },
-		]}
-	/>
-
-    <!-- Hero Section with Background Image -->
-    <div
-        class="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-[#08080A]"
-    >
-        <!-- Background Image with Overlay -->
-        <div class="absolute inset-0 z-0">
-            <div class="animate-hero-bg absolute inset-0">
-                <Image
-                    src={imagePromise}
-                    alt={service.imagePrompt}
-                    class="w-full h-full object-cover opacity-50 mix-blend-screen"
-                    width={1920}
-                    height={1080}
-                />
-            </div>
-            <div
-                class="absolute inset-0 bg-gradient-to-b from-[#08080A] via-[#08080A]/70 to-[#08080A]"
-            >
-            </div>
-            <div
-                class="absolute inset-0 bg-gradient-to-r from-[#08080A] via-transparent to-[#08080A]"
-            >
-            </div>
-        </div>
-
-        <div class="container mx-auto px-4 z-10 relative text-center">
-            <h1
-                class="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight opacity-0 animate-blur-up"
-                style="animation-delay: 0.1s;"
-            >
-                <span
-                    class="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400"
-                    >{service.title}</span
-                >
-            </h1>
-            <p
-                class="text-xl md:text-2xl text-[#31B0FF] font-light max-w-3xl mx-auto opacity-0 animate-blur-up"
-                style="animation-delay: 0.3s;"
-            >
-                {service.shortDescription}
-            </p>
-
-            <!-- Decoration Line -->
-            <div
-                class="h-1 bg-gradient-to-r from-[#31B0FF] to-[#0099cc] rounded-full mx-auto mt-8 opacity-0 animate-grow-line"
-                style="animation-delay: 0.6s;"
-            >
-            </div>
-        </div>
-    </div>
+    <SectionHero
+        title={service.title}
+        subtitle={service.shortDescription}
+        image={imageMetadata}
+        breadcrumbItems={[
+            { name: "Inicio", href: "/" },
+            { name: "Servicios", href: "/services" },
+            {
+                name: service.title,
+                href: `/servicios/${service.id}`,
+                current: true,
+            },
+        ]}
+    />
 
     <!-- Main Content Grid -->
     <div class="relative bg-[#08080A] min-h-screen">

@@ -17,6 +17,10 @@ import BackgroundGrid from "./BackgroundGrid.astro";
     subtitle="Ingeniería especializada en confiabilidad y mantenimiento predictivo, comprometidos con la excelencia operativa."
     image={aboutHeaderBg}
     large={true}
+    breadcrumbItems={[
+      { name: "Inicio", href: "/" },
+      { name: "Nosotros", href: "/about", current: true },
+    ]}
   />
 
   <!-- Tech Grid Background Pattern -->
@@ -58,7 +62,7 @@ import BackgroundGrid from "./BackgroundGrid.astro";
           <div class="flex items-center gap-3 mb-6">
             <div class="h-px w-8 bg-[#31B0FF]"></div>
             <h2
-              class="text-[#31B0FF] font-bold text-sm uppercase tracking-widest"
+              class="text-[#31B0FF] font-bold text-[11px] uppercase tracking-[0.4em]"
             >
               Nuestra Historia
             </h2>
@@ -117,25 +121,32 @@ import BackgroundGrid from "./BackgroundGrid.astro";
       </div>
     </div>
 
-    <!-- 3. Misión y Visión - Cards Minimalistas -->
-    <div class="grid md:grid-cols-2 gap-8 mb-24 animate-item">
+    <!-- 3. Misión y Visión - Holo Estilo Sobrio -->
+    <div class="grid md:grid-cols-2 gap-8 mb-24">
       <!-- Misión -->
       <div
-        class="group relative overflow-hidden rounded-2xl bg-[#11161d] border border-white/10 p-10 hover:border-[#31B0FF]/30 transition-all duration-500 shadow-lg"
+        class="animate-item group holo-card relative bg-[#121214] rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-[0_0_50px_rgba(49,176,255,0.1)]"
       >
-        <!-- Glow effect -->
         <div
-          class="absolute -top-20 -right-20 w-40 h-40 bg-[#31B0FF]/10 rounded-full blur-[50px] group-hover:bg-[#31B0FF]/20 transition-all duration-500"
+          class="holo-border absolute inset-0 rounded-2xl z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
         >
         </div>
-        <div class="relative z-10">
+        <div
+          class="relative z-10 bg-[#121214] p-10 h-full rounded-2xl border border-white/5 group-hover:border-transparent transition-colors"
+        >
           <div
-            class="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center text-[#31B0FF] mb-8 group-hover:bg-[#31B0FF]/10 transition-colors duration-500"
+            class="w-14 h-14 rounded-xl bg-[#31B0FF]/10 flex items-center justify-center text-[#31B0FF] mb-8 group-hover:bg-[#31B0FF] group-hover:text-white transition-all duration-500 shadow-lg"
           >
-            <Icon name="lucide:target" class="w-6 h-6" />
+            <Icon name="lucide:target" class="w-7 h-7" />
           </div>
-          <h2 class="text-2xl font-bold text-white mb-4">Nuestra Misión</h2>
-          <p class="text-gray-400 leading-relaxed text-lg font-light">
+          <h2
+            class="text-2xl font-bold text-white mb-4 tracking-tight group-hover:text-[#31B0FF] transition-colors"
+          >
+            Nuestra Misión
+          </h2>
+          <p
+            class="text-gray-400 leading-relaxed text-base md:text-lg font-light"
+          >
             Brindar soluciones integrales de ingeniería de mantenimiento que
             maximicen la disponibilidad y seguridad de los activos industriales,
             fundamentadas en mediciones precisas y análisis riguroso.
@@ -145,21 +156,28 @@ import BackgroundGrid from "./BackgroundGrid.astro";
 
       <!-- Visión -->
       <div
-        class="group relative overflow-hidden rounded-2xl bg-[#11161d] border border-white/10 p-10 hover:border-[#0099cc]/30 transition-all duration-500 shadow-lg"
+        class="animate-item group holo-card relative bg-[#121214] rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-[0_0_50px_rgba(0,153,204,0.1)]"
       >
-        <!-- Glow effect -->
         <div
-          class="absolute -top-20 -right-20 w-40 h-40 bg-[#0099cc]/10 rounded-full blur-[50px] group-hover:bg-[#0099cc]/20 transition-all duration-500"
+          class="holo-border absolute inset-0 rounded-2xl z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 border-cyan-500"
         >
         </div>
-        <div class="relative z-10">
+        <div
+          class="relative z-10 bg-[#121214] p-10 h-full rounded-2xl border border-white/5 group-hover:border-transparent transition-colors"
+        >
           <div
-            class="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center text-[#0099cc] mb-8 group-hover:bg-[#0099cc]/10 transition-colors duration-500"
+            class="w-14 h-14 rounded-xl bg-[#0099cc]/10 flex items-center justify-center text-[#0099cc] mb-8 group-hover:bg-[#0099cc] group-hover:text-white transition-all duration-500 shadow-lg"
           >
-            <Icon name="lucide:eye" class="w-6 h-6" />
+            <Icon name="lucide:eye" class="w-7 h-7" />
           </div>
-          <h2 class="text-2xl font-bold text-white mb-4">Nuestra Visión</h2>
-          <p class="text-gray-400 leading-relaxed text-lg font-light">
+          <h2
+            class="text-2xl font-bold text-white mb-4 tracking-tight group-hover:text-[#0099cc] transition-colors"
+          >
+            Nuestra Visión
+          </h2>
+          <p
+            class="text-gray-400 leading-relaxed text-base md:text-lg font-light"
+          >
             Posicionarnos como el referente indiscutible en ingeniería de
             confiabilidad y monitoreo de condición, reconocidos por nuestra
             capacidad técnica y excelencia operativa.
@@ -170,62 +188,79 @@ import BackgroundGrid from "./BackgroundGrid.astro";
 
     <!-- 4. Nuestros Pilares (Cards Estáticas y Sobrias) -->
     <div class="mb-20">
-      <div class="text-center mb-16 animate-item">
+      <div class="text-center mb-20 animate-item">
         <span
-          class="text-[#31B0FF] font-bold text-sm uppercase tracking-widest mb-2 block"
+          class="text-[#31B0FF] font-bold text-[11px] uppercase tracking-[0.4em] mb-4 block"
           >Excelencia Operativa</span
         >
-        <h2 class="text-3xl lg:text-5xl font-bold text-white">
-          Nuestros Pilares
+        <h2
+          class="text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight"
+        >
+          Nuestros <span
+            class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500"
+            >Pilares</span
+          >
         </h2>
+        <div
+          class="h-px w-24 bg-gradient-to-r from-transparent via-[#31B0FF]/40 to-transparent mx-auto mt-6"
+        >
+        </div>
       </div>
 
       <div class="grid md:grid-cols-3 gap-8">
         <!-- Card 1 -->
-        <div class="animate-item group">
+        <div
+          class="animate-item group holo-card relative bg-[#121214] rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-[0_0_40px_rgba(49,176,255,0.1)]"
+        >
           <div
-            class="h-full rounded-2xl bg-[#11161d] border border-white/10 overflow-hidden hover:border-[#31B0FF]/30 transition-all duration-500 relative shadow-lg"
+            class="holo-border absolute inset-0 rounded-2xl z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
           >
-            <!-- Glow effect -->
-            <div
-              class="absolute -top-20 -right-20 w-40 h-40 bg-[#31B0FF]/10 rounded-full blur-[50px] group-hover:bg-[#31B0FF]/20 transition-all duration-500 z-0"
-            >
-            </div>
-
-            <div class="relative h-64 overflow-hidden z-10">
+          </div>
+          <div
+            class="relative z-10 bg-[#121214] h-full rounded-2xl border border-white/5 group-hover:border-transparent transition-colors flex flex-col"
+          >
+            <div class="relative h-64 overflow-hidden">
               <div
-                class="absolute inset-0 bg-gradient-to-t from-[#11161d] to-transparent z-10"
+                class="absolute inset-0 bg-gray-900/40 z-10 group-hover:bg-transparent transition-colors duration-500"
               >
               </div>
               <Image
                 src={about1}
                 alt="Servicios"
-                class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+                class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
               />
               <div class="absolute bottom-4 left-6 z-20">
-                <span class="text-5xl font-bold text-white/5 select-none"
+                <span
+                  class="text-5xl font-bold text-white/5 select-none tracking-tighter"
                   >01</span
                 >
               </div>
             </div>
-            <div class="p-8 pt-4">
+            <div class="p-8 flex-grow">
+              <div class="mb-6 flex items-center gap-4">
+                <div
+                  class="w-10 h-10 rounded-lg bg-[#31B0FF]/10 flex items-center justify-center text-[#31B0FF] group-hover:bg-[#31B0FF] group-hover:text-white transition-all duration-300"
+                >
+                  <Icon name="lucide:briefcase" class="w-5 h-5" />
+                </div>
+                <div
+                  class="h-px flex-1 bg-gradient-to-r from-[#31B0FF]/20 to-transparent"
+                >
+                </div>
+              </div>
               <h3
-                class="text-xl font-bold text-white mb-4 group-hover:text-[#31B0FF] transition-colors"
+                class="text-xl font-bold text-white mb-4 group-hover:text-[#31B0FF] transition-colors tracking-tight"
               >
                 Servicios Especializados
               </h3>
               <ul class="space-y-3 font-light">
                 <li class="flex items-center gap-3 text-gray-400">
                   <div class="w-1 h-1 rounded-full bg-[#31B0FF]"></div>
-                  <span>Mantenimiento Predictivo</span>
+                  <span class="text-sm">Predictivo & Confiabilidad</span>
                 </li>
                 <li class="flex items-center gap-3 text-gray-400">
                   <div class="w-1 h-1 rounded-full bg-[#31B0FF]"></div>
-                  <span>Ingeniería de Confiabilidad</span>
-                </li>
-                <li class="flex items-center gap-3 text-gray-400">
-                  <div class="w-1 h-1 rounded-full bg-[#31B0FF]"></div>
-                  <span>Análisis Dinámico</span>
+                  <span class="text-sm">Análisis de Vibraciones</span>
                 </li>
               </ul>
             </div>
@@ -233,37 +268,49 @@ import BackgroundGrid from "./BackgroundGrid.astro";
         </div>
 
         <!-- Card 2 -->
-        <div class="animate-item group md:-mt-8">
+        <div
+          class="animate-item group holo-card relative bg-[#121214] rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-[0_0_40px_rgba(49,176,255,0.15)] md:-mt-8"
+        >
           <div
-            class="h-full rounded-2xl bg-[#11161d] border border-[#31B0FF]/30 overflow-hidden hover:border-[#31B0FF]/50 transition-all duration-500 relative shadow-lg shadow-[#31B0FF]/10"
+            class="holo-border absolute inset-0 rounded-2xl z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
           >
-            <!-- Glow effect -->
-            <div
-              class="absolute -top-20 -right-20 w-40 h-40 bg-[#31B0FF]/10 rounded-full blur-[50px] group-hover:bg-[#31B0FF]/20 transition-all duration-500 z-0"
-            >
-            </div>
-
-            <div class="relative h-64 overflow-hidden z-10">
+          </div>
+          <div
+            class="relative z-10 bg-[#121214] h-full rounded-2xl border border-[#31B0FF]/30 group-hover:border-transparent transition-colors flex flex-col"
+          >
+            <div class="relative h-64 overflow-hidden">
               <div
-                class="absolute inset-0 bg-gradient-to-t from-[#11161d] to-transparent z-10"
+                class="absolute inset-0 bg-gray-900/40 z-10 group-hover:bg-transparent transition-colors duration-500"
               >
               </div>
               <Image
                 src={about2}
                 alt="Equipo"
-                class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+                class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
               />
               <div class="absolute bottom-4 left-6 z-20">
-                <span class="text-5xl font-bold text-[#31B0FF]/10 select-none"
+                <span
+                  class="text-5xl font-bold text-[#31B0FF]/10 select-none tracking-tighter"
                   >02</span
                 >
               </div>
             </div>
-            <div class="p-8 pt-4 relative z-10">
+            <div class="p-8 flex-grow">
+              <div class="mb-6 flex items-center gap-4">
+                <div
+                  class="w-10 h-10 rounded-lg bg-[#31B0FF]/20 flex items-center justify-center text-[#31B0FF] group-hover:bg-[#31B0FF] group-hover:text-white transition-all duration-300"
+                >
+                  <Icon name="lucide:award" class="w-5 h-5" />
+                </div>
+                <div
+                  class="h-px flex-1 bg-gradient-to-r from-[#31B0FF]/40 to-transparent"
+                >
+                </div>
+              </div>
               <h3
-                class="text-xl font-bold text-white mb-4 group-hover:text-[#31B0FF] transition-colors"
+                class="text-xl font-bold text-white mb-4 group-hover:text-[#31B0FF] transition-colors tracking-tight"
               >
-                Equipo Experto
+                Equipo Certificado
               </h3>
               <ul class="space-y-3 font-light">
                 <li class="flex items-center gap-3 text-gray-400">
@@ -271,21 +318,14 @@ import BackgroundGrid from "./BackgroundGrid.astro";
                     name="lucide:check-circle-2"
                     class="w-4 h-4 text-[#31B0FF]"
                   />
-                  <span>Certificación ISO 18436</span>
+                  <span class="text-sm">Ingenieros ISO 18436</span>
                 </li>
                 <li class="flex items-center gap-3 text-gray-400">
                   <Icon
                     name="lucide:check-circle-2"
                     class="w-4 h-4 text-[#31B0FF]"
                   />
-                  <span>Experiencia en Campo</span>
-                </li>
-                <li class="flex items-center gap-3 text-gray-400">
-                  <Icon
-                    name="lucide:check-circle-2"
-                    class="w-4 h-4 text-[#31B0FF]"
-                  />
-                  <span>Formación Continua</span>
+                  <span class="text-sm">Experiencia Multinacional</span>
                 </li>
               </ul>
             </div>
@@ -293,50 +333,58 @@ import BackgroundGrid from "./BackgroundGrid.astro";
         </div>
 
         <!-- Card 3 -->
-        <div class="animate-item group">
+        <div
+          class="animate-item group holo-card relative bg-[#121214] rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-[0_0_40px_rgba(49,176,255,0.1)]"
+        >
           <div
-            class="h-full rounded-2xl bg-[#11161d] border border-white/10 overflow-hidden hover:border-[#31B0FF]/30 transition-all duration-500 relative shadow-lg"
+            class="holo-border absolute inset-0 rounded-2xl z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
           >
-            <!-- Glow effect -->
-            <div
-              class="absolute -top-20 -right-20 w-40 h-40 bg-[#31B0FF]/10 rounded-full blur-[50px] group-hover:bg-[#31B0FF]/20 transition-all duration-500 z-0"
-            >
-            </div>
-
-            <div class="relative h-64 overflow-hidden z-10">
+          </div>
+          <div
+            class="relative z-10 bg-[#121214] h-full rounded-2xl border border-white/5 group-hover:border-transparent transition-colors flex flex-col"
+          >
+            <div class="relative h-64 overflow-hidden">
               <div
-                class="absolute inset-0 bg-gradient-to-t from-[#11161d] to-transparent z-10"
+                class="absolute inset-0 bg-gray-900/40 z-10 group-hover:bg-transparent transition-colors duration-500"
               >
               </div>
               <Image
                 src={about3}
-                alt="Soluciones"
-                class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+                alt="Tecnología"
+                class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
               />
               <div class="absolute bottom-4 left-6 z-20">
-                <span class="text-5xl font-bold text-white/5 select-none"
+                <span
+                  class="text-5xl font-bold text-white/5 select-none tracking-tighter"
                   >03</span
                 >
               </div>
             </div>
-            <div class="p-8 pt-4">
+            <div class="p-8 flex-grow">
+              <div class="mb-6 flex items-center gap-4">
+                <div
+                  class="w-10 h-10 rounded-lg bg-[#31B0FF]/10 flex items-center justify-center text-[#31B0FF] group-hover:bg-[#31B0FF] group-hover:text-white transition-all duration-300"
+                >
+                  <Icon name="lucide:cpu" class="w-5 h-5" />
+                </div>
+                <div
+                  class="h-px flex-1 bg-gradient-to-r from-[#31B0FF]/20 to-transparent"
+                >
+                </div>
+              </div>
               <h3
-                class="text-xl font-bold text-white mb-4 group-hover:text-[#31B0FF] transition-colors"
+                class="text-xl font-bold text-white mb-4 group-hover:text-[#31B0FF] transition-colors tracking-tight"
               >
-                Tecnología Avanzada
+                Tecnología 4.0
               </h3>
               <ul class="space-y-3 font-light">
                 <li class="flex items-center gap-3 text-gray-400">
                   <div class="w-1 h-1 rounded-full bg-[#31B0FF]"></div>
-                  <span>Software 4.0</span>
+                  <span class="text-sm">Sistemas de Monitoreo IoT</span>
                 </li>
                 <li class="flex items-center gap-3 text-gray-400">
                   <div class="w-1 h-1 rounded-full bg-[#31B0FF]"></div>
-                  <span>Harding Calibrado</span>
-                </li>
-                <li class="flex items-center gap-3 text-gray-400">
-                  <div class="w-1 h-1 rounded-full bg-[#31B0FF]"></div>
-                  <span>Integración IoT</span>
+                  <span class="text-sm">Software de Diagnóstico</span>
                 </li>
               </ul>
             </div>
@@ -357,6 +405,36 @@ import BackgroundGrid from "./BackgroundGrid.astro";
     .animate-item.is-visible {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    /* Holographic Border Effect */
+    @keyframes border-rotate {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .holo-border::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(
+        transparent,
+        transparent,
+        transparent,
+        #31b0ff,
+        transparent,
+        transparent,
+        transparent,
+        #22d3ee
+      );
+      animation: border-rotate 4s linear infinite;
     }
   </style>
 
