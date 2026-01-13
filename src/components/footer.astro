@@ -1,15 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import LogoMBC from "../assets/logo-mbc.svg";
-
-const services = [
-  { name: "Mantenimiento Predictivo", href: "/services#predictive" },
-  { name: "Ingeniería de Confiabilidad", href: "/services#reliability" },
-  { name: "Análisis Dinámico", href: "/services#dynamic" },
-  { name: "Evaluación Estructural", href: "/services#structural" },
-  { name: "Monitoreo de Activos", href: "/services#monitoring" },
-  { name: "Soporte Técnico", href: "/services#support" },
-];
+import { services } from "../consts/services";
 
 const company = [
   { name: "Sobre Nosotros", href: "/about" },
@@ -106,7 +98,7 @@ const legal = [
                   href={item.href}
                   class="text-gray-500 hover:text-[#31B0FF] transition-colors block text-xs"
                 >
-                  {item.name}
+                  {item.title}
                 </a>
               </li>
             ))
