@@ -1,505 +1,22 @@
 ---
-// Hero.astro
-import { Icon } from "astro-icon/components";
-import logo from "../assets/logo-1.png"
-import heroimg1 from "../assets/image-7.png";
-import heroimg2 from "../assets/image-1.jpeg";
-import heroimg3 from "../assets/image-2.jpeg";
-import heroimg4 from "../assets/image-3.jpeg";
-import heroimg5 from "../assets/image-4.jpeg";
-import antaminaLogo from "../assets/logo-antamina.jpg";
-import cerroVerdeLogo from "../assets/logo-cerro-verde.jpg";
-import antapacayLogo from "../assets/logo-antapacay.png";
-import southerLogo from "../assets/logo-souther.png";
-import backgroundExperience from "../assets/experiencia.jpg";
-// import quellavecoLogo from "../assets/logo-quellaveco.png";
-
-const slides = [
-  { src: heroimg1.src, alt: "MBC - Slide 1" },
-  { src: heroimg2.src, alt: "MBC - Slide 2" },
-  { src: heroimg3.src, alt: "MBC - Slide 3" },
-  { src: heroimg4.src, alt: "MBC - Slide 4" },
-  { src: heroimg5.src, alt: "MBC - Slide 5" },
-];
+// Hero.astro - Main Container
+import HeroMain from "./hero/HeroMain.astro";
+import HeroPillars from "./hero/HeroPillars.astro";
+import HeroClients from "./hero/HeroClients.astro";
+import HeroStats from "./hero/HeroStats.astro";
+import HeroTestimonials from "./hero/HeroTestimonials.astro";
 ---
 
-<section
-  id="main-hero"
-  class="reveal-section relative min-h-[92vh] overflow-hidden bg-gradient-to-br from-[#0a0a0c] via-[#0f1419] to-[#1a1f2e] pt-30"
->
-  {/* Background slider */}
-  <div class="absolute inset-0 z-0 overflow-hidden">
-    <div class="hero-slider absolute inset-0" data-interval="6000">
-      <video
-      class="hero-slide absolute inset-0 w-full h-full object-cover opacity-60 transition-opacity duration-500"
-      autoplay
-      loop
-      muted
-      playsinline
-      poster={heroimg1.src}
-    >
-      <source src="/media/video-hero-1.mp4" type="video/mp4" />
-    </video>
-    <video
-      class="hero-slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500"
-      autoplay
-      loop
-      muted
-      playsinline
-    >
-      <source src="/media/video-hero-2.mp4" type="video/mp4" />
-    </video>
-    </div>
-    {/* <div class="hero-slider absolute inset-0" data-interval="2500">
-    {slides.map((slide, i) => (
-      <img
-        src={slide.src}
-        alt={slide.alt}
-        class={`hero-slide absolute inset-0 h-full w-full object-cover object-center
-        transition-all duration-[1200ms] ease-in-out
-        ${i === 0 ? "opacity-80 scale-100" : "opacity-0 scale-105"}`}
-        loading={i === 0 ? "eager" : "lazy"}
-        decoding="async"
-      />
-    ))}
-  </div> */}
-    {/* Dark overlay + left focus */}
-    <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/25"></div>
-    {/* Subtle tech haze */}
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_25%_35%,rgba(49,176,255,0.14),transparent_45%)]"></div>
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_80%_40%,rgba(0,153,204,0.10),transparent_40%)]"></div>
-  </div>
+<!-- Compose the Hero Section -->
+<HeroMain />
+<HeroPillars />
+<HeroClients />
+<HeroStats />
+<HeroTestimonials />
 
-  {/* Decorative blobs */}
-  <div class="pointer-events-none absolute -top-24 -left-24 h-80 w-80 rounded-full blur-3xl opacity-30 bg-[#31B0FF]/30"></div>
-  <div class="pointer-events-none absolute -bottom-24 right-0 h-96 w-96 rounded-full blur-3xl opacity-25 bg-[#0099cc]/25"></div>
-
-  <div class="container mx-auto px-6 relative z-10">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-      {/* Copy */}
-      <div class="lg:col-span-7">
-        <div class="animate-item inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#31B0FF]/30 bg-[#11161d]/80 backdrop-blur-sm">
-          <span class="relative flex h-2 w-2">
-            <span class="absolute inline-flex h-full w-full rounded-full bg-[#31B0FF] opacity-75 animate-ping"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-[#31B0FF]"></span>
-          </span>
-          <span class="text-sm text-gray-200/90">Monitoreo • Vibraciones • Ingeniería de datos</span>
-        </div>
-
-        <h1 class="animate-item mt-6 text-white font-extrabold tracking-tight text-4xl md:text-5xl lg:text-6xl leading-tight">
-          LÍDERES EN MANTENIMIENTO<br />
-          PREDICTIVO E INGENIERÍA DE<br />
-          DATOS EN PERÚ
-        </h1>
-
-        <p class="animate-item mt-5 max-w-xl text-gray-200/85 leading-relaxed">
-          Evite fallas catastróficas en activos críticos. Monitoreo avanzado y software personalizado
-          para entornos industriales exigentes (minería, energía e infraestructura).
-        </p>
-
-        <div class="animate-item mt-8 flex flex-col sm:flex-row gap-4">
-          <a
-            href="contact"
-            class="group relative px-8 py-3 bg-gradient-to-r from-[#31B0FF] to-[#0099cc] hover:from-[#2998df] hover:to-[#0080aa] text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_24px_rgba(49,176,255,0.30)] overflow-hidden inline-flex items-center justify-center"
-          >
-            <span class="relative z-10 flex items-center">
-              <Icon name="lucide:clipboard-check" class="w-5 h-5 mr-2" />
-              Solicita consultoría técnica
-            </span>
-            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 group-hover:translate-x-full transition-transform duration-700"></div>
-          </a>
-
-          <a
-            href="#servicios"
-            class="group px-8 py-3 rounded-lg border border-[#31B0FF]/30 bg-[#11161d]/50 backdrop-blur-sm text-gray-100 font-medium transition-all duration-300 hover:border-[#31B0FF]/50 hover:bg-[#11161d]/80 hover:shadow-[0_0_18px_rgba(49,176,255,0.18)] inline-flex items-center justify-center"
-          >
-            <Icon name="lucide:layers" class="w-5 h-5 mr-2 text-[#31B0FF]" />
-            Ver servicios
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- body content -->
-<section
-  id="ingenieria-confiabilidad"
-  class="reveal-section relative py-20 bg-[#08080A] overflow-hidden"
->
-  <!-- Tech Grid Background Pattern -->
-  <div
-    class="absolute inset-0 z-0 pointer-events-none opacity-[0.15]"
-    style="background-image: radial-gradient(#31B0FF 1px, transparent 1px); background-size: 30px 30px; mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);"
-  >
-  </div>
-
-  <!-- Background Elements -->
-  <div class="absolute inset-0 z-0 pointer-events-none">
-    <div
-      class="absolute top-0 right-0 w-[600px] h-[500px] bg-[#31B0FF]/5 blur-[120px] rounded-full"
-    >
-    </div>
-    <div
-      class="absolute bottom-0 left-0 w-[500px] h-[400px] bg-[#0099cc]/5 blur-[100px] rounded-full"
-    >
-    </div>
-  </div>
-
-  <div class="container mx-auto px-6 text-center max-w-5xl relative z-10">
-
-    <!-- Logo -->
-    <div class="animate-item flex justify-center mb-6">
-      <img
-        src={logo.src}
-        alt="MBC Ingeniería y Confiabilidad"
-        class="h-25 opacity-90"
-      />
-    </div>
-
-    <!-- Título -->
-    <h2 class="animate-item text-white text-3xl md:text-4xl font-bold tracking-tight">
-      INGENIERÍA Y CONFIABILIDAD EN EL<br class="hidden md:block" />
-      CORAZÓN DE LA INDUSTRIA
-    </h2>
-
-    <!-- Descripción -->
-    <p class="animate-item mt-6 text-gray-300 text-base md:text-lg leading-relaxed">
-      En MBC, nos especializamos en llevar soluciones de mantenimiento predictivo a donde otros no llegan.
-      Mediante monitoreo avanzado y software a medida, transformamos datos complejos de activos críticos
-      en información estratégica, optimizando el rendimiento y garantizando la continuidad operativa
-      en sectores como minería, energía e infraestructura.
-    </p>
-
-    <!-- Separador -->
-    <div class="animate-item mt-10 flex justify-center">
-      <span class="h-[2px] w-24 bg-gradient-to-r from-[#31B0FF] to-[#0099cc] rounded-full"></span>
-    </div>
-
-    <!-- Pilares -->
-    <div class="animate-item mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-
-      <article class="h-full flex flex-col rounded-2xl bg-[#11161d] border border-white/10 overflow-hidden hover:border-[#31B0FF]/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg relative group">
-        <div class="absolute -top-20 -right-20 w-40 h-40 bg-[#31B0FF]/10 rounded-full blur-[50px] group-hover:bg-[#31B0FF]/20 transition-all duration-500 pointer-events-none z-0"></div>
-        
-        <div class="w-full h-56 relative overflow-hidden z-10">
-          <div class="absolute inset-0 bg-gradient-to-t from-[#11161d] via-[#11161d]/20 to-transparent z-10"></div>
-          <img src={heroimg2.src} alt="Monitoreo avanzado" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
-          <div class="absolute bottom-4 left-6 z-20">
-            <span class="text-5xl font-bold text-white/10 select-none tracking-tighter">01</span>
-          </div>
-        </div>
-
-        <div class="p-8 pt-4 flex-grow flex flex-col relative z-20">
-          <h3 class="text-xl font-bold text-white mb-3 group-hover:text-[#31B0FF] transition-colors flex items-center gap-2">
-            <Icon name="lucide:activity" class="w-5 h-5 text-[#31B0FF]" />
-            Monitoreo avanzado
-          </h3>
-          <p class="text-gray-400 text-sm leading-relaxed mb-0 border-t border-white/5 pt-4 flex-grow">
-            Medición de vibraciones, esfuerzos y respuesta estructural
-            para la detección temprana de fallas y condiciones anómalas.
-          </p>
-        </div>
-      </article>
-
-      <article class="h-full flex flex-col rounded-2xl bg-[#11161d] border border-white/10 overflow-hidden hover:border-[#31B0FF]/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg relative group">
-        <div class="absolute -top-20 -right-20 w-40 h-40 bg-[#31B0FF]/10 rounded-full blur-[50px] group-hover:bg-[#31B0FF]/20 transition-all duration-500 pointer-events-none z-0"></div>
-        
-        <div class="w-full h-56 relative overflow-hidden z-10">
-          <div class="absolute inset-0 bg-gradient-to-t from-[#11161d] via-[#11161d]/20 to-transparent z-10"></div>
-          <img src={heroimg3.src} alt="Ingeniería aplicada" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
-          <div class="absolute bottom-4 left-6 z-20">
-            <span class="text-5xl font-bold text-white/10 select-none tracking-tighter">02</span>
-          </div>
-        </div>
-
-        <div class="p-8 pt-4 flex-grow flex flex-col relative z-20">
-          <h3 class="text-xl font-bold text-white mb-3 group-hover:text-[#31B0FF] transition-colors flex items-center gap-2">
-            <Icon name="lucide:settings-2" class="w-5 h-5 text-[#31B0FF]" />
-            Ingeniería aplicada
-          </h3>
-          <p class="text-gray-400 text-sm leading-relaxed mb-0 border-t border-white/5 pt-4 flex-grow">
-            Análisis dinámico, OMA, FEM y validación experimental
-            orientados a confiabilidad, fatiga y vida útil de activos.
-          </p>
-        </div>
-      </article>
-
-      <article class="h-full flex flex-col rounded-2xl bg-[#11161d] border border-white/10 overflow-hidden hover:border-[#31B0FF]/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg relative group">
-        <div class="absolute -top-20 -right-20 w-40 h-40 bg-[#31B0FF]/10 rounded-full blur-[50px] group-hover:bg-[#31B0FF]/20 transition-all duration-500 pointer-events-none z-0"></div>
-        
-        <div class="w-full h-56 relative overflow-hidden z-10">
-          <div class="absolute inset-0 bg-gradient-to-t from-[#11161d] via-[#11161d]/20 to-transparent z-10"></div>
-          <img src={heroimg4.src} alt="Decisiones basadas en datos" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
-          <div class="absolute bottom-4 left-6 z-20">
-            <span class="text-5xl font-bold text-white/10 select-none tracking-tighter">03</span>
-          </div>
-        </div>
-
-        <div class="p-8 pt-4 flex-grow flex flex-col relative z-20">
-          <h3 class="text-xl font-bold text-white mb-3 group-hover:text-[#31B0FF] transition-colors flex items-center gap-2">
-            <Icon name="lucide:database" class="w-5 h-5 text-[#31B0FF]" />
-            Decisiones basadas en datos
-          </h3>
-          <p class="text-gray-400 text-sm leading-relaxed mb-0 border-t border-white/5 pt-4 flex-grow">
-            Desarrollo de software y modelos analíticos que convierten
-            señales complejas en indicadores claros para operación y mantenimiento.
-          </p>
-        </div>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-<section class="reveal-section relative py-24 bg-[#08080A] overflow-hidden">
-  {/* Video Background */}
-  <div class="absolute inset-0 z-0">
-    <video
-      class="w-full h-full object-cover opacity-20 mining-video"
-      autoplay
-      loop
-      muted
-      playsinline
-    >
-      <source src="/media/partners-1.mp4" type="video/mp4" />
-    </video>
-    <div class="absolute inset-0 bg-[#08080A]/80"></div>
-  </div>
-
-  {/* Background Glow */}
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-[#31B0FF]/5 blur-[120px] rounded-full pointer-events-none z-0"></div>
-
-  <div class="container mx-auto px-6 relative z-10">
-    <div class="animate-item text-center max-w-3xl mx-auto mb-16">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#31B0FF]/10 border border-[#31B0FF]/20 mb-6">
-        <span class="w-2 h-2 rounded-full bg-[#31B0FF] animate-pulse"></span>
-        <span class="text-xs font-medium text-[#31B0FF] uppercase tracking-wide">Trayectoria Comprobada</span>
-      </div>
-      
-      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 tracking-tight">
-        Experiencia en la Gran Minería
-      </h2>
-      
-      <p class="text-gray-400 text-lg leading-relaxed">
-        Nuestro equipo ha desplegado soluciones de ingeniería dinámica y confiabilidad 
-        en las operaciones más exigentes del Perú.
-      </p>
-    </div>
-
-    <div class="animate-item flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-      <div class="flex flex-col lg:flex-row items-center gap-6 lg:gap-10 shrink-0">
-        <h3 class="text-2xl font-bold text-white text-center lg:text-right">
-          Nuestros <br class="hidden lg:block" /> Socios
-        </h3>
-        <div class="hidden lg:block w-px h-20 bg-gradient-to-b from-transparent via-[#31B0FF]/40 to-transparent"></div>
-        <div class="lg:hidden w-20 h-px bg-gradient-to-r from-transparent via-[#31B0FF]/40 to-transparent"></div>
-      </div>
-
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 w-full">
-      {[
-        { img: antaminaLogo, alt: "Antamina" },
-        { img: cerroVerdeLogo, alt: "Cerro Verde" },
-        { img: antapacayLogo, alt: "Antapacay" },
-        { img: southerLogo, alt: "Southern Peru" },
-      ].map((brand) => (
-        <div class="group flex items-center justify-center">
-          <img
-            src={brand.img.src}
-            alt={brand.alt}
-            class="h-24 w-auto object-contain opacity-50 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110"
-          />
-        </div>
-      ))}
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="reveal-section relative py-20 overflow-hidden">
-  <div class="absolute inset-0 z-0">
-    <img src={backgroundExperience.src} alt="" class="w-full h-full object-cover" />
-    <div class="absolute inset-0 bg-[#071420]/50"></div>
-  </div>
-  <div class="container mx-auto px-6 relative z-10">
-    <div class="animate-item grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-
-      {[
-        { n: "10+", l: "Años de experiencia", i: "lucide:award" },
-        { n: "150+", l: "Activos analizados", i: "lucide:bar-chart-2" },
-        { n: "30+", l: "Proyectos industriales", i: "lucide:briefcase" },
-        { n: "5", l: "Sectores productivos", i: "lucide:layers" },
-      ].map((item, index) => (
-        <div class="group relative p-4 rounded-2xl hover:bg-white/5 transition-colors duration-300">
-          <div class="flex justify-center mb-4">
-            <div class="relative p-4 rounded-full bg-[#31B0FF]/10 text-[#31B0FF] group-hover:bg-[#31B0FF]/20 transition-all duration-500 group-hover:shadow-[0_0_20px_rgba(49,176,255,0.4)] animate-float" style={`animation-delay: ${index * 0.5}s`}>
-              <Icon 
-                name={item.i} 
-                class={`w-10 h-10 transition-transform duration-500 group-hover:scale-110 icon-animated ${index % 2 === 0 ? 'group-hover:rotate-12' : 'group-hover:-rotate-12'}`} 
-              />
-            </div>
-          </div>
-          <p class="text-4xl font-bold bg-gradient-to-r from-[#31B0FF] to-[#0099cc] bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300">
-            {item.n}
-          </p>
-          <p class="mt-2 text-gray-300 text-sm font-medium group-hover:text-white transition-colors">
-            {item.l}
-          </p>
-        </div>
-      ))}
-
-    </div>
-  </div>
-</section>
-
-<section class="reveal-section relative bg-[#08080A] py-20 overflow-hidden">
-  <!-- Tech Grid Background Pattern -->
-  <div
-    class="absolute inset-0 z-0 pointer-events-none opacity-[0.15]"
-    style="background-image: radial-gradient(#31B0FF 1px, transparent 1px); background-size: 30px 30px; mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);"
-  >
-  </div>
-
-  <!-- Background Elements -->
-  <div class="absolute inset-0 z-0 pointer-events-none">
-    <div
-      class="absolute top-0 right-0 w-[600px] h-[500px] bg-[#31B0FF]/5 blur-[120px] rounded-full"
-    >
-    </div>
-    <div
-      class="absolute bottom-0 left-0 w-[500px] h-[400px] bg-[#0099cc]/5 blur-[100px] rounded-full"
-    >
-    </div>
-  </div>
-
-  <div class="container mx-auto px-6 relative z-10">
-    <h2 class="animate-item text-white text-3xl font-semibold mb-12 text-center">
-      Opiniones de clientes
-    </h2>
-
-    <div class="animate-item relative max-w-4xl mx-auto">
-      <!-- Slider Container -->
-      <div class="overflow-hidden rounded-2xl bg-[#11161d] border border-white/10 relative z-10 shadow-lg">
-        <div class="testimonial-track flex transition-transform duration-500 ease-out">
-          {[
-            {
-              text: "Análisis riguroso y recomendaciones claras que mejoraron nuestra confiabilidad operativa en molinos.",
-              author: "Ing. Roberto Sanchez",
-              role: "Gerente de Mantenimiento",
-              img: heroimg2
-            },
-            {
-              text: "Excelente interpretación de vibraciones y comportamiento estructural. Solucionaron un problema crónico.",
-              author: "Ing. Maria Campos",
-              role: "Superintendente de Planta",
-              img: heroimg3
-            },
-            {
-              text: "Enfoque técnico sólido y acompañamiento continuo durante todo el proyecto de monitoreo.",
-              author: "Ing. Carlos Mendoza",
-              role: "Jefe de Confiabilidad",
-              img: heroimg4
-            },
-          ].map((t) => (
-            <div class="testimonial-slide w-full flex-shrink-0 p-8 md:p-12 flex flex-col md:flex-row items-center gap-8">
-              <div class="relative shrink-0">
-                <div class="w-24 h-24 rounded-full p-1 bg-gradient-to-br from-[#31B0FF] to-[#0099cc]">
-                  <img 
-                    src={t.img.src} 
-                    alt={t.author} 
-                    class="w-full h-full rounded-full object-cover border-2 border-[#0a0a0c]"
-                  />
-                </div>
-                <div class="absolute -bottom-2 -right-2 bg-[#0a0a0c] rounded-full p-1.5 border border-gray-700">
-                   <Icon name="lucide:quote" class="w-4 h-4 text-[#31B0FF]" />
-                </div>
-              </div>
-              
-              <div class="text-center md:text-left flex-1">
-                <p class="text-lg md:text-xl text-gray-200 italic mb-6 leading-relaxed">
-                  "{t.text}"
-                </p>
-                <div>
-                  <h4 class="text-white font-bold text-lg">{t.author}</h4>
-                  <p class="text-[#31B0FF] text-sm font-medium">{t.role}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <!-- Navigation Buttons -->
-      <button class="test-prev absolute top-1/2 -left-4 md:-left-16 -translate-y-1/2 p-3 rounded-full bg-[#11161d] border border-white/10 text-white hover:bg-[#31B0FF]/20 hover:border-[#31B0FF]/50 transition-all z-20 group">
-        <Icon name="lucide:chevron-left" class="w-6 h-6 group-hover:scale-110 transition-transform" />
-      </button>
-      <button class="test-next absolute top-1/2 -right-4 md:-right-16 -translate-y-1/2 p-3 rounded-full bg-[#11161d] border border-white/10 text-white hover:bg-[#31B0FF]/20 hover:border-[#31B0FF]/50 transition-all z-20 group">
-        <Icon name="lucide:chevron-right" class="w-6 h-6 group-hover:scale-110 transition-transform" />
-      </button>
-      
-      <!-- Dots Indicators -->
-      <div class="flex justify-center gap-2 mt-8">
-        {[0, 1, 2].map((i) => (
-          <button class="test-dot w-3 h-3 rounded-full bg-gray-700 hover:bg-[#31B0FF]/50 transition-colors" data-index={i} aria-label={`Ir a testimonio ${i + 1}`}></button>
-        ))}
-      </div>
-    </div>
-  </div>
-</section>
-
-  <style>
-    .metric-card {
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.1);
-      background: #11161d;
-      padding: 32px 16px;
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    }
-    .metric-number {
-      font-size: 3rem;
-      font-weight: 800;
-      background: linear-gradient(90deg, #31B0FF, #0099cc);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .metric-label {
-      margin-top: 8px;
-      color: #cbd5e1;
-      font-size: 0.95rem;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-    .animate-float {
-      animation: float 4s ease-in-out infinite;
-    }
-
-    /* Animación de trazado (drawing effect) para los iconos */
-    .icon-animated :global(path),
-    .icon-animated :global(circle),
-    .icon-animated :global(rect),
-    .icon-animated :global(line),
-    .icon-animated :global(polyline) {
-      stroke-dasharray: 100;
-      stroke-dashoffset: 100;
-      animation: drawIcon 6s ease-in-out infinite;
-    }
-
-    @keyframes drawIcon {
-      0% { stroke-dashoffset: 100; opacity: 0; }
-      10% { opacity: 1; }
-      25% { stroke-dashoffset: 0; }
-      80% { stroke-dashoffset: 0; opacity: 1; }
-      100% { stroke-dashoffset: 0; opacity: 0; }
-    }
-  </style>
-
-
-<style>
-
-  /* Igual lógica que tu footer: reveal por is-visible */
+<!-- Global Styles for Hero Animations -->
+<style is:global>
+  /* Reveal Section Logic */
   .animate-item {
     opacity: 0;
     transform: translateY(2rem);
@@ -507,130 +24,59 @@ const slides = [
     transition-duration: 0.8s;
     transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
+
   .reveal-section.is-visible .animate-item {
     opacity: 1;
     transform: translateY(0);
   }
 
-  /* Stagger */
-  .reveal-section.is-visible .animate-item:nth-child(1) { transition-delay: 0.10s; }
-  .reveal-section.is-visible .animate-item:nth-child(2) { transition-delay: 0.18s; }
-  .reveal-section.is-visible .animate-item:nth-child(3) { transition-delay: 0.26s; }
-  .reveal-section.is-visible .animate-item:nth-child(4) { transition-delay: 0.34s; }
-  .reveal-section.is-visible .animate-item:nth-child(5) { transition-delay: 0.42s; }
 
-  .mini-row{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding: 10px 12px;
-    border-radius: 12px;
-    border: 1px solid rgba(148,163,184,0.15);
-    background: rgba(2,6,23,0.25);
+  /* Stagger Delays */
+  .reveal-section.is-visible .animate-item:nth-child(1) {
+    transition-delay: 0.1s;
   }
-  
+  .reveal-section.is-visible .animate-item:nth-child(2) {
+    transition-delay: 0.2s;
+  }
+  .reveal-section.is-visible .animate-item:nth-child(3) {
+    transition-delay: 0.3s;
+  }
+  .reveal-section.is-visible .animate-item:nth-child(4) {
+    transition-delay: 0.4s;
+  }
+  .reveal-section.is-visible .animate-item:nth-child(5) {
+    transition-delay: 0.5s;
+  }
+
+  /* Utility Animations */
+  @keyframes shine {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  .animate-shine {
+    animation: shine 1.5s infinite;
+  }
 </style>
 
+<!-- Global Script for Reveal Logic -->
 <script>
-  // Auto-reveal al entrar en viewport (igual idea del footer con is-visible)
-  const sections = document.querySelectorAll(".reveal-section");
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-        }
-      });
-    },
-    { threshold: 0.15 }
-  );
-  sections.forEach((section) => io.observe(section));
-</script>
-
-<script>
-  function setVideoSpeed() {
-    const video = document.querySelector(".mining-video") as HTMLVideoElement;
-    if (video) {
-      video.playbackRate = 0.7;
-    }
-  }
-  document.addEventListener("DOMContentLoaded", setVideoSpeed);
-  document.addEventListener("astro:page-load", setVideoSpeed);
-
-  function initHeroSlider() {
-    const slider = document.querySelector(".hero-slider") as HTMLElement | null;
-    if (!slider) return;
-
-    if (slider.dataset.started === "1") return;
-    slider.dataset.started = "1";
-
-    const slides = Array.from(
-      slider.querySelectorAll(".hero-slide")
-    ) as HTMLElement[];
-
-    const interval = Number(slider.dataset.interval || 5000);
-    let current = 0;
-
-    if (slides.length > 1) {
-      setInterval(() => {
-        slides[current].classList.remove("opacity-60");
-        slides[current].classList.add("opacity-0");
-
-        current = (current + 1) % slides.length;
-
-        slides[current].classList.remove("opacity-0");
-        slides[current].classList.add("opacity-60");
-      }, interval);
-    }
+  function initReveal() {
+    const sections = document.querySelectorAll(".reveal-section");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    sections.forEach((section) => io.observe(section));
   }
 
-  document.addEventListener("DOMContentLoaded", initHeroSlider);
-  document.addEventListener("astro:page-load", initHeroSlider);
-
-  function initTestimonialSlider() {
-    const track = document.querySelector('.testimonial-track');
-    const slides = document.querySelectorAll('.testimonial-slide');
-    const nextBtn = document.querySelector('.test-next');
-    const prevBtn = document.querySelector('.test-prev');
-    const dots = document.querySelectorAll('.test-dot');
-
-    if (!track || slides.length === 0) return;
-
-    let currentIndex = 0;
-
-    const updateSlide = (index: number) => {
-      currentIndex = index;
-      if (track instanceof HTMLElement) track.style.transform = `translateX(-${currentIndex * 100}%)`;
-      
-      dots.forEach((dot, i) => {
-        if (i === currentIndex) {
-          dot.classList.add('bg-[#31B0FF]');
-          dot.classList.remove('bg-gray-700');
-        } else {
-          dot.classList.remove('bg-[#31B0FF]');
-          dot.classList.add('bg-gray-700');
-        }
-      });
-    };
-
-    nextBtn?.addEventListener('click', () => {
-      const nextIndex = (currentIndex + 1) % slides.length;
-      updateSlide(nextIndex);
-    });
-
-    prevBtn?.addEventListener('click', () => {
-      const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
-      updateSlide(prevIndex);
-    });
-
-    dots.forEach((dot, i) => {
-      dot.addEventListener('click', () => updateSlide(i));
-    });
-    
-    // Init
-    updateSlide(0);
-  }
-  
-  document.addEventListener("DOMContentLoaded", initTestimonialSlider);
-  document.addEventListener("astro:page-load", initTestimonialSlider);
+  // Run on load and on Astro transitions
+  document.addEventListener("DOMContentLoaded", initReveal);
+  document.addEventListener("astro:page-load", initReveal);
 </script>

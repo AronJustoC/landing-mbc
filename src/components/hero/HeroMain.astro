@@ -1,0 +1,284 @@
+---
+import { Icon } from "astro-icon/components";
+import logo from "../../assets/logo-1.png";
+import heroimg1 from "../../assets/image-7.png";
+import brochurePdf from "../../assets/about/MBC-Brochure.pdf";
+---
+
+<section
+    id="main-hero"
+    class="relative min-h-[95vh] flex items-center justify-center overflow-hidden bg-[#050505] pt-20"
+>
+    <!-- ultra-premium-bg: Video + Mesh Gradient + Noise -->
+    <div
+        class="absolute inset-0 z-0 select-none pointer-events-none overflow-hidden"
+    >
+        <!-- Video Layer -->
+        <div class="animate-hero-bg absolute inset-0 z-0 bg-black">
+            <video
+                id="hero-video-1"
+                class="absolute inset-0 w-full h-full object-cover opacity-70 contrast-110 grayscale-[30%] transition-opacity duration-1000"
+                autoplay
+                muted
+                playsinline
+                poster={heroimg1.src}
+            >
+                <source src="/media/video-hero-1.mp4" type="video/mp4" />
+            </video>
+            <video
+                id="hero-video-2"
+                class="absolute inset-0 w-full h-full object-cover opacity-0 contrast-110 grayscale-[30%] transition-opacity duration-1000"
+                muted
+                playsinline
+                poster={heroimg1.src}
+            >
+                <source src="/media/video-hero-2.mp4" type="video/mp4" />
+            </video>
+            <div class="absolute inset-0 bg-black/40 z-10"></div>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const video1 = document.getElementById(
+                    "hero-video-1",
+                ) as HTMLVideoElement;
+                const video2 = document.getElementById(
+                    "hero-video-2",
+                ) as HTMLVideoElement;
+
+                if (video1 && video2) {
+                    video1.addEventListener("ended", () => {
+                        video2.currentTime = 0;
+                        video2.play();
+                        video2.classList.replace("opacity-0", "opacity-70");
+                        video1.classList.replace("opacity-70", "opacity-0");
+                    });
+
+                    video2.addEventListener("ended", () => {
+                        video1.currentTime = 0;
+                        video1.play();
+                        video1.classList.replace("opacity-0", "opacity-70");
+                        video2.classList.replace("opacity-70", "opacity-0");
+                    });
+                }
+            });
+        </script>
+
+        <!-- Mesh Gradient Overlay (Animated) -->
+        <div
+            class="absolute inset-0 z-10 opacity-30 mix-blend-overlay mesh-gradient-anim"
+        >
+        </div>
+
+        <!-- Noise Texture for "Film Grain" feel -->
+        <div
+            class="absolute inset-0 z-20 opacity-[0.03] pointer-events-none mix-blend-overlay"
+            style="background-image: url('https://grainy-gradients.vercel.app/noise.svg'); background-size: 150px;"
+        >
+        </div>
+
+        <!-- Vignette & Depth Gradients -->
+        <div
+            class="absolute inset-0 z-30 bg-gradient-to-t from-[#050505] via-[#050505]/10 to-transparent"
+        >
+        </div>
+        <div
+            class="absolute inset-0 z-30 bg-gradient-to-r from-[#050505]/10 via-[#050505]/10 to-[#050505]/10"
+        >
+        </div>
+        <div
+            class="absolute inset-0 z-30 bg-[radial-gradient(circle_at_center,transparent_10%,#050505_120%)]"
+        >
+        </div>
+    </div>
+
+    <div class="container mx-auto px-6 relative z-40 text-center">
+        <!-- Logo Hero -->
+        <div
+            class="flex flex-col justify-center items-center mb-8 opacity-0 animate-blur-up"
+            style="animation-delay: 0.1s;"
+        >
+            <img
+                src={logo.src}
+                alt="MBC Predictive"
+                class="h-10 md:h-16 w-auto object-contain drop-shadow-[0_5px_15px_rgba(0,0,0,0.9)] hover:drop-shadow-[0_8px_25px_rgba(0,0,0,0.4)] transition-all duration-500"
+            />
+
+            <h1
+                class="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-8 tracking-tighter opacity-0 animate-blur-up leading-tight drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]"
+                style="animation-delay: 0.3s;"
+            >
+                <span
+                    class="block bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-gray-300 drop-shadow-2xl"
+                >
+                    INGENIERÍA DE
+                </span>
+                <span
+                    class="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-gradient-x bg-[length:200%_auto] drop-shadow-lg"
+                >
+                    MANTENIMIENTO
+                </span>
+                <span
+                    class="block text-2xl md:text-4xl lg:text-5xl font-bold text-gray-200 mt-2 tracking-wide text-glow-subtle"
+                >
+                    PARA LA CONFIABILIDAD DE ACTIVOS
+                </span>
+            </h1>
+
+            <p
+                class="text-lg md:text-xl text-gray-200 font-light max-w-3xl mx-auto opacity-0 animate-blur-up mb-12 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] leading-relaxed"
+                style="animation-delay: 0.5s;"
+            >
+                Brindamos soluciones integrales orientadas a maximizar la <strong
+                    class="text-white font-medium drop-shadow-md"
+                    >disponibilidad, seguridad y vida útil</strong
+                > de sus activos industriales mediante estrategias basadas en datos
+                reales.
+            </p>
+
+            <!-- Decoration Line -->
+            <div
+                class="h-px w-32 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent mx-auto mb-12 opacity-0 animate-grow-line"
+                style="animation-delay: 0.7s;"
+            >
+            </div>
+
+            <!-- Buttons Area -->
+            <div
+                class="flex flex-col sm:flex-row gap-5 justify-center opacity-0 animate-blur-up items-center"
+                style="animation-delay: 0.9s;"
+            >
+                <!-- Primary CTA -->
+                <a
+                    href="contact"
+                    class="group relative px-8 py-4 bg-white text-black font-bold rounded-full overflow-hidden flex items-center gap-3 transition-transform duration-300 hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(34,211,238,0.4)]"
+                >
+                    <span class="relative z-10 tracking-tight"
+                        >SOLICITA CONSULTORÍA</span
+                    >
+                    <Icon
+                        name="lucide:arrow-right"
+                        class="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:translate-x-1"
+                    />
+                    <div
+                        class="absolute inset-0 bg-gradient-to-r from-cyan-100 via-white to-cyan-100 opacity-0 group-hover:opacity-50 transition-opacity duration-300"
+                    >
+                    </div>
+                </a>
+
+                <!-- Secondary CTA (Brochure) -->
+                <a
+                    href={brochurePdf}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="group px-8 py-4 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-white font-medium transition-all duration-300 hover:bg-white/10 hover:border-white/30 flex items-center gap-3 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+                >
+                    <Icon
+                        name="lucide:download"
+                        class="w-5 h-5 text-gray-300 transition-colors duration-300 group-hover:text-white"
+                    />
+                    <span
+                        class="text-gray-200 transition-colors duration-300 group-hover:text-white"
+                        >Descargar Brochure</span
+                    >
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    @keyframes hero-move-scale {
+        0% {
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    @keyframes blur-up {
+        0% {
+            opacity: 0;
+            transform: translateY(30px);
+            filter: blur(10px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+    }
+
+    @keyframes grow-line {
+        0% {
+            width: 0;
+            opacity: 0;
+        }
+        100% {
+            width: 8rem;
+            opacity: 0.8;
+        }
+    }
+
+    .animate-hero-bg {
+        animation: hero-move-scale 20s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        will-change: transform;
+    }
+
+    .animate-blur-up {
+        animation: blur-up 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        will-change: opacity, transform, filter;
+    }
+
+    .animate-grow-line {
+        animation: grow-line 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        will-change: width, opacity;
+    }
+
+    /* Ultra-Premium Animations */
+    @keyframes gradient-x {
+        0%,
+        100% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+    }
+    .animate-gradient-x {
+        animation: gradient-x 6s ease infinite;
+    }
+
+    .mesh-gradient-anim {
+        background:
+            radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
+            radial-gradient(
+                at 50% 0%,
+                hsla(225, 39%, 30%, 1) 0,
+                transparent 50%
+            ),
+            radial-gradient(
+                at 100% 0%,
+                hsla(339, 49%, 30%, 1) 0,
+                transparent 50%
+            );
+        filter: blur(80px);
+        animation: mesh-pulse 10s ease-in-out infinite alternate;
+    }
+
+    @keyframes mesh-pulse {
+        0% {
+            opacity: 0.3;
+            transform: scale(1);
+        }
+        100% {
+            opacity: 0.5;
+            transform: scale(1.1);
+        }
+    }
+
+    .text-glow-subtle {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+</style>

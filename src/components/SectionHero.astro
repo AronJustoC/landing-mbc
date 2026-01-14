@@ -1,5 +1,12 @@
 ---
 import { Image } from "astro:assets";
+import Breadcrumb from "./Breadcrumb.astro";
+
+interface BreadcrumbItem {
+    name: string;
+    href: string;
+    current?: boolean;
+}
 
 interface Props {
     title: string;
@@ -7,14 +14,22 @@ interface Props {
     image: ImageMetadata;
     id?: string;
     large?: boolean; // Option to make it a full page hero vs section header
+    breadcrumbItems?: BreadcrumbItem[];
 }
 
-const { title, subtitle, image, id, large = true } = Astro.props;
+const {
+    title,
+    subtitle,
+    image,
+    id,
+    large = true,
+    breadcrumbItems,
+} = Astro.props;
 ---
 
 <div
     id={id}
-    class={`relative flex items-center justify-center overflow-hidden bg-[#08080A] ${large ? "min-h-[50vh] md:min-h-[60vh]" : "min-h-[40vh]"}`}
+    class={`relative flex flex-col items-center justify-center overflow-hidden bg-[#08080A] ${large ? "min-h-[50vh] md:min-h-[60vh] pt-32 pb-20" : "min-h-[40vh] pt-28 pb-16"}`}
 >
     <!-- Background Image with Overlay -->
     <div class="absolute inset-0 z-0">
@@ -37,7 +52,15 @@ const { title, subtitle, image, id, large = true } = Astro.props;
         </div>
     </div>
 
-    <div class="container mx-auto px-4 z-10 relative text-center">
+    {
+        breadcrumbItems && (
+            <div class="container mx-auto px-4 z-20 relative w-full mb-auto">
+                <Breadcrumb items={breadcrumbItems} />
+            </div>
+        )
+    }
+
+    <div class="container mx-auto px-4 z-10 relative text-center mt-auto">
         <h2
             class="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight opacity-0 animate-blur-up"
             style="animation-delay: 0.1s;"

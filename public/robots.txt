@@ -1,0 +1,15 @@
+# Robots.txt para MBC Predictive
+# Permitir a todos los crawlers
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://mbcpredictive.com/sitemap.xml
+
+# Disallow private areas (si es necesario en el futuro)
+# Disallow: /login
+# Disallow: /api
+
+# Crawl-delay (opcional, para no sobrecargar el servidor)
+# Crawl-delay: 1

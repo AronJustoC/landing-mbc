@@ -1,0 +1,87 @@
+---
+import antaminaLogo from "../../assets/logo-antamina.jpg";
+import cerroVerdeLogo from "../../assets/logo-cerro-verde.jpg";
+import antapacayLogo from "../../assets/logo-antapacay.png";
+import southerLogo from "../../assets/logo-souther.png";
+---
+
+<section class="reveal-section relative py-20 bg-[#08080A] overflow-hidden">
+    {/* Background Glow */}
+    <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-cyan-500/5 blur-[100px] rounded-full pointer-events-none"
+    >
+    </div>
+
+    <div class="container mx-auto px-6 relative z-10">
+        <div class="animate-item text-center max-w-4xl mx-auto mb-20">
+            <h2
+                class="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight leading-tight"
+            >
+                Experiencia que Impulsa la <br />
+                <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500"
+                    >Gran Minería</span
+                >
+            </h2>
+
+            <p class="text-gray-400 text-lg leading-relaxed max-w-2xl mx-auto">
+                Nuestro equipo ha desplegado soluciones de ingeniería dinámica y
+                confiabilidad en las operaciones más exigentes del Perú,
+                construyendo relaciones duraderas basadas en resultados.
+            </p>
+        </div>
+
+        <div class="animate-item">
+            <div
+                class="bg-white/5 border border-white/5 rounded-3xl p-10 backdrop-blur-sm relative overflow-hidden group hover:border-cyan-500/20 transition-colors duration-500"
+            >
+                <div
+                    class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                >
+                </div>
+
+                <div
+                    class="flex flex-col lg:flex-row items-center gap-12 justify-between"
+                >
+                    <div class="text-center lg:text-left shrink-0 max-w-xs">
+                        <h3 class="text-2xl font-bold text-white mb-2">
+                            Nuestros Aliados
+                        </h3>
+                        <p class="text-gray-400 text-sm">
+                            Empresas líderes que confían en nuestra ingeniería
+                            para sus activos críticos.
+                        </p>
+                    </div>
+
+                    <div
+                        class="h-px w-full lg:w-px lg:h-24 bg-gradient-to-r lg:bg-gradient-to-b from-transparent via-white/10 to-transparent"
+                    >
+                    </div>
+
+                    <div
+                        class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 w-full"
+                    >
+                        {
+                            [
+                                { img: antaminaLogo, alt: "Antamina" },
+                                { img: cerroVerdeLogo, alt: "Cerro Verde" },
+                                { img: antapacayLogo, alt: "Antapacay" },
+                                { img: southerLogo, alt: "Southern Peru" },
+                            ].map((brand) => (
+                                <div class="group flex items-center justify-center transition-all duration-500 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 hover:scale-105">
+                                    <img
+                                        src={brand.img.src}
+                                        alt={brand.alt}
+                                        class="h-20 md:h-24 w-auto object-contain bg-white rounded-xl p-4 shadow-sm group-hover:shadow-[0_0_20px_rgba(34,211,238,0.3)] transition-all duration-500"
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

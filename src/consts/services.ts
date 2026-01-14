@@ -3,6 +3,7 @@ export interface ServiceData {
     id: string;
     title: string;
     name?: string; // Backwards compatibility for header
+    href: string; // Link to the service page
     shortDescription: string;
     description?: string; // Backwards compatibility for header
     fullDescription: string;
@@ -16,6 +17,7 @@ export const services: ServiceData[] = [
     {
         id: "mantenimiento-predictivo",
         title: "Mantenimiento Predictivo",
+        href: "/servicios/mantenimiento-predictivo",
         shortDescription: "Monitoreo de condición especializado para predecir fallas antes de que ocurran.",
         fullDescription: "Nuestro servicio de Mantenimiento Predictivo utiliza tecnologías de vanguardia para monitorear la salud de sus activos en tiempo real. Detectamos anomalías incipientes antes de que se conviertan en fallas catastróficas, permitiéndole programar intervenciones solo cuando son estrictamente necesarias.",
         benefits: [
@@ -30,6 +32,7 @@ export const services: ServiceData[] = [
     {
         id: "ingenieria-confiabilidad",
         title: "Ingeniería de Confiabilidad",
+        href: "/servicios/ingenieria-confiabilidad",
         shortDescription: "Optimización de estrategias de mantenimiento basadas en datos precisos y riesgo.",
         fullDescription: "Transformamos la gestión de sus activos mediante metodologías probadas como RCM (Mantenimiento Centrado en Confiabilidad) y FMEA. Analizamos sus datos históricos y operativos para diseñar estrategias que maximicen la disponibilidad y minimicen el riesgo.",
         benefits: [
@@ -44,6 +47,7 @@ export const services: ServiceData[] = [
     {
         id: "analisis-dinamico",
         title: "Análisis Dinámico",
+        href: "/servicios/analisis-dinamico",
         shortDescription: "Diagnóstico Vibracional, Modal y Elementos Finitos.",
         fullDescription: "Un paso más allá del monitoreo tradicional. Realizamos estudios profundos de la dinámica de sus estructuras y máquinas, identificando resonancias, frecuencias naturales y modos de vibración que podrían causar fatiga estructural.",
         benefits: [
@@ -58,6 +62,7 @@ export const services: ServiceData[] = [
     {
         id: "evaluacion-estructural",
         title: "Evaluación Estructural",
+        href: "/servicios/evaluacion-estructural",
         shortDescription: "Análisis profundo de integridad en infraestructura industrial.",
         fullDescription: "Evaluamos la salud estructural de sus instalaciones críticas (chutes, tolvas, naves industriales) utilizando técnicas no destructivas y modelamiento avanzado. Garantizamos que sus estructuras soporten las cargas operativas de manera segura.",
         benefits: [
@@ -72,6 +77,7 @@ export const services: ServiceData[] = [
     {
         id: "monitoreo-activos",
         title: "Monitoreo de Activos",
+        href: "/servicios/monitoreo-activos",
         shortDescription: "Seguimiento continuo 24/7 en tiempo real.",
         fullDescription: "Implementamos sistemas de monitoreo continuo (online) que vigilan sus activos más críticos 24/7. Reciba alertas instantáneas en su celular o centro de control ante cualquier desviación de los parámetros normales de operación.",
         benefits: [
@@ -86,6 +92,7 @@ export const services: ServiceData[] = [
     {
         id: "soporte-tecnico",
         title: "Soporte Técnico",
+        href: "/servicios/soporte-tecnico",
         shortDescription: "Asistencia experta y consultoría de alto nivel.",
         fullDescription: "Ponemos a su disposición nuestro equipo de ingenieros certificados para resolver problemas complejos en campo. Desde el comisionamiento de nuevas plantas hasta la resolución de crisis operativas.",
         benefits: [

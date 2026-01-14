@@ -1,28 +1,20 @@
 ---
 import { Icon } from "astro-icon/components";
 import LogoMBC from "../assets/logo-mbc.svg";
-
-const services = [
-  { name: "Mantenimiento Predictivo", href: "/services#predictive" },
-  { name: "Ingeniería de Confiabilidad", href: "/services#reliability" },
-  { name: "Análisis Dinámico", href: "/services#dynamic" },
-  { name: "Evaluación Estructural", href: "/services#structural" },
-  { name: "Monitoreo de Activos", href: "/services#monitoring" },
-  { name: "Soporte Técnico", href: "/services#support" },
-];
+import { services } from "../consts/services";
 
 const company = [
   { name: "Sobre Nosotros", href: "/about" },
   { name: "Misión y Visión", href: "/about#mision-vision" },
-  { name: "Nuestro Equipo", href: "/about#team" },
+  { name: "Nuestro Equipo", href: "/about#trayectoria" },
   { name: "Contacto", href: "/contact" },
 ];
 
 const legal = [
-  { name: "Términos y Condiciones", href: "/terminos-condiciones" },
-  { name: "Política de Privacidad", href: "/politica-privacidad" },
-  { name: "Cumplimiento Normativo", href: "/cumplimiento-normativo" },
-  { name: "Mapa del Sitio", href: "/map" },
+  { name: "Términos y Condiciones", href: "/terms" },
+  { name: "Política de Privacidad", href: "/privacy" },
+  { name: "Cumplimiento Normativo", href: "/compliance" },
+  { name: "Mapa del Sitio", href: "/sitemap" },
 ];
 ---
 
@@ -106,7 +98,7 @@ const legal = [
                   href={item.href}
                   class="text-gray-500 hover:text-[#31B0FF] transition-colors block text-xs"
                 >
-                  {item.name}
+                  {item.title}
                 </a>
               </li>
             ))

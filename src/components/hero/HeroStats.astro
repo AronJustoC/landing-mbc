@@ -1,0 +1,141 @@
+---
+import { Icon } from "astro-icon/components";
+import backgroundExperience from "../../assets/hero/experience-bg-high-res.png";
+---
+
+<section
+    class="reveal-section relative py-32 overflow-hidden bg-fixed bg-cover bg-center"
+    style={`background-image: url('${backgroundExperience.src}')`}
+>
+    <div class="absolute inset-0 bg-[#08080A]/60"></div>
+    <div
+        class="absolute inset-0 bg-gradient-to-t from-[#08080A] via-transparent to-[#08080A]"
+    >
+    </div>
+
+    <div class="container mx-auto px-6 relative z-10">
+        <div
+            class="animate-item grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10"
+        >
+            {
+                [
+                    { n: "10+", l: "Años de experiencia", i: "lucide:award" },
+                    {
+                        n: "150+",
+                        l: "Activos analizados",
+                        i: "lucide:bar-chart-2",
+                    },
+                    {
+                        n: "30+",
+                        l: "Proyectos industriales",
+                        i: "lucide:briefcase",
+                    },
+                    { n: "5", l: "Sectores productivos", i: "lucide:layers" },
+                ].map((item) => (
+                    <div class="group px-4">
+                        <div class="flex justify-center mb-6">
+                            <div class="p-4 rounded-xl  text-white/50 group-hover:scale-110 transition-all duration-300  box-shadow-[0_0_15px_rgba(34,211,238,0.1)]">
+                                <Icon name={item.i} class="w-8 h-8" />
+                            </div>
+                        </div>
+                        <p
+                            class="text-5xl md:text-6xl font-bold text-white mb-2 tracking-tighter counter-anim"
+                            data-target={item.n.replace(/\D/g, "")}
+                            data-suffix={item.n.replace(/\d/g, "")}
+                        >
+                            0{item.n.replace(/\d/g, "")}
+                        </p>
+                        <p class="text-cyan-200/70 font-medium uppercase tracking-wider text-xs md:text-sm">
+                            {item.l}
+                        </p>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .metric-card {
+        border-radius: 16px;
+        border: 1px solid rgba(0, 212, 255, 0.18);
+        background: rgba(10, 10, 12, 0.35);
+        backdrop-filter: blur(10px);
+        padding: 32px 16px;
+        box-shadow: 0 0 26px rgba(0, 212, 255, 0.08);
+    }
+    .metric-number {
+        font-size: 3rem;
+        font-weight: 800;
+        background: linear-gradient(90deg, #00d4ff, #0099cc);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .metric-label {
+        margin-top: 8px;
+        color: #cbd5e1;
+        font-size: 0.95rem;
+    }
+</style>
+
+<script>
+    // Counter Animation
+    function initCounters() {
+        const counters = document.querySelectorAll(".counter-anim");
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const target = entry.target as HTMLElement;
+                        const endValue = parseInt(
+                            target.getAttribute("data-target") || "0",
+                        );
+                        const suffix = target.getAttribute("data-suffix") || "";
+
+                        if (!target.classList.contains("counted")) {
+                            animateValue(target, 0, endValue, 2000, suffix);
+                            target.classList.add("counted");
+                        }
+                    }
+                });
+            },
+            { threshold: 0.5 },
+        );
+
+        counters.forEach((counter) => observer.observe(counter));
+    }
+
+    function animateValue(
+        obj: HTMLElement,
+        start: number,
+        end: number,
+        duration: number,
+        suffix: string,
+    ) {
+        let startTimestamp: number | null = null;
+        const step = (timestamp: number) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min(
+                (timestamp - startTimestamp) / duration,
+                1,
+            );
+
+            // Cubic ease out
+            // const easeProgress = 1 - Math.pow(1 - progress, 3);
+            // Using just progress for the content calc as per original code structure,
+            // but original code had calculation logic inside the requestAnimationFrame.
+
+            obj.innerHTML =
+                Math.floor(progress * (end - start) + start) + suffix;
+
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
+    }
+
+    document.addEventListener("DOMContentLoaded", initCounters);
+    document.addEventListener("astro:page-load", initCounters);
+</script>
