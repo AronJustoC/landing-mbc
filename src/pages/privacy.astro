@@ -1,0 +1,157 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHero from "../components/SectionHero.astro";
+import contactHeaderBg from "../assets/headers/contact_header_background.png";
+
+const lastUpdate = "13 de Enero, 2026";
+---
+
+<Layout
+    title="Política de Privacidad | MBC Predictive"
+    description="Conoce cómo MBC Predictive protege y procesa tus datos personales y corporativos bajo estándares internacionales."
+>
+    <SectionHero
+        title="Privacidad"
+        subtitle="Transparencia y seguridad en el tratamiento de su información técnica y personal."
+        image={contactHeaderBg}
+        breadcrumbItems={[
+            { name: "Inicio", href: "/" },
+            { name: "Legal", href: "#" },
+            { name: "Privacidad", href: "/privacy", current: true },
+        ]}
+    />
+
+    <section class="bg-[#08080A] py-24 relative overflow-hidden">
+        <!-- Tech Patterns -->
+        <div
+            class="absolute inset-0 z-0 pointer-events-none opacity-[0.05]"
+            style="background-image: radial-gradient(#31B0FF 1px, transparent 1px); background-size: 30px 30px;"
+        >
+        </div>
+
+        <div
+            class="container mx-auto px-6 max-w-4xl relative z-10 text-gray-400 font-light leading-relaxed"
+        >
+            <div class="mb-12">
+                <span
+                    class="text-[#31B0FF] font-bold text-[11px] uppercase tracking-[0.4em] mb-4 block"
+                    >Protección de Datos</span
+                >
+                <h2 class="text-3xl font-bold text-white mb-4 tracking-tight">
+                    Política de Privacidad Integral
+                </h2>
+                <p class="text-sm">Última actualización: {lastUpdate}</p>
+            </div>
+
+            <div class="space-y-12">
+                <p>
+                    En <strong>MBC Predictive</strong>, valoramos la
+                    confidencialidad de su información técnica y personal. Esta
+                    política detalla cómo recopilamos, protegemos y utilizamos
+                    los datos que usted nos confía al interactuar con nuestra
+                    plataforma de ingeniería y servicios de monitoreo.
+                </p>
+
+                <div class="group">
+                    <h3
+                        class="text-xl font-bold text-white mb-4 tracking-tight flex items-center gap-3"
+                    >
+                        <div class="w-1.5 h-6 bg-[#31B0FF]"></div>
+                        Datos Técnicos e Industriales
+                    </h3>
+                    <p>
+                        Además de los datos personales básicos, MBC Predictive
+                        procesa datos técnicos capturados en sus instalaciones,
+                        tales como espectros de vibración, perfiles térmicos y
+                        parámetros operativos de maquinaria. Esta información es
+                        tratada como estrictamente confidencial y se utiliza
+                        únicamente para el análisis de la salud de sus activos.
+                    </p>
+                    <ul class="list-disc pl-6 mt-4 space-y-2">
+                        <li>Espectros y formas de onda de vibración.</li>
+                        <li>Termogramas e imágenes infrarrojas.</li>
+                        <li>Datos de telemetría de sensores IoT instalados.</li>
+                    </ul>
+                </div>
+
+                <!-- Seccion 1 -->
+                <div class="group">
+                    <h3
+                        class="text-xl font-bold text-white mb-4 tracking-tight flex items-center gap-3"
+                    >
+                        <div class="w-1.5 h-6 bg-[#31B0FF]"></div>
+                        Uso de Información Técnica
+                    </h3>
+                    <p>Su información se utiliza exclusivamente para:</p>
+                    <ul class="list-disc pl-6 mt-4 space-y-2">
+                        <li>
+                            Procesar sus requerimientos de ingeniería y soporte
+                            en campo.
+                        </li>
+                        <li>
+                            Alimentar nuestros algoritmos de diagnóstico
+                            predictivo para detectar fallas tempranas en sus
+                            activos.
+                        </li>
+                        <li>
+                            Generar tableros de control personalizados en
+                            nuestra plataforma de monitoreo.
+                        </li>
+                        <li>
+                            Mejorar la precisión técnica de nuestras
+                            recomendaciones de mantenimiento.
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Seccion 2 -->
+                <div class="group">
+                    <h3
+                        class="text-xl font-bold text-white mb-4 tracking-tight flex items-center gap-3"
+                    >
+                        <div class="w-1.5 h-6 bg-[#31B0FF]"></div>
+                        Seguridad de Nivel Industrial
+                    </h3>
+                    <p>
+                        Dada la naturaleza crítica de los datos de planta, MBC
+                        Predictive emplea protocolos de seguridad industrial,
+                        incluyendo túneles VPN cifrados para la telemetría y
+                        almacenamiento en servidores con redundancia geográfica.
+                        El acceso a los datos de sus activos está estrictamente
+                        limitado a los ingenieros asignados a su cuenta.
+                    </p>
+                </div>
+
+                <!-- Seccion 4 -->
+                <div class="group">
+                    <h3
+                        class="text-xl font-bold text-white mb-4 tracking-tight flex items-center gap-3"
+                    >
+                        <div class="w-1.5 h-6 bg-[#31B0FF]"></div>
+                        Derechos de los Usuarios
+                    </h3>
+                    <p>
+                        Usted tiene derecho a acceder, rectificar o eliminar su
+                        información personal en cualquier momento. Para ejercer
+                        estos derechos o retirar su consentimiento, puede
+                        enviarnos una solicitud formal. MBC Predictive revisa
+                        regularmente la exactitud de los datos y los conserva
+                        solo por el tiempo necesario para los fines descritos.
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-20 pt-10 border-t border-white/5">
+                <p class="text-sm italic">
+                    Si tiene dudas sobre cómo gestionamos su privacidad,
+                    contáctenos en
+                    <a
+                        href="mailto:privacy@mbcpredictive.com"
+                        class="text-[#31B0FF] hover:underline"
+                        >privacy@mbcpredictive.com</a
+                    >
+                </p>
+            </div>
+        </div>
+    </section>
+</Layout>

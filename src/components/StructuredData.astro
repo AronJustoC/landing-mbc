@@ -32,7 +32,7 @@ const organizationSchema = {
     '@type': 'ContactPoint',
     telephone: '+51-984-123-456',
     contactType: 'sales',
-    email: 'contacto@mbcpredictive.com',
+    email: 'info@mbcpredictive.com',
     areaServed: 'PE',
     availableLanguage: ['Spanish', 'English'],
   },
@@ -61,7 +61,7 @@ const localBusinessSchema = {
   image: 'https://mbcpredictive.com/og-image.jpg',
   url: 'https://mbcpredictive.com',
   telephone: '+51-984-123-456',
-  email: 'contacto@mbcpredictive.com',
+  email: 'info@mbcpredictive.com',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Av. La Cultura 733',
@@ -138,7 +138,7 @@ const serviceSchema = data ? {
 } : null;
 
 // Select the appropriate schema based on type
-let schema = organizationSchema;
+let schema: any = organizationSchema;
 
 switch (type) {
   case 'localbusiness':

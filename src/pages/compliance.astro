@@ -1,0 +1,171 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHero from "../components/SectionHero.astro";
+import contactHeaderBg from "../assets/headers/contact_header_background.png";
+import { Icon } from "astro-icon/components";
+
+const compliances = [
+    {
+        title: "ISO 18436",
+        subtitle: "Monitoreo de Condición y Diagnóstico",
+        desc: "Certificación internacional para nuestro personal técnico en análisis vibracional y termografía infrarroja, asegurando rigor científico en cada diagnóstico.",
+        icon: "lucide:award",
+    },
+    {
+        title: "ISO 9001:2015",
+        subtitle: "Gestión de la Calidad",
+        desc: "Compromiso con la mejora continua de nuestros procesos operativos y la satisfacción total del cliente industrial.",
+        icon: "lucide:shield-check",
+    },
+    {
+        title: "ISO 55001",
+        subtitle: "Gestión de Activos",
+        desc: "Alineamiento total con los estándares globales para maximizar el valor y ciclo de vida de los activos industriales de nuestros clientes.",
+        icon: "lucide:settings",
+    },
+    {
+        title: "Cumplimiento Ambiental",
+        subtitle: "Ley N° 28611",
+        desc: "Operamos bajo las normativas ambientales peruanas, promoviendo tecnologías que optimizan el consumo energético y reducen la huella de carbono.",
+        icon: "lucide:leaf",
+    },
+];
+---
+
+<Layout
+    title="Cumplimiento Normativo | MBC Predictive"
+    description="Nuestros estándares de calidad, seguridad y cumplimiento de normativas internacionales de ingeniería."
+>
+    <SectionHero
+        title="Cumplimiento"
+        subtitle="Excelencia certificada bajo estándares internacionales de ingeniería y seguridad industrial."
+        image={contactHeaderBg}
+        breadcrumbItems={[
+            { name: "Inicio", href: "/" },
+            { name: "Legal", href: "#" },
+            { name: "Cumplimiento", href: "/compliance", current: true },
+        ]}
+    />
+
+    <section class="bg-[#08080A] py-24 relative overflow-hidden">
+        <!-- Background Patterns -->
+        <div
+            class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#31B0FF]/20 to-transparent"
+        >
+        </div>
+
+        <div class="container mx-auto px-6 max-w-5xl relative z-10">
+            <div class="text-center mb-20 animate-item">
+                <span
+                    class="text-[#31B0FF] font-bold text-[11px] uppercase tracking-[0.4em] mb-4 block"
+                    >Estándares Globales</span
+                >
+                <h2
+                    class="text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight"
+                >
+                    Rigurosidad en cada <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500"
+                        >Proceso</span>
+                </h2>
+                <div
+                    class="h-px w-24 bg-gradient-to-r from-transparent via-[#31B0FF]/40 to-transparent mx-auto mt-6"
+                >
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                {
+                    compliances.map((item) => (
+                        <div class="group holo-card relative bg-[#121214] rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-[0_0_40px_rgba(49,176,255,0.1)]">
+                            <div class="holo-border absolute inset-0 rounded-2xl z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                            <div class="relative z-10 bg-[#121214] p-8 h-full rounded-2xl border border-white/5 group-hover:border-transparent transition-colors">
+                                <div class="w-14 h-14 rounded-xl bg-[#31B0FF]/10 flex items-center justify-center text-[#31B0FF] mb-6 group-hover:bg-[#31B0FF] group-hover:text-white transition-all duration-500 shadow-lg">
+                                    <Icon name={item.icon} class="w-7 h-7" />
+                                </div>
+
+                                <div class="flex items-center gap-3 mb-2">
+                                    <h3 class="text-xl font-bold text-white tracking-tight">
+                                        {item.title}
+                                    </h3>
+                                    <div class="h-px flex-1 bg-gradient-to-r from-[#31B0FF]/20 to-transparent" />
+                                </div>
+
+                                <p class="text-[#31B0FF] text-[10px] font-bold uppercase tracking-[0.2em] mb-4">
+                                    {item.subtitle}
+                                </p>
+                                <p class="text-gray-400 text-sm leading-relaxed font-light">
+                                    {item.desc}
+                                </p>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+
+            <div
+                class="mt-24 p-8 bg-[#11161d] border border-white/10 rounded-2xl relative overflow-hidden"
+            >
+                <div class="absolute top-0 right-0 p-8 opacity-5">
+                    <Icon
+                        name="lucide:check-square"
+                        class="w-48 h-48 text-[#31B0FF]"
+                    />
+                </div>
+                <div class="relative z-10 max-w-2xl">
+                    <h3
+                        class="text-2xl font-bold text-white mb-4 tracking-tight"
+                    >
+                        Política de Integridad
+                    </h3>
+                    <p class="text-gray-400 font-light leading-relaxed mb-6">
+                        MBC Predictive mantiene un compromiso inquebrantable con
+                        la ética empresarial. Nuestro código de conducta
+                        profesional prohíbe estrictamente cualquier forma de
+                        corrupción o tráfico de influencias, garantizando
+                        transparencia total en licitaciones y contratos
+                        públicos/privados.
+                    </p>
+                    <div class="flex items-center gap-4 text-[#31B0FF]">
+                        <Icon name="lucide:file-text" class="w-5 h-5" />
+                        <span
+                            class="text-xs font-bold uppercase tracking-widest cursor-pointer hover:underline"
+                            >Ver Código de Conducta</span
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<style>
+    /* Holographic Border Effect */
+    @keyframes border-rotate {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    .holo-border::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: conic-gradient(
+            transparent,
+            transparent,
+            transparent,
+            #31b0ff,
+            transparent,
+            transparent,
+            transparent,
+            #22d3ee
+        );
+        animation: border-rotate 4s linear infinite;
+    }
+</style>
