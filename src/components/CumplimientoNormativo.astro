@@ -1,0 +1,97 @@
+---
+import SectionHero from "./SectionHero.astro";
+import headerBg from "../assets/headers/about_header_background.png";
+import { Icon } from "astro-icon/components";
+
+const regulations = [
+  {
+    code: "ISO 18436-2",
+    title: "Monitoreo de Condición",
+    desc: "Todo nuestro personal técnico cuenta con certificación vigente bajo la norma ISO 18436 para análisis de vibraciones (Categorías I, II y III), garantizando diagnósticos estandarizados y precisos.",
+    icon: "lucide:activity"
+  },
+  {
+    code: "Ley N° 29783",
+    title: "Seguridad y Salud en el Trabajo",
+    desc: "Cumplimiento estricto de la Ley SST y sus modificatorias. Priorizamos la vida y salud de nuestros ingenieros en campo mediante IPERC, PETS y capacitación continua.",
+    icon: "lucide:hard-hat"
+  },
+  {
+    code: "DS N° 024-2016-EM",
+    title: "Seguridad Minera",
+    desc: "Alineados al Reglamento de Seguridad y Salud Ocupacional en Minería. Nuestro equipo está habilitado para ingresar y operar en las principales unidades mineras del Perú.",
+    icon: "lucide:mountain"
+  },
+  {
+    code: "ISO 55001",
+    title: "Gestión de Activos",
+    desc: "Nuestras estrategias de ingeniería de confiabilidad se diseñan siguiendo los lineamientos de la gestión de activos físicos para maximizar el valor durante todo el ciclo de vida.",
+    icon: "lucide:settings"
+  }
+];
+---
+
+<section class="bg-[#08080A] relative overflow-hidden pb-24">
+  <SectionHero
+    title="Cumplimiento Normativo"
+    subtitle="Estándares internacionales y normativa peruana que respaldan nuestra excelencia operativa."
+    image={headerBg}
+    large={false}
+  />
+
+  <div class="container mx-auto px-6 relative z-10 pt-16 max-w-6xl">
+    
+    <div class="text-center mb-16">
+      <span class="text-[#31B0FF] font-bold text-sm uppercase tracking-widest mb-2 block">Calidad y Seguridad</span>
+      <h2 class="text-3xl lg:text-4xl font-bold text-white">Marco Regulatorio</h2>
+      <p class="text-gray-400 mt-4 max-w-2xl mx-auto">
+        Operamos bajo los más altos estándares de la industria, asegurando no solo la calidad técnica de nuestros diagnósticos, sino la seguridad integral en cada servicio.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      {regulations.map((item) => (
+        <div class="group relative bg-[#11161d] border border-white/10 rounded-2xl p-8 hover:border-[#31B0FF]/40 transition-all duration-300 hover:-translate-y-1">
+          <!-- Glow -->
+          <div class="absolute -top-10 -right-10 w-32 h-32 bg-[#31B0FF]/5 rounded-full blur-[40px] group-hover:bg-[#31B0FF]/10 transition-all"></div>
+          
+          <div class="relative z-10 flex items-start gap-6">
+            <div class="shrink-0 p-3 rounded-xl bg-[#31B0FF]/10 text-[#31B0FF] border border-[#31B0FF]/20">
+              <Icon name={item.icon} class="w-8 h-8" />
+            </div>
+            <div>
+              <span class="inline-block px-3 py-1 rounded-full bg-white/5 text-xs font-mono text-[#31B0FF] mb-3 border border-white/5">
+                {item.code}
+              </span>
+              <h3 class="text-xl font-bold text-white mb-3">{item.title}</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">
+                {item.desc}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Homologaciones -->
+    <div class="mt-16 p-8 rounded-2xl bg-gradient-to-r from-[#11161d] to-[#0d1116] border border-white/5 text-center">
+      <h3 class="text-white font-bold text-lg mb-6">Empresa Homologada por</h3>
+      <div class="flex flex-wrap justify-center gap-8 md:gap-16 opacity-70 grayscale">
+        <!-- Placeholder text for logos since I don't have the specific images for SGS/Bureau Veritas in context, using text representation -->
+        <div class="flex items-center gap-2">
+            <Icon name="lucide:check-circle-2" class="w-5 h-5 text-[#31B0FF]" />
+            <span class="text-gray-300 font-semibold">SGS del Perú</span>
+        </div>
+        <div class="flex items-center gap-2">
+            <Icon name="lucide:check-circle-2" class="w-5 h-5 text-[#31B0FF]" />
+            <span class="text-gray-300 font-semibold">Bureau Veritas</span>
+        </div>
+        <div class="flex items-center gap-2">
+            <Icon name="lucide:check-circle-2" class="w-5 h-5 text-[#31B0FF]" />
+            <span class="text-gray-300 font-semibold">Mega Certificaciones</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

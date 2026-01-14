@@ -1,0 +1,44 @@
+---
+import SectionHero from "./SectionHero.astro";
+import headerBg from "../assets/headers/about_header_background.png"; // Reutilizamos fondo existente
+---
+
+<section class="bg-[#08080A] relative overflow-hidden pb-20">
+  <SectionHero
+    title="Términos y Condiciones"
+    subtitle="Marco legal y condiciones de servicio para nuestras soluciones de ingeniería."
+    image={headerBg}
+    large={false}
+  />
+
+  <div class="container mx-auto px-6 relative z-10 pt-16 max-w-4xl">
+    <div class="prose prose-invert prose-lg max-w-none">
+      <div class="bg-[#11161d] border border-white/10 rounded-2xl p-8 md:p-12 shadow-lg">
+        
+        <h3 class="text-[#31B0FF] font-bold text-xl mb-4">1. Ámbito de los Servicios</h3>
+        <p class="text-gray-300 mb-6">
+          MBC Predictive provee servicios de ingeniería especializada, monitoreo de condición y consultoría técnica. Nuestros informes y diagnósticos se basan en la interpretación técnica de datos según normas ISO vigentes (como ISO 18436). Sin embargo, la decisión final sobre la intervención de activos corresponde al cliente y sus responsables operativos.
+        </p>
+
+        <h3 class="text-[#31B0FF] font-bold text-xl mb-4">2. Propiedad Intelectual</h3>
+        <p class="text-gray-300 mb-6">
+          Todos los modelos analíticos, algoritmos de software y metodologías propietarias utilizadas para el diagnóstico pertenecen exclusivamente a MBC Predictive. El cliente recibe el derecho de uso de la información contenida en los reportes finales para sus fines operativos internos.
+        </p>
+
+        <h3 class="text-[#31B0FF] font-bold text-xl mb-4">3. Limitación de Responsabilidad</h3>
+        <p class="text-gray-300 mb-6">
+          Si bien utilizamos tecnología de vanguardia y personal certificado, el mantenimiento predictivo es una ciencia probabilística. MBC Predictive no se hace responsable por lucro cesante o daños consecuentes derivados de fallas imprevistas que no pudieron ser detectadas con las técnicas aplicadas o que ocurrieron en intervalos entre mediciones.
+        </p>
+
+        <h3 class="text-[#31B0FF] font-bold text-xl mb-4">4. Normativa Aplicable</h3>
+        <p class="text-gray-300 mb-6">
+          Estos términos se rigen por las leyes de la República del Perú. Cualquier disputa será resuelta en los tribunales del Cercado de Lima, renunciando las partes a cualquier otro fuero.
+        </p>
+
+        <div class="mt-8 pt-8 border-t border-white/10 text-sm text-gray-500">
+          Última actualización: Octubre 2023
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

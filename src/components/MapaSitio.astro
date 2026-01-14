@@ -1,0 +1,85 @@
+---
+import SectionHero from "./SectionHero.astro";
+import headerBg from "../assets/headers/about_header_background.png";
+import { services } from "../consts/services";
+import { Icon } from "astro-icon/components";
+
+const mainLinks = [
+  { name: "Inicio", href: "/" },
+  { name: "Nosotros", href: "/about" },
+  { name: "Servicios", href: "/services" },
+  { name: "Contacto", href: "/contact" },
+];
+
+const legalLinks = [
+  { name: "Términos y Condiciones", href: "/legal/terminos" },
+  { name: "Política de Privacidad", href: "/legal/privacidad" },
+  { name: "Cumplimiento Normativo", href: "/legal/cumplimiento" },
+];
+---
+
+<section class="bg-[#08080A] relative overflow-hidden pb-24">
+  <SectionHero
+    title="Mapa del Sitio"
+    subtitle="Visión general de la estructura de nuestro portal web."
+    image={headerBg}
+    large={false}
+  />
+
+  <div class="container mx-auto px-6 relative z-10 pt-16 max-w-5xl">
+    <div class="grid md:grid-cols-3 gap-12">
+      
+      <!-- Columna Principal -->
+      <div class="space-y-6">
+        <h3 class="text-[#31B0FF] font-bold text-lg uppercase tracking-wider border-b border-white/10 pb-4">
+          Principal
+        </h3>
+        <ul class="space-y-4">
+          {mainLinks.map(link => (
+            <li>
+              <a href={link.href} class="text-gray-300 hover:text-white hover:translate-x-2 transition-all duration-300 flex items-center gap-2">
+                <Icon name="lucide:chevron-right" class="w-4 h-4 text-[#31B0FF]" />
+                {link.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Columna Servicios -->
+      <div class="space-y-6">
+        <h3 class="text-[#31B0FF] font-bold text-lg uppercase tracking-wider border-b border-white/10 pb-4">
+          Nuestros Servicios
+        </h3>
+        <ul class="space-y-4">
+          {services.map(service => (
+            <li>
+              <a href={`/servicios/${service.id}`} class="text-gray-300 hover:text-white hover:translate-x-2 transition-all duration-300 flex items-center gap-2 group">
+                <Icon name="lucide:layers" class="w-4 h-4 text-gray-600 group-hover:text-[#31B0FF] transition-colors" />
+                {service.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Columna Legal -->
+      <div class="space-y-6">
+        <h3 class="text-[#31B0FF] font-bold text-lg uppercase tracking-wider border-b border-white/10 pb-4">
+          Legal y Normativa
+        </h3>
+        <ul class="space-y-4">
+          {legalLinks.map(link => (
+            <li>
+              <a href={link.href} class="text-gray-300 hover:text-white hover:translate-x-2 transition-all duration-300 flex items-center gap-2">
+                <Icon name="lucide:file-text" class="w-4 h-4 text-gray-600" />
+                {link.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
