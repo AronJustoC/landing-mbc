@@ -85,21 +85,25 @@ const isLinkActive = (href: string) => {
     <div class="flex items-center justify-between h-20">
       <!-- Logo -->
       <a href="/" class="flex items-center gap-3 group/logo">
-        <img
-          src={LogoMBC.src}
-          alt="MBC Logo"
-          width="45"
-          height="45"
-          class="filter drop-shadow-lg opacity-90 group-hover/logo:opacity-100 transition-opacity duration-300"
-        />
-        <div class="flex flex-col">
+        <div class="flex flex-col items-center justify-center gap-1">
+      
+          <div class="flex items-center gap-1">
+            <img
+              src={LogoMBC.src}
+              alt="MBC Logo"
+              width="45"
+              height="45"
+              class="filter drop-shadow-lg opacity-90 group-hover/logo:opacity-100 transition-opacity duration-300"
+          />  
           <span
-            class="text-white font-bold text-2xl tracking-tight leading-none"
+            class="text-gray-200/80 font-semibold font-[Roboto] text-4xl tracking-tight leading-none"
             >MBC</span
-          >
+          >  
+      </div>
+        
           <span
-            class="text-[#31B0FF] text-[10px] font-medium tracking-widest uppercase leading-none"
-            >Predictive</span
+            class="text-gray-400/90 text-[7px] font-[Roboto] font-semibold tracking-[0.2em] uppercase leading-none mt-0.5"
+            >INGENIERÍA Y CONFIABILIDAD</span
           >
         </div>
       </a>
@@ -256,8 +260,8 @@ const isLinkActive = (href: string) => {
             >MBC</span
           >
           <span
-            class="text-[#31B0FF] text-[9px] font-medium tracking-widest uppercase leading-none"
-            >Predictive</span
+            class="text-[#31B0FF] text-[6px] font-bold tracking-widest uppercase leading-none"
+            >INGENIERÍA Y CONFIABILIDAD</span
           >
         </div>
       </a>
@@ -361,7 +365,7 @@ const isLinkActive = (href: string) => {
         </div>
 
         <div class="flex gap-4">
-          <a href="#" class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-[#31B0FF] transition-all">
+          <a href="https://www.linkedin.com/company/mbc-confiabilidad/" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-[#31B0FF] transition-all">
             <Icon name="lucide:linkedin" class="w-5 h-5" />
           </a>
           <a href="#" class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-[#31B0FF] transition-all">

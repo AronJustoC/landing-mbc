@@ -26,21 +26,24 @@ const legal = [
       <!-- Col 1: Identity & Contact -->
       <div class="space-y-6 lg:col-span-1">
         <a href="/" class="flex items-center gap-3 group/logo">
-          <img
-            src={LogoMBC.src}
-            alt="MBC Logo"
-            width="45"
-            height="45"
-            class="filter drop-shadow-lg opacity-80 group-hover/logo:opacity-100 transition-opacity duration-300"
-          />
-          <div class="flex flex-col">
+          <div class="flex flex-col items-center justify-center gap-1">
+            <div class="flex items-center gap-1">
+              <img
+                src={LogoMBC.src}
+                alt="MBC Logo"
+                width="45"
+                height="45"
+                class="filter drop-shadow-lg opacity-90 group-hover/logo:opacity-100 transition-opacity duration-300"
+              />
+              <span
+                class="text-gray-200/80 font-semibold font-[Roboto] text-4xl tracking-tight leading-none"
+                >MBC</span
+              >
+            </div>
+
             <span
-              class="text-white font-bold text-2xl tracking-tight leading-none"
-              >MBC</span
-            >
-            <span
-              class="text-[#31B0FF] text-[10px] font-medium tracking-widest uppercase leading-none"
-              >Predictive</span
+              class="text-gray-400/90 text-[7px] font-[Roboto] font-semibold tracking-[0.2em] uppercase leading-none mt-0.5"
+              >INGENIERÍA Y CONFIABILIDAD</span
             >
           </div>
         </a>
@@ -161,7 +164,9 @@ const legal = [
           >
           <div class="flex gap-2 lg:justify-end">
             <a
-              href="#"
+              href="https://www.linkedin.com/company/mbc-confiabilidad/"
+              target="_blank"
+              rel="noopener noreferrer"
               class="w-8 h-8 rounded bg-white/5 border border-white/5 flex items-center justify-center text-gray-500 hover:border-[#31B0FF]/30 hover:text-[#31B0FF] hover:bg-[#31B0FF]/10 transition-all duration-300"
               aria-label="LinkedIn"
             >
