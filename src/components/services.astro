@@ -6,35 +6,35 @@ import SectionHero from "./SectionHero.astro";
 import servicesHeaderBg from "../assets/headers/services_header_background.png";
 
 // Dynamic Layout to map images to services from consts
-import predictiveImg from "../assets/services/predictive.png";
-import reliabilityImg from "../assets/services/reliability.png";
-import dynamicImg from "../assets/services/dynamic.png";
-import structuralImg from "../assets/services/structural.png";
-import monitoringImg from "../assets/services/monitoring.png";
-import supportImg from "../assets/services/support.png";
+import dinamicoEstructuralImg from "../assets/services/analisis-dinamico-estructural.png";
+import evaluacionEstructuralImg from "../assets/services/evaluacion-estructural.png";
+import femImg from "../assets/services/simulacion-fem.png";
+import monitoreoImg from "../assets/services/monitoreo-activos.png";
+import confiabilidadImg from "../assets/services/ingenieria-confiabilidad.png";
+import soporteImg from "../assets/services/soporte-tecnico.png";
 
 // Helper to map IDs to imported images
 const imageMap: Record<string, ImageMetadata> = {
-    "mantenimiento-predictivo": predictiveImg,
-    "ingenieria-confiabilidad": reliabilityImg,
-    "analisis-dinamico": dynamicImg,
-    "evaluacion-estructural": structuralImg,
-    "monitoreo-activos": monitoringImg,
-    "soporte-tecnico": supportImg,
+    "analisis-dinamico-estructural": dinamicoEstructuralImg,
+    "evaluacion-estructural": evaluacionEstructuralImg,
+    "simulacion-fem": femImg,
+    "monitoreo-activos": monitoreoImg,
+    "ingenieria-confiabilidad": confiabilidadImg,
+    "soporte-tecnico": soporteImg,
 };
 
 function getIconForService(id: string) {
   switch (id) {
-    case "mantenimiento-predictivo":
-      return "lucide:activity";
-    case "ingenieria-confiabilidad":
-      return "lucide:shield-check";
-    case "analisis-dinamico":
+    case "analisis-dinamico-estructural":
       return "lucide:waves";
     case "evaluacion-estructural":
-      return "lucide:construction";
+      return "lucide:ruler";
+    case "simulacion-fem":
+      return "lucide:box";
     case "monitoreo-activos":
       return "lucide:monitor-check";
+    case "ingenieria-confiabilidad":
+      return "lucide:shield-check";
     case "soporte-tecnico":
       return "lucide:headset";
     default:
@@ -108,7 +108,7 @@ const services = servicesData.map((s) => ({
                                 </h3>
                                 
                                 <p class="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
-                                    {service.description}
+                                    {service.shortDescription}
                                 </p>
 
                                 <a

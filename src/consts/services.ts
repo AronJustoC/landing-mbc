@@ -15,93 +15,129 @@ export interface ServiceData {
 
 export const services: ServiceData[] = [
     {
-        id: "mantenimiento-predictivo",
-        title: "Mantenimiento Predictivo",
-        href: "/servicios/mantenimiento-predictivo",
-        shortDescription: "Monitoreo de condición especializado para predecir fallas antes de que ocurran.",
-        fullDescription: "Nuestro servicio de Mantenimiento Predictivo utiliza tecnologías de vanguardia para monitorear la salud de sus activos en tiempo real. Detectamos anomalías incipientes antes de que se conviertan en fallas catastróficas, permitiéndole programar intervenciones solo cuando son estrictamente necesarias.",
+        id: "analisis-dinamico-estructural",
+        title: "Análisis Dinámico Estructural",
+        href: "/servicios/analisis-dinamico-estructural",
+        shortDescription: "Estudios avanzados de dinámica estructural: OMA, ODS y análisis modal.",
+        fullDescription: "Realizamos estudios profundos de la dinámica de estructuras y maquinaria para identificar resonancias, frecuencias naturales y modos de vibración que podrían causar fatiga estructural o fallas prematuras. Nuestro enfoque combina mediciones de campo con análisis avanzados para resolver problemas crónicos de vibración.",
         benefits: [
-            "Reducción drástica de paradas no programadas.",
-            "Optimización de costos de mantenimiento y repuestos.",
-            "Extensión de la vida útil de los equipos.",
-            "Mejora en la seguridad operativa."
-        ],
-        features: ["Análisis de Vibraciones ISO 18436", "Termografía Infrarroja", "Ultrasonido Acústico", "Análisis de Aceites"],
-        imagePrompt: "Industrial predictive maintenance dashboard with futuristic holographic data visualization, showing vibration waves and heat maps over a heavy machinery engine, cyan and black color scheme, high tech, minimal."
-    },
-    {
-        id: "ingenieria-confiabilidad",
-        title: "Ingeniería de Confiabilidad",
-        href: "/servicios/ingenieria-confiabilidad",
-        shortDescription: "Optimización de estrategias de mantenimiento basadas en datos precisos y riesgo.",
-        fullDescription: "Transformamos la gestión de sus activos mediante metodologías probadas como RCM (Mantenimiento Centrado en Confiabilidad) y FMEA. Analizamos sus datos históricos y operativos para diseñar estrategias que maximicen la disponibilidad y minimicen el riesgo.",
-        benefits: [
-            "Aumento de la disponibilidad operativa (OEE).",
-            "Reducción de riesgos y accidentes.",
-            "Toma de decisiones basada en datos (Data-Driven).",
-            "Alineación con normas ISO 55000."
-        ],
-        features: ["Análisis de Causa Raíz (RCA)", "Análisis de Weibull", "Optimización de Planes de Mantenimiento", "Gestión de Repuestos Críticos"],
-        imagePrompt: "Reliability engineering concept, abstract visualization of interconnected nodes and stability graphs, blueprint style, blueprint grid in background, cyan glowing lines, industrial context."
-    },
-    {
-        id: "analisis-dinamico",
-        title: "Análisis Dinámico",
-        href: "/servicios/analisis-dinamico",
-        shortDescription: "Diagnóstico Vibracional, Modal y Elementos Finitos.",
-        fullDescription: "Un paso más allá del monitoreo tradicional. Realizamos estudios profundos de la dinámica de sus estructuras y máquinas, identificando resonancias, frecuencias naturales y modos de vibración que podrían causar fatiga estructural.",
-        benefits: [
+            "Identificación precisa de frecuencias naturales y modos de vibración.",
             "Solución definitiva a problemas crónicos de vibración.",
-            "Validación de diseños estructurales.",
-            "Prevención de fallas por fatiga.",
-            "Aseguramiento de la integridad estructural."
+            "Validación de comportamiento dinámico ante cargas operativas.",
+            "Prevención de fallas por fatiga y resonancia."
         ],
-        features: ["Análisis Modal Operacional (OMA)", "ODS (Operational Deflection Shapes)", "Simulación de Elementos Finitos (FEM)", "Pruebas de Impacto (Bump Test)"],
-        imagePrompt: "Dynamic analysis simulation, 3D wireframe mesh of a mechanical part vibrating with colorful stress zones (cyan and blue), dark background, scientific and precise look."
+        features: [
+            "Análisis Modal Operacional (OMA)",
+            "ODS (Operational Deflection Shapes)",
+            "Pruebas de Impacto (Bump Test)",
+            "Análisis de Respuesta Transitoria",
+            "Correlación Test-Modelo"
+        ],
+        imagePrompt: "Dynamic structural analysis, 3D wireframe mesh of industrial structure vibrating with colorful stress zones in cyan and blue, mode shapes visualization, dark background, scientific and precise engineering look."
     },
     {
         id: "evaluacion-estructural",
         title: "Evaluación Estructural",
         href: "/servicios/evaluacion-estructural",
-        shortDescription: "Análisis profundo de integridad en infraestructura industrial.",
-        fullDescription: "Evaluamos la salud estructural de sus instalaciones críticas (chutes, tolvas, naves industriales) utilizando técnicas no destructivas y modelamiento avanzado. Garantizamos que sus estructuras soporten las cargas operativas de manera segura.",
+        shortDescription: "Análisis de integridad estructural con extensometría y ensayos no destructivos.",
+        fullDescription: "Evaluamos la salud estructural de instalaciones críticas utilizando técnicas avanzadas como extensometría (strain gauges), inspección por ultrasonido y análisis de tensiones. Garantizamos que sus estructuras soporten las cargas operativas de manera segura y cumplan con los estándares normativos.",
         benefits: [
-            "Garantía de seguridad estructural.",
-            "Cumplimiento normativo y legal.",
-            "Extensión de vida útil de infraestructura antigua.",
-            "Planes de refuerzo optimizados."
+            "Medición directa de deformaciones y esfuerzos reales.",
+            "Garantía de seguridad estructural certificada.",
+            "Cumplimiento de normativas internacionales.",
+            "Planes de refuerzo optimizados basados en datos."
         ],
-        features: ["Extensometría (Strain Gauges)", "Inspección Visual Especializada", "Cálculo de Cargas y Esfuerzos", "Monitoreo de Grietas"],
-        imagePrompt: "Structural integrity scanning, laser grid scanning a large industrial metal structure, highlighting stress points in cyan, night industrial setting, cybernetic aesthetic."
+        features: [
+            "Extensometría (Strain Gauges)",
+            "Análisis de Tensiones en Campo",
+            "Inspección por Ultrasonido (UT)",
+            "Evaluación de Fatiga Estructural",
+            "Medición de Esfuerzos Residuales"
+        ],
+        imagePrompt: "Structural evaluation with strain gauges, industrial steel structure with sensors attached, data visualization overlays showing stress and strain measurements in cyan, professional engineering setting."
+    },
+    {
+        id: "simulacion-fem",
+        title: "Simulación FEM",
+        href: "/servicios/simulacion-fem",
+        shortDescription: "Modelado y simulación por elementos finitos para análisis estructural y dinámico.",
+        fullDescription: "Aplicamos el Método de Elementos Finitos (FEM) para simular el comportamiento de estructuras y componentes bajo diversas condiciones de carga. Desde análisis estáticos hasta dinámicos, nuestras simulaciones permiten validar diseños, optimizar geometrías y predecir puntos críticos antes de la fabricación.",
+        benefits: [
+            "Validación virtual de diseños antes de fabricación.",
+            "Optimización de peso y resistencia de componentes.",
+            "Predicción de puntos de falla y concentración de esfuerzos.",
+            "Reducción de costos de prototipado físico."
+        ],
+        features: [
+            "Análisis Estático Lineal y No Lineal",
+            "Análisis Modal y de Frecuencias",
+            "Análisis Dinámico Transitorio",
+            "Análisis de Fatiga y Vida Útil",
+            "Optimización Topológica"
+        ],
+        imagePrompt: "FEM simulation visualization, 3D mesh of mechanical component with stress gradients in cyan blue color spectrum, finite element mesh visible, engineering software interface aesthetic, dark professional background."
     },
     {
         id: "monitoreo-activos",
         title: "Monitoreo de Activos",
         href: "/servicios/monitoreo-activos",
-        shortDescription: "Seguimiento continuo 24/7 en tiempo real.",
-        fullDescription: "Implementamos sistemas de monitoreo continuo (online) que vigilan sus activos más críticos 24/7. Reciba alertas instantáneas en su celular o centro de control ante cualquier desviación de los parámetros normales de operación.",
+        shortDescription: "Seguimiento continuo 24/7 de la condición de sus equipos críticos.",
+        fullDescription: "Implementamos sistemas de monitoreo continuo (online) que vigilan sus activos más críticos las 24 horas del día, los 7 días de la semana. Reciba alertas instantáneas ante cualquier desviación de los parámetros normales de operación, permitiendo decisiones proactivas de mantenimiento.",
         benefits: [
-            "Vigilancia ininterrumpida 24/7.",
-            "Alertas tempranas automáticas.",
-            "Acceso remoto a la condición de la máquina.",
-            "Integración con sistemas SCADA/DCS."
+            "Vigilancia ininterrumpida 24/7 de equipos críticos.",
+            "Alertas tempranas automáticas vía SMS, email o app.",
+            "Acceso remoto a la condición de máquinas desde cualquier lugar.",
+            "Integración con sistemas SCADA/DCS existentes."
         ],
-        features: ["Sensores IoT Industriales", "Sistemas de Protección de Maquinaria", "Tableros de Control en Nube", "Informes Automatizados"],
-        imagePrompt: "Asset monitoring center, multiple screens displaying real-time graphs and machinery status in cyan and dark blue interface, futuristic control room, depth of field."
+        features: [
+            "Sensores IoT Industriales",
+            "Sistemas de Protección de Maquinaria",
+            "Dashboards en Nube Personalizados",
+            "Análisis de Tendencias Automatizado",
+            "Informes de Condición Periódicos"
+        ],
+        imagePrompt: "Asset monitoring center, multiple screens displaying real-time graphs and machinery status in cyan and dark blue interface, industrial IoT sensors connected, futuristic control room aesthetic."
+    },
+    {
+        id: "ingenieria-confiabilidad",
+        title: "Ingeniería de Confiabilidad",
+        href: "/servicios/ingenieria-confiabilidad",
+        shortDescription: "Optimización de estrategias de mantenimiento basadas en datos y análisis de riesgo.",
+        fullDescription: "Transformamos la gestión de sus activos mediante metodologías probadas como RCM (Mantenimiento Centrado en Confiabilidad), FMEA y análisis de causa raíz. Analizamos datos históricos y operativos para diseñar estrategias que maximicen la disponibilidad y minimicen el riesgo operacional.",
+        benefits: [
+            "Aumento significativo de la disponibilidad operativa (OEE).",
+            "Reducción de riesgos operacionales y accidentes.",
+            "Toma de decisiones basada en datos (Data-Driven).",
+            "Alineación con normas ISO 55000 de gestión de activos."
+        ],
+        features: [
+            "Análisis de Causa Raíz (RCA)",
+            "Análisis de Weibull y Vida Útil",
+            "Implementación de RCM y FMEA",
+            "Optimización de Planes de Mantenimiento",
+            "Gestión de Repuestos Críticos"
+        ],
+        imagePrompt: "Reliability engineering concept, abstract visualization of interconnected nodes and reliability graphs, Weibull curves, blueprint style grid in background, cyan glowing lines, industrial data analytics context."
     },
     {
         id: "soporte-tecnico",
         title: "Soporte Técnico",
         href: "/servicios/soporte-tecnico",
-        shortDescription: "Asistencia experta y consultoría de alto nivel.",
-        fullDescription: "Ponemos a su disposición nuestro equipo de ingenieros certificados para resolver problemas complejos en campo. Desde el comisionamiento de nuevas plantas hasta la resolución de crisis operativas.",
+        shortDescription: "Asistencia experta en campo y consultoría especializada de alto nivel.",
+        fullDescription: "Ponemos a su disposición nuestro equipo de ingenieros certificados para resolver problemas complejos en campo. Desde el comisionamiento de nuevas instalaciones hasta la resolución de crisis operativas, brindamos respaldo técnico imparcial y de alta calidad.",
         benefits: [
-            "Respaldo de expertos certificados.",
-            "Solución rápida a emergencias.",
-            "Transferencia de conocimiento a su equipo.",
-            "Imparcialidad técnica."
+            "Respaldo de ingenieros certificados internacionalmente.",
+            "Solución rápida y efectiva a emergencias operativas.",
+            "Transferencia de conocimiento a su equipo técnico.",
+            "Opinión técnica imparcial e independiente."
         ],
-        features: ["Asistencia en Paradas de Planta", "Comisionamiento de Equipos", "Auditorías de Mantenimiento", "Capacitación In-House"],
-        imagePrompt: "Technical support engineers in field, silhouettes of engineers with safety helmets looking at a holographic tablet with technical data, industrial background, cinematic lighting, cyan highlights."
+        features: [
+            "Asistencia en Paradas de Planta",
+            "Comisionamiento de Equipos Rotativos",
+            "Auditorías de Programas de Mantenimiento",
+            "Capacitación In-House Certificada",
+            "Consultoría de Segundo Nivel"
+        ],
+        imagePrompt: "Technical support engineers in field, engineers with safety helmets analyzing holographic technical data on tablets, industrial plant background, professional lighting with cyan technology highlights."
     }
 ];
