@@ -6,40 +6,38 @@ import Footer from "../components/footer.astro";
 import StructuredData from "../components/StructuredData.astro";
 
 interface Props {
-  title?: string;
-  description?: string;
-  image?: string;
-  canonical?: string;
-  type?: 'website' | 'article';
-  noindex?: boolean;
+	title?: string;
+	description?: string;
+	image?: string;
+	canonical?: string;
+	type?: "website" | "article";
+	noindex?: boolean;
 }
 
 const {
-  title = 'MBC Predictive | Mantenimiento Predictivo & Ingeniería',
-  description = 'Especialistas en Mantenimiento Predictivo e Ingeniería en Cusco. Servicios de análisis vibracional, termografía, ultrasonido y alineamiento láser para optimizar la confiabilidad de su industria.',
-  image = '/og-image.jpg',
-  canonical,
-  type = 'website',
-  noindex = false,
+	title = "MBC | Mantenimiento Predictivo & Ingeniería",
+	description = "Especialistas en Mantenimiento Predictivo e Ingeniería en Cusco. Servicios de análisis vibracional, termografía, ultrasonido y alineamiento láser para optimizar la confiabilidad de su industria.",
+	image = "/og-image.jpg",
+	canonical,
+	type = "website",
+	noindex = false,
 } = Astro.props;
 
 // Default canonical URL based on current pathname
 const getCanonicalUrl = () => {
-  if (canonical) return canonical;
+	if (canonical) return canonical;
 
-  const siteUrl = Astro.site?.href || 'https://mbcpredictive.com';
-  const pathname = Astro.url?.pathname || '/';
-  return siteUrl.replace(/\/$/, '') + pathname;
+	const siteUrl = Astro.site?.href || "https://mbcpredictive.com";
+	const pathname = Astro.url?.pathname || "/";
+	return siteUrl.replace(/\/$/, "") + pathname;
 };
 
 const finalCanonical = getCanonicalUrl();
 
-const fullTitle = title.includes('MBC Predictive')
-  ? title
-  : `${title} | MBC Predictive`;
+const fullTitle = title.includes("MBC") ? title : `${title} | MBC`;
 
-const siteUrl = Astro.site?.href || 'https://mbcpredictive.com';
-const fullImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
+const siteUrl = Astro.site?.href || "https://mbcpredictive.com";
+const fullImage = image.startsWith("http") ? image : `${siteUrl}${image}`;
 ---
 
 <!doctype html>
@@ -60,8 +58,11 @@ const fullImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
 			name="keywords"
 			content="mantenimiento predictivo, cusco, ingeniería, análisis vibracional, termografía, ultrasonido, alineamiento láser, balanceo dinámico, industria 4.0"
 		/>
-		<meta name="author" content="MBC Predictive" />
-		<meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
+		<meta name="author" content="MBC" />
+		<meta
+			name="robots"
+			content={noindex ? "noindex, nofollow" : "index, follow"}
+		/>
 
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content={type} />
@@ -69,7 +70,7 @@ const fullImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
 		<meta property="og:title" content={fullTitle} />
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content={fullImage} />
-		<meta property="og:site_name" content="MBC Predictive" />
+		<meta property="og:site_name" content="MBC" />
 		<meta property="og:locale" content="es_PE" />
 
 		<!-- Twitter -->

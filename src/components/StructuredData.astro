@@ -14,8 +14,8 @@ const { type = 'organization', data } = Astro.props;
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'MBC Predictive',
-  legalName: 'MBC Predictive S.A.C.',
+  name: 'MBC',
+  legalName: 'MBC S.A.C.',
   url: 'https://mbcpredictive.com',
   logo: 'https://mbcpredictive.com/logo.png',
   description: 'Especialistas en Mantenimiento Predictivo e Ingeniería en Cusco, Perú. Servicios de análisis vibracional, termografía, ultrasonido y alineamiento láser.',
@@ -38,7 +38,7 @@ const organizationSchema = {
   },
   sameAs: [
     'https://www.facebook.com/mbcpredictive',
-    'https://www.linkedin.com/company/mbcpredictive',
+    'https://www.linkedin.com/company/mbc-confiabilidad/',
     'https://www.instagram.com/mbcpredictive',
   ],
   areaServed: {
@@ -57,7 +57,7 @@ const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
   '@id': 'https://mbcpredictive.com/#localbusiness',
-  name: 'MBC Predictive',
+  name: 'MBC',
   image: 'https://mbcpredictive.com/og-image.jpg',
   url: 'https://mbcpredictive.com',
   telephone: '+51-984-123-456',
@@ -93,7 +93,7 @@ const localBusinessSchema = {
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'MBC Predictive',
+  name: 'MBC',
   url: 'https://mbcpredictive.com/',
   description: 'Especialistas en Mantenimiento Predictivo e Ingeniería en Cusco, Perú',
   potentialAction: {
@@ -111,7 +111,7 @@ const serviceSchema = data ? {
   description: data.description || data.fullDescription,
   provider: {
     '@type': 'Organization',
-    name: 'MBC Predictive',
+    name: 'MBC',
     url: 'https://mbcpredictive.com',
   },
   areaServed: {

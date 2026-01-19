@@ -6,35 +6,35 @@ import SectionHero from "./SectionHero.astro";
 import servicesHeaderBg from "../assets/headers/services_header_background.png";
 
 // Dynamic Layout to map images to services from consts
-import predictiveImg from "../assets/services/predictive.png";
-import reliabilityImg from "../assets/services/reliability.png";
-import dynamicImg from "../assets/services/dynamic.png";
-import structuralImg from "../assets/services/structural.png";
-import monitoringImg from "../assets/services/monitoring.png";
-import supportImg from "../assets/services/support.png";
+import dinamicoEstructuralImg from "../assets/services/analisis-dinamico-estructural.png";
+import evaluacionEstructuralImg from "../assets/services/evaluacion-estructural.png";
+import femImg from "../assets/services/simulacion-fem.png";
+import monitoreoImg from "../assets/services/monitoreo-activos.png";
+import confiabilidadImg from "../assets/services/ingenieria-confiabilidad.png";
+import soporteImg from "../assets/services/soporte-tecnico.png";
 
 // Helper to map IDs to imported images
 const imageMap: Record<string, ImageMetadata> = {
-    "mantenimiento-predictivo": predictiveImg,
-    "ingenieria-confiabilidad": reliabilityImg,
-    "analisis-dinamico": dynamicImg,
-    "evaluacion-estructural": structuralImg,
-    "monitoreo-activos": monitoringImg,
-    "soporte-tecnico": supportImg,
+    "analisis-dinamico-estructural": dinamicoEstructuralImg,
+    "evaluacion-estructural": evaluacionEstructuralImg,
+    "simulacion-fem": femImg,
+    "monitoreo-activos": monitoreoImg,
+    "ingenieria-confiabilidad": confiabilidadImg,
+    "soporte-tecnico": soporteImg,
 };
 
 function getIconForService(id: string) {
   switch (id) {
-    case "mantenimiento-predictivo":
-      return "lucide:activity";
-    case "ingenieria-confiabilidad":
-      return "lucide:shield-check";
-    case "analisis-dinamico":
+    case "analisis-dinamico-estructural":
       return "lucide:waves";
     case "evaluacion-estructural":
-      return "lucide:construction";
+      return "lucide:ruler";
+    case "simulacion-fem":
+      return "lucide:box";
     case "monitoreo-activos":
       return "lucide:monitor-check";
+    case "ingenieria-confiabilidad":
+      return "lucide:shield-check";
     case "soporte-tecnico":
       return "lucide:headset";
     default:
@@ -64,69 +64,61 @@ const services = servicesData.map((s) => ({
 
     <div class="container mx-auto px-6 relative z-10 pt-20 max-w-7xl pb-24">
         <!-- Section Intro -->
-        <div class="text-center mb-20 animate-item">
-            <span class="text-[#31B0FF] font-bold text-[11px] uppercase tracking-[0.4em] mb-4 block">Soluciones Especializadas</span>
-            <h2 class="text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight">
-                Nuestras <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Capacidades</span>
+        <div class="text-center mb-16 animate-item">
+            <span class="text-[#31B0FF] font-semibold text-xs uppercase tracking-[0.3em] mb-3 block">Soluciones Especializadas</span>
+            <h2 class="text-3xl lg:text-4xl font-bold text-white tracking-tight leading-tight">
+                Nuestras <span class="text-gray-400">Capacidades</span>
             </h2>
-            <div class="h-px w-24 bg-gradient-to-r from-transparent via-[#31B0FF]/40 to-transparent mx-auto mt-6"></div>
+            <div class="h-px w-16 bg-[#31B0FF]/40 mx-auto mt-5"></div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {
                 services.map((service, index) => (
                     <div
-                        class="animate-item group holo-card relative bg-[#121214] rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-[0_0_50px_rgba(49,176,255,0.15)] h-full"
-                        style={`transition-delay: ${index * 100}ms`}
+                        class="animate-item group relative bg-[#0d1117] rounded-xl overflow-hidden border border-white/5 hover:border-[#31B0FF]/30 transition-all duration-500 hover:shadow-[0_10px_40px_-10px_rgba(49,176,255,0.15)] h-full"
+                        style={`transition-delay: ${index * 80}ms`}
                     >
-                        <div class="holo-border absolute inset-0 rounded-2xl z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        
-                        <article class="relative z-10 bg-[#121214] h-full rounded-2xl flex flex-col">
-                            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#31B0FF]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                            
+                        <article class="h-full flex flex-col">
                             <!-- Image Container -->
-                            <div class="w-full h-56 relative overflow-hidden">
-                                <div class="absolute inset-0 bg-gray-900/20 z-10 group-hover:bg-transparent transition-colors duration-500" />
+                            <div class="w-full h-48 relative overflow-hidden">
+                                <div class="absolute inset-0 bg-gradient-to-t from-[#0d1117] via-transparent to-transparent z-10" />
                                 <Image
                                     src={service.image}
                                     alt={service.title}
-                                    class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                                    class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
                                     width={600}
                                     height={400}
                                 />
-                                <!-- Number Watermark -->
-                                <div class="absolute bottom-4 left-6 z-20">
-                                    <span class="text-5xl font-bold text-white/10 select-none tracking-tighter">
-                                        {String(index + 1).padStart(2, "0")}
-                                    </span>
-                                </div>
                             </div>
 
-                            <div class="p-8 pb-10 flex-grow flex flex-col relative z-20">
-                                <div class="mb-6 flex items-center gap-4">
-                                    <div class="p-3 rounded-xl bg-[#31B0FF]/10 group-hover:scale-110 group-hover:bg-[#31B0FF] group-hover:text-white transition-all duration-300">
+                            <div class="p-6 flex-grow flex flex-col relative z-20">
+                                <div class="mb-4 flex items-center gap-3">
+                                    <div class="p-2.5 rounded-lg bg-[#31B0FF]/10 group-hover:bg-[#31B0FF]/20 transition-colors duration-300">
                                         <Icon
                                             name={service.icon}
-                                            class="w-6 h-6 text-[#31B0FF] group-hover:text-white transition-colors"
+                                            class="w-5 h-5 text-[#31B0FF]"
                                         />
                                     </div>
-                                    <div class="h-px flex-1 bg-gradient-to-r from-[#31B0FF]/20 to-transparent" />
+                                    <div class="h-px flex-1 bg-white/5" />
                                 </div>
 
-                                <h3 class="text-xl font-bold text-white mb-4 group-hover:text-[#31B0FF] transition-colors tracking-tight">
+                                <h3 class="text-lg font-semibold text-white mb-3 group-hover:text-[#31B0FF] transition-colors tracking-tight">
                                     {service.title}
                                 </h3>
                                 
-                                <p class="text-gray-400 text-sm leading-relaxed mb-8 flex-grow font-light">
-                                    {service.description}
+                                <p class="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
+                                    {service.shortDescription}
                                 </p>
 
                                 <a
                                     href={service.href}
-                                    class="inline-flex items-center gap-2 text-xs font-bold text-[#31B0FF] uppercase tracking-widest hover:text-white transition-colors mt-auto group/link"
+                                    class="inline-flex items-center gap-2 text-sm font-medium text-[#31B0FF] hover:text-white transition-colors mt-auto group/link"
                                 >
-                                    Explorar Servicio
-                                    <span class="group-hover/link:translate-x-1.5 transition-transform duration-300">→</span>
+                                    <span class="relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-white group-hover/link:after:w-full after:transition-all after:duration-300">
+                                        Ver detalles
+                                    </span>
+                                    <Icon name="lucide:arrow-right" class="w-4 h-4 group-hover/link:translate-x-1 transition-transform duration-300" />
                                 </a>
                             </div>
                         </article>
@@ -139,43 +131,13 @@ const services = servicesData.map((s) => ({
     <style>
         .animate-item {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .animate-item.is-visible {
             opacity: 1;
             transform: translateY(0);
-        }
-
-        /* Holographic Border Effect */
-        @keyframes border-rotate {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
-        
-        .holo-border::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(
-                transparent,
-                transparent,
-                transparent,
-                #31B0FF,
-                transparent,
-                transparent,
-                transparent,
-                #22d3ee
-            );
-            animation: border-rotate 4s linear infinite;
         }
     </style>
 </section>
