@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^12.6.12",
     "@astrojs/vercel": "^9.0.3",
     "@iconify-json/lucide": "^1.2.78",
     "@iconify-json/simple-icons": "^1.2.64",

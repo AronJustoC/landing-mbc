@@ -2,12 +2,13 @@ import { defineConfig } from 'astro/config';
 import icon from "astro-icon";
 import tailwindcss from '@tailwindcss/vite'
 
-import vercel from '@astrojs/vercel';
+import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
   site: 'https://mbcpredictive.com',
   output: 'server',
   adapter: vercel(),
+  adapter: cloudflare(),
   vite: {
     plugins: [tailwindcss()]
   },
