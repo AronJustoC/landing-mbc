@@ -18,126 +18,160 @@ export const services: ServiceData[] = [
         id: "analisis-dinamico-estructural",
         title: "Análisis Dinámico Estructural",
         href: "/servicios/analisis-dinamico-estructural",
-        shortDescription: "Estudios avanzados de dinámica estructural: OMA, ODS y análisis modal.",
-        fullDescription: "Realizamos estudios profundos de la dinámica de estructuras y maquinaria para identificar resonancias, frecuencias naturales y modos de vibración que podrían causar fatiga estructural o fallas prematuras. Nuestro enfoque combina mediciones de campo con análisis avanzados para resolver problemas crónicos de vibración.",
+        shortDescription: "Analisis Modal Operacional (OMA), Analisis de Deflexión Operativa (ODS), Estudio de Elementos Finitos (FEA) y Medición de Deformaciones.",
+        fullDescription: "Realizamos estudios profundos de la dinámica de estructuras y maquinaria para identificar resonancias, frecuencias naturales y modos de vibración que podrían causar fatiga estructural o fallas prematuras. Combina OMA, ODS y FEA para una solución integral.",
         benefits: [
-            "Identificación precisa de frecuencias naturales y modos de vibración.",
-            "Solución definitiva a problemas crónicos de vibración.",
-            "Validación de comportamiento dinámico ante cargas operativas.",
-            "Prevención de fallas por fatiga y resonancia."
+            "Identificación precisa de frecuencias naturales.",
+            "Solución a problemas crónicos de vibración.",
+            "Validación de comportamiento dinámico.",
+            "Prevención de fallas por fatiga."
         ],
         features: [
             "Análisis Modal Operacional (OMA)",
             "ODS (Operational Deflection Shapes)",
-            "Pruebas de Impacto (Bump Test)",
-            "Análisis de Respuesta Transitoria",
-            "Correlación Test-Modelo"
+            "Estudio de Elementos Finitos (FEA)",
+            "Medición de Deformaciones"
         ],
-        imagePrompt: "Dynamic structural analysis, 3D wireframe mesh of industrial structure vibrating with colorful stress zones in cyan and blue, mode shapes visualization, dark background, scientific and precise engineering look."
+        imagePrompt: "Dynamic structural analysis wireframe"
     },
     {
-        id: "evaluacion-estructural",
-        title: "Evaluación Estructural",
-        href: "/servicios/evaluacion-estructural",
-        shortDescription: "Análisis de integridad estructural con extensometría y ensayos no destructivos.",
-        fullDescription: "Evaluamos la salud estructural de instalaciones críticas utilizando técnicas avanzadas como extensometría (strain gauges), inspección por ultrasonido y análisis de tensiones. Garantizamos que sus estructuras soporten las cargas operativas de manera segura y cumplan con los estándares normativos.",
+        id: "analisis-vibratorio",
+        title: "Análisis Vibratorio",
+        href: "/servicios/analisis-vibratorio",
+        shortDescription: "Diagnostico Vibratorio Estructural y Equipos Rotativos.",
+        fullDescription: "Diagnóstico experto de problemas vibratorios en estructuras y maquinaria rotativa. Identificamos desbalance, desalineación, holguras y problemas estructurales mediante análisis espectral avanzado.",
         benefits: [
-            "Medición directa de deformaciones y esfuerzos reales.",
-            "Garantía de seguridad estructural certificada.",
-            "Cumplimiento de normativas internacionales.",
-            "Planes de refuerzo optimizados basados en datos."
+            "Detección temprana de fallas mecánicas.",
+            "Reducción de paradas no programadas.",
+            "Extensión de la vida útil de rodamientos.",
+            "Diagnóstico preciso de la raíz del problema."
         ],
         features: [
-            "Extensometría (Strain Gauges)",
-            "Análisis de Tensiones en Campo",
-            "Inspección por Ultrasonido (UT)",
-            "Evaluación de Fatiga Estructural",
-            "Medición de Esfuerzos Residuales"
+            "Análisis Espectral de Vibraciones",
+            "Diagnóstico de Equipos Rotativos",
+            "Evaluación de Severidad Vibratoria",
+            "Balanceo Dinámico en Sitio"
         ],
-        imagePrompt: "Structural evaluation with strain gauges, industrial steel structure with sensors attached, data visualization overlays showing stress and strain measurements in cyan, professional engineering setting."
+        imagePrompt: "Vibration analysis waveform spectrum"
     },
     {
-        id: "simulacion-fem",
-        title: "Simulación FEM",
-        href: "/servicios/simulacion-fem",
-        shortDescription: "Modelado y simulación por elementos finitos para análisis estructural y dinámico.",
-        fullDescription: "Aplicamos el Método de Elementos Finitos (FEM) para simular el comportamiento de estructuras y componentes bajo diversas condiciones de carga. Desde análisis estáticos hasta dinámicos, nuestras simulaciones permiten validar diseños, optimizar geometrías y predecir puntos críticos antes de la fabricación.",
+        id: "monitoreo-condicion",
+        title: "Monitoreo de Condición",
+        href: "/servicios/monitoreo-condicion",
+        shortDescription: "Monitoreo de Parametros Vibratorio y Deformaciones.",
+        fullDescription: "Seguimiento continuo de la salud de sus activos mediante el control de parámetros vibratorios y deformaciones. Detecte cambios sutiles antes de que se conviertan en fallas catastróficas.",
         benefits: [
-            "Validación virtual de diseños antes de fabricación.",
-            "Optimización de peso y resistencia de componentes.",
-            "Predicción de puntos de falla y concentración de esfuerzos.",
-            "Reducción de costos de prototipado físico."
+            "Tendencias de evolución de fallas.",
+            "Planificación optimizada de mantenimiento.",
+            "Reducción de costos correctivos.",
+            "Control total sobre la salud del activo."
         ],
         features: [
-            "Análisis Estático Lineal y No Lineal",
-            "Análisis Modal y de Frecuencias",
-            "Análisis Dinámico Transitorio",
-            "Análisis de Fatiga y Vida Útil",
-            "Optimización Topológica"
+            "Tendencias de Vibración Global",
+            "Monitoreo de Envolvente de Aceleración",
+            "Control de Deformaciones Estáticas",
+            "Alarmas Tempranas Configurables"
         ],
-        imagePrompt: "FEM simulation visualization, 3D mesh of mechanical component with stress gradients in cyan blue color spectrum, finite element mesh visible, engineering software interface aesthetic, dark professional background."
+        imagePrompt: "Condition monitoring dashboard graphs"
     },
     {
-        id: "monitoreo-activos",
-        title: "Monitoreo de Activos",
-        href: "/servicios/monitoreo-activos",
-        shortDescription: "Seguimiento continuo 24/7 de la condición de sus equipos críticos.",
-        fullDescription: "Implementamos sistemas de monitoreo continuo (online) que vigilan sus activos más críticos las 24 horas del día, los 7 días de la semana. Reciba alertas instantáneas ante cualquier desviación de los parámetros normales de operación, permitiendo decisiones proactivas de mantenimiento.",
+        id: "inspeccion-integridad-estructural",
+        title: "Inspección de Integridad Estructural",
+        href: "/servicios/inspeccion-integridad-estructural",
+        shortDescription: "Ensayos No Destructivos.",
+        fullDescription: "Evaluación exhaustiva de la integridad de componentes y estructuras mediante Ensayos No Destructivos (END). Detectamos grietas, corrosión y defectos ocultos sin dañar el equipo.",
         benefits: [
-            "Vigilancia ininterrumpida 24/7 de equipos críticos.",
-            "Alertas tempranas automáticas vía SMS, email o app.",
-            "Acceso remoto a la condición de máquinas desde cualquier lugar.",
-            "Integración con sistemas SCADA/DCS existentes."
+            "Detección de defectos subsuperficiales.",
+            "Aseguramiento de la calidad de soldaduras.",
+            "Evaluación de corrosión y desgaste.",
+            "Certificación de seguridad operativa."
         ],
         features: [
-            "Sensores IoT Industriales",
-            "Sistemas de Protección de Maquinaria",
-            "Dashboards en Nube Personalizados",
-            "Análisis de Tendencias Automatizado",
-            "Informes de Condición Periódicos"
+            "Ultrasonido (UT)",
+            "Partículas Magnéticas (MT)",
+            "Líquidos Penetrantes (PT)",
+            "Inspección Visual Remota (RVI)"
         ],
-        imagePrompt: "Asset monitoring center, multiple screens displaying real-time graphs and machinery status in cyan and dark blue interface, industrial IoT sensors connected, futuristic control room aesthetic."
+        imagePrompt: "Nondestructive testing inspection"
     },
     {
         id: "ingenieria-confiabilidad",
         title: "Ingeniería de Confiabilidad",
         href: "/servicios/ingenieria-confiabilidad",
-        shortDescription: "Optimización de estrategias de mantenimiento basadas en datos y análisis de riesgo.",
-        fullDescription: "Transformamos la gestión de sus activos mediante metodologías probadas como RCM (Mantenimiento Centrado en Confiabilidad), FMEA y análisis de causa raíz. Analizamos datos históricos y operativos para diseñar estrategias que maximicen la disponibilidad y minimicen el riesgo operacional.",
+        shortDescription: "Optimización de estrategias de mantenimiento basadas en datos y riesgo.",
+        fullDescription: "Transformamos la gestión de mantenimiento mediante el análisis de datos y riesgos. Diseñamos estrategias RCM y análisis de causa raíz para maximizar la disponibilidad y rentabilidad.",
         benefits: [
-            "Aumento significativo de la disponibilidad operativa (OEE).",
-            "Reducción de riesgos operacionales y accidentes.",
-            "Toma de decisiones basada en datos (Data-Driven).",
-            "Alineación con normas ISO 55000 de gestión de activos."
+            "Planes de mantenimiento costo-efectivos.",
+            "Reducción de recurrencia de fallas.",
+            "Mejora del OEE (Eficiencia Global).",
+            "Gestión de riesgos optimizada."
         ],
         features: [
+            "Mantenimiento Centrado en Confiabilidad (RCM)",
             "Análisis de Causa Raíz (RCA)",
-            "Análisis de Weibull y Vida Útil",
-            "Implementación de RCM y FMEA",
-            "Optimización de Planes de Mantenimiento",
-            "Gestión de Repuestos Críticos"
+            "Análisis de Criticidad",
+            "Optimización de Repuestos"
         ],
-        imagePrompt: "Reliability engineering concept, abstract visualization of interconnected nodes and reliability graphs, Weibull curves, blueprint style grid in background, cyan glowing lines, industrial data analytics context."
+        imagePrompt: "Reliability engineering charts"
     },
     {
-        id: "soporte-tecnico",
-        title: "Soporte Técnico",
-        href: "/servicios/soporte-tecnico",
-        shortDescription: "Asistencia experta en campo y consultoría especializada de alto nivel.",
-        fullDescription: "Ponemos a su disposición nuestro equipo de ingenieros certificados para resolver problemas complejos en campo. Desde el comisionamiento de nuevas instalaciones hasta la resolución de crisis operativas, brindamos respaldo técnico imparcial y de alta calidad.",
+        id: "monitoreo-kpis-zarandas",
+        title: "Monitoreo de KPIs Dinamicos en Zarandas",
+        href: "/servicios/monitoreo-kpis-zarandas",
+        shortDescription: "Monitoreo en Línea de Parametros de Stroke, Aceleración G y RPM Operativo.",
+        fullDescription: "Solución especializada para el monitoreo de zarandas vibratorias. Control en tiempo real de Stroke, aceleraciones G y RPM para asegurar una clasificación eficiente y prevenir daños estructurales.",
         benefits: [
-            "Respaldo de ingenieros certificados internacionalmente.",
-            "Solución rápida y efectiva a emergencias operativas.",
-            "Transferencia de conocimiento a su equipo técnico.",
-            "Opinión técnica imparcial e independiente."
+            "Optimización de la eficiencia de cribado.",
+            "Prevención de fracturas en cuerpos de zarandas.",
+            "Control de operación dentro de diseño.",
+            "Alerta de condiciones de resonancia."
         ],
         features: [
-            "Asistencia en Paradas de Planta",
-            "Comisionamiento de Equipos Rotativos",
-            "Auditorías de Programas de Mantenimiento",
-            "Capacitación In-House Certificada",
-            "Consultoría de Segundo Nivel"
+            "Medición de Stroke en Tiempo Real",
+            "Monitoreo de Aceleración G",
+            "Control de RPM y Fase",
+            "Detección de Movimiento Irregular"
         ],
-        imagePrompt: "Technical support engineers in field, engineers with safety helmets analyzing holographic technical data on tablets, industrial plant background, professional lighting with cyan technology highlights."
+        imagePrompt: "Vibrating screen monitoring system"
+    },
+    {
+        id: "estudio-frf",
+        title: "Estudio de Función de Respuesta en Frecuencia",
+        href: "/servicios/estudio-frf",
+        shortDescription: "Extracción de parametros modales FRF, Rigidez y Amortiguamiento.",
+        fullDescription: "Pruebas experimentales para determinar las Funciones de Respuesta en Frecuencia (FRF) de sistemas mecánicos. Obtenemos parámetros clave como rigidez dinámica, masa aparente y amortiguamiento.",
+        benefits: [
+            "Caracterización dinámica precisa.",
+            "Validación de modelos matemáticos.",
+            "Solución a problemas de resonancia.",
+            "Diseño de absorbedores dinámicos."
+        ],
+        features: [
+            "Pruebas de Impacto Instrumentadas",
+            "Excitación con Shaker Electrodinámico",
+            "Cálculo de Rigidez Dinámica",
+            "Estimación de Amortiguamiento Modal"
+        ],
+        imagePrompt: "Frequency response function graph"
+    },
+    {
+        id: "exposicion-humana",
+        title: "Monitoreo y Evaluación de Exposición Humana a Vibraciones – ISO 2631",
+        href: "/servicios/exposicion-humana",
+        shortDescription: "Análisis de Exposición, Identificación de Condiciones Críticas del Cuerpo Humano.",
+        fullDescription: "Evaluación de vibraciones de cuerpo entero y mano-brazo según normativa ISO 2631. Protegemos la salud ocupacional de los operadores identificando condiciones críticas de exposición.",
+        benefits: [
+            "Cumplimiento normativo ISO 2631.",
+            "Protección de la salud del operador.",
+            "Reducción de fatiga laboral.",
+            "Prevención de enfermedades profesionales."
+        ],
+        features: [
+            "Medición de Vibración Cuerpo Entero",
+            "Medición de Vibración Mano-Brazo",
+            "Cálculo de Dosis Diaria A(8)",
+            "Mapas de Riesgo Vibratorio"
+        ],
+        imagePrompt: "Human vibration exposure analysis"
     }
 ];

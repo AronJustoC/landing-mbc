@@ -24,13 +24,10 @@ export async function getStaticPaths() {
 const { service } = Astro.props;
 
 // Map Service IDs to new English filenames
+// Map Service IDs to filenames if they don't match the ID exactly
 const imageMap: Record<string, string> = {
-    "mantenimiento-predictivo": "predictive",
-    "ingenieria-confiabilidad": "reliability",
-    "analisis-dinamico": "dynamic",
-    "evaluacion-estructural": "structural",
-    "monitoreo-activos": "monitoring",
-    "soporte-tecnico": "support",
+    "inspeccion-integridad-estructural": "inspeccion-integridad",
+    "monitoreo-kpis-zarandas": "monitoreo-kpis",
 };
 
 const imageName = imageMap[service.id] || service.id;

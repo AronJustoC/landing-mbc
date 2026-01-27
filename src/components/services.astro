@@ -7,36 +7,44 @@ import servicesHeaderBg from "../assets/headers/services_header_background.png";
 
 // Dynamic Layout to map images to services from consts
 import dinamicoEstructuralImg from "../assets/services/analisis-dinamico-estructural.png";
-import evaluacionEstructuralImg from "../assets/services/evaluacion-estructural.png";
-import femImg from "../assets/services/simulacion-fem.png";
-import monitoreoImg from "../assets/services/monitoreo-activos.png";
+import analisisVibratorioImg from "../assets/services/analisis-vibratorio.png";
+import monitoreoCondicionImg from "../assets/services/monitoreo-condicion.png";
+import inspeccionIntegridadImg from "../assets/services/inspeccion-integridad.png";
 import confiabilidadImg from "../assets/services/ingenieria-confiabilidad.png";
-import soporteImg from "../assets/services/soporte-tecnico.png";
+import monitoreoKpisImg from "../assets/services/monitoreo-kpis.png";
+import estudioFrfImg from "../assets/services/estudio-frf.png";
+import exposicionHumanaImg from "../assets/services/exposicion-humana.png";
 
 // Helper to map IDs to imported images
 const imageMap: Record<string, ImageMetadata> = {
     "analisis-dinamico-estructural": dinamicoEstructuralImg,
-    "evaluacion-estructural": evaluacionEstructuralImg,
-    "simulacion-fem": femImg,
-    "monitoreo-activos": monitoreoImg,
+    "analisis-vibratorio": analisisVibratorioImg,
+    "monitoreo-condicion": monitoreoCondicionImg,
+    "inspeccion-integridad-estructural": inspeccionIntegridadImg,
     "ingenieria-confiabilidad": confiabilidadImg,
-    "soporte-tecnico": soporteImg,
+    "monitoreo-kpis-zarandas": monitoreoKpisImg,
+    "estudio-frf": estudioFrfImg,
+    "exposicion-humana": exposicionHumanaImg,
 };
 
 function getIconForService(id: string) {
   switch (id) {
     case "analisis-dinamico-estructural":
       return "lucide:waves";
-    case "evaluacion-estructural":
-      return "lucide:ruler";
-    case "simulacion-fem":
-      return "lucide:box";
-    case "monitoreo-activos":
+    case "analisis-vibratorio":
+      return "lucide:activity";
+    case "monitoreo-condicion":
       return "lucide:monitor-check";
+    case "inspeccion-integridad-estructural":
+      return "lucide:scan-eye";
     case "ingenieria-confiabilidad":
       return "lucide:shield-check";
-    case "soporte-tecnico":
-      return "lucide:headset";
+    case "monitoreo-kpis-zarandas":
+      return "lucide:bar-chart-2"; // Or lucide:gauge
+    case "estudio-frf":
+      return "lucide:audio-waveform";
+    case "exposicion-humana":
+      return "lucide:user-check"; // Or lucide:accessibility
     default:
       return "lucide:circle";
   }
@@ -72,11 +80,11 @@ const services = servicesData.map((s) => ({
             <div class="h-px w-16 bg-[#31B0FF]/40 mx-auto mt-5"></div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="flex flex-wrap justify-center gap-6">
             {
                 services.map((service, index) => (
                     <div
-                        class="animate-item group relative bg-[#0d1117] rounded-xl overflow-hidden border border-white/5 hover:border-[#31B0FF]/30 transition-all duration-500 hover:shadow-[0_10px_40px_-10px_rgba(49,176,255,0.15)] h-full"
+                        class="animate-item group relative bg-[#0d1117] rounded-xl overflow-hidden border border-white/5 hover:border-[#31B0FF]/30 transition-all duration-500 hover:shadow-[0_10px_40px_-10px_rgba(49,176,255,0.15)] h-full w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
                         style={`transition-delay: ${index * 80}ms`}
                     >
                         <article class="h-full flex flex-col">
@@ -92,7 +100,7 @@ const services = servicesData.map((s) => ({
                                 />
                             </div>
 
-                            <div class="p-6 flex-grow flex flex-col relative z-20">
+                            <div class="p-4 flex-grow flex flex-col relative z-20">
                                 <div class="mb-4 flex items-center gap-3">
                                     <div class="p-2.5 rounded-lg bg-[#31B0FF]/10 group-hover:bg-[#31B0FF]/20 transition-colors duration-300">
                                         <Icon
@@ -103,11 +111,11 @@ const services = servicesData.map((s) => ({
                                     <div class="h-px flex-1 bg-white/5" />
                                 </div>
 
-                                <h3 class="text-lg font-semibold text-white mb-3 group-hover:text-[#31B0FF] transition-colors tracking-tight">
+                                <h3 class="text-lg font-semibold text-white group-hover:text-[#31B0FF] transition-colors tracking-tight line-clamp-2 h-[3.5rem] flex items-center">
                                     {service.title}
                                 </h3>
                                 
-                                <p class="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
+                                <p class="text-gray-400 text-sm leading-relaxed  line-clamp-2 h-[2.5rem] mb-4">
                                     {service.shortDescription}
                                 </p>
 
