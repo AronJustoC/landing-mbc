@@ -9,6 +9,46 @@ import aboutHeaderBg from "../assets/headers/about_header_background.png";
 import brochure from "../assets/about/MBC-Brochure.pdf";
 import SectionHero from "./SectionHero.astro";
 import BackgroundGrid from "./BackgroundGrid.astro";
+import Profesional2 from "../assets/about/profesional-PPY.jpeg";
+import Profesional1 from "../assets/about/profesional-ACC.png";
+import Profesional3 from "../assets/about/profesional-ALD.png";
+import Profesional4 from "../assets/about/profesional-YPI.png";
+
+
+const TEAM = [
+    {
+        name: "Ing. Percy P. Y.",
+        role: "Gerente Técnico",
+        specialties: ["Analista de Vibraciones Cat. III", "Gestión de Mantenimiento"],
+        image: Profesional1,
+        bio: "Líder con más de 6 años de experiencia en mantenimiento predictivo. Especialista en diagnóstico de maquinaria crítica en minería y gran industria, liderando equipos de alto rendimiento.",
+        linkedin: "https://www.linkedin.com",
+    },
+    {
+        name: "Ing. Alexander ...............",
+        role: "Gerente Técnico",
+        specialties: ["Ingeniería de Confiabilidad (CMRP)", "Gestión de Activos"],
+        image: Profesional2,
+        bio: "Experto en implementación de estrategias RCM y gestión de activos. Enfocado en la optimización de costos y mejora de la disponibilidad operativa mediante análisis de datos.",
+        linkedin: "https://www.linkedin.com",
+    },
+    {
+        name: "Bach. Especialista 1",
+        role: "Analista Senior",
+        specialties: ["Analista de Vibraciones Cat. II", "Ultrasonido Acústico Nivel II"],
+        image: Profesional3,
+        bio: "Supervisor de campo con amplia trayectoria en ensayos no destructivos. Garantiza la calidad y seguridad en cada intervención técnica, asegurando el cumplimiento de normativas internacionales.",
+        linkedin: "https://www.linkedin.com",
+    },
+    {
+        name: "Bach. Especialista 2",
+        role: "Analista Senior",
+        specialties: ["Análisis Modal Experimental", "Análisis ODS"],
+        image: Profesional4,
+        bio: "Especialista en dinámica estructural y solución de problemas de resonancia. Utiliza tecnología avanzada para modelamiento y simulación de comportamiento de activos.",
+        linkedin: "https://www.linkedin.com",
+    },
+];
 ---
 
 <section id="nosotros" class="bg-[#08080A] relative overflow-hidden">
@@ -318,6 +358,75 @@ import BackgroundGrid from "./BackgroundGrid.astro";
             </div>
           </article>
         </div>
+      </div>
+    </div>
+
+    <!-- 5. Nuestro Equipo -->
+    <div id="equipo" class="mb-20">
+      <div class="text-center mb-16 animate-item">
+        <span
+          class="text-[#31B0FF] font-semibold text-xs uppercase tracking-[0.3em] mb-3 block"
+          >Liderazgo Técnico</span
+        >
+        <h2
+          class="text-3xl lg:text-4xl font-bold text-white tracking-tight leading-tight"
+        >
+          Profesionales a <span class="text-gray-400">Cargo</span>
+        </h2>
+        <div class="h-px w-16 bg-[#31B0FF]/40 mx-auto mt-5"></div>
+      </div>
+
+      <div class="space-y-24">
+        {
+          TEAM.map((member, index) => (
+            <div class={`animate-item flex flex-col lg:flex-row gap-8 lg:gap-20 items-center ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
+              <!-- Imagen del Profesional -->
+              <div class="w-full max-w-sm lg:max-w-none lg:w-4/12 relative group">
+                <div class="absolute inset-0 bg-[#31B0FF]/20 blur-3xl rounded-full opacity-0 group-hover:opacity-30 transition-opacity duration-700"></div>
+                <a
+                  href={member.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="block relative rounded-2xl overflow-hidden border border-white/10 group-hover:border-[#31B0FF]/30 transition-all duration-500 shadow-2xl cursor-pointer"
+                >
+                    <div class="aspect-[4/5] relative">
+                         <Image
+                          src={member.image}
+                          alt={member.name}
+                          class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#08080A] via-transparent to-transparent opacity-40"></div>
+                        <!-- LinkedIn Overlay Icon -->
+                        <div class="absolute bottom-4 right-4 bg-[#0077b5] p-2.5 rounded-lg opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 z-20 shadow-lg">
+                            <Icon name="lucide:linkedin" class="w-5 h-5 text-white" />
+                        </div>
+                    </div>
+                </a>
+              </div>
+
+              <!-- Información y Biografía -->
+              <div class="w-full lg:w-8/12">
+                 <div class={`flex flex-col ${index % 2 !== 0 ? 'lg:items-end lg:text-right' : 'lg:items-start lg:text-left'}`}>
+                    <span class="text-[#31B0FF] font-bold text-sm tracking-widest uppercase mb-2">{member.role}</span>
+                    <h3 class="text-3xl lg:text-4xl font-bold text-white mb-6">{member.name}</h3>
+                    
+                    <p class="text-gray-300 text-lg leading-relaxed mb-8 font-light max-w-2xl">
+                        {member.bio}
+                    </p>
+                    
+                    <div class={`flex flex-wrap gap-3 ${index % 2 !== 0 ? 'lg:justify-end' : 'lg:justify-start'}`}>
+                        {member.specialties.map((specialty) => (
+                            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 border border-white/10 hover:border-[#31B0FF]/30 transition-colors">
+                                <Icon name="lucide:award" class="w-4 h-4 text-[#31B0FF]" />
+                                <span class="text-xs md:text-sm text-gray-300 font-medium">{specialty}</span>
+                            </div>
+                        ))}
+                    </div>
+                 </div>
+              </div>
+            </div>
+          ))
+        }
       </div>
     </div>
   </div>
