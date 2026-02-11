@@ -13,8 +13,9 @@ interface Props {
     subtitle?: string;
     image: ImageMetadata;
     id?: string;
-    large?: boolean; // Option to make it a full page hero vs section header
+    large?: boolean;
     breadcrumbItems?: BreadcrumbItem[];
+    category?: string; // Optional small text above title
 }
 
 const {
@@ -24,67 +25,74 @@ const {
     id,
     large = true,
     breadcrumbItems,
+    category,
 } = Astro.props;
 ---
 
 <div
     id={id}
-    class={`relative flex flex-col items-center justify-center overflow-hidden bg-[#08080A] ${large ? "min-h-[50vh] md:min-h-[60vh] pt-32 pb-20" : "min-h-[40vh] pt-28 pb-16"}`}
+    class={`relative flex flex-col items-center justify-center overflow-hidden bg-[#08080A] ${large ? "min-h-[60vh] md:min-h-[75vh] pt-32 pb-24" : "min-h-[45vh] pt-28 pb-16"}`}
 >
-    <!-- Background Image with Overlay -->
+    <!-- Background Image with Ultra-Premium Overlay -->
     <div class="absolute inset-0 z-0">
         <div class="animate-hero-bg absolute inset-0">
             <Image
                 src={image}
                 alt={`${title} background`}
-                class="w-full h-full object-cover opacity-30 mix-blend-screen"
+                class="w-full h-full object-cover opacity-20 contrast-125 grayscale-[50%]"
                 width={1920}
                 height={1080}
             />
         </div>
-        <div
-            class="absolute inset-0 bg-gradient-to-b from-[#08080A]/60 via-[#08080A]/50 to-[#08080A]"
-        >
-        </div>
-        <div
-            class="absolute inset-0 bg-gradient-to-r from-[#08080A] via-transparent to-[#08080A]"
-        >
-        </div>
+        <!-- Gradient layers for depth -->
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#08080A_100%)]"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#08080A]/80 via-transparent to-[#08080A]"></div>
     </div>
 
     {
         breadcrumbItems && (
-            <div class="container mx-auto px-4 z-20 relative w-full mb-auto">
+            <div class="container mx-auto px-6 z-20 relative flex justify-center mb-auto max-w-7xl">
                 <Breadcrumb items={breadcrumbItems} />
             </div>
         )
     }
 
-    <div class="container mx-auto px-4 z-10 relative text-center mt-auto">
+    <div class="container mx-auto px-6 z-10 relative text-center mt-auto max-w-5xl">
+        {category && (
+            <span class="text-[#31B0FF] font-bold text-[10px] uppercase tracking-[0.5em] mb-6 block opacity-0 animate-blur-up" style="animation-delay: 0.1s;">
+                {category}
+            </span>
+        )}
+        
         <h2
-            class="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight opacity-0 animate-blur-up"
-            style="animation-delay: 0.1s;"
+            class="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 tracking-tighter opacity-0 animate-blur-up"
+            style="animation-delay: 0.2s;"
         >
-            <span
-                class="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400"
-                >{title}</span
-            >
+            {title.includes(" ") ? (
+                <>
+                    <span class="text-white">{title.split(" ")[0]}</span>
+                    <span class="text-gray-500 italic ml-2">{title.split(" ").slice(1).join(" ")}</span>
+                </>
+            ) : (
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">{title}</span>
+            )}
         </h2>
+        
         {
             subtitle && (
                 <p
-                    class="text-xl md:text-2xl text-[#31B0FF] font-light max-w-3xl mx-auto drop-shadow-lg drop-shadow-black/20 opacity-0 animate-blur-up"
-                    style="animation-delay: 0.3s;"
+                    class="text-lg md:text-xl text-gray-400 font-light max-w-3xl mx-auto leading-relaxed opacity-0 animate-blur-up"
+                    style="animation-delay: 0.4s;"
                 >
                     {subtitle}
                 </p>
             )
         }
 
-        <!-- Decoration Line -->
+        <!-- Refined Decoration Line -->
         <div
-            class="h-1 bg-gradient-to-r from-[#31B0FF] to-[#0099cc] rounded-full mx-auto mt-8 opacity-0 animate-grow-line"
-            style="animation-delay: 0.6s;"
+            class="h-px bg-gradient-to-r from-transparent via-[#31B0FF]/40 to-transparent mx-auto mt-12 opacity-0 animate-grow-line"
+            style="animation-delay: 0.7s;"
         >
         </div>
     </div>
