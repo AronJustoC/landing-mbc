@@ -1,60 +1,13 @@
 ---
 import { Icon } from "astro-icon/components";
 import LogoMBC from "../assets/logo-mbc.svg";
-
 import { services as servicesData } from "../consts/services";
-
-// Map services data to header format if needed, or just use it directly
-// We'll augment the consts data with icons here for display purposes if not present in the consts file yet,
-// but for now let's assume we mapped them or added them to consts.
-// To keep it clean, let's just stick to the consts file source of truth strategy.
-// Wait, the consts file doesn't have icons defined yet. I should double check services.ts content via memory.
-// I see I defined icons in header.astro but not in services.ts.
-// I will merge them here for the view.
 
 const services = servicesData.map((s) => ({
   name: s.title,
-  description: s.shortDescription,
   href: `/servicios/${s.id}`,
-  icon: getIconForService(s.id),
+  icon: s.icon,
 }));
-
-function getIconForService(id: string) {
-  switch (id) {
-    case "mantenimiento-predictivo":
-      return "lucide:activity";
-    case "ingenieria-confiabilidad":
-      return "lucide:shield-check";
-    case "analisis-dinamico":
-      return "lucide:waves";
-    case "evaluacion-estructural":
-      return "lucide:construction";
-    case "monitoreo-activos":
-      return "lucide:monitor-check";
-    case "soporte-tecnico":
-      return "lucide:headset";
-    default:
-      return "lucide:circle";
-  }
-}
-
-const aboutUs = [
-  {
-    name: "Nuestra Historia",
-    description: "Conoce nuestra trayectoria y valores.",
-    href: "/nosotros/historia",
-  },
-  {
-    name: "Misión y Visión",
-    description: "Los pilares que guían nuestro trabajo.",
-    href: "/nosotros/mision-vision",
-  },
-  {
-    name: "Nuestro Equipo",
-    description: "El talento detrás de nuestro éxito.",
-    href: "/nosotros/equipo",
-  },
-];
 
 const currentPath = Astro.url.pathname;
 
@@ -82,46 +35,46 @@ const isLinkActive = (href: string) => {
   >
   </div>
   <div class="relative container mx-auto px-6">
-    <div class="flex items-center justify-between h-20">
-      <!-- Logo -->
-      <a href="/" class="flex items-center gap-3 group/logo">
-        <div class="flex flex-col items-center justify-center gap-1">
-      
-          <div class="flex items-center gap-1">
-            <img
-              src={LogoMBC.src}
-              alt="MBC Logo"
-              width="45"
-              height="45"
-              class="filter drop-shadow-lg opacity-90 group-hover/logo:opacity-100 transition-opacity duration-300"
-          />  
-          <span
-            class="text-gray-200/80 font-medium font-[Roboto] text-4xl tracking-tight leading-none"
-            >MBC</span
-          >  
+    <div class="flex items-center h-20">
+      <!-- Logo Area -->
+      <div class="flex-1 flex justify-start">
+        <a href="/" class="flex items-center gap-3 group/logo">
+          <div class="flex flex-col items-center justify-center gap-1">
+            <div class="flex items-center gap-1">
+              <img
+                src={LogoMBC.src}
+                alt="MBC Logo"
+                width="45"
+                height="45"
+                class="filter drop-shadow-lg opacity-90 group-hover/logo:opacity-100 transition-opacity duration-300"
+              />
+              <span
+                class="text-gray-200 font-light font-sans text-4xl tracking-tight leading-none"
+                >MBC</span
+              >
+            </div>
+            <span
+              class="text-gray-500 text-[7px] font-sans font-bold tracking-[0.3em] uppercase leading-none mt-0.5"
+              >INGENIERÍA Y CONFIABILIDAD</span
+            >
+          </div>
+        </a>
       </div>
-        
-          <span
-            class="text-gray-400/90 text-[7px] font-[Roboto] font-semibold tracking-[0.2em] uppercase leading-none mt-0.5"
-            >INGENIERÍA Y CONFIABILIDAD</span
-          >
-        </div>
-      </a>
 
-      <!-- Navigation -->
-      <nav class="hidden md:flex items-center gap-10">
+      <!-- Navigation Area (Absolute Centered) -->
+      <nav class="hidden md:flex items-center gap-12 absolute left-1/2 -translate-x-1/2">
         {navLinks.map((link) => (
           link.hasDropdown ? (
             <div class="relative group/nav" id="desktop-services-container">
               <div class="flex items-center gap-1.5 py-6 cursor-pointer">
                 <a
                   href={link.href}
-                  class={`text-sm font-semibold transition-all duration-300 relative py-1 ${
+                  class={`text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-300 relative py-1 ${
                     isLinkActive(link.href) ? "text-[#31B0FF]" : "text-gray-400 group-hover/nav:text-white"
                   }`}
                 >
                   {link.name}
-                  <span class={`absolute bottom-0 left-0 h-0.5 bg-[#31B0FF] transition-all duration-300 ${isLinkActive(link.href) ? "w-full" : "w-0 group-hover/nav:w-full"}`}></span>
+                  <span class={`absolute bottom-0 left-0 h-px bg-[#31B0FF] transition-all duration-300 ${isLinkActive(link.href) ? "w-full" : "w-0 group-hover/nav:w-full"}`}></span>
                 </a>
                 <button
                   id="desktop-services-trigger"
@@ -130,81 +83,42 @@ const isLinkActive = (href: string) => {
                   aria-expanded="false"
                 >
                   <Icon
-  name="lucide:chevron-down"
-  class="w-4 h-4 transition-transform duration-300 group-hover/nav:rotate-180"
-/>
+                    name="lucide:chevron-down"
+                    class="w-3.5 h-3.5 transition-transform duration-300 group-hover/nav:rotate-180"
+                  />
                 </button>
               </div>
 
-              <!-- Mega Menu Dropdown -->
+              <!-- Refined Dropdown Menu -->
               <div
                 id="desktop-services-menu"
-                class="absolute top-full left-1/2 -translate-x-1/2 pt-0 opacity-0 invisible transition-all duration-300 transform translate-y-4 w-[900px]"
+                class="absolute top-full left-1/2 -translate-x-1/2 pt-0 opacity-0 invisible transition-all duration-300 transform translate-y-2 w-72"
               >
                 <div
-                  class="bg-[#0a0f14]/95 border border-white/10 rounded-3xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.9)] overflow-hidden backdrop-blur-2xl flex"
+                  class="bg-[#0a0f14]/98 border border-white/5 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-3xl p-2"
                 >
-                  <!-- Left Side: Services Grid (70%) -->
-                  <div class="flex-1 p-8">
-                    <div class="flex items-center justify-between mb-8 pb-4 border-b border-white/5">
-                      <span class="text-[11px] font-bold text-[#31B0FF] uppercase tracking-[0.3em]">Servicios de Ingeniería</span>
-                      <a href="/services" class="text-[11px] font-semibold text-gray-500 hover:text-white transition-colors uppercase tracking-wider flex items-center gap-1 group/all">
-                        Ver todo
-                        <Icon name="lucide:arrow-right" class="w-3 h-3 group-hover/all:translate-x-1 transition-transform" />
-                      </a>
-                    </div>
-                    
-                    <div class="grid grid-cols-2 gap-x-8 gap-y-2">
-                      {
-                        services.map((service) => (
-                          <a
-                            href={service.href}
-                            class="flex items-start gap-4 p-4 rounded-2xl hover:bg-white/[0.03] transition-all duration-300 group/item border border-transparent hover:border-white/5"
-                          >
-                            <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-[#31B0FF]/10 text-[#31B0FF] shrink-0 group-hover/item:bg-[#31B0FF] group-hover/item:text-white group-hover/item:scale-110 group-hover/item:rotate-3 transition-all duration-500 shadow-lg">
-                              <Icon name={service.icon} class="w-6 h-6" />
-                            </div>
-                            <div class="pt-1">
-                              <p class="text-white font-bold text-sm mb-1 group-hover/item:text-[#31B0FF] transition-colors">
-                                {service.name}
-                              </p>
-                              <p class="text-gray-500 text-[11px] leading-relaxed line-clamp-2 group-hover/item:text-gray-300 transition-colors">
-                                {service.description}
-                              </p>
-                            </div>
-                          </a>
-                        ))
-                      }
-                    </div>
+                  <div class="space-y-1">
+                    {
+                      services.map((service) => (
+                        <a
+                          href={service.href}
+                          class="flex items-center gap-4 p-3 rounded-xl hover:bg-white/[0.03] transition-all duration-300 group/item"
+                        >
+                          <div class="w-8 h-8 flex items-center justify-center rounded-lg bg-[#31B0FF]/5 text-[#31B0FF]/70 shrink-0 group-hover/item:bg-[#31B0FF]/20 group-hover/item:text-[#31B0FF] transition-all duration-500">
+                            <Icon name={service.icon} class="w-4 h-4" />
+                          </div>
+                          <span class="text-gray-300 font-medium text-[11px] group-hover/item:text-white transition-colors">
+                            {service.name}
+                          </span>
+                        </a>
+                      ))
+                    }
                   </div>
-
-                  <!-- Right Side: Featured/CTA Panel (30%) -->
-                  <div class="w-[280px] bg-gradient-to-br from-[#31B0FF]/10 via-transparent to-transparent p-8 border-l border-white/5 flex flex-col">
-                    <div class="mb-8">
-                      <h4 class="text-white font-bold text-sm mb-3">¿Necesitas Asesoría?</h4>
-                      <p class="text-gray-400 text-xs leading-relaxed mb-6">
-                        Nuestro equipo de ingenieros está listo para coordinar una visita técnica a sus instalaciones.
-                      </p>
-                      <a href="/contact" class="inline-flex items-center justify-center px-5 py-3 bg-[#31B0FF] text-white text-[11px] font-bold uppercase tracking-wider rounded-xl hover:bg-[#2196F3] transition-all w-full shadow-lg shadow-[#31B0FF]/25 group/cta">
-                        Solicitar Visita
-                        <Icon name="lucide:arrow-right" class="ml-2 w-3 h-3 group-hover/cta:translate-x-1 transition-transform" />
-                      </a>
-                    </div>
-
-                    <div class="mt-auto space-y-4 pt-6 border-t border-white/5">
-                      <div class="flex items-center gap-3 group/link cursor-pointer">
-                        <div class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-gray-400 group-hover/link:bg-[#31B0FF]/10 group-hover/link:text-[#31B0FF] transition-colors">
-                          <Icon name="lucide:file-text" class="w-4 h-4" />
-                        </div>
-                        <span class="text-xs font-semibold text-gray-400 group-hover/link:text-white transition-colors">Brochure Corporativo</span>
-                      </div>
-                      <div class="flex items-center gap-3 group/link cursor-pointer">
-                        <div class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-gray-400 group-hover/link:bg-[#31B0FF]/10 group-hover/link:text-[#31B0FF] transition-colors">
-                          <Icon name="lucide:headphones" class="w-4 h-4" />
-                        </div>
-                        <span class="text-xs font-semibold text-gray-400 group-hover/link:text-white transition-colors">Soporte 24/7</span>
-                      </div>
-                    </div>
+                  <div class="mt-2 pt-2 border-t border-white/5">
+                    <a href="/services" class="flex items-center justify-center gap-2 py-2 text-[10px] font-bold text-gray-500 hover:text-[#31B0FF] uppercase tracking-widest transition-colors">
+                      Ver todo
+                      <Icon name="lucide:arrow-right" class="w-3 h-3" />
+                    </a>
                   </div>
                 </div>
               </div>
@@ -212,25 +126,25 @@ const isLinkActive = (href: string) => {
           ) : (
             <a
               href={link.href}
-              class={`text-sm font-semibold transition-all duration-300 relative py-1 group/nav ${
+              class={`text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-300 relative py-1 group/nav ${
                 isLinkActive(link.href) ? "text-[#31B0FF]" : "text-gray-400 hover:text-white"
               }`}
             >
               {link.name}
-              <span class={`absolute bottom-0 left-0 h-0.5 bg-[#31B0FF] transition-all duration-300 ${isLinkActive(link.href) ? "w-full" : "w-0 group-hover/nav:w-full"}`}></span>
+              <span class={`absolute bottom-0 left-0 h-px bg-[#31B0FF] transition-all duration-300 ${isLinkActive(link.href) ? "w-full" : "w-0 group-hover/nav:w-full"}`}></span>
             </a>
           )
         ))}
       </nav>
 
-      <!-- Actions -->
-      <div class="flex items-center gap-5">
+      <!-- Actions Area -->
+      <div class="flex-1 flex items-center justify-end gap-6">
         <a
           href="/login"
-          class="hidden md:flex items-center gap-2.5 px-6 py-2.5 bg-[#31B0FF]/10 text-[#31B0FF] hover:bg-[#31B0FF] hover:text-white border border-[#31B0FF]/20 hover:border-[#31B0FF] text-[11px] font-bold uppercase tracking-[0.15em] rounded-lg transition-all duration-500 hover:shadow-[0_0_25px_rgba(49,176,255,0.4)] group/btn"
+          class="hidden md:flex items-center gap-2 px-5 py-2 bg-white/5 text-gray-400 hover:text-[#31B0FF] hover:bg-[#31B0FF]/5 border border-white/10 hover:border-[#31B0FF]/30 text-[10px] font-bold uppercase tracking-[0.2em] rounded-full transition-all duration-500 group/btn"
         >
-          <Icon name="lucide:user" class="w-4 h-4 group-hover/btn:scale-110 transition-transform duration-300" />
-          <span>Acceso Clientes</span>
+          <Icon name="lucide:user" class="w-3.5 h-3.5 transition-transform duration-300" />
+          <span>Acceso</span>
         </a>
 
         <!-- Mobile menu button -->
@@ -334,7 +248,7 @@ const isLinkActive = (href: string) => {
               style={`transition-delay: ${index * 50}ms`}
             >
               <div class={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${
-                isLinkActive(link.href) ? 'bg-[#31B0FF] text-white' : 'bg-white/5 text-gray-400 group-hover:text-white'
+                isLinkActive(link.href) ? "bg-[#31B0FF] text-white" : "bg-white/5 text-gray-400 group-hover:text-white"
               }`}>
                 <Icon name={link.name === 'Inicio' ? 'lucide:home' : link.name === 'Nosotros' ? 'lucide:users' : 'lucide:mail'} class="w-5 h-5" />
               </div>
@@ -349,11 +263,11 @@ const isLinkActive = (href: string) => {
         <div>
           <span class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.3em] mb-4 block">Contacto Rápido</span>
           <div class="space-y-4">
-            <a href="tel:+51984654321" class="flex items-center gap-4 text-gray-400 hover:text-white transition-colors">
+            <a href="tel:+51000000000" class="flex items-center gap-4 text-gray-400 hover:text-white transition-colors">
               <div class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center">
                 <Icon name="lucide:phone" class="w-4 h-4" />
               </div>
-              <span class="text-sm font-medium">+51 984 654 321</span>
+              <span class="text-sm font-medium">+51 000 000 000</span>
             </a>
             <a href="mailto:info@mbcpredictive.com" class="flex items-center gap-4 text-gray-400 hover:text-white transition-colors">
               <div class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center">
@@ -367,9 +281,6 @@ const isLinkActive = (href: string) => {
         <div class="flex gap-4">
           <a href="https://www.linkedin.com/company/mbc-confiabilidad/" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-[#31B0FF] transition-all">
             <Icon name="lucide:linkedin" class="w-5 h-5" />
-          </a>
-          <a href="#" class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-[#31B0FF] transition-all">
-            <Icon name="lucide:instagram" class="w-5 h-5" />
           </a>
         </div>
       </div>
