@@ -389,10 +389,12 @@ const { showHero = true } = Astro.props;
     <!-- Scripts Lógica de Validación -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script is:inline>
-      document.addEventListener("DOMContentLoaded", () => {
+      function initContactForm() {
         const form = document.getElementById("contact-form");
         const errorMsg = document.getElementById("captcha-error");
         const toast = document.getElementById("notification-toast");
+
+        if (!form) return;
 
         // Función para mostrar Toast
         const showToast = () => {
@@ -406,7 +408,6 @@ const { showHero = true } = Astro.props;
         // Recaptcha Callback (Global)
         window.onRecaptchaSuccess = () => {
           const customEvent = new Event("recaptcha-verified");
-          // Asegurarse de que el formulario exista en el scope si es inline
           const form = document.getElementById("contact-form");
           if (form) form.dispatchEvent(customEvent);
         };
@@ -421,167 +422,119 @@ const { showHero = true } = Astro.props;
             isValid = false;
           }
           if (input.type === "email" && input.value) {
-            // Regex corregido
             const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailPattern.test(input.value)) isValid = false;
           }
 
           if (!isValid) {
-            input.classList.add(
-              "border-red-500",
-              "focus:border-red-500",
-              "focus:ring-red-500",
-            );
-            input.classList.remove(
-              "border-gray-700/50",
-              "focus:border-[#31B0FF]",
-              "focus:ring-[#31B0FF]",
-            );
+            input.classList.add("border-red-500", "focus:border-red-500", "focus:ring-red-500");
+            input.classList.remove("border-gray-700/50", "focus:border-[#31B0FF]", "focus:ring-[#31B0FF]");
             if (errorSpan) errorSpan.classList.remove("hidden");
           } else {
-            input.classList.remove(
-              "border-red-500",
-              "focus:border-red-500",
-              "focus:ring-red-500",
-            );
-            input.classList.add(
-              "border-gray-700/50",
-              "focus:border-[#31B0FF]",
-              "focus:ring-[#31B0FF]",
-            );
+            input.classList.remove("border-red-500", "focus:border-red-500", "focus:ring-red-500");
+            input.classList.add("border-gray-700/50", "focus:border-[#31B0FF]", "focus:ring-[#31B0FF]");
             if (errorSpan) errorSpan.classList.add("hidden");
           }
           return isValid;
         };
 
-        // Listeners para validación en tiempo real (al salir del campo)
-        const inputs = form?.querySelectorAll("input, textarea");
-        inputs?.forEach((input) => {
+        const inputs = form.querySelectorAll("input, textarea");
+        inputs.forEach((input) => {
           input.addEventListener("blur", () => validateField(input));
           input.addEventListener("input", () => {
-            // Limpiar error al escribir
             const group = input.closest(".group");
             const errorSpan = group.querySelector(".error-msg");
             if (input.classList.contains("border-red-500")) {
-              input.classList.remove(
-                "border-red-500",
-                "focus:border-red-500",
-                "focus:ring-red-500",
-              );
-              input.classList.add(
-                "border-gray-700/50",
-                "focus:border-[#31B0FF]",
-                "focus:ring-[#31B0FF]",
-              );
+              input.classList.remove("border-red-500", "focus:border-red-500", "focus:ring-red-500");
+              input.classList.add("border-gray-700/50", "focus:border-[#31B0FF]", "focus:ring-[#31B0FF]");
               if (errorSpan) errorSpan.classList.add("hidden");
             }
           });
         });
 
-        if (form) {
-          const recaptchaContainer = form.querySelector(
-            ".g-recaptcha-container",
-          );
-          const submitBtn = form.querySelector('button[type="submit"]');
-          const captchaError = document.getElementById("captcha-error");
+        const recaptchaContainer = form.querySelector(".g-recaptcha-container");
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const captchaError = document.getElementById("captcha-error");
 
-          // Manejar el submit inicial (clic en Enviar)
-          form.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            let isFormValid = true;
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          let isFormValid = true;
 
-            // Validar todos los campos
-            inputs?.forEach((input) => {
-              if (!validateField(input)) isFormValid = false;
+          inputs.forEach((input) => {
+            if (!validateField(input)) isFormValid = false;
+          });
+
+          if (!isFormValid) return;
+
+          // @ts-ignore
+          const recaptchaToken = grecaptcha.getResponse();
+
+          if (!recaptchaToken) {
+            if (recaptchaContainer) {
+              recaptchaContainer.classList.remove("hidden");
+              recaptchaContainer.classList.add("animate-fade-in");
+            }
+            if (submitBtn) submitBtn.classList.add("hidden");
+            if (captchaError) {
+              captchaError.classList.remove("hidden");
+              captchaError.innerText = "Por favor, completa la verificación abajo 👇";
+            }
+            return;
+          }
+
+          await submitForm(recaptchaToken);
+        });
+
+        form.addEventListener("recaptcha-verified", async () => {
+          // @ts-ignore
+          const token = grecaptcha.getResponse();
+          if (token) {
+            await submitForm(token);
+          }
+        });
+
+        async function submitForm(token) {
+          if (submitBtn) {
+            submitBtn.classList.remove("hidden");
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<span class="animate-spin mr-2">⟳</span> Enviando...`;
+          }
+          if (recaptchaContainer) recaptchaContainer.classList.add("hidden");
+          if (captchaError) captchaError.classList.add("hidden");
+
+          const formData = new FormData(form);
+          const data = Object.fromEntries(formData.entries());
+          data.recaptcha = token;
+
+          try {
+            const response = await fetch("/api/contact", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data),
             });
 
-            if (!isFormValid) return;
-
-            // Verificar si ya tenemos token
-            // @ts-ignore
-            const recaptchaToken = grecaptcha.getResponse();
-
-            if (!recaptchaToken) {
-              // Si es válido pero no hay token, mostrar el captcha
-              if (recaptchaContainer) {
-                recaptchaContainer.classList.remove("hidden");
-                recaptchaContainer.classList.add("animate-fade-in");
-              }
-              if (submitBtn) submitBtn.classList.add("hidden");
-              if (captchaError) captchaError.classList.remove("hidden");
-              captchaError.innerText =
-                "Por favor, completa la verificación abajo 👇";
-              return;
-            }
-
-            // Si llegamos aquí, tenemos token y formulario válido -> ENVIAR
-            await submitForm(recaptchaToken);
-          });
-
-          // Evento personalizado disparado por el callback de recaptcha
-          form.addEventListener("recaptcha-verified", async () => {
-            // @ts-ignore
-            const token = grecaptcha.getResponse();
-            if (token) {
-              await submitForm(token);
-            }
-          });
-
-          async function submitForm(token) {
-            const originalBtnText = submitBtn ? submitBtn.innerHTML : "";
-            if (submitBtn) {
-              submitBtn.classList.remove("hidden");
-              submitBtn.disabled = true;
-              submitBtn.innerHTML = `<span class="animate-spin mr-2">⟳</span> Enviando...`;
-            }
-            if (recaptchaContainer) recaptchaContainer.classList.add("hidden");
-            if (captchaError) captchaError.classList.add("hidden");
-
-            // Preparar datos
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
-            data.recaptcha = token;
-
-            try {
-              const response = await fetch("/api/contact", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data),
-              });
-
-              if (response.ok) {
-                showToast();
-                form.reset();
-                // @ts-ignore
-                grecaptcha.reset();
-                if (recaptchaContainer)
-                  recaptchaContainer.classList.add("hidden");
-              } else {
-                // @ts-ignore
-                grecaptcha.reset();
-                if (recaptchaContainer)
-                  recaptchaContainer.classList.remove("hidden");
-                const result = await response.json();
-                alert(
-                  "Error: " +
-                    (result.message || "No se pudo enviar el mensaje"),
-                );
-              }
-            } catch (error) {
-              console.error(error);
-              alert("Error de conexión");
+            if (response.ok) {
+              showToast();
+              form.reset();
               // @ts-ignore
               grecaptcha.reset();
-              if (recaptchaContainer)
-                recaptchaContainer.classList.remove("hidden");
-            } finally {
-              if (submitBtn) {
-                submitBtn.disabled = false;
-                // Restaurar SVG y texto (Simplificado)
-                submitBtn.innerHTML = `<span>ENVIAR MENSAJE</span> <svg data-icon="lucide:send" class="w-4 h-4" viewBox="0 0 24 24" fill="none" class="w-4 h-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>`;
-              }
+            } else {
+              // @ts-ignore
+              grecaptcha.reset();
+              if (recaptchaContainer) recaptchaContainer.classList.remove("hidden");
+              const result = await response.json();
+              alert("Error: " + (result.message || "No se pudo enviar el mensaje"));
+            }
+          } catch (error) {
+            console.error(error);
+            alert("Error de conexión");
+            // @ts-ignore
+            grecaptcha.reset();
+            if (recaptchaContainer) recaptchaContainer.classList.remove("hidden");
+          } finally {
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = `<span>ENVIAR MENSAJE</span> <svg data-icon="lucide:send" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>`;
             }
           }
         }
@@ -595,12 +548,15 @@ const { showHero = true } = Astro.props;
               }
             });
           },
-          { threshold: 0.1 },
+          { threshold: 0.1 }
         );
-        document
-          .querySelectorAll(".animate-item")
-          .forEach((el) => observer.observe(el));
-      });
+        document.querySelectorAll(".animate-item").forEach((el) => observer.observe(el));
+      }
+
+      // Initialize on load and after Astro swaps
+      document.addEventListener("DOMContentLoaded", initContactForm);
+      document.addEventListener("astro:page-load", initContactForm);
+    </script>
     </script>
 
     <style>
