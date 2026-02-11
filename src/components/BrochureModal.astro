@@ -1,0 +1,142 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  pdfUrl: string;
+  id: string;
+}
+
+const { pdfUrl, id } = Astro.props;
+---
+
+<div
+  id={id}
+  class="fixed inset-0 z-[2000] flex items-center justify-center p-4 md:p-8 opacity-0 pointer-events-none transition-all duration-500 overflow-hidden"
+>
+  <!-- Backdrop con Blur Premium -->
+  <div
+    class="absolute inset-0 bg-[#08080A]/80 backdrop-blur-2xl transition-opacity duration-500 modal-backdrop"
+  >
+  </div>
+
+  <!-- Modal Container -->
+  <div
+    class="relative w-full max-w-6xl h-[90vh] bg-[#0d1117] border border-white/10 rounded-[2rem] shadow-[0_0_100px_rgba(49,176,255,0.15)] overflow-hidden flex flex-col transform scale-95 translate-y-10 transition-all duration-500 modal-content"
+  >
+    <!-- Header -->
+    <div class="flex items-center justify-between px-8 py-6 border-b border-white/5 bg-[#0a0e14]">
+      <div class="flex items-center gap-4">
+        <div class="w-10 h-10 rounded-xl bg-[#31B0FF]/10 flex items-center justify-center text-[#31B0FF]">
+          <Icon name="lucide:file-text" class="w-5 h-5" />
+        </div>
+        <div>
+          <h3 class="text-white font-bold tracking-tight">Brochure Corporativo</h3>
+          <p class="text-gray-500 text-[10px] uppercase tracking-widest font-semibold">MBC Ingeniería y Confiabilidad</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <a
+          href={pdfUrl}
+          download
+          class="hidden md:flex items-center gap-2 px-5 py-2.5 bg-[#31B0FF] text-white text-[11px] font-bold uppercase tracking-wider rounded-xl hover:bg-[#2196F3] transition-all shadow-lg shadow-[#31B0FF]/20 group/dl"
+        >
+          <Icon name="lucide:download" class="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+          Descargar PDF
+        </a>
+        
+        <button
+          class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 transition-all hover:rotate-90 modal-close-btn"
+          aria-label="Cerrar modal"
+        >
+          <Icon name="lucide:x" class="w-6 h-6" />
+        </button>
+      </div>
+    </div>
+
+    <!-- PDF Viewer / Content -->
+    <div class="flex-grow bg-[#05070a] relative group">
+        <!-- Loader sutil -->
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+            <div class="w-10 h-10 border-2 border-[#31B0FF]/20 border-t-[#31B0FF] rounded-full animate-spin"></div>
+        </div>
+        
+        <!-- Iframe con el PDF -->
+        <iframe
+            src={`${pdfUrl}#toolbar=0&navpanes=0&scrollbar=0`}
+            class="w-full h-full border-none relative z-10 opacity-0 transition-opacity duration-700"
+            onload="this.classList.remove('opacity-0')"
+        ></iframe>
+
+        <!-- Fallback para móviles o si falla el iframe -->
+        <div class="absolute inset-0 flex md:hidden items-center justify-center bg-[#0d1117] z-20 p-8 text-center">
+            <div class="max-w-xs">
+                <Icon name="lucide:smartphone" class="w-16 h-16 text-gray-700 mx-auto mb-6" />
+                <h4 class="text-white font-bold mb-4">Vista previa limitada en móvil</h4>
+                <p class="text-gray-400 text-sm mb-8">Para una mejor experiencia, te recomendamos descargar el brochure directamente.</p>
+                <a
+                    href={pdfUrl}
+                    download
+                    class="inline-flex items-center gap-2 px-8 py-4 bg-[#31B0FF] text-white text-xs font-bold uppercase tracking-widest rounded-2xl w-full justify-center"
+                >
+                    Descargar ahora
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Móvil -->
+    <div class="md:hidden p-4 border-t border-white/5 bg-[#0a0e14]">
+        <a
+          href={pdfUrl}
+          download
+          class="flex items-center justify-center gap-2 w-full py-4 bg-white/5 text-gray-400 text-[10px] font-bold uppercase tracking-widest rounded-xl"
+        >
+          <Icon name="lucide:download" class="w-4 h-4" />
+          Descargar Brochure
+        </a>
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ modalId: id }}>
+  (function() {
+    const modal = document.getElementById(modalId);
+    const trigger = document.querySelector(`[data-modal-target="${modalId}"]`);
+    const closeBtns = modal.querySelectorAll('.modal-close-btn, .modal-backdrop');
+    const content = modal.querySelector('.modal-content');
+
+    if (!modal || !trigger) return;
+
+    const openModal = (e) => {
+      e.preventDefault();
+      modal.classList.remove('pointer-events-none', 'opacity-0');
+      modal.classList.add('opacity-100');
+      content.classList.remove('scale-95', 'translate-y-10');
+      content.classList.add('scale-100', 'translate-y-0');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeModal = () => {
+      modal.classList.remove('opacity-100');
+      modal.classList.add('opacity-0');
+      content.classList.remove('scale-100', 'translate-y-0');
+      content.classList.add('scale-95', 'translate-y-10');
+      
+      setTimeout(() => {
+        modal.classList.add('pointer-events-none');
+        document.body.style.overflow = '';
+      }, 500);
+    };
+
+    trigger.addEventListener('click', openModal);
+    closeBtns.forEach(btn => btn.addEventListener('click', closeModal));
+
+    // Cerrar con Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('pointer-events-none')) {
+        closeModal();
+      }
+    });
+  })();
+</script>

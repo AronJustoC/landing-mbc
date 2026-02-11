@@ -1,0 +1,90 @@
+---
+interface Props {
+  variant?: 'fade-up' | 'fade-in' | 'zoom-in' | 'slide-left' | 'slide-right';
+  delay?: number;
+  duration?: number;
+  class?: string;
+  threshold?: number;
+  as?: string;
+}
+
+const { 
+  variant = 'fade-up', 
+  delay = 0, 
+  duration = 0.6, 
+  class: className = '',
+  threshold = 0.1,
+  as: Tag = 'div'
+} = Astro.props;
+
+const variants = {
+  'fade-up': 'opacity-0 translate-y-8',
+  'fade-in': 'opacity-0',
+  'zoom-in': 'opacity-0 scale-95',
+  'slide-left': 'opacity-0 -translate-x-8',
+  'slide-right': 'opacity-0 translate-x-8',
+};
+
+const activeVariants = {
+  'fade-up': 'opacity-100 translate-y-0',
+  'fade-in': 'opacity-100',
+  'zoom-in': 'opacity-100 scale-100',
+  'slide-left': 'opacity-100 translate-x-0',
+  'slide-right': 'opacity-100 translate-x-0',
+};
+---
+
+<Tag 
+  class:list={["animate-item-v2", variants[variant], className]} 
+  data-variant={activeVariants[variant]}
+  data-delay={delay}
+  data-duration={duration}
+  data-threshold={threshold}
+>
+  <slot />
+</Tag>
+
+<script>
+  function initAnimations() {
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target as HTMLElement;
+          const variant = el.getAttribute('data-variant');
+          const delay = el.getAttribute('data-delay') || '0';
+          const duration = el.getAttribute('data-duration') || '0.6';
+          
+          el.style.transitionDuration = `${duration}s`;
+          el.style.transitionDelay = `${delay}s`;
+          el.style.transitionProperty = 'opacity, transform';
+          el.style.transitionTimingFunction = 'cubic-bezier(0.4, 0, 0.2, 1)';
+          
+          if (variant) {
+            const variantClasses = variant.split(' ');
+            el.classList.add(...variantClasses);
+            el.classList.remove('opacity-0', 'translate-y-8', '-translate-x-8', 'translate-x-8', 'scale-95');
+          }
+          
+          observer.unobserve(el);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.animate-item-v2').forEach(el => {
+      observer.observe(el);
+    });
+  }
+
+  // Init on load
+  initAnimations();
+
+  // Re-init on Astro page transitions
+  document.addEventListener('astro:after-swap', initAnimations);
+  document.addEventListener('astro:page-load', initAnimations);
+</script>

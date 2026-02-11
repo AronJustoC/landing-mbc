@@ -10,7 +10,7 @@ export interface ServiceData {
     benefits: string[];
     features: string[];
     imagePrompt: string;
-    icon?: string; // Icon name for header
+    icon: string;
 }
 
 export const services: ServiceData[] = [
@@ -32,7 +32,8 @@ export const services: ServiceData[] = [
             "Estudio de Elementos Finitos (FEA)",
             "Medición de Deformaciones"
         ],
-        imagePrompt: "Dynamic structural analysis wireframe"
+        imagePrompt: "Dynamic structural analysis wireframe",
+        icon: "lucide:waves"
     },
     {
         id: "analisis-vibratorio",
@@ -52,7 +53,8 @@ export const services: ServiceData[] = [
             "Evaluación de Severidad Vibratoria",
             "Balanceo Dinámico en Sitio"
         ],
-        imagePrompt: "Vibration analysis waveform spectrum"
+        imagePrompt: "Vibration analysis waveform spectrum",
+        icon: "lucide:activity"
     },
     {
         id: "monitoreo-condicion",
@@ -72,7 +74,8 @@ export const services: ServiceData[] = [
             "Control de Deformaciones Estáticas",
             "Alarmas Tempranas Configurables"
         ],
-        imagePrompt: "Condition monitoring dashboard graphs"
+        imagePrompt: "Condition monitoring dashboard graphs",
+        icon: "lucide:monitor-check"
     },
     {
         id: "inspeccion-integridad-estructural",
@@ -92,7 +95,8 @@ export const services: ServiceData[] = [
             "Líquidos Penetrantes (PT)",
             "Inspección Visual Remota (RVI)"
         ],
-        imagePrompt: "Nondestructive testing inspection"
+        imagePrompt: "Nondestructive testing inspection",
+        icon: "lucide:scan-eye"
     },
     {
         id: "ingenieria-confiabilidad",
@@ -112,7 +116,8 @@ export const services: ServiceData[] = [
             "Análisis de Criticidad",
             "Optimización de Repuestos"
         ],
-        imagePrompt: "Reliability engineering charts"
+        imagePrompt: "Reliability engineering charts",
+        icon: "lucide:shield-check"
     },
     {
         id: "monitoreo-kpis-zarandas",
@@ -132,7 +137,8 @@ export const services: ServiceData[] = [
             "Control de RPM y Fase",
             "Detección de Movimiento Irregular"
         ],
-        imagePrompt: "Vibrating screen monitoring system"
+        imagePrompt: "Vibrating screen monitoring system",
+        icon: "lucide:bar-chart-2"
     },
     {
         id: "estudio-frf",
@@ -152,7 +158,8 @@ export const services: ServiceData[] = [
             "Cálculo de Rigidez Dinámica",
             "Estimación de Amortiguamiento Modal"
         ],
-        imagePrompt: "Frequency response function graph"
+        imagePrompt: "Frequency response function graph",
+        icon: "lucide:audio-waveform"
     },
     {
         id: "exposicion-humana",
@@ -172,6 +179,7 @@ export const services: ServiceData[] = [
             "Cálculo de Dosis Diaria A(8)",
             "Mapas de Riesgo Vibratorio"
         ],
-        imagePrompt: "Human vibration exposure analysis"
+        imagePrompt: "Human vibration exposure analysis",
+        icon: "lucide:user-check"
     }
 ];
