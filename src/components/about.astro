@@ -6,32 +6,34 @@ import about1 from "../assets/about/about_1.png";
 import about2 from "../assets/about/about_2.png";
 import about3 from "../assets/about/about-3.png";
 import aboutHeaderBg from "../assets/headers/about_header_background.png";
-import brochure from "../assets/about/MBC-Brochure.pdf";
+import brochure from "../assets/about/Brouchure_MBC_2026.pdf";
 import SectionHero from "./SectionHero.astro";
 import BackgroundGrid from "./BackgroundGrid.astro";
 import Profesional2 from "../assets/about/Profesional-PPY.jpeg";
 import Profesional1 from "../assets/about/Profesional-ACC.png";
 import Profesional3 from "../assets/about/Profesional-ALD.png";
 import Profesional4 from "../assets/about/Profesional-YPI.png";
+import BrochureModal from "./BrochureModal.astro";
 
 
 const TEAM = [
     {
-        name: "Ing. Percy P. Y.",
-        role: "Gerente Técnico",
-        specialties: ["Analista de Vibraciones Cat. III", "Gestión de Mantenimiento"],
-        image: Profesional1,
-        bio: "Líder con más de 6 años de experiencia en mantenimiento predictivo. Especialista en diagnóstico de maquinaria crítica en minería y gran industria, liderando equipos de alto rendimiento.",
-        linkedin: "https://www.linkedin.com",
-    },
-    {
-        name: "Ing. Alexander ...............",
+        name: "Ing. Alexander Alvarez",
         role: "Gerente Técnico",
         specialties: ["Ingeniería de Confiabilidad (CMRP)", "Gestión de Activos"],
         image: Profesional2,
         bio: "Experto en implementación de estrategias RCM y gestión de activos. Enfocado en la optimización de costos y mejora de la disponibilidad operativa mediante análisis de datos.",
         linkedin: "https://www.linkedin.com",
     },
+    {
+        name: "Ing. Percy Pacco",
+        role: "Gerente Técnico",
+        specialties: ["Analista de Vibraciones Cat. III", "Gestión de Mantenimiento"],
+        image: Profesional1,
+        bio: "Líder con más de 6 años de experiencia en mantenimiento predictivo. Especialista en diagnóstico de maquinaria crítica en minería y gran industria, liderando equipos de alto rendimiento.",
+        linkedin: "https://www.linkedin.com",
+    },
+    /*
     {
         name: "Bach. Especialista 1",
         role: "Analista Senior",
@@ -48,20 +50,30 @@ const TEAM = [
         bio: "Especialista en dinámica estructural y solución de problemas de resonancia. Utiliza tecnología avanzada para modelamiento y simulación de comportamiento de activos.",
         linkedin: "https://www.linkedin.com",
     },
+    */
 ];
+
+interface Props {
+    showHero?: boolean;
+}
+
+const { showHero = true } = Astro.props;
 ---
 
 <section id="nosotros" class="bg-[#08080A] relative overflow-hidden">
-  <SectionHero
-    title="Nosotros"
-    subtitle="Ingeniería especializada en confiabilidad y mantenimiento predictivo, comprometidos con la excelencia operativa."
-    image={aboutHeaderBg}
-    large={true}
-    breadcrumbItems={[
-      { name: "Inicio", href: "/" },
-      { name: "Nosotros", href: "/about", current: true },
-    ]}
-  />
+  {showHero && (
+    <SectionHero
+      title="Sobre Nosotros"
+      category="Identidad Corporativa"
+      subtitle="Expertos en confiabilidad y mantenimiento predictivo comprometidos con la excelencia operativa."
+      image={aboutHeaderBg}
+      large={true}
+      breadcrumbItems={[
+        { name: "Inicio", href: "/" },
+        { name: "Nosotros", href: "/about", current: true },
+      ]}
+    />
+  )}
 
   <!-- Tech Grid Background Pattern -->
   <div
@@ -90,32 +102,35 @@ const TEAM = [
     <!-- 2. Trayectoria Empresarial (History) - Estilo Ejecutivo -->
     <div
       id="trayectoria"
-      class="bg-[#0d1117] border border-white/5 hover:border-[#31B0FF]/20 rounded-xl p-6 lg:p-8 mb-16 relative overflow-hidden animate-item transition-all duration-500 hover:shadow-[0_10px_40px_-10px_rgba(49,176,255,0.1)] group"
+      class="bg-[#0d1117] border border-white/5 rounded-[2.5rem] p-8 lg:p-12 mb-24 relative overflow-hidden animate-item transition-all duration-700 hover:border-[#31B0FF]/20 group"
     >
-      <div class="grid lg:grid-cols-2 gap-8 items-center relative z-10">
+      <!-- Background Glow -->
+      <div class="absolute -top-24 -right-24 w-96 h-96 bg-[#31B0FF]/5 blur-[100px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10">
         <div class="order-2 lg:order-1">
-          <div class="flex items-center gap-2 mb-4">
-            <div class="h-px w-6 bg-[#31B0FF]"></div>
+          <div class="flex items-center gap-4 mb-6">
+            <div class="h-px w-8 bg-[#31B0FF]"></div>
             <h2
-              class="text-[#31B0FF] font-semibold text-xs uppercase tracking-[0.3em]"
+              class="text-[#31B0FF] font-bold text-xs uppercase tracking-[0.4em]"
             >
               Nuestra Historia
             </h2>
           </div>
           <h3
-            class="text-2xl lg:text-3xl font-bold text-white mb-4 leading-tight tracking-tight"
+            class="text-3xl lg:text-5xl font-black text-white mb-8 leading-tight tracking-tight"
           >
-            Trayectoria <span class="text-gray-400">Empresarial</span>
+            Trayectoria <span class="text-gray-500">Empresarial</span>
           </h3>
-          <div class="space-y-4 text-gray-400 leading-relaxed text-sm">
+          <div class="space-y-6 text-gray-400 leading-relaxed text-base font-light">
             <p>
-              <strong class="text-white font-medium">MBC</strong> se ha consolidado
+              <strong class="text-white font-semibold">MBC</strong> se ha consolidado
               como un socio estratégico líder en ingeniería predictiva para las industrias
               más exigentes. Nuestra evolución constante nos permite ofrecer tecnologías
               de vanguardia y metodologías avanzadas.
             </p>
             <div
-              class="pl-4 border-l-2 border-[#31B0FF]/30 italic text-gray-500 text-xs py-1"
+              class="pl-6 border-l-2 border-[#31B0FF]/30 italic text-gray-400 text-sm py-2 bg-white/[0.02] rounded-r-xl"
             >
               "Ingenieros especializados en mantenimiento, análisis vibracional
               y confiabilidad, comprometidos con la excelencia."
@@ -126,51 +141,51 @@ const TEAM = [
               de nuestros clientes.
             </p>
 
-            <div class="pt-2">
-              <a
-                href={brochure}
-                download="MBC_Brochure.pdf"
-                class="inline-flex items-center gap-2 px-4 py-2 bg-[#31B0FF]/10 text-[#31B0FF] border border-[#31B0FF]/20 text-xs font-semibold rounded-lg hover:bg-[#31B0FF] hover:text-white transition-all duration-300 group/btn"
+            <div class="pt-6">
+              <button
+                data-modal-target="brochure-modal-about"
+                class="inline-flex items-center gap-3 px-8 py-4 bg-[#31B0FF] text-white text-xs font-bold uppercase tracking-widest rounded-2xl hover:bg-[#2196F3] transition-all duration-500 shadow-xl shadow-[#31B0FF]/20 group/btn btn-glow"
               >
                 <Icon
-                  name="lucide:file-down"
-                  class="w-4 h-4 group-hover/btn:translate-y-0.5 transition-transform"
+                  name="lucide:file-text"
+                  class="w-4 h-4 group-hover:scale-110 transition-transform"
                 />
-                <span>Descargar Brochure</span>
-              </a>
+                <span>Explorar Brochure</span>
+              </button>
             </div>
           </div>
         </div>
-        <div class="order-1 lg:order-2 relative">
+        <div class="order-1 lg:order-2 relative group/img">
+          <div class="absolute -inset-4 bg-[#31B0FF]/10 blur-2xl rounded-[3rem] opacity-0 group-hover/img:opacity-100 transition-opacity duration-700"></div>
           <Image
             src={image1}
             alt="Equipo MBC"
-            class="relative rounded-lg w-full object-cover aspect-[4/3] border border-white/5 group-hover:border-[#31B0FF]/20 transition-all duration-500"
-            width={600}
-            height={450}
+            class="relative rounded-[2rem] w-full object-cover aspect-[4/3] border border-white/10 shadow-2xl transition-all duration-700 group-hover/img:scale-[1.02]"
+            width={800}
+            height={600}
           />
         </div>
       </div>
     </div>
 
     <!-- 3. Misión y Visión - Estilo Ejecutivo -->
-    <div id="mision-vision" class="grid md:grid-cols-2 gap-6 mb-24">
+    <div id="mision-vision" class="grid md:grid-cols-2 gap-8 mb-32">
       <!-- Misión -->
       <div
-        class="animate-item group relative bg-[#0d1117] rounded-xl overflow-hidden border border-white/5 hover:border-[#31B0FF]/30 transition-all duration-500 hover:shadow-[0_10px_40px_-10px_rgba(49,176,255,0.15)]"
+        class="animate-item group relative bg-[#0d1117] rounded-[2rem] overflow-hidden border border-white/5 hover:border-[#31B0FF]/30 transition-all duration-500 hover:shadow-[0_20px_50px_-20px_rgba(49,176,255,0.15)]"
       >
-        <div class="p-8 h-full">
+        <div class="p-10 h-full">
           <div
-            class="w-12 h-12 rounded-lg bg-[#31B0FF]/10 flex items-center justify-center text-[#31B0FF] mb-6 group-hover:bg-[#31B0FF]/20 transition-colors duration-300"
+            class="w-16 h-16 rounded-2xl bg-[#31B0FF]/10 flex items-center justify-center text-[#31B0FF] mb-8 border border-[#31B0FF]/10 group-hover:bg-[#31B0FF] group-hover:text-white transition-all duration-500"
           >
-            <Icon name="lucide:target" class="w-6 h-6" />
+            <Icon name="lucide:target" class="w-8 h-8" />
           </div>
           <h2
-            class="text-xl font-semibold text-white mb-3 tracking-tight group-hover:text-[#31B0FF] transition-colors"
+            class="text-2xl font-bold text-white mb-4 tracking-tight group-hover:text-[#31B0FF] transition-colors"
           >
             Nuestra Misión
           </h2>
-          <p class="text-gray-400 leading-relaxed text-sm">
+          <p class="text-gray-400 leading-relaxed text-base font-light">
             Brindar soluciones integrales de ingeniería de mantenimiento que
             maximicen la disponibilidad y seguridad de los activos industriales,
             fundamentadas en mediciones precisas y análisis riguroso.
@@ -180,20 +195,20 @@ const TEAM = [
 
       <!-- Visión -->
       <div
-        class="animate-item group relative bg-[#0d1117] rounded-xl overflow-hidden border border-white/5 hover:border-[#31B0FF]/30 transition-all duration-500 hover:shadow-[0_10px_40px_-10px_rgba(49,176,255,0.15)]"
+        class="animate-item group relative bg-[#0d1117] rounded-[2rem] overflow-hidden border border-white/5 hover:border-[#31B0FF]/30 transition-all duration-500 hover:shadow-[0_20px_50px_-20px_rgba(49,176,255,0.15)]"
       >
-        <div class="p-8 h-full">
+        <div class="p-10 h-full">
           <div
-            class="w-12 h-12 rounded-lg bg-[#31B0FF]/10 flex items-center justify-center text-[#31B0FF] mb-6 group-hover:bg-[#31B0FF]/20 transition-colors duration-300"
+            class="w-16 h-16 rounded-2xl bg-[#31B0FF]/10 flex items-center justify-center text-[#31B0FF] mb-8 border border-[#31B0FF]/10 group-hover:bg-[#31B0FF] group-hover:text-white transition-all duration-500"
           >
-            <Icon name="lucide:eye" class="w-6 h-6" />
+            <Icon name="lucide:eye" class="w-8 h-8" />
           </div>
           <h2
-            class="text-xl font-semibold text-white mb-3 tracking-tight group-hover:text-[#31B0FF] transition-colors"
+            class="text-2xl font-bold text-white mb-4 tracking-tight group-hover:text-[#31B0FF] transition-colors"
           >
             Nuestra Visión
           </h2>
-          <p class="text-gray-400 leading-relaxed text-sm">
+          <p class="text-gray-400 leading-relaxed text-base font-light">
             Posicionarnos como el referente indiscutible en ingeniería de
             confiabilidad y monitoreo de condición, reconocidos por nuestra
             capacidad técnica y excelencia operativa.
@@ -376,49 +391,58 @@ const TEAM = [
         <div class="h-px w-16 bg-[#31B0FF]/40 mx-auto mt-5"></div>
       </div>
 
-      <div class="space-y-24">
+      <div class="space-y-32">
         {
           TEAM.map((member, index) => (
-            <div class={`animate-item flex flex-col lg:flex-row gap-8 lg:gap-20 items-center ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
+            <div class={`animate-item flex flex-col lg:flex-row gap-12 lg:gap-24 items-center ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
               <!-- Imagen del Profesional -->
-              <div class="w-full max-w-sm lg:max-w-none lg:w-4/12 relative group">
-                <div class="absolute inset-0 bg-[#31B0FF]/20 blur-3xl rounded-full opacity-0 group-hover:opacity-30 transition-opacity duration-700"></div>
-                <a
-                  href={member.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="block relative rounded-2xl overflow-hidden border border-white/10 group-hover:border-[#31B0FF]/30 transition-all duration-500 shadow-2xl cursor-pointer"
-                >
-                    <div class="aspect-[4/5] relative">
+              <div class="w-full max-w-sm lg:max-w-none lg:w-5/12 relative group">
+                <div class="absolute inset-0 bg-[#31B0FF]/10 blur-[80px] rounded-full opacity-0 group-hover:opacity-40 transition-opacity duration-1000"></div>
+                <div class="relative rounded-[2.5rem] overflow-hidden border border-white/10 group-hover:border-[#31B0FF]/40 transition-all duration-700 shadow-2xl">
+                    <div class="aspect-[4/5] relative overflow-hidden">
                          <Image
                           src={member.image}
                           alt={member.name}
-                          class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                          class="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-105"
                         />
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#08080A] via-transparent to-transparent opacity-40"></div>
-                        <!-- LinkedIn Overlay Icon -->
-                        <div class="absolute bottom-4 right-4 bg-[#0077b5] p-2.5 rounded-lg opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 z-20 shadow-lg">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#08080A] via-transparent to-transparent opacity-60"></div>
+                        
+                        <!-- LinkedIn Floating Badge -->
+                        <a
+                          href={member.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="absolute bottom-6 right-6 bg-[#0077b5] w-12 h-12 rounded-2xl flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 z-20 shadow-[0_10px_20px_rgba(0,119,181,0.3)] hover:scale-110"
+                        >
                             <Icon name="lucide:linkedin" class="w-5 h-5 text-white" />
-                        </div>
+                        </a>
                     </div>
-                </a>
+                </div>
+                <!-- Technical Detail -->
+                <div class={`absolute -bottom-6 ${index % 2 !== 0 ? '-left-6' : '-right-6'} w-32 h-32 border border-[#31B0FF]/10 rounded-full flex items-center justify-center pointer-events-none opacity-20 group-hover:opacity-50 transition-opacity duration-700`}>
+                    <div class="w-24 h-24 border border-[#31B0FF]/20 rounded-full animate-[spin_10s_linear_infinite]"></div>
+                </div>
               </div>
 
               <!-- Información y Biografía -->
-              <div class="w-full lg:w-8/12">
+              <div class="w-full lg:w-7/12">
                  <div class={`flex flex-col ${index % 2 !== 0 ? 'lg:items-end lg:text-right' : 'lg:items-start lg:text-left'}`}>
-                    <span class="text-[#31B0FF] font-bold text-sm tracking-widest uppercase mb-2">{member.role}</span>
-                    <h3 class="text-3xl lg:text-4xl font-bold text-white mb-6">{member.name}</h3>
+                    <div class="flex items-center gap-3 mb-4">
+                        {index % 2 !== 0 && <div class="h-px w-6 bg-[#31B0FF]/40"></div>}
+                        <span class="text-[#31B0FF] font-black text-xs tracking-[0.3em] uppercase">{member.role}</span>
+                        {index % 2 === 0 && <div class="h-px w-6 bg-[#31B0FF]/40"></div>}
+                    </div>
+                    <h3 class="text-4xl lg:text-6xl font-black text-white mb-8 tracking-tighter leading-none">{member.name}</h3>
                     
-                    <p class="text-gray-300 text-lg leading-relaxed mb-8 font-light max-w-2xl">
+                    <p class="text-gray-400 text-lg lg:text-xl leading-relaxed mb-10 font-light max-w-2xl">
                         {member.bio}
                     </p>
                     
-                    <div class={`flex flex-wrap gap-3 ${index % 2 !== 0 ? 'lg:justify-end' : 'lg:justify-start'}`}>
+                    <div class={`flex flex-wrap gap-4 ${index % 2 !== 0 ? 'lg:justify-end' : 'lg:justify-start'}`}>
                         {member.specialties.map((specialty) => (
-                            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 border border-white/10 hover:border-[#31B0FF]/30 transition-colors">
-                                <Icon name="lucide:award" class="w-4 h-4 text-[#31B0FF]" />
-                                <span class="text-xs md:text-sm text-gray-300 font-medium">{specialty}</span>
+                            <div class="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-white/[0.03] border border-white/5 hover:border-[#31B0FF]/30 hover:bg-[#31B0FF]/5 transition-all duration-300 group/spec">
+                                <Icon name="lucide:shield-check" class="w-4 h-4 text-[#31B0FF] opacity-50 group-hover/spec:opacity-100 transition-opacity" />
+                                <span class="text-xs md:text-sm text-gray-300 font-semibold tracking-wide">{specialty}</span>
                             </div>
                         ))}
                     </div>
@@ -491,4 +515,6 @@ const TEAM = [
       .querySelectorAll(".animate-item")
       .forEach((el) => observer.observe(el));
   </script>
+
+  <BrochureModal pdfUrl={brochure} id="brochure-modal-about" />
 </section>
