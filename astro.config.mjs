@@ -17,7 +17,7 @@ export default defineConfig({
       include: {
         lucide: ['*'], // This tells astro-icon to include all icons from the 'lucide' set
         // tabler: ['brand-*'] // This tells astro-icon to include only the 'brand-whatsapp' icon from the 'tabler' set
-        'simple-icons': ['whatsapp', 'linkedin', 'youtube'] // This tells astro-icon to include only the 'whatsapp' icon from the 'simple-icons' set
+        'simple-icons': ['whatsapp', 'linkedin'] // This tells astro-icon to include only the 'whatsapp' and 'linkedin' icons from the 'simple-icons' set
       }
     })
   ]

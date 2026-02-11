@@ -2,14 +2,53 @@
 
 @theme {
     --color-brand: #31B0FF;
+    --color-brand-muted: color-mix(in srgb, var(--color-brand) 20%, transparent);
+    --color-background: #08080A;
+    --color-surface: #121214;
+    --color-border: #222224;
 }
 
 @layer base {
 
-    html,
+    html {
+        scroll-behavior: smooth;
+    }
+
     body {
-        @apply bg-[#08080A] text-white;
+        @apply bg-background text-white;
         margin: 0;
         padding: 0;
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    ::selection {
+        @apply bg-brand/30 text-white;
+    }
+
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        @apply bg-background;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        @apply bg-white/10 rounded-full border-2 border-background hover:bg-brand/50 transition-colors;
+    }
+}
+
+@layer components {
+    .btn-glow {
+        @apply relative overflow-hidden transition-all duration-500 hover:scale-[1.02] shadow-[0_0_20px_rgba(49,176,255,0.15)] hover:shadow-[0_0_35px_rgba(49,176,255,0.4)];
+    }
+
+    .btn-glow::after {
+        content: '';
+        @apply absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 transition-opacity duration-500;
+    }
+
+    .btn-glow:hover::after {
+        @apply opacity-100;
     }
 }

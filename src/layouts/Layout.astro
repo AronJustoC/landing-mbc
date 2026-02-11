@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { ViewTransitions } from "astro:transitions";
 import WasapBall from "../components/shareComponents/wasapBall.astro";
 import HeaderContainer from "../components/HeaderContainer.astro";
 import Footer from "../components/footer.astro";
@@ -47,6 +48,7 @@ const fullImage = image.startsWith("http") ? image : `${siteUrl}${image}`;
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/png" href="/favicon.png" />
 		<meta name="generator" content={Astro.generator} />
+		<ViewTransitions />
 
 		<!-- Canonical URL -->
 		<link rel="canonical" href={finalCanonical} />
@@ -88,16 +90,8 @@ const fullImage = image.startsWith("http") ? image : `${siteUrl}${image}`;
 	<body>
 		<HeaderContainer />
 		<slot />
-		<Footer />
-		<WasapBall />
+    <Footer />
+	<!--<WasapBall /> -->
+
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

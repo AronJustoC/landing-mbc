@@ -1,21 +1,22 @@
 ---
+import AnimateItem from "../AnimateItem.astro";
 import { Icon } from "astro-icon/components";
 import backgroundExperience from "../../assets/hero/experience-bg-high-res.png";
 ---
 
 <section
-    class="reveal-section relative py-32 overflow-hidden bg-fixed bg-cover bg-center"
+    class="relative py-32 overflow-hidden bg-fixed bg-cover bg-center"
     style={`background-image: url('${backgroundExperience.src}')`}
 >
-    <div class="absolute inset-0 bg-[#08080A]/60"></div>
+    <div class="absolute inset-0 bg-background/70 backdrop-blur-[2px]"></div>
     <div
-        class="absolute inset-0 bg-gradient-to-t from-[#08080A] via-transparent to-[#08080A]"
+        class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background"
     >
     </div>
 
     <div class="container mx-auto px-6 relative z-10">
         <div
-            class="animate-item grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10"
+            class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center"
         >
             {
                 [
@@ -31,52 +32,85 @@ import backgroundExperience from "../../assets/hero/experience-bg-high-res.png";
                         i: "lucide:briefcase",
                     },
                     { n: "5", l: "Sectores productivos", i: "lucide:layers" },
-                ].map((item) => (
-                    <div class="group px-4">
-                        <div class="flex justify-center mb-6">
-                            <div class="p-4 rounded-xl  text-white/50 group-hover:scale-110 transition-all duration-300  box-shadow-[0_0_15px_rgba(34,211,238,0.1)]">
-                                <Icon name={item.i} class="w-8 h-8" />
+                ].map((item, index) => (
+                    <AnimateItem variant="fade-up" delay={index * 0.1}>
+                        <div class="group px-4 py-8 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-xl hover:bg-white/10 hover:border-brand/30 transition-all duration-500 shadow-2xl hover:shadow-brand/10">
+                            <div class="flex justify-center mb-6">
+                                <div class="p-4 rounded-xl text-brand group-hover:scale-110 transition-all duration-300 drop-shadow-[0_0_15px_rgba(49,176,255,0.4)]">
+                                    <Icon name={item.i} class="w-8 h-8" />
+                                </div>
                             </div>
+                            <p
+                                class="text-5xl md:text-6xl font-black text-white mb-2 tracking-tighter counter-anim bg-clip-text text-transparent bg-gradient-to-b from-white to-white/70"
+                                data-target={item.n.replace(/\D/g, "")}
+                                data-suffix={item.n.replace(/\d/g, "")}
+                            >
+                                0{item.n.replace(/\d/g, "")}
+                            </p>
+                            <p class="text-brand/80 font-bold uppercase tracking-widest text-[10px] md:text-xs">
+                                {item.l}
+                            </p>
                         </div>
-                        <p
-                            class="text-5xl md:text-6xl font-bold text-white mb-2 tracking-tighter counter-anim"
-                            data-target={item.n.replace(/\D/g, "")}
-                            data-suffix={item.n.replace(/\d/g, "")}
-                        >
-                            0{item.n.replace(/\d/g, "")}
-                        </p>
-                        <p class="text-cyan-200/70 font-medium uppercase tracking-wider text-xs md:text-sm">
-                            {item.l}
-                        </p>
-                    </div>
+                    </AnimateItem>
                 ))
             }
         </div>
     </div>
 </section>
 
-<style>
-    .metric-card {
-        border-radius: 16px;
-        border: 1px solid rgba(0, 212, 255, 0.18);
-        background: rgba(10, 10, 12, 0.35);
-        backdrop-filter: blur(10px);
-        padding: 32px 16px;
-        box-shadow: 0 0 26px rgba(0, 212, 255, 0.08);
+<script>
+    function initCounters() {
+        const counters = document.querySelectorAll(".counter-anim");
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const target = entry.target as HTMLElement;
+                        const endValue = parseInt(
+                            target.getAttribute("data-target") || "0",
+                        );
+                        const suffix = target.getAttribute("data-suffix") || "";
+
+                        if (!target.classList.contains("counted")) {
+                            animateValue(target, 0, endValue, 2000, suffix);
+                            target.classList.add("counted");
+                        }
+                    }
+                });
+            },
+            { threshold: 0.5 },
+        );
+
+        counters.forEach((counter) => observer.observe(counter));
     }
-    .metric-number {
-        font-size: 3rem;
-        font-weight: 800;
-        background: linear-gradient(90deg, #00d4ff, #0099cc);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+
+    function animateValue(
+        obj: HTMLElement,
+        start: number,
+        end: number,
+        duration: number,
+        suffix: string,
+    ) {
+        let startTimestamp: number | null = null;
+        const step = (timestamp: number) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min(
+                (timestamp - startTimestamp) / duration,
+                1,
+            );
+            obj.innerHTML =
+                Math.floor(progress * (end - start) + start) + suffix;
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
     }
-    .metric-label {
-        margin-top: 8px;
-        color: #cbd5e1;
-        font-size: 0.95rem;
-    }
-</style>
+
+    document.addEventListener("DOMContentLoaded", initCounters);
+    document.addEventListener("astro:page-load", initCounters);
+</script>
 
 <script>
     // Counter Animation
