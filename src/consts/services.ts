@@ -11,6 +11,10 @@ export interface ServiceData {
     features: string[];
     imagePrompt: string;
     icon?: string; // Icon name for header
+    metaTitle?: string;
+    metaDescription?: string;
+    keywords?: string[];
+    imageAlt?: string;
 }
 
 export const services: ServiceData[] = [
@@ -32,7 +36,11 @@ export const services: ServiceData[] = [
             "Estudio de Elementos Finitos (FEA)",
             "Medición de Deformaciones"
         ],
-        imagePrompt: "Dynamic structural analysis wireframe"
+        imagePrompt: "Dynamic structural analysis wireframe",
+        metaTitle: "Análisis Dinámico Estructural (OMA/ODS/FEA) | MBC Predictive",
+        metaDescription: "Servicios de Análisis Modal Operacional, ODS y Elementos Finitos. Identificamos resonancias y prevenimos fallas estructurales en maquinaria.",
+        keywords: ["OMA", "ODS", "FEA", "Análisis Modal", "Vibraciones Estructurales"],
+        imageAlt: "Representación digital de análisis estructural dinámico con malla de elementos finitos"
     },
     {
         id: "analisis-vibratorio",
@@ -52,7 +60,11 @@ export const services: ServiceData[] = [
             "Evaluación de Severidad Vibratoria",
             "Balanceo Dinámico en Sitio"
         ],
-        imagePrompt: "Vibration analysis waveform spectrum"
+        imagePrompt: "Vibration analysis waveform spectrum",
+        metaTitle: "Análisis de Vibraciones y Diagnóstico | MBC Predictive",
+        metaDescription: "Diagnóstico experto de vibraciones en maquinaria rotativa. Detección de desbalance, desalineación y fallas en rodamientos.",
+        keywords: ["Análisis Vibratorio", "Balanceo Dinámico", "Mantenimiento Predictivo", "Vibraciones Mecánicas"],
+        imageAlt: "Espectro de forma de onda de análisis vibratorio en monitor"
     },
     {
         id: "monitoreo-condicion",
@@ -72,7 +84,11 @@ export const services: ServiceData[] = [
             "Control de Deformaciones Estáticas",
             "Alarmas Tempranas Configurables"
         ],
-        imagePrompt: "Condition monitoring dashboard graphs"
+        imagePrompt: "Condition monitoring dashboard graphs",
+        metaTitle: "Monitoreo de Condición y Salud de Activos | MBC Predictive",
+        metaDescription: "Seguimiento continuo de parámetros vibratorios y deformaciones. Detecte fallas antes de que ocurran con nuestro sistema de monitoreo.",
+        keywords: ["Monitoreo de Condición", "Salud de Activos", "Sensores IoT", "Mantenimiento 4.0"],
+        imageAlt: "Panel de control con gráficos de monitoreo de condición en tiempo real"
     },
     {
         id: "inspeccion-integridad-estructural",
@@ -92,7 +108,11 @@ export const services: ServiceData[] = [
             "Líquidos Penetrantes (PT)",
             "Inspección Visual Remota (RVI)"
         ],
-        imagePrompt: "Nondestructive testing inspection"
+        imagePrompt: "Nondestructive testing inspection",
+        metaTitle: "Ensayos No Destructivos (END) e Integridad | MBC Predictive",
+        metaDescription: "Inspección de integridad estructural mediante ultrasonido, partículas magnéticas y líquidos penetrantes. Detección de grietas y corrosión.",
+        keywords: ["Ensayos No Destructivos", "END", "Ultrasonido", "Inspección Estructural", "Corrosión"],
+        imageAlt: "Inspector realizando pruebas no destructivas en estructura metálica"
     },
     {
         id: "ingenieria-confiabilidad",
@@ -112,7 +132,11 @@ export const services: ServiceData[] = [
             "Análisis de Criticidad",
             "Optimización de Repuestos"
         ],
-        imagePrompt: "Reliability engineering charts"
+        imagePrompt: "Reliability engineering charts",
+        metaTitle: "Ingeniería de Confiabilidad y Mantenimiento RCM | MBC Predictive",
+        metaDescription: "Optimice su mantenimiento con RCM y análisis de causa raíz (RCA). Estrategias basadas en datos para maximizar la disponibilidad.",
+        keywords: ["Ingeniería de Confiabilidad", "RCM", "Análisis Causa Raíz", "Gestión de Activos"],
+        imageAlt: "Gráficos estadísticos de ingeniería de confiabilidad y análisis de riesgo"
     },
     {
         id: "monitoreo-kpis-zarandas",
@@ -132,7 +156,11 @@ export const services: ServiceData[] = [
             "Control de RPM y Fase",
             "Detección de Movimiento Irregular"
         ],
-        imagePrompt: "Vibrating screen monitoring system"
+        imagePrompt: "Vibrating screen monitoring system",
+        metaTitle: "Monitoreo de Zarandas Vibratorias y KPIs | MBC Predictive",
+        metaDescription: "Control en tiempo real de Stroke, aceleración G y RPM en zarandas. Optimice la clasificación y prevenga daños estructurales.",
+        keywords: ["Zarandas Vibratorias", "Monitoreo Zarandas", "Stroke", "Aceleración G", "Minería"],
+        imageAlt: "Sistema de monitoreo digital instalado en zaranda vibratoria industrial"
     },
     {
         id: "estudio-frf",
@@ -152,7 +180,11 @@ export const services: ServiceData[] = [
             "Cálculo de Rigidez Dinámica",
             "Estimación de Amortiguamiento Modal"
         ],
-        imagePrompt: "Frequency response function graph"
+        imagePrompt: "Frequency response function graph",
+        metaTitle: "Estudio FRF y Pruebas de Impacto | MBC Predictive",
+        metaDescription: "Determinación de Funciones de Respuesta en Frecuencia (FRF), rigidez dinámica y amortiguamiento mediante pruebas de impacto.",
+        keywords: ["FRF", "Función Respuesta Frecuencia", "Rigidez Dinámica", "Pruebas de Impacto", "Modal Testing"],
+        imageAlt: "Gráfico de función de respuesta en frecuencia (FRF) mostrando picos de resonancia"
     },
     {
         id: "exposicion-humana",
@@ -172,6 +204,10 @@ export const services: ServiceData[] = [
             "Cálculo de Dosis Diaria A(8)",
             "Mapas de Riesgo Vibratorio"
         ],
-        imagePrompt: "Human vibration exposure analysis"
+        imagePrompt: "Human vibration exposure analysis",
+        metaTitle: "Medición de Vibraciones Cuerpo Entero ISO 2631 | MBC Predictive",
+        metaDescription: "Evaluación de exposición humana a vibraciones según ISO 2631. Proteja la salud ocupacional midiendo vibración mano-brazo y cuerpo entero.",
+        keywords: ["ISO 2631", "Vibración Cuerpo Entero", "Vibración Mano Brazo", "Salud Ocupacional", "Higiene Industrial"],
+        imageAlt: "Esquema de análisis de exposición humana a vibraciones en operador de maquinaria"
     }
 ];

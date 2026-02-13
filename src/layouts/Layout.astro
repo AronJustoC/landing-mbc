@@ -12,6 +12,7 @@ interface Props {
 	canonical?: string;
 	type?: "website" | "article";
 	noindex?: boolean;
+	simpleLayout?: boolean;
 }
 
 const {
@@ -21,6 +22,7 @@ const {
 	canonical,
 	type = "website",
 	noindex = false,
+	simpleLayout = false,
 } = Astro.props;
 
 // Default canonical URL based on current pathname
@@ -86,10 +88,10 @@ const fullImage = image.startsWith("http") ? image : `${siteUrl}${image}`;
 		<StructuredData type="website" />
 	</head>
 	<body>
-		<HeaderContainer />
+		{!simpleLayout && <HeaderContainer />}
 		<slot />
-		<Footer />
-		<WasapBall />
+		{!simpleLayout && <Footer />}
+		{!simpleLayout && <WasapBall />}
 	</body>
 </html>
 
