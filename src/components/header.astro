@@ -21,18 +21,22 @@ const services = servicesData.map((s) => ({
 
 function getIconForService(id: string) {
   switch (id) {
-    case "mantenimiento-predictivo":
+    case "analisis-dinamico-estructural":
+      return "lucide:waves";
+    case "analisis-vibratorio":
       return "lucide:activity";
+    case "monitoreo-condicion":
+      return "lucide:monitor-check";
+    case "inspeccion-integridad-estructural":
+      return "lucide:scan-eye";
     case "ingenieria-confiabilidad":
       return "lucide:shield-check";
-    case "analisis-dinamico":
-      return "lucide:waves";
-    case "evaluacion-estructural":
-      return "lucide:construction";
-    case "monitoreo-activos":
-      return "lucide:monitor-check";
-    case "soporte-tecnico":
-      return "lucide:headset";
+    case "monitoreo-kpis-zarandas":
+      return "lucide:bar-chart-2";
+    case "estudio-frf":
+      return "lucide:audio-waveform";
+    case "exposicion-humana":
+      return "lucide:user-check";
     default:
       return "lucide:circle";
   }

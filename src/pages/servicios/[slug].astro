@@ -23,20 +23,25 @@ export async function getStaticPaths() {
 
 const { service } = Astro.props;
 
-// Map Service IDs to new English filenames
-// Map Service IDs to filenames if they don't match the ID exactly
+// Map Service IDs to exact filenames used in services.astro
 const imageMap: Record<string, string> = {
-    "inspeccion-integridad-estructural": "inspeccion-integridad",
-    "monitoreo-kpis-zarandas": "monitoreo-kpis",
+    "analisis-dinamico-estructural": "analisis-dinamico-estructural.png",
+    "analisis-vibratorio": "analisis-vibratorio.png",
+    "monitoreo-condicion": "monitoreo-de-condicion.png",
+    "inspeccion-integridad-estructural": "Inspeccion-de-integridad-estructural.jpeg",
+    "ingenieria-confiabilidad": "ingenieria-de-confiabilidad.jpeg",
+    "monitoreo-kpis-zarandas": "monitoreo-kpis.png",
+    "estudio-frf": "estudio-de-funcion-de-respuesta-en-frecuencia.png",
+    "exposicion-humana": "exposicion-humana.png",
 };
 
-const imageName = imageMap[service.id] || service.id;
+const filename = imageMap[service.id];
 
 // Dynamic Image Import
 const images = import.meta.glob<{ default: ImageMetadata }>(
     "/src/assets/services/*.{jpeg,jpg,png,gif}",
 );
-const imagePath = `/src/assets/services/${imageName}.png`;
+const imagePath = `/src/assets/services/${filename}`;
 if (!images[imagePath])
     throw new Error(
         `"${imagePath}" does not exist in glob: "src/assets/services/*.{jpeg,jpg,png,gif}"`,
@@ -61,7 +66,7 @@ const serviceSchemaData = {
 <Layout
     title={`${service.title} | MBC`}
     description={serviceDescription}
-    image={`/services/${imageName}.png`}
+    image={`/services/${filename}`}
 >
     <!-- Service Schema.org -->
     <StructuredData type="service" data={serviceSchemaData} />
