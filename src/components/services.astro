@@ -14,6 +14,10 @@ import confiabilidadImg from "../assets/services/ingenieria-de-confiabilidad.jpe
 import monitoreoKpisImg from "../assets/services/monitoreo-kpis.png";
 import estudioFrfImg from "../assets/services/estudio-de-funcion-de-respuesta-en-frecuencia.png";
 import exposicionHumanaImg from "../assets/services/exposicion-humana.png";
+import programasInstitute from "../assets/services/programas-institute.png";
+import temariosAcademicos from "../assets/services/temarios-institute.png";
+import calendarioCursos from "../assets/services/fechas-institute.png";
+import certificacionInternacional from "../assets/services/certificaion-institute.png";
 
 // Helper to map IDs to imported images
 const imageMap: Record<string, ImageMetadata> = {
@@ -154,6 +158,116 @@ const services = servicesData.map((s) => ({
                     </div>
                 ))
             }
+        </div>
+    </div>
+
+    <!-- MBC Predictive Training Institute Section -->
+    <div class="container mx-auto px-6 relative z-10 pb-24 max-w-7xl">
+        <div class="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent mb-20"></div>
+
+        <div class="text-center mb-16 animate-item">
+            <span class="text-[#31B0FF] font-semibold text-xs uppercase tracking-[0.3em] mb-3 block">Formación y Capacitación</span>
+            <h2 class="text-3xl lg:text-4xl font-bold text-white tracking-tight leading-tight">
+                MBC Predictive <span class="text-gray-400">Training Institute</span>
+            </h2>
+            <div class="h-px w-16 bg-[#31B0FF]/40 mx-auto mt-5"></div>
+            <p class="text-gray-400 mt-6 max-w-2xl mx-auto text-sm leading-relaxed">
+                Centro de entrenamiento especializado en tecnologías predictivas. Elevamos las competencias técnicas de su equipo con estándares internacionales.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Programas -->
+            <div class="animate-item bg-[#0d1117] border border-white/5 rounded-xl overflow-hidden hover:border-[#31B0FF]/30 transition-all duration-300 group hover:-translate-y-1">
+                <div class="h-32 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0d1117] to-transparent z-10"></div>
+                    <Image src={programasInstitute} alt="Programas de Capacitación" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                </div>
+                <div class="p-6 relative z-20">
+                    <div class="w-12 h-12 rounded-lg bg-[#31B0FF]/10 flex items-center justify-center text-[#31B0FF] mb-4 group-hover:bg-[#31B0FF] group-hover:text-white transition-colors">
+                        <Icon name="lucide:library" class="w-6 h-6" />
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Programas</h3>
+                    <p class="text-gray-400 text-xs mb-4 leading-relaxed">
+                        Cursos de certificación en Análisis de Vibraciones (Cat I-III), Ultrasonido, Termografía y Alineamiento.
+                    </p>
+                    <div class="w-full h-1 bg-white/5 rounded-full overflow-hidden">
+                        <div class="h-full bg-[#31B0FF] w-3/4"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Temarios -->
+            <div class="animate-item bg-[#0d1117] border border-white/5 rounded-xl overflow-hidden hover:border-[#31B0FF]/30 transition-all duration-300 group hover:-translate-y-1">
+                <div class="h-32 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0d1117] to-transparent z-10"></div>
+                    <Image src={temariosAcademicos} alt="Temarios Académicos" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                </div>
+                <div class="p-6 relative z-20">
+                    <div class="w-12 h-12 rounded-lg bg-[#31B0FF]/10 flex items-center justify-center text-[#31B0FF] mb-4 group-hover:bg-[#31B0FF] group-hover:text-white transition-colors">
+                        <Icon name="lucide:file-text" class="w-6 h-6" />
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Temarios</h3>
+                    <p class="text-gray-400 text-xs mb-4 leading-relaxed">
+                        Contenido riguroso alineado a normas ISO 18436, combinando teoría fundamentada con práctica intensiva.
+                    </p>
+                    <div class="w-full h-1 bg-white/5 rounded-full overflow-hidden">
+                        <div class="h-full bg-[#31B0FF] w-full"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fechas -->
+            <div class="animate-item bg-[#0d1117] border border-white/5 rounded-xl overflow-hidden hover:border-[#31B0FF]/30 transition-all duration-300 group hover:-translate-y-1">
+                <div class="h-32 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0d1117] to-transparent z-10"></div>
+                    <Image src={calendarioCursos} alt="Calendario de Cursos" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                </div>
+                <div class="p-6 relative z-20">
+                    <div class="w-12 h-12 rounded-lg bg-[#31B0FF]/10 flex items-center justify-center text-[#31B0FF] mb-4 group-hover:bg-[#31B0FF] group-hover:text-white transition-colors">
+                        <Icon name="lucide:calendar-days" class="w-6 h-6" />
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Fechas</h3>
+                    <p class="text-gray-400 text-xs mb-4 leading-relaxed">
+                        Calendario anual de cursos abiertos y flexibilidad para capacitaciones In-House según disponibilidad.
+                    </p>
+                    <div class="w-full h-1 bg-white/5 rounded-full overflow-hidden">
+                        <div class="h-full bg-[#31B0FF] w-1/2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certificados -->
+            <div class="animate-item bg-[#0d1117] border border-white/5 rounded-xl overflow-hidden hover:border-[#31B0FF]/30 transition-all duration-300 group hover:-translate-y-1">
+                <div class="h-32 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0d1117] to-transparent z-10"></div>
+                    <Image src={certificacionInternacional} alt="Certificación Internacional" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                </div>
+                <div class="p-6 relative z-20">
+                    <div class="w-12 h-12 rounded-lg bg-[#31B0FF]/10 flex items-center justify-center text-[#31B0FF] mb-4 group-hover:bg-[#31B0FF] group-hover:text-white transition-colors">
+                        <Icon name="lucide:award" class="w-6 h-6" />
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Certificados</h3>
+                    <p class="text-gray-400 text-xs mb-4 leading-relaxed">
+                        Acreditación oficial con validez internacional, respaldada por Mobius Institute y entes reguladores.
+                    </p>
+                    <div class="w-full h-1 bg-white/5 rounded-full overflow-hidden">
+                        <div class="h-full bg-[#31B0FF] w-full"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Button -->
+        <div class="mt-12 flex justify-center animate-item">
+            <a
+                href="/contact"
+                class="group relative inline-flex items-center gap-3 px-8 py-4 bg-[#31B0FF] text-white font-bold rounded-full overflow-hidden transition-all duration-300 hover:bg-[#2196F3] hover:shadow-[0_0_30px_rgba(49,176,255,0.4)] hover:-translate-y-1"
+            >
+                <span class="relative z-10 uppercase tracking-wider text-sm">Solicitar Información</span>
+                <Icon name="lucide:arrow-right" class="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+            </a>
         </div>
     </div>
 
