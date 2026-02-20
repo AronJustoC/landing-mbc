@@ -5,6 +5,8 @@ import BackgroundGrid from "./BackgroundGrid.astro";
 import contactHeaderBg from "../assets/headers/contact_header_background.png";
 import MapLocation from "./shareComponents/mapLocation.astro";
 import { imageConfig } from "astro:assets";
+
+const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
 ---
 
 <section id="contacto" class="bg-[#08080A] relative overflow-hidden">
@@ -126,7 +128,7 @@ import { imageConfig } from "astro:assets";
                   Consultas Generales
                 </h3>
                 <a
-                  href="mailto:info@mbcpredictive.com"
+                  href="mailto:info@mbcpredictive.com, yonatanpaccoylla@gmail.com, percypy30@gmail.com, alvarezh.alexanderfranklin@gmail.com"
                   class="text-gray-200 text-sm hover:text-[#31B0FF] transition-colors"
                   >info@mbcpredictive.com</a
                 >
@@ -229,6 +231,7 @@ import { imageConfig } from "astro:assets";
               class="space-y-5 relative z-10"
               method="post"
               action="#"
+              data-recaptcha-enabled={RECAPTCHA_SITE_KEY ? "true" : "false"}
               novalidate
             >
               <!-- Campo Nombres -->
@@ -352,13 +355,17 @@ import { imageConfig } from "astro:assets";
               <div
                 class="flex justify-start transform origin-left scale-[0.85] md:scale-90 g-recaptcha-container hidden transition-all duration-300 min-h-[78px]"
               >
-                <div
-                  class="g-recaptcha"
-                  data-sitekey={import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY}
-                  data-theme="dark"
-                  data-callback="onRecaptchaSuccess"
-                >
-                </div>
+                {RECAPTCHA_SITE_KEY ? (
+                  <div
+                    class="g-recaptcha"
+                    data-sitekey={RECAPTCHA_SITE_KEY}
+                    data-theme="dark"
+                    data-callback="onRecaptchaSuccess"
+                  >
+                  </div>
+                ) : (
+                  <div class="text-red-400 text-xs border border-red-500/50 bg-red-500/10 p-2 rounded">Falta configurar SITE_KEY en .env</div>
+                )}
               </div>
 
               <!-- Botón de Envío -->
@@ -516,6 +523,7 @@ import { imageConfig } from "astro:assets";
           );
           const submitBtn = form.querySelector('button[type="submit"]');
           const captchaError = document.getElementById("captcha-error");
+          const isRecaptchaEnabled = form.dataset.recaptchaEnabled === "true";
 
           // Manejar el submit inicial (clic en Enviar)
           form.addEventListener("submit", async (e) => {
@@ -531,19 +539,29 @@ import { imageConfig } from "astro:assets";
 
             // Verificar si ya tenemos token
             // @ts-ignore
-            const recaptchaToken = grecaptcha.getResponse();
-
-            if (!recaptchaToken) {
-              // Si es válido pero no hay token, mostrar el captcha
-              if (recaptchaContainer) {
-                recaptchaContainer.classList.remove("hidden");
-                recaptchaContainer.classList.add("animate-fade-in");
+            let recaptchaToken = "";
+            
+            if (isRecaptchaEnabled) {
+              try {
+                if (typeof grecaptcha !== 'undefined') {
+                  recaptchaToken = grecaptcha.getResponse();
+                }
+              } catch (e) {
+                console.warn("reCAPTCHA no inicializado o bloqueado");
               }
-              if (submitBtn) submitBtn.classList.add("hidden");
-              if (captchaError) captchaError.classList.remove("hidden");
-              captchaError.innerText =
-                "Por favor, completa la verificación abajo 👇";
-              return;
+
+              if (!recaptchaToken) {
+                // Si es válido pero no hay token, mostrar el captcha
+                if (recaptchaContainer) {
+                  recaptchaContainer.classList.remove("hidden");
+                  recaptchaContainer.classList.add("animate-fade-in");
+                }
+                if (submitBtn) submitBtn.classList.add("hidden");
+                if (captchaError) captchaError.classList.remove("hidden");
+                captchaError.innerText =
+                  "Por favor, completa la verificación abajo 👇";
+                return;
+              }
             }
 
             // Si llegamos aquí, tenemos token y formulario válido -> ENVIAR

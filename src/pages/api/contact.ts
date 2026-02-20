@@ -7,21 +7,24 @@ export const POST: APIRoute = async ({ request }) => {
     const data = await request.json();
     const { nombre, email, empresa, telefono, mensaje, recaptcha } = data;
 
-    if (!recaptcha) {
+    const secretKey = import.meta.env.RECAPTCHA_SECRET_KEY;
+
+    // Solo validar si existe la clave secreta (modo producción)
+    if (secretKey && !recaptcha) {
         return new Response(JSON.stringify({ message: "Falta el token de reCAPTCHA" }), { status: 400 });
     }
 
     // 1. Verify reCAPTCHA with Google
-    const secretKey = import.meta.env.RECAPTCHA_SECRET_KEY;
-    const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${recaptcha}`;
-
     try {
-        const recaptchaRes = await fetch(verifyUrl, { method: "POST" });
-        const googleData = await recaptchaRes.json();
+        if (secretKey) {
+            const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${recaptcha}`;
+            const recaptchaRes = await fetch(verifyUrl, { method: "POST" });
+            const googleData = await recaptchaRes.json();
 
-        if (!googleData.success) {
-            console.error("reCAPTCHA Failed:", googleData);
-            return new Response(JSON.stringify({ message: "Verificación de reCAPTCHA fallida" }), { status: 400 });
+            if (!googleData.success) {
+                console.error("reCAPTCHA Failed:", googleData);
+                return new Response(JSON.stringify({ message: "Verificación de reCAPTCHA fallida" }), { status: 400 });
+            }
         }
 
         // 2. Configure SMTP Transporter (Namecheap / PrivateEmail)
@@ -38,7 +41,7 @@ export const POST: APIRoute = async ({ request }) => {
         // 3. Prepare Email Content
         const mailOptions = {
             from: `"Web MBC Contact" <${import.meta.env.SMTP_USER}>`, // Sender address (Must be the one authenticated)
-            to: "info@mbcpredictive.com", // Receiver address
+            to: "info@mbcpredictive.com, yonatanpaccoylla@gmail.com, percypy30@gmail.com, alvarezh.alexanderfranklin@gmail.com", // Receiver address // Receiver address
             replyTo: email, // If you click reply, it goes to the user
             subject: `Nuevo Mensaje Web de: ${nombre}`,
             html: `
