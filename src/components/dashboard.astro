@@ -3,10 +3,10 @@ import { Icon } from "astro-icon/components";
 
 // Mock Data for Dashboard
 const SENSORS = [
-    { id: 1, name: "Motor Principal - Molino 1", status: "normal", temp: 65, vibration: 2.4 },
-    { id: 2, name: "Bomba Hidráulica A", status: "warning", temp: 82, vibration: 4.1 },
-    { id: 3, name: "Ventilador Extractor", status: "critical", temp: 95, vibration: 8.5 },
-    { id: 4, name: "Cinta Transportadora 2", status: "normal", temp: 55, vibration: 1.2 },
+    { id: 1, name: "P1-ZARANDA", status: "normal", temp: 65, vibration: 2.4 },
+    { id: 2, name: "P2-ZARANDA", status: "warning", temp: 82, vibration: 4.1 },
+    { id: 3, name: "P3-ZARANDA", status: "critical", temp: 95, vibration: 8.5 },
+    { id: 4, name: "P4-ZARANDA", status: "normal", temp: 55, vibration: 1.2 },
 ];
 
 const REPORTS = [
@@ -76,7 +76,7 @@ const REPORTS = [
             <div id="view-dashboard">
                 <header class="flex justify-between items-center mb-8">
                     <div>
-                        <h1 class="text-2xl font-bold text-white">Resumen Operativo</h1>
+                        <h1 class="text-2xl font-bold text-white">Proyecto de Zaranda Movil - Puno</h1>
                         <p class="text-gray-400 text-sm mt-1">Monitoreo en tiempo real de activos críticos</p>
                     </div>
                     <div class="flex items-center gap-4">
@@ -132,33 +132,33 @@ const REPORTS = [
 
                 <!-- Charts Area -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <!-- Chart 1: FEM -->
+                    <!-- Chart 1: P1-ZARANDA -->
                     <div class="bg-[#121214] border border-white/5 rounded-xl p-5">
                         <h3 class="text-white text-sm font-medium mb-4 flex items-center gap-2">
-                            <Icon name="lucide:zap" class="w-4 h-4 text-cyan-400" /> FEM (V)
+                            <Icon name="lucide:activity" class="w-4 h-4 text-cyan-400" /> P1-ZARANDA (G)
                         </h3>
-                        <div class="h-64 w-full"><canvas id="chartFem" role="img" aria-label="Gráfico de Fuerza Electromotriz en el tiempo"></canvas></div>
+                        <div class="h-64 w-full"><canvas id="chartP1" role="img" aria-label="Gráfico P1-ZARANDA"></canvas></div>
                     </div>
-                    <!-- Chart 2: Vibración -->
+                    <!-- Chart 2: P2-ZARANDA -->
                     <div class="bg-[#121214] border border-white/5 rounded-xl p-5">
                         <h3 class="text-white text-sm font-medium mb-4 flex items-center gap-2">
-                            <Icon name="lucide:activity" class="w-4 h-4 text-green-400" /> Vibración (mm/s)
+                            <Icon name="lucide:activity" class="w-4 h-4 text-green-400" /> P2-ZARANDA (G)
                         </h3>
-                        <div class="h-64 w-full"><canvas id="chartVib" role="img" aria-label="Gráfico de Vibración en mm/s"></canvas></div>
+                        <div class="h-64 w-full"><canvas id="chartP2" role="img" aria-label="Gráfico P2-ZARANDA"></canvas></div>
                     </div>
-                    <!-- Chart 3: Esfuerzo -->
+                    <!-- Chart 3: P3-ZARANDA -->
                     <div class="bg-[#121214] border border-white/5 rounded-xl p-5">
                         <h3 class="text-white text-sm font-medium mb-4 flex items-center gap-2">
-                            <Icon name="lucide:gauge" class="w-4 h-4 text-yellow-400" /> Esfuerzo (MPa)
+                            <Icon name="lucide:activity" class="w-4 h-4 text-yellow-400" /> P3-ZARANDA (G)
                         </h3>
-                        <div class="h-64 w-full"><canvas id="chartEsf" role="img" aria-label="Gráfico de Esfuerzo en MPa"></canvas></div>
+                        <div class="h-64 w-full"><canvas id="chartP3" role="img" aria-label="Gráfico P3-ZARANDA"></canvas></div>
                     </div>
-                    <!-- Chart 4: Aceleración -->
+                    <!-- Chart 4: P4-ZARANDA -->
                     <div class="bg-[#121214] border border-white/5 rounded-xl p-5">
                         <h3 class="text-white text-sm font-medium mb-4 flex items-center gap-2">
-                            <Icon name="lucide:move" class="w-4 h-4 text-red-400" /> Aceleración (G)
+                            <Icon name="lucide:activity" class="w-4 h-4 text-red-400" /> P4-ZARANDA (G)
                         </h3>
-                        <div class="h-64 w-full"><canvas id="chartAcc" role="img" aria-label="Gráfico de Aceleración en G"></canvas></div>
+                        <div class="h-64 w-full"><canvas id="chartP4" role="img" aria-label="Gráfico P4-ZARANDA"></canvas></div>
                     </div>
                 </div>
             </div>
@@ -198,7 +198,7 @@ const REPORTS = [
                                     </td>
                                     <td class="p-4">{sensor.temp}°C</td>
                                     <td class="p-4">{sensor.vibration} mm/s</td>
-                                    <td class="p-4">Hace 5 min</td>
+                                    <td class="p-4 sensor-update-time">--</td>
                                 </tr>
                             ))}
                         </tbody>
@@ -292,6 +292,17 @@ const REPORTS = [
             const navSettings = document.getElementById('nav-settings');
             const adminButtons = document.querySelectorAll('.admin-only-btn');
 
+            // Actualizar fecha y hora en tiempo real
+            const updateTime = () => {
+                const now = new Date();
+                const timeString = now.toLocaleString('es-ES');
+                document.querySelectorAll('.sensor-update-time').forEach(el => {
+                    el.textContent = timeString;
+                });
+            };
+            setInterval(updateTime, 1000);
+            updateTime();
+
             // Show App
             if (app) {
                 app.classList.remove('hidden');
@@ -352,12 +363,15 @@ const REPORTS = [
                 Chart.defaults.color = '#9ca3af';
                 Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
 
-                const createChart = (ctxId, label, color, min, max) => {
+                const createChart = (ctxId, label, color) => {
                     const ctx = document.getElementById(ctxId);
                     if (!ctx) return;
 
-                    const dataPoints = Array.from({length: 12}, () => Math.floor(Math.random() * (max - min + 1) + min));
-                    const labels = Array.from({length: 12}, (_, i) => `${i * 5}m`);
+                    // Generar señal simulada entre -10 y 10 G
+                    const dataPoints = Array.from({length: 100}, (_, i) => {
+                        return Math.sin(i * 0.2) * 8 + (Math.random() * 4 - 2); 
+                    });
+                    const labels = Array.from({length: 100}, (_, i) => `${(i * 0.05).toFixed(2)}s`);
 
                     new Chart(ctx, {
                         type: 'line',
@@ -368,7 +382,7 @@ const REPORTS = [
                                 data: dataPoints,
                                 borderColor: color,
                                 backgroundColor: color.replace('1)', '0.1)'),
-                                borderWidth: 2,
+                                borderWidth: 1.5,
                                 tension: 0.4,
                                 pointRadius: 0,
                                 fill: true
@@ -382,11 +396,13 @@ const REPORTS = [
                             },
                             scales: {
                                 y: {
-                                    beginAtZero: false,
+                                    min: -10,
+                                    max: 10,
                                     grid: { color: 'rgba(255, 255, 255, 0.05)' }
                                 },
                                 x: {
-                                    grid: { display: false }
+                                    grid: { display: false },
+                                    ticks: { maxTicksLimit: 10 }
                                 }
                             }
                         }
@@ -400,10 +416,10 @@ const REPORTS = [
                 const red = 'rgba(239, 68, 68, 1)';
 
                 // Render Charts
-                createChart('chartFem', 'FEM (V)', cyan, 210, 230);
-                createChart('chartVib', 'Vibración (mm/s)', green, 1, 8);
-                createChart('chartEsf', 'Esfuerzo (MPa)', yellow, 150, 250);
-                createChart('chartAcc', 'Aceleración (G)', red, 0, 5);
+                createChart('chartP1', 'P1-ZARANDA', cyan);
+                createChart('chartP2', 'P2-ZARANDA', green);
+                createChart('chartP3', 'P3-ZARANDA', yellow);
+                createChart('chartP4', 'P4-ZARANDA', red);
             }
         }
     })();
