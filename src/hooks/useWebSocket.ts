@@ -7,6 +7,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { WS_BASE } from '../config';
 
 const WS_BASE_URL = WS_BASE;
+const isDev = import.meta.env.DEV;
 const RECONNECT_DELAY_MS = 3000;
 
 interface UseWebSocketResult<T> {
@@ -26,7 +27,8 @@ export function useWebSocket<T>(endpoint: string): UseWebSocketResult<T> {
         // Endpoint especial para deshabilitar conexión (cards sin nodo asignado)
         if (endpoint === '__disabled__') return;
 
-        const url = `${WS_BASE_URL}/${endpoint}`;
+        const sep = endpoint.includes('?') ? '&' : '?';
+        const url = `${WS_BASE_URL}/${endpoint}${isDev ? '' : `${sep}ngrok-skip-browser-warning=true`}`;
 
         try {
             const ws = new WebSocket(url);

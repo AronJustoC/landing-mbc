@@ -7,7 +7,7 @@
  */
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { API_BASE } from '../../config';
+import { API_BASE, FETCH_HEADERS } from '../../config';
 
 const LS_KEY = 'mbc_selected_node';
 const EVENT_NAME = 'mbc-node-select';
@@ -50,7 +50,7 @@ export default function HistoricoWidget() {
         setError(null);
         dataRef.current = null;
         try {
-            const res = await fetch(`${API_BASE}/historico?node=${nid}`, { signal: AbortSignal.timeout(10000) });
+            const res = await fetch(`${API_BASE}/historico?node=${nid}`, { headers: FETCH_HEADERS, signal: AbortSignal.timeout(10000) });
             const d: HistoricoData = await res.json();
             setData(d);
             dataRef.current = d;

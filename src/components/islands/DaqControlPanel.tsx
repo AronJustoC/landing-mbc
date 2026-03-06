@@ -7,7 +7,7 @@
  */
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { API_BASE } from '../../config';
+import { API_BASE, FETCH_HEADERS } from '../../config';
 const STATUS_POLL_INTERVAL_MS = 2000;
 
 /** Estado del DAQ desde el backend */
@@ -68,6 +68,7 @@ export default function DaqControlPanel() {
     const fetchStatus = useCallback(async () => {
         try {
             const response = await fetch(`${API_BASE}/daq/status`, {
+                headers: FETCH_HEADERS,
                 signal: AbortSignal.timeout(3000),
             });
             const data: DaqStatus = await response.json();
@@ -97,7 +98,7 @@ export default function DaqControlPanel() {
         try {
             const response = await fetch(`${API_BASE}/daq/start`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', ...FETCH_HEADERS },
                 body: JSON.stringify({ mode: 'mscl' }),
             });
             const result = await response.json();
@@ -118,6 +119,7 @@ export default function DaqControlPanel() {
         try {
             const response = await fetch(`${API_BASE}/daq/stop`, {
                 method: 'POST',
+                headers: FETCH_HEADERS,
             });
             const result = await response.json();
             if (!result.success) {

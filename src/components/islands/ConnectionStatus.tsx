@@ -6,7 +6,7 @@
  */
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { API_BASE } from '../../config';
+import { API_BASE, FETCH_HEADERS } from '../../config';
 
 const HEALTH_URL = API_BASE.replace('/api', '/health');
 const CHECK_INTERVAL_MS = 5000;
@@ -20,6 +20,7 @@ export default function ConnectionStatus() {
         try {
             const response = await fetch(HEALTH_URL, {
                 method: 'GET',
+                headers: FETCH_HEADERS,
                 signal: AbortSignal.timeout(3000),
             });
             const data = await response.json();

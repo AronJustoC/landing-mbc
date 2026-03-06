@@ -13,3 +13,8 @@ export const API_BASE = isDev
 export const WS_BASE = isDev
     ? 'ws://192.168.1.4:8000/ws'
     : 'wss://unstalked-transphysically-suzette.ngrok-free.dev/ws';
+
+// Header requerido por ngrok free tier para evitar la página de advertencia
+export const FETCH_HEADERS: Record<string, string> = isDev
+    ? {}
+    : { 'ngrok-skip-browser-warning': 'true' };
