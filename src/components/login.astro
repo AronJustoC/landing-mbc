@@ -79,39 +79,51 @@ import { Icon } from "astro-icon/components";
 </main>
 
 <script>
-    const form = document.getElementById('login-form');
+    const API_BASE = 'http://192.168.1.4:8000/api';
+
+    const form    = document.getElementById('login-form') as HTMLFormElement | null;
     const errorMsg = document.getElementById('error-message');
+    const btnSubmit = document.querySelector('button[type="submit"]') as HTMLButtonElement | null;
 
-    if (form instanceof HTMLFormElement) {
-        form.addEventListener('submit', (e) => {
+    if (form) {
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
+
             const formData = new FormData(form);
-            const user = formData.get('username');
-            const pass = formData.get('password');
+            const username = (formData.get('username') as string).trim();
+            const password = formData.get('password') as string;
 
-            // Mock Authentication Logic
-            // Credenciales (Se recomienda configurar variables de entorno PUBLIC_*)
-            const adminUser = import.meta.env.PUBLIC_ADMIN_USER || 'admin';
-            const adminPass = import.meta.env.PUBLIC_ADMIN_PASS || '123';
-            const viewerUser = import.meta.env.PUBLIC_VIEWER_USER || 'visualizador';
-            const viewerPass = import.meta.env.PUBLIC_VIEWER_PASS || '123';
+            if (errorMsg) errorMsg.classList.add('hidden');
+            if (btnSubmit) { btnSubmit.disabled = true; btnSubmit.textContent = 'Verificando...'; }
 
-            if (user === adminUser && pass === adminPass) {
+            try {
+                const res = await fetch(`${API_BASE}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password }),
+                });
+
+                if (!res.ok) {
+                    if (errorMsg) errorMsg.classList.remove('hidden');
+                    return;
+                }
+
+                const data = await res.json();
                 localStorage.setItem('mbc_session', JSON.stringify({
-                    user: 'Administrador',
-                    role: 'admin',
-                    token: 'mock-token-admin-123'
+                    user:    data.user,
+                    role:    data.role,
+                    token:   data.token,
+                    expires: data.expires,
                 }));
                 window.location.href = '/dashboard';
-            } else if (user === viewerUser && pass === viewerPass) {
-                localStorage.setItem('mbc_session', JSON.stringify({
-                    user: 'Visualizador',
-                    role: 'viewer',
-                    token: 'mock-token-viewer-123'
-                }));
-                window.location.href = '/dashboard';
-            } else {
-                if (errorMsg) errorMsg.classList.remove('hidden');
+
+            } catch {
+                if (errorMsg) {
+                    errorMsg.textContent = 'No se pudo conectar al servidor';
+                    errorMsg.classList.remove('hidden');
+                }
+            } finally {
+                if (btnSubmit) { btnSubmit.disabled = false; btnSubmit.textContent = 'Iniciar Sesión'; }
             }
         });
     }

@@ -6,3 +6,22 @@ import DashboardContent from '../components/dashboard.astro';
 <Layout title="Dashboard | MBC" simpleLayout={true}>
     <DashboardContent title="Dashboard | MBC" />
 </Layout>
+
+<script>
+    // Guard: redirige a /login si no hay sesión válida
+    try {
+        const raw = localStorage.getItem('mbc_session');
+        if (!raw) throw new Error('no session');
+
+        const session = JSON.parse(raw);
+        if (!session.token || !session.expires) throw new Error('invalid session');
+
+        // Verificar que el token no haya expirado (exp es Unix timestamp en segundos)
+        if (Date.now() / 1000 > session.expires) {
+            localStorage.removeItem('mbc_session');
+            throw new Error('expired');
+        }
+    } catch {
+        window.location.replace('/login');
+    }
+</script>
