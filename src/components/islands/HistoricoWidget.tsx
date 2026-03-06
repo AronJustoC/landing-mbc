@@ -7,8 +7,7 @@
  */
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-
-const API_BASE = 'http://192.168.1.4:8000/api';
+import { API_BASE } from '../../config';
 
 const LS_KEY = 'mbc_selected_node';
 const EVENT_NAME = 'mbc-node-select';

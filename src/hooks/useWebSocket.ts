@@ -4,8 +4,9 @@
  */
 
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { WS_BASE } from '../config';
 
-const WS_BASE_URL = 'ws://192.168.1.4:8000/ws';
+const WS_BASE_URL = WS_BASE;
 const RECONNECT_DELAY_MS = 3000;
 
 interface UseWebSocketResult<T> {

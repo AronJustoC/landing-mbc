@@ -79,7 +79,10 @@ import { Icon } from "astro-icon/components";
 </main>
 
 <script>
-    const API_BASE = 'https://web-production-888fb2.up.railway.app/api';
+    const isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    const API_BASE = isDev
+        ? 'http://192.168.1.4:8000/api'
+        : 'https://unstalked-transphysically-suzette.ngrok-free.dev/api';
 
     const form    = document.getElementById('login-form') as HTMLFormElement | null;
     const errorMsg = document.getElementById('error-message');

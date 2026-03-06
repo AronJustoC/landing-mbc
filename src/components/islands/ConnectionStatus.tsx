@@ -6,8 +6,9 @@
  */
 
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { API_BASE } from '../../config';
 
-const HEALTH_URL = 'http://192.168.1.4:8000/health';
+const HEALTH_URL = API_BASE.replace('/api', '/health');
 const CHECK_INTERVAL_MS = 5000;
 
 export default function ConnectionStatus() {

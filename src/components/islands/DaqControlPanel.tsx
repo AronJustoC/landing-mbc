@@ -7,9 +7,7 @@
  */
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-
-/** URL base del backend */
-const API_BASE = 'http://192.168.1.4:8000/api';
+import { API_BASE } from '../../config';
 const STATUS_POLL_INTERVAL_MS = 2000;
 
 /** Estado del DAQ desde el backend */
