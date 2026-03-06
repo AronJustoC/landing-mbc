@@ -9,14 +9,21 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/react": "^4.4.2",
     "@iconify-json/lucide": "^1.2.78",
     "@iconify-json/simple-icons": "^1.2.64",
     "@tailwindcss/vite": "^4.1.17",
     "@types/nodemailer": "^7.0.5",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "astro": "^5.16.4",
     "astro-icon": "^1.1.5",
     "daisyui": "^5.5.14",
     "nodemailer": "^7.0.12",
+    "plotly.js-dist-min": "^3.4.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-plotly.js": "^2.6.0",
     "tailwindcss": "^4.1.17"
   },
   "devDependencies": {

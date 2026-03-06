@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import icon from "astro-icon";
 import tailwindcss from '@tailwindcss/vite'
+import react from '@astrojs/react';
 
 import vercel from '@astrojs/vercel';
 
@@ -12,12 +13,11 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
   integrations: [
-    // image(),
+    react(),
     icon({
       include: {
-        lucide: ['*'], // This tells astro-icon to include all icons from the 'lucide' set
-        // tabler: ['brand-*'] // This tells astro-icon to include only the 'brand-whatsapp' icon from the 'tabler' set
-        'simple-icons': ['whatsapp', 'linkedin', 'youtube'] // This tells astro-icon to include only the 'whatsapp' icon from the 'simple-icons' set
+        lucide: ['*'],
+        'simple-icons': ['whatsapp', 'linkedin', 'youtube']
       }
     })
   ]
