@@ -81,7 +81,7 @@ import { Icon } from "astro-icon/components";
 <script>
     const isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     const API_BASE = isDev
-        ? 'http://192.168.1.4:8000/api'
+        ? 'https://backend-mbc-web-production.up.railway.app/api'
         : 'https://backend-mbc-web-production.up.railway.app/api';
 
     const form    = document.getElementById('login-form') as HTMLFormElement | null;
