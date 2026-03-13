@@ -7,7 +7,7 @@
  */
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { useWebSocket } from '../../hooks/useWebSocket';
+import { useMQTT as useWebSocket } from '../../hooks/useMQTT';
 
 const LS_KEY = 'mbc_selected_node';
 const EVENT_NAME = 'mbc-node-select';
@@ -39,6 +39,7 @@ function drawChart(
     series: { values: number[]; color: string }[],
     yLabel: string,
     alarmY?: number,
+    timestamps?: number[],
 ) {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
@@ -48,7 +49,7 @@ function drawChart(
     canvas.height = rect.height * dpr;
     ctx.scale(dpr, dpr);
     const W = rect.width, H = rect.height;
-    const pad = { top: 8, right: 12, bottom: 28, left: 52 };
+    const pad = { top: 8, right: 12, bottom: 38, left: 52 };
     const pw = W - pad.left - pad.right;
     const ph = H - pad.top - pad.bottom;
 
@@ -122,6 +123,26 @@ function drawChart(
         }
         ctx.stroke();
     });
+
+    // Eje X: fecha y hora
+    if (timestamps && timestamps.length >= 2) {
+        const n = timestamps.length;
+        const numTicks = 4;
+        ctx.fillStyle = '#9ca3af';
+        ctx.font = '9px Inter,sans-serif';
+        for (let i = 0; i <= numTicks; i++) {
+            const idx = Math.floor((i / numTicks) * (n - 1));
+            const ts  = timestamps[idx];
+            const xPos = pad.left + (idx / (n - 1)) * pw;
+            const d = new Date(ts * 1000);
+            const label = d.toLocaleString('es-PE', {
+                month: '2-digit', day: '2-digit',
+                hour: '2-digit', minute: '2-digit', second: '2-digit',
+            });
+            ctx.textAlign = i === 0 ? 'left' : i === numTicks ? 'right' : 'center';
+            ctx.fillText(label, xPos, H - 4);
+        }
+    }
 }
 
 export default function VelocidadWidget() {
@@ -149,14 +170,17 @@ export default function VelocidadWidget() {
             if (d.vx.length > 1) {
                 drawChart(canvasInstRef.current,
                     [{ values: d.vx, color: COLORS.x }, { values: d.vy, color: COLORS.y }, { values: d.vz, color: COLORS.z }],
-                    'Vel. inst. (mm/s)'
+                    'Vel. inst. (mm/s)',
+                    undefined,
+                    d.timestamps,
                 );
             }
             if (d.rx.length > 1) {
                 drawChart(canvasRmsRef.current,
                     [{ values: d.rx, color: COLORS.x }, { values: d.ry, color: COLORS.y }, { values: d.rz, color: COLORS.z }],
                     'VRMS (mm/s)',
-                    d.alarm_threshold
+                    d.alarm_threshold,
+                    d.trend?.timestamps,
                 );
             }
         }

@@ -7,7 +7,7 @@
  */
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { API_BASE, FETCH_HEADERS } from '../../config';
+import { DAQ_API_BASE as API_BASE, FETCH_HEADERS } from '../../config';
 
 const LS_KEY = 'mbc_selected_node';
 const EVENT_NAME = 'mbc-node-select';

@@ -7,7 +7,7 @@
  */
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { useWebSocket } from '../../hooks/useWebSocket';
+import { useMQTT as useWebSocket } from '../../hooks/useMQTT';
 
 const LS_KEY = 'mbc_selected_node';
 const EVENT_NAME = 'mbc-node-select';

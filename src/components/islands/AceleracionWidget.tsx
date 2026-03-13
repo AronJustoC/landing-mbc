@@ -6,7 +6,7 @@
  */
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { useWebSocket } from '../../hooks/useWebSocket';
+import { useMQTT as useWebSocket } from '../../hooks/useMQTT';
 
 const LS_KEY = 'mbc_selected_node';
 const EVENT_NAME = 'mbc-node-select';
@@ -121,7 +121,7 @@ export default function AceleracionWidget() {
         const width = rect.width;
         const height = rect.height;
         const buf = bufferRef.current;
-        const padding = { top: 10, right: 15, bottom: 30, left: 50 };
+        const padding = { top: 10, right: 15, bottom: 38, left: 50 };
         const plotWidth = width - padding.left - padding.right;
         const plotHeight = height - padding.top - padding.bottom;
 
@@ -185,6 +185,25 @@ export default function AceleracionWidget() {
             ctx.moveTo(xPos, padding.top);
             ctx.lineTo(xPos, padding.top + plotHeight);
             ctx.stroke();
+        }
+
+        // Eje X: fecha y hora
+        if (buf.timestamps.length >= 2) {
+            const numTicks = 5;
+            ctx.fillStyle = COLORS.text;
+            ctx.font = '9px Inter, system-ui, sans-serif';
+            for (let i = 0; i <= numTicks; i++) {
+                const idx = Math.floor((i / numTicks) * (buf.timestamps.length - 1));
+                const ts  = buf.timestamps[idx];
+                const xPos = padding.left + (idx / (buf.timestamps.length - 1)) * plotWidth;
+                const d = new Date(ts * 1000);
+                const label = d.toLocaleString('es-PE', {
+                    month: '2-digit', day: '2-digit',
+                    hour: '2-digit', minute: '2-digit', second: '2-digit',
+                });
+                ctx.textAlign = i === 0 ? 'left' : i === numTicks ? 'right' : 'center';
+                ctx.fillText(label, xPos, padding.top + plotHeight + 18);
+            }
         }
 
         // Eje Y label

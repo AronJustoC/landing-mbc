@@ -6,7 +6,7 @@
  */
 
 import { useState, useEffect } from 'react';
-import { useWebSocket } from '../../hooks/useWebSocket';
+import { useMQTT as useWebSocket } from '../../hooks/useMQTT';
 
 interface EjeData {
     accel_g: number;

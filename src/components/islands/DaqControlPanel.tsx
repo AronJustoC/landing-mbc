@@ -1,144 +1,97 @@
 /**
- * DaqControlPanel — Panel de control del proceso DAQ.
+ * DaqControlPanel — Control del DAQ vía MQTT.
  *
- * Permite iniciar/detener la adquisición de datos y muestra métricas
- * en tiempo real: estado, PID, uptime, muestras, tasa de muestreo.
- * Consume los endpoints REST /api/daq/start, /api/daq/stop, /api/daq/status.
+ * Publica comandos en zaranda/daq/cmd y lee estado desde zaranda/status.
+ * Sin HTTP, sin túneles — mismo canal que los gráficos en tiempo real.
  */
 
-import { useState, useEffect, useRef, useCallback } from 'react';
-import { API_BASE, FETCH_HEADERS } from '../../config';
-const STATUS_POLL_INTERVAL_MS = 2000;
+import { useState, useEffect, useRef } from 'react';
+import { useMQTT, publishMQTT } from '../../hooks/useMQTT';
+import { MQTT_TOPIC_BASE } from '../../config';
 
-/** Estado del DAQ desde el backend */
+const CMD_TOPIC = `${MQTT_TOPIC_BASE}/daq/cmd`;
+
 interface DaqStatus {
-    running: boolean;
-    pid: number | null;
-    mode: string | null;
-    uptime_seconds: number;
-    total_samples: number;
-    sample_rate: number;
-    hdf5_exists: boolean;
-    hdf5_size_mb: number;
+    acquiring:    boolean;
+    nodes_active: number[];
+    ts:           number;
+    online?:      boolean;
 }
 
-/** Colores del sistema de diseño */
 const COLORS = {
-    bg: '#121214',
-    cardBorder: 'rgba(255, 255, 255, 0.05)',
-    text: '#9ca3af',
-    textLight: '#d1d5db',
-    white: '#ffffff',
-    green: '#22c55e',
-    greenBg: 'rgba(34, 197, 94, 0.1)',
+    bg:          '#121214',
+    cardBorder:  'rgba(255, 255, 255, 0.05)',
+    text:        '#9ca3af',
+    textLight:   '#d1d5db',
+    white:       '#ffffff',
+    green:       '#22c55e',
+    greenBg:     'rgba(34, 197, 94, 0.1)',
     greenBorder: 'rgba(34, 197, 94, 0.2)',
-    red: '#ef4444',
-    redBg: 'rgba(239, 68, 68, 0.1)',
-    redBorder: 'rgba(239, 68, 68, 0.2)',
-    cyan: '#06b6d4',
-    cyanBg: 'rgba(6, 182, 212, 0.1)',
-    cyanBorder: 'rgba(6, 182, 212, 0.2)',
-    yellow: '#eab308',
-    yellowBg: 'rgba(234, 179, 8, 0.1)',
-    yellowBorder: 'rgba(234, 179, 8, 0.2)',
+    red:         '#ef4444',
+    redBg:       'rgba(239, 68, 68, 0.1)',
+    redBorder:   'rgba(239, 68, 68, 0.2)',
+    cyan:        '#06b6d4',
+    cyanBg:      'rgba(6, 182, 212, 0.1)',
+    cyanBorder:  'rgba(6, 182, 212, 0.2)',
+    yellow:      '#eab308',
+    yellowBg:    'rgba(234, 179, 8, 0.1)',
+    yellowBorder:'rgba(234, 179, 8, 0.2)',
 };
 
 function formatUptime(seconds: number): string {
     if (seconds <= 0) return '0s';
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const secs = Math.floor(seconds % 60);
-    if (hours > 0) return `${hours}h ${minutes}m ${secs}s`;
-    if (minutes > 0) return `${minutes}m ${secs}s`;
-    return `${secs}s`;
-}
-
-function formatNumber(value: number): string {
-    if (value >= 1_000_000) return `${(value / 1_000_000).toFixed(1)}M`;
-    if (value >= 1_000) return `${(value / 1_000).toFixed(1)}K`;
-    return value.toString();
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = Math.floor(seconds % 60);
+    if (h > 0) return `${h}h ${m}m ${s}s`;
+    if (m > 0) return `${m}m ${s}s`;
+    return `${s}s`;
 }
 
 export default function DaqControlPanel() {
-    const [status, setStatus] = useState<DaqStatus | null>(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
-    const isMountedRef = useRef(true);
+    const { data: status, connected } = useMQTT<DaqStatus>('status');
+    const [loading,   setLoading]   = useState(false);
+    const [uptime,    setUptime]    = useState(0);
+    const startRef = useRef<number | null>(null);
 
-    const fetchStatus = useCallback(async () => {
-        try {
-            const response = await fetch(`${API_BASE}/daq/status`, {
-                headers: FETCH_HEADERS,
-                signal: AbortSignal.timeout(3000),
-            });
-            const data: DaqStatus = await response.json();
-            if (isMountedRef.current) {
-                setStatus(data);
-                setError(null);
-            }
-        } catch {
-            if (isMountedRef.current) {
-                setError('Sin conexión al backend');
-            }
+    // Calcular uptime localmente desde cuando acquiring pasó a true
+    useEffect(() => {
+        if (status?.acquiring) {
+            if (startRef.current === null) startRef.current = Date.now();
+        } else {
+            startRef.current = null;
+            setUptime(0);
         }
-    }, []);
+    }, [status?.acquiring]);
 
     useEffect(() => {
-        isMountedRef.current = true;
-        fetchStatus();
-        const interval = setInterval(fetchStatus, STATUS_POLL_INTERVAL_MS);
-        return () => {
-            isMountedRef.current = false;
-            clearInterval(interval);
-        };
-    }, [fetchStatus]);
-
-    const handleStart = async () => {
-        setLoading(true);
-        try {
-            const response = await fetch(`${API_BASE}/daq/start`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', ...FETCH_HEADERS },
-                body: JSON.stringify({ mode: 'mscl' }),
-            });
-            const result = await response.json();
-            if (!result.success) {
-                setError(result.message);
+        if (!status?.acquiring) return;
+        const interval = setInterval(() => {
+            if (startRef.current !== null) {
+                setUptime(Math.floor((Date.now() - startRef.current) / 1000));
             }
-            // Refrescar estado inmediato
-            setTimeout(fetchStatus, 500);
-        } catch {
-            setError('Error al iniciar DAQ');
-        } finally {
-            setLoading(false);
-        }
+        }, 1000);
+        return () => clearInterval(interval);
+    }, [status?.acquiring]);
+
+    const handleStart = () => {
+        setLoading(true);
+        publishMQTT(CMD_TOPIC, { cmd: 'start' });
+        setTimeout(() => setLoading(false), 1000);
     };
 
-    const handleStop = async () => {
+    const handleStop = () => {
         setLoading(true);
-        try {
-            const response = await fetch(`${API_BASE}/daq/stop`, {
-                method: 'POST',
-                headers: FETCH_HEADERS,
-            });
-            const result = await response.json();
-            if (!result.success) {
-                setError(result.message);
-            }
-            setTimeout(fetchStatus, 500);
-        } catch {
-            setError('Error al detener DAQ');
-        } finally {
-            setLoading(false);
-        }
+        publishMQTT(CMD_TOPIC, { cmd: 'stop' });
+        setTimeout(() => setLoading(false), 1000);
     };
 
-    const isRunning = status?.running ?? false;
-    const statusColor = isRunning ? COLORS.green : COLORS.red;
-    const statusBg = isRunning ? COLORS.greenBg : COLORS.redBg;
-    const statusBorder = isRunning ? COLORS.greenBorder : COLORS.redBorder;
-    const statusText = isRunning ? 'Activo' : 'Detenido';
-    const statusIcon = isRunning ? '🟢' : '🔴';
+    const isRunning     = status?.acquiring ?? false;
+    const nodesActive   = status?.nodes_active ?? [];
+    const statusColor   = isRunning ? COLORS.green  : COLORS.red;
+    const statusBg      = isRunning ? COLORS.greenBg  : COLORS.redBg;
+    const statusBorder  = isRunning ? COLORS.greenBorder : COLORS.redBorder;
+    const statusText    = isRunning ? 'Activo' : 'Detenido';
 
     return (
         <div style={{
@@ -157,99 +110,61 @@ export default function DaqControlPanel() {
                 gap: '12px',
             }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <h3 style={{
-                        color: COLORS.white,
-                        fontSize: '14px',
-                        fontWeight: 600,
-                        margin: 0,
-                    }}>
+                    <h3 style={{ color: COLORS.white, fontSize: '14px', fontWeight: 600, margin: 0 }}>
                         🎛️ Control de Adquisición DAQ
                     </h3>
-                    {/* Status badge */}
                     <span style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '6px',
-                        fontSize: '11px',
-                        padding: '3px 10px',
-                        borderRadius: '9999px',
-                        backgroundColor: statusBg,
-                        color: statusColor,
-                        border: `1px solid ${statusBorder}`,
-                        fontWeight: 500,
+                        display: 'inline-flex', alignItems: 'center', gap: '6px',
+                        fontSize: '11px', padding: '3px 10px', borderRadius: '9999px',
+                        backgroundColor: statusBg, color: statusColor,
+                        border: `1px solid ${statusBorder}`, fontWeight: 500,
                     }}>
                         <span style={{
-                            width: '6px',
-                            height: '6px',
-                            borderRadius: '50%',
+                            width: '6px', height: '6px', borderRadius: '50%',
                             backgroundColor: statusColor,
                             animation: isRunning ? 'daqPulse 2s infinite' : 'none',
                         }} />
                         {statusText}
                     </span>
-                    {status?.mode && isRunning && (
-                        <span style={{
-                            fontSize: '10px',
-                            padding: '2px 8px',
-                            borderRadius: '4px',
-                            backgroundColor: COLORS.cyanBg,
-                            color: COLORS.cyan,
-                            border: `1px solid ${COLORS.cyanBorder}`,
-                            textTransform: 'uppercase',
-                            fontWeight: 500,
-                            letterSpacing: '0.05em',
-                        }}>
-                            {status.mode}
-                        </span>
-                    )}
+                    {/* Indicador de conexión MQTT */}
+                    <span style={{
+                        fontSize: '10px', padding: '2px 8px', borderRadius: '4px',
+                        backgroundColor: connected ? COLORS.cyanBg : COLORS.yellowBg,
+                        color: connected ? COLORS.cyan : COLORS.yellow,
+                        border: `1px solid ${connected ? COLORS.cyanBorder : COLORS.yellowBorder}`,
+                    }}>
+                        {connected ? 'MQTT ✓' : 'MQTT...'}
+                    </span>
                 </div>
 
-                {/* Botones de control */}
+                {/* Botones */}
                 <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', width: '100%' }}>
                     <button
                         onClick={handleStart}
-                        disabled={loading || isRunning}
+                        disabled={loading || isRunning || !connected}
                         style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            flex: 1,
-                            minWidth: '120px',
-                            gap: '6px',
-                            padding: '8px 16px',
-                            fontSize: '12px',
-                            fontWeight: 500,
-                            borderRadius: '8px',
-                            border: `1px solid ${COLORS.greenBorder}`,
-                            backgroundColor: isRunning ? 'transparent' : COLORS.greenBg,
-                            color: isRunning ? COLORS.text : COLORS.green,
-                            cursor: isRunning || loading ? 'not-allowed' : 'pointer',
-                            opacity: isRunning || loading ? 0.5 : 1,
-                            transition: 'all 0.2s',
+                            flex: 1, minWidth: '120px', gap: '6px',
+                            padding: '8px 16px', fontSize: '12px', fontWeight: 500,
+                            borderRadius: '8px', border: `1px solid ${COLORS.greenBorder}`,
+                            backgroundColor: (isRunning || !connected) ? 'transparent' : COLORS.greenBg,
+                            color: (isRunning || !connected) ? COLORS.text : COLORS.green,
+                            cursor: (isRunning || loading || !connected) ? 'not-allowed' : 'pointer',
+                            opacity: (isRunning || loading || !connected) ? 0.5 : 1,
                         }}
                     >
                         ▶ Iniciar
                     </button>
                     <button
                         onClick={handleStop}
-                        disabled={loading || !isRunning}
+                        disabled={loading || !isRunning || !connected}
                         style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            flex: 1,
-                            minWidth: '120px',
-                            gap: '6px',
-                            padding: '8px 16px',
-                            fontSize: '12px',
-                            fontWeight: 500,
-                            borderRadius: '8px',
-                            border: `1px solid ${COLORS.redBorder}`,
-                            backgroundColor: !isRunning ? 'transparent' : COLORS.redBg,
-                            color: !isRunning ? COLORS.text : COLORS.red,
-                            cursor: !isRunning || loading ? 'not-allowed' : 'pointer',
-                            opacity: !isRunning || loading ? 0.5 : 1,
-                            transition: 'all 0.2s',
+                            flex: 1, minWidth: '120px', gap: '6px',
+                            padding: '8px 16px', fontSize: '12px', fontWeight: 500,
+                            borderRadius: '8px', border: `1px solid ${COLORS.redBorder}`,
+                            backgroundColor: (!isRunning || !connected) ? 'transparent' : COLORS.redBg,
+                            color: (!isRunning || !connected) ? COLORS.text : COLORS.red,
+                            cursor: (!isRunning || loading || !connected) ? 'not-allowed' : 'pointer',
+                            opacity: (!isRunning || loading || !connected) ? 0.5 : 1,
                         }}
                     >
                         ⏹ Detener
@@ -257,57 +172,29 @@ export default function DaqControlPanel() {
                 </div>
             </div>
 
-            {/* Error message */}
-            {error && (
-                <div style={{
-                    padding: '8px 12px',
-                    marginBottom: '12px',
-                    borderRadius: '8px',
-                    backgroundColor: COLORS.yellowBg,
-                    color: COLORS.yellow,
-                    border: `1px solid ${COLORS.yellowBorder}`,
-                    fontSize: '12px',
-                }}>
-                    ⚠ {error}
-                </div>
-            )}
-
-            {/* Metrics grid */}
+            {/* Métricas disponibles vía MQTT */}
             <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
                 gap: '12px',
             }}>
-                {/* PID */}
-                <MetricCard
-                    label="PID"
-                    value={status?.pid?.toString() ?? '--'}
-                    icon="🔧"
+                <MetricCard label="Nodos Activos"
+                    value={isRunning ? `${nodesActive.length} / 4` : '--'}
+                    icon="📡"
+                    highlight={isRunning && nodesActive.length > 0}
                 />
-                {/* Uptime */}
-                <MetricCard
-                    label="Tiempo Activo"
-                    value={status ? formatUptime(status.uptime_seconds) : '--'}
+                <MetricCard label="Tiempo Activo"
+                    value={isRunning ? formatUptime(uptime) : '--'}
                     icon="⏱"
                 />
-                {/* Total muestras */}
-                <MetricCard
-                    label="Muestras HDF5"
-                    value={status ? formatNumber(status.total_samples) : '--'}
-                    icon="📊"
+                <MetricCard label="Nodos"
+                    value={nodesActive.length > 0 ? nodesActive.join(', ') : '--'}
+                    icon="🔧"
                 />
-                {/* Tasa de muestreo */}
-                <MetricCard
-                    label="Tasa Actual"
-                    value={status ? `${status.sample_rate}/s` : '--'}
+                <MetricCard label="Tasa"
+                    value={isRunning ? '128 Hz' : '--'}
                     icon="⚡"
-                    highlight={isRunning && status !== null && status.sample_rate > 200}
-                />
-                {/* HDF5 Size */}
-                <MetricCard
-                    label="Archivo HDF5"
-                    value={status?.hdf5_exists ? `${status.hdf5_size_mb} MB` : 'No existe'}
-                    icon="💾"
+                    highlight={isRunning}
                 />
             </div>
 
@@ -321,45 +208,27 @@ export default function DaqControlPanel() {
     );
 }
 
-/** Tarjeta de métrica individual */
 function MetricCard({ label, value, icon, highlight = false }: {
-    label: string;
-    value: string;
-    icon: string;
-    highlight?: boolean;
+    label: string; value: string; icon: string; highlight?: boolean;
 }) {
     return (
         <div style={{
-            padding: '12px',
-            borderRadius: '8px',
-            backgroundColor: highlight ? COLORS.cyanBg : 'rgba(255, 255, 255, 0.02)',
-            border: `1px solid ${highlight ? COLORS.cyanBorder : 'rgba(255, 255, 255, 0.04)'}`,
+            padding: '12px', borderRadius: '8px',
+            backgroundColor: highlight ? COLORS.cyanBg : 'rgba(255,255,255,0.02)',
+            border: `1px solid ${highlight ? COLORS.cyanBorder : 'rgba(255,255,255,0.04)'}`,
         }}>
-            <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                marginBottom: '6px',
-            }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px' }}>
                 <span style={{ fontSize: '14px' }}>{icon}</span>
                 <span style={{
-                    fontSize: '10px',
-                    color: COLORS.text,
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em',
-                    fontWeight: 500,
-                }}>
-                    {label}
-                </span>
+                    fontSize: '10px', color: COLORS.text,
+                    textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 500,
+                }}>{label}</span>
             </div>
             <span style={{
-                fontSize: '16px',
-                fontWeight: 600,
+                fontSize: '16px', fontWeight: 600,
                 color: highlight ? COLORS.cyan : COLORS.white,
                 fontFamily: 'monospace',
-            }}>
-                {value}
-            </span>
+            }}>{value}</span>
         </div>
     );
 }

@@ -6,7 +6,7 @@
  */
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { useWebSocket } from '../../hooks/useWebSocket';
+import { useMQTT as useWebSocket } from '../../hooks/useMQTT';
 
 const LS_KEY = 'mbc_selected_node';
 const EVENT_NAME = 'mbc-node-select';
@@ -56,7 +56,7 @@ export default function TendenciaVRMSWidget() {
         ctx.scale(dpr, dpr);
 
         const W = rect.width, H = rect.height;
-        const pad = { top: 8, right: 12, bottom: 28, left: 52 };
+        const pad = { top: 8, right: 12, bottom: 38, left: 52 };
         const pw = W - pad.left - pad.right;
         const ph = H - pad.top  - pad.bottom;
 
@@ -139,17 +139,23 @@ export default function TendenciaVRMSWidget() {
             ctx.stroke();
         });
 
-        // X axis: timestamps
+        // Eje X: fecha y hora (5 ticks uniformes)
         if (tr.timestamps.length >= 2) {
-            const tFirst = tr.timestamps[0];
-            const tLast  = tr.timestamps[tr.timestamps.length - 1];
-            const fmt = (ts: number) => new Date(ts * 1000).toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            const numTicks = 4;
             ctx.fillStyle = COLORS.text;
             ctx.font = '9px Inter,sans-serif';
-            ctx.textAlign = 'left';
-            ctx.fillText(fmt(tFirst), pad.left, H - 4);
-            ctx.textAlign = 'right';
-            ctx.fillText(fmt(tLast), W - pad.right, H - 4);
+            for (let i = 0; i <= numTicks; i++) {
+                const idx = Math.floor((i / numTicks) * (n - 1));
+                const ts  = tr.timestamps[idx];
+                const xPos = mapX(idx);
+                const d2 = new Date(ts * 1000);
+                const label = d2.toLocaleString('es-PE', {
+                    month: '2-digit', day: '2-digit',
+                    hour: '2-digit', minute: '2-digit', second: '2-digit',
+                });
+                ctx.textAlign = i === 0 ? 'left' : i === numTicks ? 'right' : 'center';
+                ctx.fillText(label, xPos, H - 4);
+            }
         }
 
         animRef.current = requestAnimationFrame(render);
