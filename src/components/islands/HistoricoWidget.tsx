@@ -209,7 +209,7 @@ export default function HistoricoWidget() {
                 </div>
             )}
 
-            <canvas ref={canvasRef} style={{ width: '100%', height: 240, display: 'block', borderRadius: 8 }} />
+            <canvas ref={canvasRef} data-chart-id="historico" style={{ width: '100%', height: 240, display: 'block', borderRadius: 8 }} />
         </div>
     );
 }

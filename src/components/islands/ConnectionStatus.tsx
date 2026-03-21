@@ -85,7 +85,7 @@ export default function ConnectionStatus() {
         : 'rgba(239,68,68,0.2)';
 
     const statusText = brokerOnline
-        ? (daqActive ? 'MQTT · DAQ Activo' : 'MQTT · DAQ Inactivo')
+        ? (daqActive ? 'DAQ Activo' : 'DAQ Inactivo')
         : 'Broker MQTT Offline';
 
     return (

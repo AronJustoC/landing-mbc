@@ -49,11 +49,15 @@ export default function TendenciaVRMSWidget() {
         const ctx = canvas.getContext('2d');
         if (!ctx) { animRef.current = requestAnimationFrame(render); return; }
 
-        const rect = canvas.getBoundingClientRect();
         const dpr  = window.devicePixelRatio || 1;
-        canvas.width  = rect.width  * dpr;
-        canvas.height = rect.height * dpr;
-        ctx.scale(dpr, dpr);
+        const rect = canvas.getBoundingClientRect();
+        const newW = Math.round(rect.width  * dpr);
+        const newH = Math.round(rect.height * dpr);
+        if (canvas.width !== newW || canvas.height !== newH) {
+            canvas.width  = newW;
+            canvas.height = newH;
+        }
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
         const W = rect.width, H = rect.height;
         const pad = { top: 8, right: 12, bottom: 38, left: 52 };
@@ -197,7 +201,7 @@ export default function TendenciaVRMSWidget() {
                     </span>
                 </div>
             </div>
-            <canvas ref={canvasRef} style={{ width: '100%', height: 200, display: 'block', borderRadius: 8 }} />
+            <canvas ref={canvasRef} data-chart-id="tendencia" style={{ width: '100%', height: 200, display: 'block', borderRadius: 8 }} />
         </div>
     );
 }

@@ -111,12 +111,16 @@ export default function AceleracionWidget() {
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        // Ajustar resolución al tamaño real
+        // Resize solo cuando el tamaño real cambia — evita limpiar GPU texture en cada frame
+        const dpr  = window.devicePixelRatio || 1;
         const rect = canvas.getBoundingClientRect();
-        const dpr = window.devicePixelRatio || 1;
-        canvas.width = rect.width * dpr;
-        canvas.height = rect.height * dpr;
-        ctx.scale(dpr, dpr);
+        const newW = Math.round(rect.width  * dpr);
+        const newH = Math.round(rect.height * dpr);
+        if (canvas.width !== newW || canvas.height !== newH) {
+            canvas.width  = newW;
+            canvas.height = newH;
+        }
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
         const width = rect.width;
         const height = rect.height;
@@ -279,6 +283,9 @@ export default function AceleracionWidget() {
             borderRadius: '12px',
             padding: '20px',
             position: 'relative',
+            width: '100%',
+            minWidth: 0,
+            overflow: 'hidden',
         }}>
             <div ref={headerRef} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px', flexWrap: 'wrap', gap: '8px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
@@ -316,7 +323,8 @@ export default function AceleracionWidget() {
             <div style={{ width: '100%', overflowX: 'auto', minWidth: 0 }}>
                 <canvas
                     ref={canvasRef}
-                    style={{ width: '100%', height: '240px', display: 'block', borderRadius: '8px', minWidth: '300px' }}
+                    data-chart-id="aceleracion"
+                    style={{ width: '100%', height: '320px', display: 'block', borderRadius: '8px', minWidth: '300px' }}
                 />
             </div>
             <style>{`

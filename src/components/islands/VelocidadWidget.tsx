@@ -8,6 +8,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useMQTT as useWebSocket } from '../../hooks/useMQTT';
+import { getThresholds, setThresholds, THRESHOLD_EVENT } from '../../config/thresholds';
 
 const LS_KEY = 'mbc_selected_node';
 const EVENT_NAME = 'mbc-node-select';
@@ -21,7 +22,9 @@ interface VelocidadData {
     rx: number[]; ry: number[]; rz: number[];
     vrms_actual: { x: number; y: number; z: number };
     alarm: boolean;
+    alarm_warning: boolean;
     alarm_threshold: number;
+    alarm_warning_threshold: number;
     trend: { timestamps: number[]; rx: number[]; ry: number[]; rz: number[] };
 }
 
@@ -40,14 +43,20 @@ function drawChart(
     yLabel: string,
     alarmY?: number,
     timestamps?: number[],
+    warningY?: number,
 ) {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
+    // Resize solo cuando el tamaño real cambia — evita limpiar GPU texture en cada frame
+    const dpr  = window.devicePixelRatio || 1;
     const rect = canvas.getBoundingClientRect();
-    const dpr = window.devicePixelRatio || 1;
-    canvas.width = rect.width * dpr;
-    canvas.height = rect.height * dpr;
-    ctx.scale(dpr, dpr);
+    const newW = Math.round(rect.width  * dpr);
+    const newH = Math.round(rect.height * dpr);
+    if (canvas.width !== newW || canvas.height !== newH) {
+        canvas.width  = newW;
+        canvas.height = newH;
+    }
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     const W = rect.width, H = rect.height;
     const pad = { top: 8, right: 12, bottom: 38, left: 52 };
     const pw = W - pad.left - pad.right;
@@ -65,8 +74,8 @@ function drawChart(
         return;
     }
 
-    const minV = Math.min(...all, alarmY ?? Infinity) * 1.1;
-    const maxV = Math.max(...all, alarmY ?? -Infinity) * 1.1;
+    const minV = Math.min(...all, alarmY ?? Infinity, warningY ?? Infinity) * 1.1;
+    const maxV = Math.max(...all, alarmY ?? -Infinity, warningY ?? -Infinity) * 1.1;
     const span = maxV - minV || 1;
 
     const mapY = (v: number) => pad.top + ph - ((v - minV) / span) * ph;
@@ -96,7 +105,21 @@ function drawChart(
     ctx.fillText(yLabel, 0, 0);
     ctx.restore();
 
-    // Alarm line
+    // Warning line (yellow)
+    if (warningY !== undefined) {
+        const wy = mapY(warningY);
+        ctx.setLineDash([4, 4]);
+        ctx.strokeStyle = '#eab308';
+        ctx.lineWidth = 1.2;
+        ctx.beginPath(); ctx.moveTo(pad.left, wy); ctx.lineTo(W - pad.right, wy); ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = '#eab308';
+        ctx.font = '9px Inter,sans-serif';
+        ctx.textAlign = 'left';
+        ctx.fillText(`${warningY} mm/s`, pad.left + 4, wy - 3);
+    }
+
+    // Alarm line (red)
     if (alarmY !== undefined) {
         const ay = mapY(alarmY);
         ctx.setLineDash([6, 4]);
@@ -147,6 +170,10 @@ function drawChart(
 
 export default function VelocidadWidget() {
     const [nodeId, setNodeId] = useState<number>(getStoredNode);
+    const [thresholds, setThresholdsState] = useState(getThresholds);
+    const [editing, setEditing] = useState(false);
+    const [inputY, setInputY] = useState('');
+    const [inputR, setInputR] = useState('');
     const { data, connected } = useWebSocket<VelocidadData>(`velocidad?node=${nodeId}`);
 
     useEffect(() => {
@@ -154,6 +181,13 @@ export default function VelocidadWidget() {
         window.addEventListener(EVENT_NAME, handler);
         return () => window.removeEventListener(EVENT_NAME, handler);
     }, []);
+
+    useEffect(() => {
+        const handler = (e: Event) => setThresholdsState((e as CustomEvent<{ yellow: number; red: number }>).detail);
+        window.addEventListener(THRESHOLD_EVENT, handler);
+        return () => window.removeEventListener(THRESHOLD_EVENT, handler);
+    }, []);
+
     const canvasInstRef = useRef<HTMLCanvasElement>(null);
     const canvasRmsRef  = useRef<HTMLCanvasElement>(null);
     const animRef       = useRef<number>(0);
@@ -181,6 +215,7 @@ export default function VelocidadWidget() {
                     'VRMS (mm/s)',
                     d.alarm_threshold,
                     d.trend?.timestamps,
+                    d.alarm_warning_threshold,
                 );
             }
         }
@@ -193,13 +228,29 @@ export default function VelocidadWidget() {
     }, [render]);
 
     const d = data;
-    const alarm = d?.alarm ?? false;
+    const alarm        = d?.alarm         ?? false;
+    const alarmWarning = d?.alarm_warning ?? false;
+
+    const openEdit = () => {
+        setInputY(String(thresholds.yellow));
+        setInputR(String(thresholds.red));
+        setEditing(true);
+    };
+
+    const saveEdit = () => {
+        const y = parseFloat(inputY);
+        const r = parseFloat(inputR);
+        if (!isNaN(y) && !isNaN(r) && y > 0 && r > y) {
+            setThresholds(y, r);
+        }
+        setEditing(false);
+    };
 
     return (
         <div style={{ backgroundColor: '#000', border: '1px solid #333', borderRadius: 12, padding: 20 }}>
             {/* Header */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12, flexWrap: 'wrap', gap: 8 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
                     <h3 style={{ color: '#fff', fontSize: 14, fontWeight: 500, margin: 0 }}>📈 Velocidad — Instantánea y RMS</h3>
                     <span style={{
                         fontSize: 11, padding: '2px 8px', borderRadius: 9999,
@@ -210,8 +261,13 @@ export default function VelocidadWidget() {
                         {connected ? 'En vivo' : 'Desconectado'}
                     </span>
                     {alarm && (
-                        <span style={{ fontSize: 11, padding: '2px 8px', borderRadius: 9999, backgroundColor: 'rgba(239,68,68,0.2)', color: '#ff4444', border: '1px solid rgba(239,68,68,0.4)', fontWeight: 700 }}>
-                            ⚠ ALARMA VRMS
+                        <span style={{ fontSize: 11, padding: '2px 8px', borderRadius: 9999, backgroundColor: 'rgba(239,68,68,0.2)', color: '#ef4444', border: '1px solid rgba(239,68,68,0.4)', fontWeight: 700 }}>
+                            ⚠ CRÍTICO VRMS
+                        </span>
+                    )}
+                    {!alarm && alarmWarning && (
+                        <span style={{ fontSize: 11, padding: '2px 8px', borderRadius: 9999, backgroundColor: 'rgba(234,179,8,0.2)', color: '#eab308', border: '1px solid rgba(234,179,8,0.4)', fontWeight: 700 }}>
+                            ⚠ ALERTA VRMS
                         </span>
                     )}
                 </div>
@@ -222,23 +278,53 @@ export default function VelocidadWidget() {
                 </div>
             </div>
 
-            {/* Leyenda */}
-            <div style={{ display: 'flex', gap: 16, marginBottom: 8 }}>
-                {[['X', COLORS.x], ['Y', COLORS.y], ['Z', COLORS.z]].map(([label, color]) => (
-                    <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                        <div style={{ width: 16, height: 2, backgroundColor: color as string }} />
-                        <span style={{ color: COLORS.text, fontSize: 11 }}>{label}</span>
+            {/* Leyenda + editor de umbrales */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, marginBottom: 8, flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', gap: 16 }}>
+                    {[['X', COLORS.x], ['Y', COLORS.y], ['Z', COLORS.z]].map(([label, color]) => (
+                        <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                            <div style={{ width: 16, height: 2, backgroundColor: color as string }} />
+                            <span style={{ color: COLORS.text, fontSize: 11 }}>{label}</span>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Umbrales */}
+                {editing ? (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                        <span style={{ color: COLORS.text, fontSize: 11 }}>Alerta:</span>
+                        <input
+                            type="number" value={inputY} onChange={e => setInputY(e.target.value)}
+                            style={{ width: 60, backgroundColor: '#1a1a1e', border: '1px solid #eab308', borderRadius: 4, color: '#eab308', fontSize: 12, padding: '2px 6px', fontFamily: 'monospace' }}
+                        />
+                        <span style={{ color: COLORS.text, fontSize: 11 }}>Crítico:</span>
+                        <input
+                            type="number" value={inputR} onChange={e => setInputR(e.target.value)}
+                            style={{ width: 60, backgroundColor: '#1a1a1e', border: '1px solid #ef4444', borderRadius: 4, color: '#ef4444', fontSize: 12, padding: '2px 6px', fontFamily: 'monospace' }}
+                        />
+                        <span style={{ color: COLORS.text, fontSize: 10 }}>mm/s</span>
+                        <button onClick={saveEdit} style={{ fontSize: 11, padding: '2px 10px', borderRadius: 4, backgroundColor: 'rgba(34,197,94,0.15)', color: '#22c55e', border: '1px solid rgba(34,197,94,0.4)', cursor: 'pointer' }}>✓ Guardar</button>
+                        <button onClick={() => setEditing(false)} style={{ fontSize: 11, padding: '2px 8px', borderRadius: 4, backgroundColor: 'transparent', color: COLORS.text, border: '1px solid #333', cursor: 'pointer' }}>✕</button>
                     </div>
-                ))}
+                ) : (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                        <span style={{ color: '#eab308', fontSize: 11, fontFamily: 'monospace' }}>{thresholds.yellow} mm/s</span>
+                        <span style={{ color: COLORS.text, fontSize: 11 }}>/</span>
+                        <span style={{ color: '#ef4444', fontSize: 11, fontFamily: 'monospace' }}>{thresholds.red} mm/s</span>
+                        <button onClick={openEdit} style={{ fontSize: 10, padding: '2px 8px', borderRadius: 4, backgroundColor: 'rgba(255,255,255,0.05)', color: COLORS.text, border: '1px solid #333', cursor: 'pointer' }}>⚙ Umbrales</button>
+                    </div>
+                )}
             </div>
 
             {/* Velocidad Instantánea */}
             <p style={{ color: COLORS.text, fontSize: 11, margin: '0 0 4px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Velocidad Instantánea</p>
-            <canvas ref={canvasInstRef} style={{ width: '100%', height: 180, display: 'block', borderRadius: 6, marginBottom: 12 }} />
+            <canvas ref={canvasInstRef} data-chart-id="velocidad-inst" style={{ width: '100%', height: 180, display: 'block', borderRadius: 6, marginBottom: 12 }} />
 
             {/* VRMS */}
-            <p style={{ color: COLORS.text, fontSize: 11, margin: '0 0 4px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>VRMS (ventana 1s) — umbral {d?.alarm_threshold ?? 5} mm/s</p>
-            <canvas ref={canvasRmsRef} style={{ width: '100%', height: 180, display: 'block', borderRadius: 6 }} />
+            <p style={{ color: COLORS.text, fontSize: 11, margin: '0 0 4px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                VRMS (ventana 1s) — <span style={{ color: '#eab308' }}>alerta {thresholds.yellow} mm/s</span> · <span style={{ color: '#ef4444' }}>crítico {thresholds.red} mm/s</span>
+            </p>
+            <canvas ref={canvasRmsRef} data-chart-id="velocidad-rms" style={{ width: '100%', height: 180, display: 'block', borderRadius: 6 }} />
         </div>
     );
 }

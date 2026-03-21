@@ -19,6 +19,7 @@
     "astro": "^5.16.4",
     "astro-icon": "^1.1.5",
     "daisyui": "^5.5.14",
+    "html2canvas": "^1.4.1",
     "mqtt": "^5.15.0",
     "nodemailer": "^7.0.12",
     "plotly.js-dist-min": "^3.4.0",

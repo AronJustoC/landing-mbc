@@ -9,7 +9,8 @@ import { useState, useEffect, useRef } from 'react';
 import { useMQTT, publishMQTT } from '../../hooks/useMQTT';
 import { MQTT_TOPIC_BASE } from '../../config';
 
-const CMD_TOPIC = `${MQTT_TOPIC_BASE}/daq/cmd`;
+const CMD_TOPIC    = `${MQTT_TOPIC_BASE}/daq/cmd`;
+const CONFIG_TOPIC = `${MQTT_TOPIC_BASE}/daq/config`;
 
 interface DaqStatus {
     acquiring:    boolean;
@@ -50,9 +51,17 @@ function formatUptime(seconds: number): string {
 
 export default function DaqControlPanel() {
     const { data: status, connected } = useMQTT<DaqStatus>('status');
-    const [loading,   setLoading]   = useState(false);
-    const [uptime,    setUptime]    = useState(0);
+    const [loading,       setLoading]     = useState(false);
+    const [uptime,        setUptime]      = useState(0);
+    const [intervalInput, setIntervalInput] = useState('5');
     const startRef = useRef<number | null>(null);
+
+    const applyInterval = (raw: string) => {
+        const val = parseFloat(raw);
+        if (!isNaN(val) && val >= 1 && val <= 60) {
+            publishMQTT(CONFIG_TOPIC, { metrics_interval: val });
+        }
+    };
 
     // Calcular uptime localmente desde cuando acquiring pasó a true
     useEffect(() => {
@@ -133,7 +142,7 @@ export default function DaqControlPanel() {
                         color: connected ? COLORS.cyan : COLORS.yellow,
                         border: `1px solid ${connected ? COLORS.cyanBorder : COLORS.yellowBorder}`,
                     }}>
-                        {connected ? 'MQTT ✓' : 'MQTT...'}
+                        {connected ? 'HBK CONECTADO ✓' : 'HBK...'}
                     </span>
                 </div>
 
@@ -196,6 +205,38 @@ export default function DaqControlPanel() {
                     icon="⚡"
                     highlight={isRunning}
                 />
+                {/* Intervalo de métricas configurable */}
+                <div style={{
+                    padding: '12px', borderRadius: '8px',
+                    backgroundColor: 'rgba(255,255,255,0.02)',
+                    border: '1px solid rgba(255,255,255,0.04)',
+                }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px' }}>
+                        <span style={{ fontSize: '14px' }}>⏲</span>
+                        <span style={{
+                            fontSize: '10px', color: COLORS.text,
+                            textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 500,
+                        }}>Intervalo métricas</span>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <input
+                            type="number"
+                            min={1} max={60} step={1}
+                            value={intervalInput}
+                            onChange={e => setIntervalInput(e.target.value)}
+                            onBlur={e => applyInterval(e.target.value)}
+                            onKeyDown={e => { if (e.key === 'Enter') applyInterval(intervalInput); }}
+                            style={{
+                                width: '52px', padding: '4px 6px',
+                                fontSize: '14px', fontWeight: 600, fontFamily: 'monospace',
+                                borderRadius: '6px', border: '1px solid rgba(6,182,212,0.3)',
+                                backgroundColor: 'rgba(6,182,212,0.07)', color: COLORS.cyan,
+                                outline: 'none', textAlign: 'center',
+                            }}
+                        />
+                        <span style={{ fontSize: '12px', color: COLORS.text }}>seg</span>
+                    </div>
+                </div>
             </div>
 
             <style>{`

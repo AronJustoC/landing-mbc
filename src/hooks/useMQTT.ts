@@ -20,6 +20,7 @@ import { useState, useEffect, useRef } from 'react';
 // Same pattern as FFTChart with Plotly: dynamic import only inside browser useEffect.
 import type { MqttClient } from 'mqtt';
 import { MQTT_URL, MQTT_USERNAME, MQTT_PASSWORD, MQTT_TOPIC_BASE } from '../config';
+import { getThresholds } from '../config/thresholds';
 
 // ── Singleton MQTT client (browser-only) ─────────────────────────────────────
 let _client: MqttClient | null = null;
@@ -170,21 +171,26 @@ function adaptMetricas(msg: Record<string, unknown>) {
 }
 
 function adaptVelocidad(msg: Record<string, unknown>) {
-    const vrms = (msg.vrms as { x: number; y: number; z: number }) ?? { x: 0, y: 0, z: 0 };
-    const ALARM_THRESHOLD = 5.0;
+    const vrms  = (msg.vrms  as { x: number; y: number; z: number }) ?? { x: 0, y: 0, z: 0 };
+    const vpico = (msg.vpico as { x: number; y: number; z: number }) ?? { x: 0, y: 0, z: 0 };
     const trend = (msg.trend as { timestamps: number[]; rx: number[]; ry: number[]; rz: number[] })
         ?? { timestamps: [], rx: [], ry: [], rz: [] };
+    const { yellow, red } = getThresholds();
+    const maxVpico = Math.max(vpico.x, vpico.y, vpico.z);
     return {
-        timestamps:     (msg.timestamps as number[]) ?? [],
-        vx:             (msg.vx as number[]) ?? [],
-        vy:             (msg.vy as number[]) ?? [],
-        vz:             (msg.vz as number[]) ?? [],
-        rx:             trend.rx,
-        ry:             trend.ry,
-        rz:             trend.rz,
-        vrms_actual:    vrms,
-        alarm:          vrms.x > ALARM_THRESHOLD || vrms.y > ALARM_THRESHOLD || vrms.z > ALARM_THRESHOLD,
-        alarm_threshold: ALARM_THRESHOLD,
+        timestamps:              (msg.timestamps as number[]) ?? [],
+        vx:                      (msg.vx as number[]) ?? [],
+        vy:                      (msg.vy as number[]) ?? [],
+        vz:                      (msg.vz as number[]) ?? [],
+        rx:                      trend.rx,
+        ry:                      trend.ry,
+        rz:                      trend.rz,
+        vrms_actual:             vrms,
+        vpico_actual:            vpico,
+        alarm:                   maxVpico >= red,
+        alarm_warning:           maxVpico >= yellow && maxVpico < red,
+        alarm_threshold:         red,
+        alarm_warning_threshold: yellow,
         trend,
     };
 }
@@ -248,6 +254,9 @@ export function useMQTT<T>(endpoint: string): UseMQTTResult<T> {
 
     useEffect(() => {
         if (!topic) return;
+
+        // Clear stale data immediately so widgets don't show old node's values
+        setData(null);
 
         topicRef.current = topic;
         const adapter = ADAPTERS[stream];
