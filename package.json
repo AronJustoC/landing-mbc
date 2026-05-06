@@ -9,9 +9,11 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.9",
     "@astrojs/react": "^4.4.2",
     "@iconify-json/lucide": "^1.2.78",
     "@iconify-json/simple-icons": "^1.2.64",
+    "@supabase/supabase-js": "^2.105.3",
     "@tailwindcss/vite": "^4.1.17",
     "@types/nodemailer": "^7.0.5",
     "@types/react": "^19.2.14",
@@ -26,7 +28,8 @@
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-plotly.js": "^2.6.0",
-    "tailwindcss": "^4.1.17"
+    "tailwindcss": "^4.1.17",
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
     "@astrojs/vercel": "^9.0.3"

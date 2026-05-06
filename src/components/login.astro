@@ -22,17 +22,17 @@ import { Icon } from "astro-icon/components";
 
             <form id="login-form" class="space-y-6">
                 <div>
-                    <label for="username" class="block text-sm font-medium text-gray-300 mb-2">Usuario</label>
+                    <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Correo Electrónico</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <Icon name="lucide:user" class="w-5 h-5 text-gray-500" />
+                            <Icon name="lucide:mail" class="w-5 h-5 text-gray-500" />
                         </div>
                         <input 
-                            type="text" 
-                            id="username" 
-                            name="username" 
+                            type="email" 
+                            id="email" 
+                            name="email" 
                             class="block w-full pl-10 pr-3 py-3 bg-[#08080A] border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
-                            placeholder="Ej: admin o visualizador"
+                            placeholder="usuario@ejemplo.com"
                             required
                         />
                     </div>
@@ -66,25 +66,14 @@ import { Icon } from "astro-icon/components";
                     Iniciar Sesión
                 </button>
             </form>
-
-            <!-- <div class="mt-6 text-center">
-                <p class="text-xs text-gray-500">
-                    Datos de prueba:<br/>
-                    Admin: <span class="text-cyan-400">admin</span> / <span class="text-cyan-400">123</span><br/>
-                    Visualizador: <span class="text-cyan-400">visualizador</span> / <span class="text-cyan-400">123</span>
-                </p>
-            </div> -->
         </div>
     </div>
 </main>
 
 <script>
-    const isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-    const API_BASE = isDev
-        ? 'https://backend-mbc-web-production.up.railway.app/api'
-        : 'https://backend-mbc-web-production.up.railway.app/api';
+    import { signInWithEmail } from '../lib/authSession';
 
-    const form    = document.getElementById('login-form') as HTMLFormElement | null;
+    const form = document.getElementById('login-form') as HTMLFormElement | null;
     const errorMsg = document.getElementById('error-message');
     const btnSubmit = document.querySelector('button[type="submit"]') as HTMLButtonElement | null;
 
@@ -93,34 +82,32 @@ import { Icon } from "astro-icon/components";
             e.preventDefault();
 
             const formData = new FormData(form);
-            const username = (formData.get('username') as string).trim();
+            const email = (formData.get('email') as string).trim();
             const password = formData.get('password') as string;
 
             if (errorMsg) errorMsg.classList.add('hidden');
             if (btnSubmit) { btnSubmit.disabled = true; btnSubmit.textContent = 'Verificando...'; }
 
             try {
-                const res = await fetch(`${API_BASE}/auth/login`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'ngrok-skip-browser-warning': 'true',
-                    },
-                    body: JSON.stringify({ username, password }),
-                });
+                const result = await signInWithEmail(email, password);
 
-                if (!res.ok) {
-                    if (errorMsg) errorMsg.classList.remove('hidden');
+                if (!result.success || !result.session) {
+                    if (errorMsg) {
+                        errorMsg.textContent = result.error ?? 'Credenciales incorrectas';
+                        errorMsg.classList.remove('hidden');
+                    }
                     return;
                 }
 
-                const data = await res.json();
+                // Supabase maneja la persistencia de sesión automáticamente.
+                // Guardamos datos de perfil en localStorage para acceso sincrónico
+                // en la UI (nombre, rol) sin necesidad de llamadas async.
                 localStorage.setItem('mbc_session', JSON.stringify({
-                    user:    data.user,
-                    role:    data.role,
-                    token:   data.token,
-                    expires: data.expires,
+                    user:    result.session.user,
+                    role:    result.session.role,
+                    email:   result.session.email,
                 }));
+
                 window.location.href = '/dashboard';
 
             } catch {
@@ -133,4 +120,4 @@ import { Icon } from "astro-icon/components";
             }
         });
     }
-</script>
+</script>

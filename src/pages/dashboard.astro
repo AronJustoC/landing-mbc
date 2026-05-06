@@ -8,20 +8,19 @@ import DashboardContent from '../components/dashboard.astro';
 </Layout>
 
 <script>
-    // Guard: redirige a /login si no hay sesión válida
-    try {
-        const raw = localStorage.getItem('mbc_session');
-        if (!raw) throw new Error('no session');
+    // Guard: redirige a /login si no hay sesión válida en Supabase
+    import { getCurrentSession } from '../lib/authSession';
 
-        const session = JSON.parse(raw);
-        if (!session.token || !session.expires) throw new Error('invalid session');
-
-        // Verificar que el token no haya expirado (exp es Unix timestamp en segundos)
-        if (Date.now() / 1000 > session.expires) {
-            localStorage.removeItem('mbc_session');
-            throw new Error('expired');
+    (async () => {
+        try {
+            const session = await getCurrentSession();
+            if (!session) {
+                // Limpiar datos de perfil local si la sesión Supabase expiró
+                localStorage.removeItem('mbc_session');
+                throw new Error('no session');
+            }
+        } catch {
+            window.location.replace('/login');
         }
-    } catch {
-        window.location.replace('/login');
-    }
+    })();
 </script>

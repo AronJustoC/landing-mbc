@@ -71,6 +71,14 @@ const COLOR_MAP: Record<string, { bg: string; text: string; badge: string }> = {
     })();
 </script>
 
+<!-- Script para importar y exponer signOut en el contexto global del dashboard -->
+<script>
+    import { signOut } from '../lib/authSession';
+
+    // Exponemos signOut al scope global para que el script is:inline pueda usarla
+    (window as any).__mbcSignOut = signOut;
+</script>
+
 <div id="dashboard-app" class="min-h-screen bg-[#08080A] flex hidden opacity-0 transition-opacity duration-500 relative overflow-hidden">
         <!-- Mobile Overlay -->
         <div id="sidebar-overlay" class="fixed inset-0 bg-black/60 z-40 hidden lg:hidden backdrop-blur-sm transition-opacity"></div>
@@ -381,10 +389,17 @@ const COLOR_MAP: Record<string, { bg: string; text: string; badge: string }> = {
                 adminButtons.forEach(btn => btn.classList.remove('hidden'));
             }
 
-            // Logout Logic
+            // Logout Logic — Cierra sesión en Supabase y limpia datos locales
             const logoutBtn = document.getElementById('logout-btn');
             if (logoutBtn) {
-                logoutBtn.addEventListener('click', () => {
+                logoutBtn.addEventListener('click', async () => {
+                    try {
+                        if (typeof window.__mbcSignOut === 'function') {
+                            await window.__mbcSignOut();
+                        }
+                    } catch (e) {
+                        console.error('[logout] Error cerrando sesión en Supabase:', e);
+                    }
                     localStorage.removeItem('mbc_session');
                     window.location.href = '/login';
                 });
